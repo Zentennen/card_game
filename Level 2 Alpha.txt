@@ -1,0 +1,151 @@
+Quick Sear
+Level 2,
+Power 45,
+Spell, Fire
+A; Quick, Flip; Choose a susceptible card in a corresponding field and pay 2;
+The chosen card takes 1 damage, then destroy me.
+
+
+Phantom Beast
+Level 2, Tribute 2,
+Offense 60, Defense 0, Health 4, Lethality 2,
+Decaying, Spell, Illusion, Monster
+Summon 3
+
+
+Wandering Kobold
+Level 2, Tribute 1,
+Offense 20, Defense 20,
+Kobold, Wanderer, Creature
+Summon 1
+
+
+Spirit of War
+Level 2, Tribute 3,
+Offense 20, Defense 20, Health 2,
+Ghost, Creature
+Summon 3
+P5; All cards in my ¤(zone) ¤(p_mods_many(Offense, 20)).
+
+
+Bosse
+Level 2, Tribute 3,
+Human, Creature, Offense 50, Defense 40
+Summon 3
+
+
+Borrowed Time
+Level 2, Borrow 0,
+Spell, Enchantment
+Evoke 2
+T5; At the end of each of your turns, if my Borrow value is less than 3;
+You may increase my Borrow value by 1. If you do, your turn doesn't end.
+T5; At the beginning of each of your turns, if my Borrow value is at least 1;
+Reduce my Borrow value by 1, then your turn ends.
+
+
+Malphite
+Level 2, Tribute 2,
+Offense 10, Defense 35, Health 3,
+Rock, Wheeler, Mountaineer
+Summon 3
+T5; Before each combat phase;
+Shield me by 1.
+
+
+Stone Wall
+Level 2, Tribute 2,
+Defense 70, Health 2, Lethality 0,
+Defender, Immobile, Rock, Structure
+Summon 2
+
+
+Wandering Phantom
+Level 2, Tribute 3,
+Offense 50, Defense 0, Health 3, Lethality 3,
+Decaying, Spell, Illusion, Wanderer, Creature
+Summon 3
+
+
+Shrouded Assassin
+Level 2, Tribute 3,
+Offense 40, Defense 30, Lethality 2,
+Assassin, Rogue, Human, Creature
+A; Flip; Pay 3;
+
+
+Wandering Warrior
+Level 2, Tribute 3,
+Offense 70, Defense 30,
+Warrior, Wanderer, Creature
+Summon 3
+
+
+Searing Pain
+Level 2,
+Power 55,
+Spell, Fire
+A; Flip; Choose a susceptible card in a corresponding field and pay 4;
+The chosen card takes 2 damage, then destroy me.
+
+
+Wandering Superhuman
+Level 2, Tribute 2,
+Offense 30, Defense 25, Health 2,
+Human, Wanderer, Creature
+Summon 2
+
+
+Fireball
+Level 2,
+Power 70,
+Spell, Fire
+A; Flip; Choose a susceptible card in a corresponding field and pay 3;
+The chosen card and all susceptible cards in the same column take 1 damage, then destroy me.
+
+
+Hurl Hellfire
+Level 2,
+Spell, Fire, Demon
+A; Flip; Choose a card in a corresponding field and pay 5;
+The chosen card and all cards in the same column take 2 damage, then destroy me.
+
+
+Master of Magic
+Level 2, Tribute 4,
+Offense 50, Defense 50, Health 2,
+Human, Creature, Mage
+Summon 4
+P5; All ¤(cswsn(Spell)) ¤(p_mods_many(Power, 50)).
+
+
+Fiery Rose
+Level 2, Tribute 3, Bloom 0,
+Power 50,
+Flower
+Summon 3
+T5; After each combat phase; 
+¤(I) ¤(act_mods_one(Bloom, 1)). Then, you may target up to X susceptible fielded cards, where X is my Bloom value. If you do, the targeted cards take 1 damage, then destroy me.
+
+
+Martha 
+Level 2, Tribute 2,
+Offense 35, Defense 25, Health 2,
+Human, Creature
+Summon 2
+
+
+Wandering Merchant
+Level 2, Tribute 2,
+Offense 30, Defense 20, Health 2,
+Wanderer, Creature
+Summon 2
+P5; If you control a ¤(cwsn(Wanderer)) in a different ¤(zone), I ¤(p_mods_one(Offense, 40)). 
+
+
+Cryptic Rose
+Level 2, Tribute 1, Bloom 0,
+Flower
+Summon 2
+T5; After each combat phase;
+I ¤(act_mods_one(Bloom, 1)). Then, you may reduce my Bloom value by any number that is lesser than or equal to its current value, and gain mana equal to 1 less than that number.

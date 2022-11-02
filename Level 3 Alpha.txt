@@ -1,0 +1,148 @@
+Gigantic Giant
+Level 3, Tribute 4,
+Offense 90, Defense 40, Health 6, Lethality 3,
+Giant, Creature
+Summon 4
+
+
+Secondman
+Level 3, Tribute 1,
+Offense 40, Defense 20, Health 2,
+Human, Creature, Warrior, Infantry
+Summon 1
+
+
+Christine
+Level 3, Tribute 2,
+Offense 40, Defense 30, Health 2,
+Flying, Human, Creature, 
+Summon 2
+
+
+Vine Dragon
+Level 3, Tribute 7,
+Offense 70, Defense 50, Health 2, Lethality 2,
+Dragon, Nature, Creature
+Summon 7
+P7; All enemy ¤(p_gives_cs(Immobile)).
+
+
+Singing Sword
+Level 3, Tribute 2,
+Offense 75, Defense 0, Health 2,
+Ghost, Undead, Creature
+Summon 2
+Equip 2
+P5; The card that I am attached to ¤(p_mods_one(Offense, 40)).
+
+
+Colossal Dragon
+Level 3, Tribute 7,
+Offense 200, Defense 100, Health 8, Lethality 4,
+Giant, Dragon, Creature
+Summon 10
+
+
+Rampaging Fire Dragon
+Level 3, Tribute 8,
+Offense 130, Defense 70, Health 5, Lethality 2,
+Onslaught, Flying, Dragon, Fire, Creature
+Summon 12
+
+
+Doom Bolt
+Level 3,
+Spell
+A; Flip; Choose a ¤(cwosn(Dragon)) in a corresponding field, then pay 3;
+The chosen card takes 5 damage, then destroy me.
+
+
+Meteor Shower
+Level 3,
+Power 60,
+Spell, Fire
+A; Flip; Choose a corresponding field, then pay 6;
+All susceptible enemy cards in the chosen field take 2 damage.
+
+
+Silvershire Horseman
+Level 3, Tribute 2,
+Offense 30, Defense 20, 
+Onslaught, Swift, Human, Warrior, Cavalry
+Summon 2
+
+
+Fire Giant
+Level 3, Tribute 3,
+Offense 70, Defense 20, Health 2, Lethality 2,
+Giant, Creature, Fire
+A; ¤(ho); ¤(Choose_your_cpos) and pay 3 in that position;
+Move this card to the chosen position. You may choose a Creature with Defense equal to or lower than my Offense and deal 1 damage to it. 
+
+
+Scorch
+Level 3,
+Power 30,
+Spell, Fire
+A; Flip; Choose a susceptible card in a corresponding field, then pay 1;
+The chosen card takes 1 damage, then destroy this card.
+
+
+Pegasus
+Level 3, Tribute 3,
+Offense 40, Defense 30, Health 2,
+Flying, Creature, Horse
+Summon 3
+P5; You may look at all of your opponents’ hands.
+
+
+Lightning Lance 
+Level 3,
+Power 100,
+Spell, Lightning
+A; Flip; Choose a susceptible card in a corresponding field, then pay 3;
+The chosen card takes 3 damage, then destroy this card.
+
+
+Massacre Wurm
+Level 3, Tribute 4,
+Power 60, Offense 60, Defense 60, Health 3,
+Wurm, Monster, Creature
+A; ¤(ho); ¤(Choose_your_cpos) and pay 6 in that position;
+All susceptible cards in enemy fields take 1 damage.
+T5; When an enemy card is destroyed;
+The destroyed card’s hero takes 1 damage.
+
+
+Crusader
+Level 3, Tribute 1,
+Offense 20, Defense 25, Health 2, Lethality 2,
+Onslaught, Human, Warrior, Holy, Creature
+Summon 1
+
+
+Legendary Swordsman
+Level 3, Tribute 4,
+Offense 60, Defense 40, Health 3, Lethality 1,
+Human, Warrior, Creature
+Summon 2
+
+
+Melissa
+Level 3, Tribute 1,
+Offense 40, Defense 35, Health 3,
+Human, Creature
+Summon 1
+
+
+Phantom Dragon
+Level 3, Tribute 5,
+Offense 200, Defense 0, Health 5, Lethality 3,
+Decaying, Spell, Illusion, Dragon, Creature
+Summon 5
+
+
+Blast from the Past
+Level 3, Spell, Time, Power 75
+A; Instant, Flip; Choose a susceptible card in a corresponding field and pay 4;
+The chosen card takes damage equal to the total amount of damage it has taken during the current round, then destroy this card.
