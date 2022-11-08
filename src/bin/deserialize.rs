@@ -144,10 +144,7 @@ impl Resources {
         for entry in entries {
             if let Result::Ok(entry) = entry {
                 let name = entry.file_name().to_str().unwrap().to_string();
-                let mut path = String::with_capacity(100);
-                path.push_str(entry.path().as_path().to_str().unwrap());
-                path.push('/');
-                path.push_str(&name);
+                let path = entry.path().as_path().to_str().unwrap().to_string();
                 let font = doc.add_font_family(fonts::from_files(path, &name, None).unwrap());
                 r.fonts.insert(name, font);
             }
@@ -504,7 +501,7 @@ fn add_attr_to_layout(card: &Card, resources: &Resources, layout: &mut LinearLay
 
     layout.push(main_attrib_layout.padded(Margins::trbl(attrib_padding_t, 0.0, attrib_padding_b, attrib_padding_l[main_attr_count])));
 
-    let mut string = String::with_capacity(default_attribute_string_alloc);
+    let mut string = String::with_capacity(default_attr_string_alloc);
     for attr in &card.attr {
         match &attr.n[..] {
             "Level" | "Tribute" | "Offense" | "Defense" | "Health" | "Lethality" | "Power" => continue,
@@ -524,7 +521,7 @@ fn add_attr_to_layout(card: &Card, resources: &Resources, layout: &mut LinearLay
 }
 
 fn prop_attr_to_par(prop: &Property, resources: &Resources) -> Paragraph {
-    let mut string = String::with_capacity(default_attribute_string_alloc);
+    let mut string = String::with_capacity(default_attr_string_alloc);
     for attr in &prop.attr {
         add_attr_to_string(attr, &mut string);
         string.push_str(", ");
@@ -532,7 +529,7 @@ fn prop_attr_to_par(prop: &Property, resources: &Resources) -> Paragraph {
     string.pop();
     string.pop();
 
-    Paragraph::new(StyledString::new(process_commands(string), resources.styles["HelveticaIItalic"]))
+    Paragraph::new(StyledString::new(process_commands(string), resources.styles["HelveticaItalic"]))
 }
 
 fn card_to_pdf_text(card: &Card, resources: &Resources) -> PaddedElement<LinearLayout> {
@@ -567,7 +564,7 @@ fn card_to_pdf_text(card: &Card, resources: &Resources) -> PaddedElement<LinearL
 }
 
 fn main() -> Maybe {
-    let font_family = fonts::from_files("./deserialize/fonts", "Helvetica", None)?;
+    let font_family = fonts::from_files("deserialize/fonts/Helvetica", "Helvetica", None)?;
     let mut doc = Document::new(font_family);
     doc.set_font_size(font_size);
     doc.set_line_spacing(line_spacing);

@@ -438,7 +438,7 @@ fn process_card_strings(card_strings: Vec<String>) -> Vec<Card> {
         let mut name = true;
         for line in card_string.lines() {
             if name {
-                cards.push(card_with_name(line.to_string()));
+                cards.push(Card::with_name(line.to_string()));
                 name = false;
             }
             else {

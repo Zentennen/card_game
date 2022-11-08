@@ -6,39 +6,46 @@ use extrust::*;
 use card_game::*;
 use pyo3::*;
 use pyo3::prelude::*;
-use pyo3::types::IntoPyDict;
+use pyo3::types::{IntoPyDict, PyFloat};
 
-const default_card_string_alloc: usize = 1000;
-const card_w: f64 = 1.0;
-const card_h: f64 = 5.3;
 //                                   0    1     2     3     4    5    6
-const attrib_padding_l: [f64; 7] = [ 0.0, 27.7, 16.0, 11.0, 7.5, 4.0, 0.8 ];
-const attrib_padding_t: f64 = 1.7;
-const attrib_padding_b: f64 = 1.7;
-const attrib_text_padding_t: f64 = 0.5;
-const attrib_text_padding_r: f64 = 0.6;
-const attrib_text_padding_l: f64 = 0.6;
-const card_padding: f64 = 1.5;
-const card_padding_t: f64 = 3.0;
-const page_padding: u8 = 6;
-const page_padding_l: u8 = 12;
-const page_padding_r: u8 = 5;
+const main_attr_pad_lr: [f64; 7] = [ 0.0, 27.7, 16.0, 11.0, 7.5, 4.0, 0.8 ];
+const main_attr_icon_w: f64 = 3.5;
+const main_attr_text_w: f64 = 5.0;
+const main_attr_h: f64 = 3.5;
+const other_attr_h: f64 = 4.0;
+const card_pad: f64 = 2.0;
+const card_outer_w: f64 = 63.0;
+const card_outer_h: f64 = 88.0;
+const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
+const card_inner_h: f64 = card_outer_h - card_pad * 2.0;
+const card_name_h: f64 = 6.0;
+const page_pad_t: f64 = 5.0;
+const page_pad_l: f64 = 12.0;
 const cards_per_column: usize = 3;
 const cards_per_row: usize = 3;
 const cards_per_page: usize = cards_per_column * cards_per_row;
-const name_font_size: u8 = 9;
-const main_attrib_font_size: u8 = 7;
-const font_size: u8 = 6;
+const name_font_size: f64 = 9.0;
+const main_attr_font_size: f64 = 7.0;
+const font_size: f64 = 6.0;
 const line_spacing: f64 = 1.25;
 const num_main_attribs: usize = 6;
+const default_card_string_alloc: usize = 1000;
 
-struct PdfHandler<'p> {
+pub struct PdfHandler<'p> {
     py: Python<'p>,
     pdf: &'p PyAny
 }
 
+impl Drop for PdfHandler<'_> {
+    fn drop(&mut self) {
+        self.output();    
+        println!("Deserialized successfully!");
+    }
+}
+
 impl PdfHandler<'_> {
-    fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
+    pub fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
         let fpdf = py.import("fpdf").unwrap();
         let pdf = fpdf.getattr("FPDF").unwrap().call0().unwrap();
         let s = PdfHandler::<'p> { py, pdf };
@@ -46,7 +53,7 @@ impl PdfHandler<'_> {
         s
     }
 
-    fn init(&self) {
+    pub fn init(&self) {
         //Load fonts
         let entries = std::fs::read_dir("deserialize/fonts").expect("Could not find directory deserialize/fonts");
         for entry in entries {
@@ -67,6 +74,80 @@ impl PdfHandler<'_> {
                 self.pdf.call_method("add_font", (), Some(args)).unwrap();
             }
         }
+    }
+
+    pub fn add_page(&self) {
+        self.pdf.call_method0("add_page").unwrap();
+    }
+
+    pub fn set_font(&self, family: &str, size: f64) {
+        let args = (family, "", size);
+        self.pdf.call_method1("set_font", args).unwrap();
+    }
+
+    pub fn set_font_i(&self, family: &str, size: f64) {
+        let args = (family, "I", size);
+        self.pdf.call_method1("set_font", args).unwrap();
+    }
+
+    pub fn set_x(&self, x: f64) {
+        let args = vec![("x", x)].into_py_dict(self.py);
+        self.pdf.call_method("set_x", (), Some(args)).unwrap();
+    }
+
+    pub fn set_y(&self, y: f64) {
+        let args = vec![("y", y)].into_py_dict(self.py);
+        self.pdf.call_method("set_y", (), Some(args)).unwrap();
+    }
+
+    pub fn set_xy(&self, x: f64, y: f64) {
+        let args = vec![("x", x), ("y", y)].into_py_dict(self.py);
+        self.pdf.call_method("set_xy", (), Some(args)).unwrap();
+    }
+
+    pub fn cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        self.pdf.call_method1("cell", args).unwrap();
+    }
+
+    pub fn center_cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        let kwargs = [("align", "C")].into_py_dict(self.py);
+        self.pdf.call_method("cell", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn multi_cell(&self,txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        self.pdf.call_method1("multi_cell", args).unwrap();
+    }
+
+    pub fn center_multi_cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        let kwargs = [("align", "C")].into_py_dict(self.py);
+        self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn image(&self, name: &str, w: f64, h: f64) {
+        let path = format!("deserialize/images/{}", name);
+        let args = types::PyTuple::new(self.py, &[path]);
+        let kwargs = [("w", w), ("h", h)].into_py_dict(self.py);
+        self.pdf.call_method("image", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn rect(&self, x: f64, y: f64, w: f64, h: f64) {
+        let args = (x, y, w, h);
+        self.pdf.call_method1("rect", args).unwrap();
+    }
+
+    pub fn string_w(&self, string: &str) -> f64 {
+        let args = types::PyTuple::new(self.py, &[string]);
+        let w = self.pdf.call_method1("get_string_width", args).unwrap().to_object(self.py);
+        w.extract(self.py).unwrap()
+    }
+
+    pub fn output(&self) {
+        let args = types::PyTuple::new(self.py, &["cards.pdf"]);
+        self.pdf.call_method1("output", args).unwrap();
     }
 }
 
@@ -322,11 +403,118 @@ fn add_attr_to_string(attr: &Attribute, string: &mut String) {
     }
 }
 
+fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
+    let mut attribs: Vec<(&str, String)> = Vec::new();
+
+    if let Some(val) = get_attribute_value(&card.attr, "Offense") {
+        if val != 0.0 {
+            attribs.push(("sword.png", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Defense") {
+        if val != 0.0 {
+            attribs.push(("shield.png", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Health") {
+        if val != 1.0 {
+            attribs.push(("heart.jpg", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Lethality") {
+        if val != 1.0 {
+            attribs.push(("fist.png", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Power") {
+        if val != 0.0 {
+            attribs.push(("star.png", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Tribute") {
+        if val != 0.0 {
+            attribs.push(("drop.png", val.to_string()));
+        }
+    }
+
+    attribs
+}
+
+fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
+    let mut y = base_y;
+    ph.set_xy(base_x, y);
+    ph.rect(base_x, y, card_outer_w, card_outer_h);    
+
+    //name
+    ph.set_xy(base_x, y);
+    ph.set_font("Helvetica", name_font_size);
+    ph.center_cell(&card.name, card_inner_w, card_name_h);
+
+    //main attributes
+    ph.set_font("Helvetica", main_attr_font_size);
+    y += card_name_h;
+    let main_attr_icon_data = get_main_attr_icon_data(card);
+    let w = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1);
+    for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
+        let mut x = base_x + i as f64 * card_inner_w / main_attr_icon_data.len() as f64;
+        ph.set_xy(x, y);
+        ph.image(icon, main_attr_icon_w, main_attr_h);
+        x += main_attr_icon_w;
+        ph.set_xy(x, y);
+        ph.cell(&val, main_attr_text_w, main_attr_h);
+    }
+
+    //other attributes
+    let mut other_attr = String::with_capacity(default_attr_string_alloc);
+    for attr in &card.attr {
+        match &attr.n as &str {
+            "Level" | "Tribute" | "Offense" | "Defense" | "Health" | "Lethality" | "Power" => continue,
+            _ => {
+                add_attr_to_string(attr, &mut other_attr);
+                other_attr.push_str(", ");
+            }
+        }
+    }
+    other_attr.pop();
+    other_attr.pop();
+    y += main_attr_h;
+    ph.set_xy(base_x, y);
+    ph.set_font_i("Helvetica", font_size);
+    ph.center_multi_cell(&process_commands(other_attr), card_inner_w, other_attr_h);
+    
+
+}
+
 fn main() -> Maybe {
     Python::with_gil(|py| {
         let ph = PdfHandler::new(py);
+        let cards = std::fs::read_to_string("cards.json").unwrap();
+        let cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
+        let num_cards = cards.len();
+        for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
+            ph.add_page();
+            for r in 0..cards_per_column {
+                for c in 0..cards_per_row {
+                    let i = p * cards_per_page + r * cards_per_row + c;
+                    if i < num_cards {
+                        let base_x = page_pad_l as f64 + c as f64 * card_outer_w + card_pad;
+                        let base_y = page_pad_t as f64 + r as f64 * card_outer_h + card_pad;
+                        deserialize_card(&ph, &cards[i], base_x, base_y)
+                    }
+                    else {
+                        return;
+                    }
+                }
+            }
+        }
+        
+        ph.output();
     });
     
-    println!("Deserialized successfully");
     ok
 }

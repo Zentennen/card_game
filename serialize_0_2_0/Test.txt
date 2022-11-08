@@ -18,7 +18,7 @@ P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while it 
 
 
 Many Attributes
-This, Card, Has, Enough, Attributes, To, Fill, Extend, Past, One, Line, Of, Text, Level 1
+Level 1, Tribute 2, Offense 2, Defense 2, Health 2, Lethality 2, Power 2, This, Card, Has, Enough, Attributes, To, Extend, Past, One, Line, Of, Text
 Summon 1
 
 Wandering Naga

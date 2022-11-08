@@ -12,7 +12,7 @@ pub const default_property_attribute_alloc: usize = 5;
 pub const default_property_effect_alloc: usize = 30;
 pub const default_action_text_alloc: usize = 100;
 pub const default_effects_alloc: usize = 1;
-pub const default_attribute_string_alloc: usize = 100;
+pub const default_attr_string_alloc: usize = 100;
 pub const string_indicator_char: char = '\"';
 
 type attrib_num = f64;
@@ -148,22 +148,24 @@ pub struct Card {
     pub pass: Vec<Property>,
 }
 
-pub fn empty_card() -> Card {
-    Card { 
-        name: String::with_capacity(default_card_name_alloc), 
-        attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
-        acti: Vec::<Property>::with_capacity(default_card_property_alloc),
-        trig: Vec::<Property>::with_capacity(default_card_property_alloc),
-        pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+impl Card {
+    pub fn new() -> Self {
+        Self { 
+            name: String::with_capacity(default_card_name_alloc), 
+            attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            acti: Vec::<Property>::with_capacity(default_card_property_alloc),
+            trig: Vec::<Property>::with_capacity(default_card_property_alloc),
+            pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+        }
     }
-}
 
-pub fn card_with_name(s: String) -> Card {
-    Card { 
-        name: s, 
-        attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
-        acti: Vec::<Property>::with_capacity(default_card_property_alloc),
-        trig: Vec::<Property>::with_capacity(default_card_property_alloc),
-        pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+    pub fn with_name(s: impl Into<String>) -> Self {
+        Self { 
+            name: s.into(), 
+            attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            acti: Vec::<Property>::with_capacity(default_card_property_alloc),
+            trig: Vec::<Property>::with_capacity(default_card_property_alloc),
+            pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+        }
     }
 }
