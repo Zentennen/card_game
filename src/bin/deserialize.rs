@@ -1,170 +1,209 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 
-//todo
-//better layout for main attribs
-//resize main attribs
-//card text size
-//property layout
+use std::os::windows::process;
 
-use std::collections::HashMap;
 use extrust::*;
 use card_game::*;
-use genpdf::*;
-use genpdf::elements::*;
-use genpdf::fonts::*;
-use genpdf::render::Area;
-use genpdf::style::Style;
-use genpdf::style::StyledString;
+use pyo3::*;
+use pyo3::prelude::*;
+use pyo3::types::{IntoPyDict};
 
-const default_card_string_alloc: usize = 1000;
-const card_w: f64 = 1.0;
-const card_h: f64 = 5.3;
-//                                   0    1     2     3     4    5    6
-const attrib_padding_l: [f64; 7] = [ 0.0, 27.7, 16.0, 11.0, 7.5, 4.0, 0.8 ];
-const attrib_padding_t: f64 = 1.7;
-const attrib_padding_b: f64 = 1.7;
-const attrib_text_padding_t: f64 = 0.5;
-const attrib_text_padding_r: f64 = 0.6;
-const attrib_text_padding_l: f64 = 0.6;
-const card_padding: f64 = 1.5;
-const card_padding_t: f64 = 3.0;
-const page_padding: u8 = 6;
-const page_padding_l: u8 = 12;
-const page_padding_r: u8 = 5;
+const page_pad_t: f64 = 5.0;
+const page_pad_l: f64 = 12.0;
 const cards_per_column: usize = 3;
 const cards_per_row: usize = 3;
 const cards_per_page: usize = cards_per_column * cards_per_row;
-const name_font_size: u8 = 9;
-const main_attrib_font_size: u8 = 7;
-const font_size: u8 = 6;
-const line_spacing: f64 = 1.25;
-const num_main_attribs: usize = 6;
+const card_outer_w: f64 = 63.0;
+const card_outer_h: f64 = 88.0;
+const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
+const card_inner_h: f64 = card_outer_h - card_pad;
+const card_pad: f64 = 2.0;
+const name_h: f64 = 8.0;
+const name_font_size: f64 = 9.0;
+const main_attr_icon_w: f64 = 3.6;
+const main_attr_text_pad_t: f64 = main_attr_font_size * 0.38;
+const main_attr_text_pad_l: f64 = 0.8;
+const main_attr_h: f64 = 3.6;
+const main_attr_pad_b: f64 = 1.7;
+const other_attr_h: f64 = 2.7;
+const prop_h: f64 = 2.5;
+const prop_pad: f64 = 2.3;
+const main_attr_font_size: f64 = 7.0;
+const font_size: f64 = 6.0;
+const default_card_string_alloc: usize = 1000;
 
-struct LayeredLayout {
-    elems: Vec<Box<dyn Element>>
+pub struct PdfHandler<'p> {
+    py: Python<'p>,
+    pdf: &'p PyAny,
+    image_aliases: std::collections::HashMap<&'static str, &'static str>
 }
 
-impl LayeredLayout {
-    fn new() -> Self {
-        Self { elems: Vec::with_capacity(2) }
-    }
-
-    fn push(&mut self, elem: impl Element + 'static) {
-        self.elems.push(Box::new(elem));
-    }
-}
-
-impl Element for LayeredLayout {
-    fn render(&mut self, context: &Context, area: Area<'_>, style: style::Style) -> Result<RenderResult, error::Error> {
-        let mut result = RenderResult::default();
-        for elem in self.elems.iter_mut() {
-            let res = elem.render(context, area.clone(), style)?;
-            result.size.width = Mm::max(result.size.width, res.size.width);
-            result.size.height = Mm::max(result.size.height, res.size.height);
-        }
-        Ok(result)
-    }
-}
-
-struct HorizontalLayout {
-    elements: Vec<Box<dyn Element>>,
-    render_idx: usize,
-}
-
-fn stack_horizontal(a: Size, b: Size) -> Size {
-    let mut size = a;
-    size.width = a.width + b.width;
-    size.height = a.height.max(b.height);
-    size
-}
-
-impl HorizontalLayout {
-    fn new() -> Self {
-        Self {
-            elements: Vec::new(),
-            render_idx: 0,
-        }
-    }
-
-    fn push<E: Element + 'static>(&mut self, element: E) {
-        self.elements.push(Box::new(element));
-    }
-
-    fn element<E: Element + 'static>(mut self, element: E) -> Self {
-        self.push(element);
-        self
+impl Drop for PdfHandler<'_> {
+    fn drop(&mut self) {
+        self.output();
+        println!("Deserialized successfully!");
     }
 }
 
-impl Element for HorizontalLayout {
-    fn render(
-        &mut self,
-        context: &Context,
-        mut area: render::Area<'_>,
-        style: Style,
-    ) -> Result<RenderResult, error::Error> {
-        let mut result = RenderResult::default();
-        while area.size().width > From::from(0.0f64) && self.render_idx < self.elements.len() {
-            let element_result = self.elements[self.render_idx].render(context, area.clone(), style)?;
-            area.add_offset(Position::new(element_result.size.width, 0i32));
-            result.size = stack_horizontal(result.size, element_result.size);
-            if element_result.has_more {
-                result.has_more = true;
-                return Ok(result);
-            }
-            self.render_idx += 1;
-        }
-        result.has_more = self.render_idx < self.elements.len();
-        Ok(result)
+impl PdfHandler<'_> {
+    pub fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
+        let fpdf = py.import("fpdf").unwrap();
+        let pdf = fpdf.getattr("FPDF").unwrap().call0().unwrap();
+        let image_aliases = std::collections::HashMap::new();
+
+        let mut s = PdfHandler::<'p> { py, pdf, image_aliases };
+        s.init();
+        s
     }
-}
 
-struct Resources {
-    images: HashMap<String, Image>,
-    fonts: HashMap<String, FontFamily<Font>>,
-    styles: HashMap<String, Style>
-}
+    pub fn init(&mut self) {
+        
 
-impl Resources {
-    fn new(doc: &mut Document) -> Self {
-        let mut r = Self { images: HashMap::with_capacity(100), fonts: HashMap::with_capacity(100), styles: HashMap::with_capacity(100) };
+        //image aliases
+        self.image_aliases.insert("Test Complicated Card.png", "Test Simple Card.png");
 
-        //Load images
-        let entries = std::fs::read_dir("deserialize/images").expect("Could not find directory deserialize/images");
-        for entry in entries {
-            if let Result::Ok(entry) = entry {
-                let name = entry.file_name().to_str().unwrap().to_string();
-                r.images.insert(name, Image::from_path(entry.path()).unwrap());
-            }
-        }
-
-        //Load fonts
+        //fonts
         let entries = std::fs::read_dir("deserialize/fonts").expect("Could not find directory deserialize/fonts");
         for entry in entries {
             if let Result::Ok(entry) = entry {
                 let name = entry.file_name().to_str().unwrap().to_string();
-                let path = entry.path().as_path().to_str().unwrap().to_string();
-                let font = doc.add_font_family(fonts::from_files(path, &name, None).unwrap());
-                r.fonts.insert(name, font);
+                let base_path = entry.path().as_path().to_str().unwrap().to_string();
+                
+                let path = format!("{}/{}-Regular.ttf", base_path, name);
+                let args = vec![("family", &name as &str), ("fname", &path as &str)].into_py_dict(self.py);
+                self.pdf.call_method("add_font", (), Some(args)).unwrap();
+
+                let path = format!("{}/{}-Bold.ttf", base_path, name);
+                let args = vec![("family", &name as &str), ("style", "B"), ("fname", &path as &str)].into_py_dict(self.py);
+                self.pdf.call_method("add_font", (), Some(args)).unwrap();
+
+                let path = format!("{}/{}-Italic.ttf", base_path, name);
+                let args = vec![("family", &name as &str), ("style", "I"), ("fname", &path as &str)].into_py_dict(self.py);
+                self.pdf.call_method("add_font", (), Some(args)).unwrap();
             }
         }
+    }
 
-        for font in &r.fonts {
-            let mut name = String::with_capacity(100);
-            name.push_str(font.0);
-            name.push_str("Bold");
-            let style = Style::new().with_font_family(*font.1).bold();
-            r.styles.insert(name, style);
+    pub fn add_page(&self) {
+        self.pdf.call_method0("add_page").unwrap();
+    }
 
-            let mut name = String::with_capacity(100);
-            name.push_str(font.0);
-            name.push_str("Italic");
-            let style = Style::new().with_font_family(*font.1).italic();
-            r.styles.insert(name, style);
-        }
+    pub fn set_font(&self, family: &str, size: f64) {
+        let args = (family, "", size);
+        self.pdf.call_method1("set_font", args).unwrap();
+    }
 
-        r
+    pub fn set_font_i(&self, family: &str, size: f64) {
+        let args = (family, "I", size);
+        self.pdf.call_method1("set_font", args).unwrap();
+    }
+
+    pub fn set_x(&self, x: f64) {
+        let args = vec![("x", x)].into_py_dict(self.py);
+        self.pdf.call_method("set_x", (), Some(args)).unwrap();
+    }
+
+    pub fn set_y(&self, y: f64) {
+        let args = vec![("y", y)].into_py_dict(self.py);
+        self.pdf.call_method("set_y", (), Some(args)).unwrap();
+    }
+
+    pub fn set_xy(&self, x: f64, y: f64) {
+        let args = vec![("x", x), ("y", y)].into_py_dict(self.py);
+        self.pdf.call_method("set_xy", (), Some(args)).unwrap();
+    }
+
+    pub fn text(&self, txt: &str, x: f64, y: f64) {
+        let args = (x, y, txt);
+        self.pdf.call_method1("text", args).unwrap();
+    }
+
+    pub fn write(&self, txt: &str) {
+        let args = vec![("txt", txt)].into_py_dict(self.py);
+        self.pdf.call_method("set_xy", (), Some(args)).unwrap();
+    }
+
+    pub fn cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        self.pdf.call_method1("cell", args).unwrap();
+    }
+
+    pub fn center_cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        let kwargs = [("align", "C")].into_py_dict(self.py);
+        self.pdf.call_method("cell", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn multi_cell(&self,txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        self.pdf.call_method1("multi_cell", args).unwrap();
+    }
+
+    pub fn center_multi_cell(&self, txt: &str, w: f64, h: f64) {
+        let args = (w, h, txt);
+        let kwargs = [("align", "C")].into_py_dict(self.py);
+        self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn image(&self, name: &str, w: f64, h: f64) {
+        let name = *self.image_aliases.get(name).unwrap_or(&name);
+        let path = format!("deserialize/images/{}", name);
+        let args = types::PyTuple::new(self.py, &[path]);
+        let kwargs = [("w", w), ("h", h)].into_py_dict(self.py);
+        self.pdf.call_method("image", args, Some(kwargs)).unwrap();
+    }
+
+    pub fn has_image(&self, name: &str) -> bool {
+        self.image_aliases.contains_key(name) || std::fs::metadata(&format!("deserialize/images/{}", name)).is_ok()
+    }
+
+    pub fn rect(&self, x: f64, y: f64, w: f64, h: f64) {
+        let args = (x, y, w, h);
+        self.pdf.call_method1("rect", args).unwrap();
+    }
+
+    pub fn line(&self, x1: f64, y1: f64, x2: f64, y2: f64) {
+        let args = (x1, y1, x2, y2);
+        self.pdf.call_method1("line", args).unwrap();
+    }
+
+    pub fn string_w(&self, string: &str) -> f64 {
+        let args = types::PyTuple::new(self.py, &[string]);
+        let w = self.pdf.call_method1("get_string_width", args).unwrap().to_object(self.py);
+        w.extract(self.py).unwrap()
+    }
+
+    pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64) -> f64 {
+        let args = (w, h, txt);
+        let kwargs = [("split_only", true)].into_py_dict(self.py);
+        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
+        let strings: Vec<&str> = strings.extract(self.py).unwrap();
+        h * strings.len() as f64
+    }
+
+    pub fn set_text_color(&self, r: f64, g: f64, b: f64) {
+        let args = (r, g, b);
+        self.pdf.call_method1("set_text_color", args).unwrap();
+    }
+
+    pub fn set_text_mode(&self) {
+
+    }
+
+    pub fn set_draw_color(&self, r: f64, g: f64, b: f64) {
+        let args = (r, g, b);
+        self.pdf.call_method1("set_draw_color", args).unwrap();
+    }
+
+    pub fn set_fill_color(&self, r: f64, g: f64, b: f64) {
+        let args = (r, g, b);
+        self.pdf.call_method1("set_fill_color", args).unwrap();
+    }
+
+    pub fn output(&self) {
+        let args = types::PyTuple::new(self.py, &["cards.pdf"]);
+        self.pdf.call_method1("output", args).unwrap();
     }
 }
 
@@ -420,197 +459,170 @@ fn add_attr_to_string(attr: &Attribute, string: &mut String) {
     }
 }
 
-fn create_main_attr_par(val: f64, st: Style, margins: Margins) -> impl Element {
-    Paragraph::new(style::StyledString::new(val.to_string(), st))
-        .aligned(Alignment::Left)
-        .padded(margins)
-}
+fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
+    let mut attribs: Vec<(&str, String)> = Vec::new();
 
-fn create_main_attr_layout(card: &Card, resources: &Resources) -> Vec<HorizontalLayout> {
-    let mut attribs: Vec<HorizontalLayout> = Vec::with_capacity(num_main_attribs);
-    let attrib_text_margins = Margins::trbl(attrib_text_padding_t, attrib_text_padding_r, 0.0, attrib_text_padding_l);
-    let st = Style::new().with_font_size(main_attrib_font_size);
+    if let Some(val) = get_attribute_value(&card.attr, "Tribute") {
+        if val != 0.0 {
+            attribs.push(("drop.png", val.to_string()));
+        }
+    }
 
     if let Some(val) = get_attribute_value(&card.attr, "Offense") {
         if val != 0.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["sword.png"].clone().with_scale((0.20, 0.175)).padded(Margins::trbl(0.38, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
+            attribs.push(("sword.png", val.to_string()));
         }
     }
 
     if let Some(val) = get_attribute_value(&card.attr, "Defense") {
         if val != 0.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["shield.png"].clone().with_scale((0.35, 0.31)).padded(Margins::trbl(0.0, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
+            attribs.push(("shield.png", val.to_string()));
         }
     }
 
     if let Some(val) = get_attribute_value(&card.attr, "Health") {
         if val != 1.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["heart.jpg"].clone().with_scale((0.11, 0.11)).padded(Margins::trbl(0.22, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
+            attribs.push(("heart.jpg", val.to_string()));
         }
     }
 
     if let Some(val) = get_attribute_value(&card.attr, "Lethality") {
         if val != 1.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["fist.png"].clone().with_scale((0.28, 0.24)).padded(Margins::trbl(0.0, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
+            attribs.push(("fist.png", val.to_string()));
         }
     }
 
     if let Some(val) = get_attribute_value(&card.attr, "Power") {
         if val != 0.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["star.png"].clone().with_scale((0.32, 0.32)).padded(Margins::trbl(0.03, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Tribute") {
-        if val != 0.0 {
-            let h = HorizontalLayout::new()
-                .element(resources.images["drop.png"].clone().with_scale((0.21, 0.16)).padded(Margins::trbl(0.18, 0.0, 0.0, 0.0)))
-                .element(create_main_attr_par(val, st, attrib_text_margins));
-            attribs.push(h);
+            attribs.push(("star.png", val.to_string()));
         }
     }
 
     attribs
 }
 
-fn add_attr_to_layout(card: &Card, resources: &Resources, layout: &mut LinearLayout) {
-    let attrib_elems = create_main_attr_layout(card, resources);
-    let main_attr_count = attrib_elems.len();
-    let mut main_attrib_layout = TableLayout::new(vec![1; main_attr_count]);
-    let mut row = main_attrib_layout.row();
-
-    for e in attrib_elems {
-        row.push_element(e);
+fn deserialize_prop(ph: &PdfHandler, prop: &Property, base_x: f64, y: &mut f64) {
+    let efct = process_commands(prop.efct.to_string());
+    let h = ph.multi_cell_h(&efct, card_inner_w, prop_h);
+    *y -= h;
+    ph.set_xy(base_x, *y);
+    ph.multi_cell(&efct, card_inner_w, prop_h);
+    
+    if prop.attr.len() > 0 {
+        ph.set_font_i("Helvetica", font_size);
+        
+        let mut string = String::with_capacity(default_attr_string_alloc);
+        for attr in &prop.attr {
+            add_attr_to_string(attr, &mut string);
+            string.push_str(", ");
+        }
+        string.pop();
+        string.pop();
+        let string = process_commands(string);
+        
+        let h = ph.multi_cell_h(&string, card_inner_w, prop_h);
+        *y -= h;
+        ph.set_xy(base_x, *y);
+        ph.multi_cell(&string, card_inner_w, prop_h);
+        
+        ph.set_font("Helvetica", font_size);
     }
-    row.push().unwrap();
 
-    layout.push(main_attrib_layout.padded(Margins::trbl(attrib_padding_t, 0.0, attrib_padding_b, attrib_padding_l[main_attr_count])));
+    *y -= prop_pad;
+}
 
-    let mut string = String::with_capacity(default_attr_string_alloc);
+fn deserialize_card(ph: &PdfHandler, card: &Card, x: f64, y: f64) {
+    ph.set_text_color(0.0, 0.0, 255.0);
+    let image_name = &format!("{}.png", &card.name);
+    if ph.has_image(image_name) {
+        ph.set_xy(x, y);
+        ph.image(image_name, card_outer_w, card_outer_h);
+    }
+    else {
+        ph.rect(x, y, card_outer_w, card_outer_h);
+    }
+
+    let base_x = x + card_pad;
+    let base_y = y;
+    let mut y = base_y;
+
+    //name
+    ph.set_xy(base_x, y);
+    ph.set_font("Helvetica", name_font_size);
+    ph.center_cell(&card.name, card_inner_w, name_h);
+
+    //main attributes
+    ph.set_font("Helvetica", main_attr_font_size);
+    y += name_h;
+    let main_attr_icon_data = get_main_attr_icon_data(card);
+    let step_w = card_inner_w / main_attr_icon_data.len() as f64;
+    let a = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1);
+    let w = step_w * (main_attr_icon_data.len() - 1) as f64 + main_attr_icon_w + main_attr_text_pad_l + a;
+    let margin = (card_inner_w - w) / 2.0;
+    for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
+        let x = base_x + margin + i as f64 * step_w;
+        ph.set_xy(x, y);
+        ph.image(icon, main_attr_icon_w, main_attr_h);
+        ph.text(&val, x + main_attr_icon_w + main_attr_text_pad_l, y + main_attr_text_pad_t);
+    }
+
+    //other attributes
+    let mut other_attr = String::with_capacity(default_attr_string_alloc);
     for attr in &card.attr {
-        match &attr.n[..] {
+        match &attr.n as &str {
             "Level" | "Tribute" | "Offense" | "Defense" | "Health" | "Lethality" | "Power" => continue,
             _ => {
-                add_attr_to_string(attr, &mut string);
-                string.push_str(", ");
+                add_attr_to_string(attr, &mut other_attr);
+                other_attr.push_str(", ");
             }
         }
     }
-    if !string.is_empty() {
-        string.pop();
-        string.pop();
-    }
-    let string = process_commands(string);
-    layout.push(Paragraph::new(StyledString::new(string, Style::new().italic())).aligned(Alignment::Center));
-    layout.push(Break::new(0.9));
-}
-
-fn prop_attr_to_par(prop: &Property, resources: &Resources) -> Paragraph {
-    let mut string = String::with_capacity(default_attr_string_alloc);
-    for attr in &prop.attr {
-        add_attr_to_string(attr, &mut string);
-        string.push_str(", ");
-    }
-    string.pop();
-    string.pop();
-
-    Paragraph::new(StyledString::new(process_commands(string), resources.styles["HelveticaItalic"]))
-}
-
-fn card_to_pdf_text(card: &Card, resources: &Resources) -> PaddedElement<LinearLayout> {
-    let name_par = Paragraph::new(style::StyledString::new(&card.name, style::Style::new().with_font_size(name_font_size).bold())).aligned(Alignment::Center);
-    let mut linear_layout = LinearLayout::vertical().element(name_par);
+    other_attr.pop();
+    other_attr.pop();
+    y += main_attr_h + main_attr_pad_b;
+    ph.set_xy(base_x, y);
+    ph.set_font_i("Helvetica", font_size);
+    ph.center_multi_cell(&process_commands(other_attr), card_inner_w, other_attr_h);
     
-    add_attr_to_layout(card, resources, &mut linear_layout);
-
-    for prop in &card.acti {
-        if !prop.attr.is_empty() {
-            linear_layout.push(prop_attr_to_par(prop, resources));
-        }
-        linear_layout.push(Paragraph::new(process_commands(prop.efct.clone())));
-        linear_layout.push(Break::new(0.75));
+    //properties
+    ph.set_font("Helvetica", font_size);
+    y = base_y + card_inner_h;
+    for prop in card.pass.iter().rev() {
+        deserialize_prop(ph, prop, base_x, &mut y);
     }
-    for prop in &card.trig {
-        if !prop.attr.is_empty() {
-            linear_layout.push(prop_attr_to_par(prop, resources));
-        }
-        linear_layout.push(Paragraph::new(process_commands(prop.efct.clone())));
-        linear_layout.push(Break::new(0.75));
+    for prop in card.trig.iter().rev() {
+        deserialize_prop(ph, prop, base_x, &mut y);
     }
-    for prop in &card.pass {
-        if !prop.attr.is_empty() {
-            linear_layout.push(prop_attr_to_par(prop, resources));
-        }
-        linear_layout.push(Paragraph::new(process_commands(prop.efct.clone())));
-        linear_layout.push(Break::new(0.75));
+    for prop in card.acti.iter().rev() {
+        deserialize_prop(ph, prop, base_x, &mut y);
     }
-
-    linear_layout.padded(Margins::trbl(card_padding_t, card_padding, card_padding, card_padding))
 }
 
 fn main() -> Maybe {
-    let font_family = fonts::from_files("deserialize/fonts/Helvetica", "Helvetica", None)?;
-    let mut doc = Document::new(font_family);
-    doc.set_font_size(font_size);
-    doc.set_line_spacing(line_spacing);
-    
-    let mut decorator = SimplePageDecorator::new();
-    decorator.set_margins(Margins::trbl(page_padding, page_padding_r, page_padding, page_padding_l));
-    doc.set_page_decorator(decorator);
-    
-    deserialize_all_cards(&mut doc)?;
-    //test_deserialize(&mut doc)?;
-
-    cout("Writing to pdf");
-    doc.render_to_file("cards.pdf")?;
-    println!("Deserialized successfully");
-    ok
-}
-
-fn deserialize_all_cards(doc: &mut Document) -> Result<usize, Er> {
-    let cards = std::fs::read_to_string("cards.json")?;
-    let cards: Vec<Card> = serde_json::from_str(&cards)?;
-    let num_cards = cards.len();
-    let resources = Resources::new(doc);
-    for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
-        if p != 0 {
-            doc.push(PageBreak::new());
-        }
-        let mut table = TableLayout::new(vec![1; cards_per_row]);
-        table.set_cell_decorator(FrameCellDecorator::new(true, true, false));
-        for r in 0..cards_per_column {
-            let mut row = table.row();
-            for c in 0..cards_per_row {
-                let i = p * cards_per_page + r * cards_per_row + c;
-                if i < num_cards {
-                    let mut layered = LayeredLayout::new();
-                    layered.push(resources.images["white.png"].clone().with_scale((card_w, card_h)));
-                    layered.push(card_to_pdf_text(&cards[i], &resources));
-                    row.push_element(layered);
-                }
-                else {
-                    let image = resources.images["white.png"].clone().with_scale((card_w, card_h));
-                    row.push_element(image);
+    Python::with_gil(|py| {
+        let ph = PdfHandler::new(py);
+        let cards = std::fs::read_to_string("cards.json").unwrap();
+        let cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
+        let num_cards = cards.len();
+        for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
+            ph.add_page();
+            for r in 0..cards_per_column {
+                for c in 0..cards_per_row {
+                    let i = p * cards_per_page + r * cards_per_row + c;
+                    if i < num_cards {
+                        let x = page_pad_l as f64 + c as f64 * card_outer_w;
+                        let y = page_pad_t as f64 + r as f64 * card_outer_h;
+                        deserialize_card(&ph, &cards[i], x, y)
+                    }
+                    else {
+                        return;
+                    }
                 }
             }
-            row.push().expect("EXPECT ERR: Could not push table row");
         }
-        doc.push(table);
-    }
-    Ok(num_cards)
+        
+        ph.output();
+    });
+    
+    ok
 }
