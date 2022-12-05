@@ -544,6 +544,10 @@ fn main() {
         if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Tribute") {
             attribute.f[0] = 2.0 * attribute.f[0] - 1.0;
         }
+        if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Lethality") {
+            attribute.n.clear();
+            attribute.n.push_str("Strength");
+        }
     }
 
     cout("Writing to json");

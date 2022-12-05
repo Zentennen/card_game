@@ -12,7 +12,7 @@ Summon 2
 
 Test Complicated Card
 Level 1, Tribute 200, Offense 200, Defense 200, Health 200, Lethality 200, Power 200, Giant, Dragon, Creature
-A; This is Complicated too; Flip, Spell; Use only if you control at least one ¤(cwsn(Wanderer));
+A; This is Complicated too; Flip, Spell; Use only if you control at least one ¤(cwa(Wanderer));
 Deal 1 damage to a hero of your choice.
 P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while it is attacking.
 
