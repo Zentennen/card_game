@@ -1,8 +1,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 
-use std::collections::btree_map::Iter;
-
 use extrust::*;
 use card_game::*;
 use pyo3::*;
@@ -35,6 +33,7 @@ pub const main_attr_h: f64 = 3.6;
 pub const main_attr_pad_b: f64 = 1.7;
 pub const main_attr_font_size: f64 = 7.0;
 pub const other_attr_h: f64 = 3.5;
+pub const attr_text_align: Alignment = Alignment::center_;
 pub const attr_text_mod: TextModifier = TextModifier::italic_;
 
 //prop
@@ -46,6 +45,7 @@ pub const font_size: f64 = 7.0;
 pub const font_name: &'static str = "Merriweather";
 pub const font_line_width: f64 = 0.1;
 pub const rect_line_width: f64 = 0.2;
+pub const default_text_align: Alignment = Alignment::center_;
 pub const default_text_mod: TextModifier = TextModifier::none_;
 
 pub struct DeserializedProperty {
@@ -58,20 +58,20 @@ pub struct DeserializedProperty {
 impl DeserializedProperty {
     pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
         let efct = process_commands(prop.efct.to_string());
-        let efct_h = ph.multi_cell_h(&efct, card_inner_w, prop_h);
+        let efct_h = ph.multi_cell_h(&efct, card_inner_w, prop_h, default_text_align);
 
         let mut attr = String::with_capacity(default_attr_string_alloc);
         let mut attr_h = 0.0;
         if prop.attr.len() > 0 {
+            ph.set_font_modded(font_name, font_size, attr_text_mod);
+
             for at in &prop.attr {
                 add_attr_to_string(at, &mut attr);
                 attr.push_str(", ");
             }
             attr.pop();
             attr.pop();
-    
-            attr_h = ph.multi_cell_h(&attr, card_inner_w, prop_h);
-            ph.multi_cell_h(&attr, card_inner_w, prop_h);
+            attr_h = ph.multi_cell_h(&attr, card_inner_w, prop_h, attr_text_align);
             
             ph.set_font_modded(font_name, font_size, default_text_mod);
         }
@@ -82,14 +82,14 @@ impl DeserializedProperty {
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64) -> f64 {
         y -= self.efct_h;
         ph.set_xy(base_x, y);
-        ph.multi_cell(&self.efct, card_inner_w, prop_h);
+        ph.multi_cell(&self.efct, card_inner_w, prop_h, default_text_align);
         
         if self.attr_h > 0.0 {
             ph.set_font_modded(font_name, font_size, attr_text_mod);
             
             y -= self.attr_h;
             ph.set_xy(base_x, y);
-            ph.multi_cell(&self.attr, card_inner_w, prop_h);
+            ph.multi_cell(&self.attr, card_inner_w, prop_h, attr_text_align);
             
             ph.set_font_modded(font_name, font_size, default_text_mod);
         }
@@ -149,6 +149,21 @@ impl Into<&str> for TextModifier {
         }
     }
 }
+
+pub enum Alignment {
+    left_, center_, right_
+}
+
+impl Into<&str> for Alignment {
+    fn into(self) -> &'static str {
+        match self {
+            Alignment::left_ => "L",
+            Alignment::center_ => "C",
+            Alignment::right_ => "R"
+        }
+    }
+}
+
 
 impl PdfHandler<'_> {
     pub fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
@@ -243,15 +258,9 @@ impl PdfHandler<'_> {
         self.pdf.call_method("cell", args, Some(kwargs)).unwrap();
     }
 
-    pub fn multi_cell(&self,txt: &str, w: f64, h: f64) {
-        let args = (w, h, txt);
+    pub fn multi_cell(&self,txt: &str, w: f64, h: f64, align: Alignment) {
+        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
         self.pdf.call_method1("multi_cell", args).unwrap();
-    }
-
-    pub fn center_multi_cell(&self, txt: &str, w: f64, h: f64) {
-        let args = (w, h, txt);
-        let kwargs = [("align", "C")].into_py_dict(self.py);
-        self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap();
     }
 
     pub fn image(&self, name: &str, w: f64, h: f64) {
@@ -287,16 +296,8 @@ impl PdfHandler<'_> {
         w.extract(self.py).unwrap()
     }
 
-    pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64) -> f64 {
-        let args = (w, h, txt);
-        let kwargs = [("split_only", true)].into_py_dict(self.py);
-        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
-        let strings: Vec<&str> = strings.extract(self.py).unwrap();
-        h * strings.len() as f64
-    }
-
-    pub fn center_multi_cell_h(&self, txt: &str, w: f64, h: f64) -> f64 {
-        let args = (w, h, txt, 0, "C");
+    pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64, align: Alignment) -> f64 {
+        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
         let kwargs = [("split_only", true)].into_py_dict(self.py);
         let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
         let strings: Vec<&str> = strings.extract(self.py).unwrap();
@@ -674,7 +675,7 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     if !other_attr.is_empty() { 
         h += main_attr_pad_b;
         ph.set_font_modded(font_name, font_size, attr_text_mod);
-        h += ph.center_multi_cell_h(&other_attr, card_inner_w, other_attr_h);
+        h += ph.multi_cell_h(&other_attr, card_inner_w, other_attr_h, attr_text_align);
     }
     ph.set_xy(base_x, base_y);
     ph.image("alpha.png", card_outer_w, h);
@@ -718,7 +719,7 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         y += main_attr_h + main_attr_pad_b;
         ph.set_xy(base_x, y);
         ph.set_font_modded(font_name, font_size, attr_text_mod);
-        ph.center_multi_cell(&other_attr, card_inner_w, other_attr_h);
+        ph.multi_cell(&other_attr, card_inner_w, other_attr_h, attr_text_align);
     }
     
     //properties
