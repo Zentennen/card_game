@@ -1,0 +1,9 @@
+Storm of Sparks
+Level 1, Tribute 5,
+Defense 100, Power 30, Health 2, 
+Spell, Lightning
+Evoke 5
+T5; At the end of each round;
+Deal 1 damage to me. For each opponent, in turn order:
+That opponent, then you, both choose 1 susceptible
+card which that opponent controls. All chosen cards take 1 damage.

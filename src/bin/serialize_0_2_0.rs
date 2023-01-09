@@ -4,7 +4,7 @@
 #![allow(unused_imports)]
 
 use std::{fs, iter::empty};
-use extrust::*;
+use extstd::*;
 use card_game::*;
 
 pub const nl_indicator_char: char = '$';
@@ -277,7 +277,8 @@ fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
             name = attribute_string;
             subattribute_part = "";
         }
-        let mut attribute = match name.trim() {
+        let name = name.trim();
+        let mut attribute = match name {
             "Flip" => Attribute::with_name("¤(flip)"),
             "Any Phase" => Attribute::with_name("¤(any_phase)"),
             "Combat Only" => Attribute::with_name("¤(co)"),
@@ -290,7 +291,19 @@ fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
         if subattribute_part != "" {
             let error_string = format!("ERROR: Failed to parse subattribute '{}' as part of attribute '{}'", subattribute_part, attribute_string);
             let sub = str::parse::<f64>(subattribute_part).expect(&error_string);
-            attribute.f.push(sub);
+
+            if attribute.n == "Level" {
+                if sub > 1.0 {
+                    attribute.n.clear();
+                    attribute.n.push_str("Advanced");
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                attribute.f.push(sub);
+            }
         }
         attributes.push(attribute);
     }
@@ -335,7 +348,7 @@ fn parse_action(s: &str) -> Res<Property> {
     }
 
     let mut effect = String::with_capacity(default_property_effect_alloc);
-    if current > 1 {
+    if current > 1 && !parts[current - 1].is_empty() {
         effect.push_str(parts[current - 1].trim());
         effect.push_str(". ");
     }
@@ -353,13 +366,12 @@ fn parse_action(s: &str) -> Res<Property> {
 fn parse_triggered(s: &str) -> Res<Property> {
     let parts: Vec<&str> = s.split(";").collect();
     let mut current = parts.len() - 1;
-
     if current == 1 {
         panic!("ERROR: Invalid triggered property: {}", s);
     }
     
     let mut effect = String::with_capacity(default_property_effect_alloc);
-    if current > 1 {
+    if current > 1 && !parts[current - 1].is_empty() {
         effect.push_str(parts[current - 1].trim());
         effect.push_str(". ");
     }
@@ -374,11 +386,10 @@ fn parse_triggered(s: &str) -> Res<Property> {
     }
 
     current -= 2;
-    if current <= 0 { return Ok(triggered); }   
+    if current <= 0 { return Ok(triggered); }
 
     parse_attributes(&mut triggered.attr, parts[current].trim());
-
-    return Ok(triggered);
+    Ok(triggered)
 }
 
 #[inline(always)]
@@ -524,6 +535,11 @@ fn main() {
         if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Offense") {
             attribute.f[0] = 2.0 * attribute.f[0];
         }
+        if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Level") {
+            attribute.f.clear();
+            attribute.n.clear();
+            attribute.n.push_str("Advanced");
+        }
         else {
             card.attr.push(Attribute{n: "Offense".to_string(), f: vec![0.0], a: vec![], s: vec![]});
         }
@@ -550,7 +566,7 @@ fn main() {
         }
     }
 
-    cout("Writing to json");
+    print("Writing to json");
     let cards_as_string = serde_json::to_string(&cards).unwrap();
     let cards_as_string = cards_as_string.replacen("  ", " ", usize::MAX);
     fs::write("./cards.json", cards_as_string).expect("ERROR: Failed to write output!");

@@ -31,7 +31,7 @@ name = "card_game"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "extrust",
+ "extstd",
  "png",
  "pyo3",
  "serde",
@@ -54,10 +54,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "extrust"
-version = "0.10.1"
+name = "extstd"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72d56824f9d20b8c4c7a20a83aab4739799ec31f5f238d6f6ffd5a06fdcd88c1"
+checksum = "ec9f45a0df1159cb74dbff994d5a8f4fd50892ccca62a5ba28e94813b050f8be"
 dependencies = [
  "anyhow",
  "thiserror",

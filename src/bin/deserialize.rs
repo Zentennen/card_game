@@ -1,89 +1,144 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 
-use extrust::*;
+use extstd::*;
 use card_game::*;
 use pyo3::*;
 use pyo3::types::IntoPyDict;
 
 pub const attr_text_align: Alignment = Alignment::center_;
 pub const attr_text_mod: TextModifier = TextModifier::italic_;
-pub const font_size: f64 = 7.0;
-pub const font_name: &'static str = "Merriweather";
+pub const name_font_size: f64 = 9.0;
+pub const font_size: f64 = 6.0;
+pub const font_name: &'static str = "SourceSerifPro";
 pub const font_line_width: f64 = 0.1;
-pub const rect_line_width: f64 = 0.2;
-pub const default_text_align: Alignment = Alignment::center_;
+pub const rect_line_w: f64 = 0.2;
+pub const default_text_align: Alignment = Alignment::left_;
 pub const default_text_mod: TextModifier = TextModifier::none_;
 
 pub struct DeserializedProperty {
-    pub efct: String,
-    pub attr: String,
-    pub efct_h: f64,
-    pub attr_h: f64
+    pub efct_limited: String,
+    pub efct_non_limited: String,
+    pub attr_limited: String,
+    pub attr_non_limited: String,
+    pub efct_limited_l: usize,
+    pub efct_non_limited_l: usize,
+    pub attr_limited_l: usize,
+    pub attr_non_limited_l: usize,
 }
 
 impl DeserializedProperty {
     pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
-        let efct = process_commands(prop.efct.to_string());
-        let efct_h = ph.multi_cell_h(&efct, card_inner_w, prop_h, default_text_align);
-
-        let mut attr = String::with_capacity(default_attr_string_alloc);
-        let mut attr_h = 0.0;
-        if prop.attr.len() > 0 {
+        let mut attr_limited = String::with_capacity(default_attr_string_alloc);
+        let mut attr_non_limited = String::with_capacity(default_attr_string_alloc);
+        let mut attr_non_limited_l = 0;
+        let mut attr_limited_l = 0;
+        if !prop.attr.is_empty() {
             ph.set_font_modded(font_name, font_size, attr_text_mod);
-
+            
+            let mut attr = String::with_capacity(default_attr_string_alloc);
             for at in &prop.attr {
                 add_attr_to_string(at, &mut attr);
                 attr.push_str(", ");
             }
             attr.pop();
             attr.pop();
-            attr_h = ph.multi_cell_h(&attr, card_inner_w, prop_h, attr_text_align);
-            
+            attr = process_commands(&attr);
+
+            let (a, b) = ph.text_on_limited_lines(&attr, prop_top_w, prop_h, default_text_align, prop_sym_l);
+            attr_limited = a.to_string();
+            attr_non_limited = b.to_string();
+            attr_limited_l = ph.multi_cell_l(&attr_limited, prop_top_w, prop_h, default_text_align);
+            if !attr_non_limited.is_empty() {
+                attr_non_limited_l = ph.multi_cell_l(&attr_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+
             ph.set_font_modded(font_name, font_size, default_text_mod);
         }
 
-        Self{ efct, attr: process_commands(attr), efct_h, attr_h }
+        let efct = process_commands(&prop.efct);
+        let efct_max_limited_l = i32::max(prop_sym_l as i32 - attr_limited_l as i32, 0) as usize;
+        let efct_limited;
+        let efct_non_limited;
+        let mut efct_limited_l = 0;
+        let mut efct_non_limited_l = 0;
+        if efct_max_limited_l == 0 {
+            efct_non_limited_l = ph.multi_cell_l(&efct, card_inner_w, prop_h, default_text_align);
+            efct_limited = String::new();
+            efct_non_limited = efct;
+        }
+        else {
+            let (a, b) = ph.text_on_limited_lines(&efct, prop_top_w, prop_h, default_text_align, efct_max_limited_l);
+            efct_limited = a.to_string();
+            efct_non_limited = b.to_string();
+            efct_limited_l = ph.multi_cell_l(&efct_limited, prop_top_w, prop_h, default_text_align);
+            if !efct_non_limited.is_empty() {
+                efct_non_limited_l = ph.multi_cell_l(&efct_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+        }
+
+        Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
     }
 
-    pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64) -> f64 {
-        y -= self.efct_h;
-        ph.set_xy(base_x, y);
-        ph.multi_cell(&self.efct, card_inner_w, prop_h, default_text_align);
+    pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
+        if !self.efct_non_limited.is_empty() {
+            y -= self.efct_non_limited_l as f64 * prop_h;
+            ph.set_xy(base_x, y);
+            ph.multi_cell(&self.efct_non_limited, card_inner_w, prop_h, default_text_align);
+        }
+        if !self.efct_limited.is_empty() {
+            y -= self.efct_limited_l as f64 * prop_h;
+            ph.set_xy(base_x, y);
+            ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
+        }
         
-        if self.attr_h > 0.0 {
+        if !self.attr_limited.is_empty() {
             ph.set_font_modded(font_name, font_size, attr_text_mod);
             
-            y -= self.attr_h;
+            if !self.attr_non_limited.is_empty() {
+                y -= self.attr_non_limited_l as f64 * prop_h;
+                ph.set_xy(base_x, y);
+                ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+            y -= self.attr_limited_l as f64 * prop_h;
             ph.set_xy(base_x, y);
-            ph.multi_cell(&self.attr, card_inner_w, prop_h, attr_text_align);
-            
+            ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
+
             ph.set_font_modded(font_name, font_size, default_text_mod);
         }
     
-        y -= prop_pad;
+        ph.set_xy(base_x + prop_sym_pad_l, y);
+        ph.image(prop_sym_name, prop_sym_size, prop_sym_size);
+
+        y -= prop_h;
         y
     }
 
-    pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> f64 {
-        let mut h = 0.0;
+    pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
+        let mut h = 0;
         for prop in acti {
-            h += prop.attr_h;
-            h += prop.efct_h;
-            h += prop_pad;
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
         }
         for prop in trig {
-            h += prop.attr_h;
-            h += prop.efct_h;
-            h += prop_pad;
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
         }
         for prop in pass {
-            h += prop.attr_h;
-            h += prop.efct_h;
-            h += prop_pad;
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
         }
         if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
-            h -= prop_pad;
+            h -= 1;
         }
         h
     }
@@ -93,13 +148,6 @@ pub struct PdfHandler<'p> {
     py: Python<'p>,
     pdf: &'p PyAny,
     image_aliases: std::collections::HashMap<&'static str, &'static str>
-}
-
-impl Drop for PdfHandler<'_> {
-    fn drop(&mut self) {
-        self.output();
-        println!("Deserialized");
-    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -132,7 +180,6 @@ impl Into<&str> for Alignment {
         }
     }
 }
-
 
 impl PdfHandler<'_> {
     pub fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
@@ -232,16 +279,45 @@ impl PdfHandler<'_> {
         self.pdf.call_method1("multi_cell", args).unwrap();
     }
 
-    pub fn multi_cell_limited_lines(&self, txt: &str, w: f64, h: f64, align: Alignment, lines: usize) {
-        let mut i = 1;
-        let mut substring = &txt[0..i];
-        while self.multi_cell_l(substring, w, h, align) <= lines {
-            i += 1;
-            substring = &txt[0..i];
-        }
+    pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64, align: Alignment) -> f64 {
+        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
+        let kwargs = [("split_only", true)].into_py_dict(self.py);
+        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).expect("ERROR!!!").to_object(self.py);
+        let strings: Vec<&str> = strings.extract(self.py).unwrap();
+        h * strings.len() as f64
+    }
 
-        let args: (f64, f64, &str, i32, &str) = (w, h, substring, 0, align.into());
-        self.pdf.call_method1("multi_cell", args).unwrap();
+    pub fn multi_cell_l(&self, txt: &str, w: f64, h: f64, align: Alignment) -> usize {
+        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
+        let kwargs = [("split_only", true)].into_py_dict(self.py);
+        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
+        let strings: Vec<&str> = strings.extract(self.py).unwrap();
+        strings.len()
+    }
+
+    fn text_on_limited_lines<'a>(&self, txt: &'a str, w: f64, h: f64, align: Alignment, max_lines: usize) -> (&'a str, &'a str) {
+        let last = txt.num_chars() - 1;
+        let mut i = 0;
+        let mut split_at = last + 1;
+        while self.multi_cell_l(txt.to(i + 1), w, h, align) <= max_lines {
+            i += 1;
+            if i == last {
+                split_at = last + 1;
+                break;
+            }
+            if txt.nth_char(i).unwrap() == ' ' {
+                split_at = i;
+            }
+        }
+        
+        if split_at > last {
+            (txt, "")
+        }
+        else {
+            let split_at = txt.char_indices().nth(split_at).unwrap().0;
+            let ret = txt.split_at(split_at);
+            (ret.0.trim(), ret.1.trim())
+        }
     }
 
     pub fn image(&self, name: &str, w: f64, h: f64) {
@@ -277,22 +353,6 @@ impl PdfHandler<'_> {
         w.extract(self.py).unwrap()
     }
 
-    pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64, align: Alignment) -> f64 {
-        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
-        let kwargs = [("split_only", true)].into_py_dict(self.py);
-        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
-        let strings: Vec<&str> = strings.extract(self.py).unwrap();
-        h * strings.len() as f64
-    }
-
-    pub fn multi_cell_l(&self, txt: &str, w: f64, h: f64, align: Alignment) -> usize {
-        let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
-        let kwargs = [("split_only", true)].into_py_dict(self.py);
-        let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
-        let strings: Vec<&str> = strings.extract(self.py).unwrap();
-        strings.len()
-    }
-
     pub fn set_text_color(&self, r: f64, g: f64, b: f64) {
         let args = (r, g, b);
         self.pdf.call_method1("set_text_color", args).unwrap();
@@ -319,6 +379,7 @@ impl PdfHandler<'_> {
     }
 
     pub fn output(&self) {
+        print("Deserialized");
         let args = types::PyTuple::new(self.py, &["cards.pdf"]);
         self.pdf.call_method1("output", args).unwrap();
     }
@@ -343,9 +404,9 @@ fn get_attr_condition_string(string: &str) -> String {
     attr_string
 }
 
-fn process_commands(string: String) -> String {
+fn process_commands(string: &String) -> String {
     if string.is_empty() {
-        return string;    
+        return String::new();
     }
 
     let string = string.replacen("¤(ho)", "Hand Only", usize::MAX);
@@ -654,36 +715,38 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         ph.image(image_name, card_outer_w, card_outer_h);
     }
     else {
-        ph.set_line_width(rect_line_width);
         ph.rect(base_x, base_y, card_outer_w, card_outer_h);
     }
 
     //attribute alpha background
-    //let mut h = card_upper_alpha_h_short;
-    let other_attr = process_commands(get_other_attr_string(card));
-    //let l: usize;
-    //if other_attr.is_empty() {
-    //    h += main_attr_pad_b;
-    //    ph.set_font_modded(font_name, font_size, attr_text_mod);
-    //    //l = ph.multi_cell_l(&other_attr, card_inner_w, other_attr_h, attr_text_align);
-    //    l = 1;
-    //    h += other_attr_h * l as f64;
-    //}
-    //else {
-    //    l = 0;
-    //}
-    //ph.set_xy(base_x, base_y);
-    //ph.image(&format!("upper{}.png", l), card_outer_w, h);
+    let mut h = card_upper_alpha_h_short;
+    let mut l = 0usize;
+    let other_attr = process_commands(&get_other_attr_string(card));
+    if !other_attr.is_empty() {
+        h += main_attr_pad_b;
+        ph.set_font_modded(font_name, font_size, attr_text_mod);
+        l = ph.multi_cell_l(&other_attr, card_inner_w, other_attr_h, attr_text_align);
+        h += other_attr_h * l as f64;
+    }
+    ph.set_xy(base_x, base_y);
+    ph.image(&format!("upper{}.png", l), card_outer_w, h);
 
     //collect data about deserialized properties
+    ph.set_font_modded(font_name, font_size, default_text_mod);
     let acti: Vec<DeserializedProperty> = card.acti.iter().rev().map(|p|{ DeserializedProperty::from_property(p, ph) }).collect();
     let trig: Vec<DeserializedProperty> = card.trig.iter().rev().map(|p|{ DeserializedProperty::from_property(p, ph) }).collect();
     let pass: Vec<DeserializedProperty> = card.pass.iter().rev().map(|p|{ DeserializedProperty::from_property(p, ph) }).collect();
 
     //property alpha background
-    let h = DeserializedProperty::get_height_sum(&acti, &trig, &pass) + card_pad;
+    let l = DeserializedProperty::get_height_sum(&acti, &trig, &pass);
+    let h = l as f64 * prop_h + gradient_h + card_pad;
     ph.set_xy(base_x, base_y + card_outer_h - h);
-    ph.image("alpha.png", card_outer_w, h);
+    ph.image(&format!("lower{}.png", l), card_outer_w, h);
+
+    if let Some(_) = get_attribute_ref_with_name(&card.attr, "Advanced") {
+        ph.set_xy(base_x, base_y);
+        //ph.image("advanced.png", advanced_w, name_h);
+    }
 
     //set the x and y coordinates to be inside the card margins
     let base_x = base_x + card_pad;
@@ -721,13 +784,33 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     ph.set_font_modded(font_name, font_size, default_text_mod);
     y = base_y + card_inner_h;
     for prop in acti {
-        y = prop.add_to_pdf(&ph, base_x, y);
+        y = prop.add_to_pdf(&ph, base_x, y, "action.png");
     }
     for prop in trig {
-        y = prop.add_to_pdf(&ph, base_x, y);
+        y = prop.add_to_pdf(&ph, base_x, y, "triggered.png");
     }
     for prop in pass {
-        y = prop.add_to_pdf(&ph, base_x, y);
+        y = prop.add_to_pdf(&ph, base_x, y, "passive.png");
+    }
+}
+
+fn deserialize_all_cards(ph: &PdfHandler, cards: Vec<Card>) {
+    let num_cards = cards.len();
+    for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
+        ph.add_page();
+        for r in 0..cards_per_column {
+            for c in 0..cards_per_row {
+                let i = p * cards_per_page + r * cards_per_row + c;
+                if i < num_cards {
+                    let x = page_pad_l as f64 + c as f64 * card_outer_w;
+                    let y = page_pad_t as f64 + r as f64 * card_outer_h;
+                    deserialize_card(&ph, &cards[i], x, y)
+                }
+                else {
+                    return;
+                }
+            }
+        }
     }
 }
 
@@ -737,24 +820,7 @@ fn main() -> Maybe {
         ph.set_text_color(255.0, 255.0, 255.0);
         let cards = std::fs::read_to_string("cards.json").unwrap();
         let cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
-        let num_cards = cards.len();
-        for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
-            ph.add_page();
-            for r in 0..cards_per_column {
-                for c in 0..cards_per_row {
-                    let i = p * cards_per_page + r * cards_per_row + c;
-                    if i < num_cards {
-                        let x = page_pad_l as f64 + c as f64 * card_outer_w;
-                        let y = page_pad_t as f64 + r as f64 * card_outer_h;
-                        deserialize_card(&ph, &cards[i], x, y)
-                    }
-                    else {
-                        return;
-                    }
-                }
-            }
-        }
-        
+        deserialize_all_cards(&ph, cards);
         ph.output();
     });
     

@@ -1,3 +1,11 @@
+Test Complicated Card
+Level 2, Tribute 200, Offense 200, Defense 200, Health 200, Lethality 200, Power 200, Giant, Dragon, Creature
+A; This is Complicated too; Flip, Spell; Use only if you control at least one ¤(cwa(Wanderer));
+Deal 1 damage to a hero of your choice.
+P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while it is attacking.
+T5; This, Is, So, Complicated, It, Has, Attributes, That, Cover, Multiple, Lines, Of, Text;; Whenever this card takes damage, it takes 1 less damage.
+
+
 Wandering Hill Giant
 Level 1, Tribute 6,
 Offense 45, Defense 5, Health 3, Lethality 2, 
@@ -8,13 +16,6 @@ Summon 6
 Test Simple Card
 Tribute 2
 Summon 2
-
-
-Test Complicated Card
-Level 1, Tribute 200, Offense 200, Defense 200, Health 200, Lethality 200, Power 200, Giant, Dragon, Creature
-A; This is Complicated too; Flip, Spell; Use only if you control at least one ¤(cwa(Wanderer));
-Deal 1 damage to a hero of your choice.
-P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while it is attacking.
 
 
 Many Attributes
@@ -44,6 +45,9 @@ Level 1, Tribute 1,
 Offense 60, Defense 0, 
 Decaying, Spell, Illusion, Warrior
 Summon 1
+Summon 2
+Summon 3
+Summon 4
 
 
 Inanimate Object

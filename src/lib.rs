@@ -28,14 +28,13 @@ pub const card_outer_w: f64 = 63.0;
 pub const card_outer_h: f64 = 88.0;
 pub const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
 pub const card_inner_h: f64 = card_outer_h - card_pad;
-pub const card_pad: f64 = 2.0;
-pub const card_upper_alpha_h_short: f64 = name_h + main_attr_h;
+pub const card_pad: f64 = 1.9;
+pub const card_upper_alpha_h_short: f64 = name_h + main_attr_h + gradient_h;
 pub const upper_alpha_h: f64 = 5.0;
 
 //name
 pub const name_h: f64 = 8.0;
-pub const name_font_size: f64 = 9.0;
-
+pub const advanced_w: f64 = 12.0;
 //attr
 pub const main_attr_icon_w: f64 = 3.6;
 pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.38;
@@ -43,11 +42,16 @@ pub const main_attr_text_pad_l: f64 = 0.8;
 pub const main_attr_h: f64 = 3.6;
 pub const main_attr_pad_b: f64 = 1.7;
 pub const main_attr_font_size: f64 = 7.0;
-pub const other_attr_h: f64 = 3.5;
+pub const other_attr_h: f64 = 3.2;
+pub const gradient_h: f64 = 3.0;
 
 //prop
-pub const prop_h: f64 = 4.0;
-pub const prop_pad: f64 = 5.0;
+pub const prop_h: f64 = 2.8;
+pub const prop_top_w: f64 = card_inner_w - prop_sym_size - card_pad;
+pub const prop_sym_size: f64 = 2.6;
+pub const prop_sym_pad_l: f64 = prop_top_w + card_pad;
+pub const prop_sym_pad_t: f64 = prop_h * prop_sym_l as f64 - prop_sym_size;
+pub const prop_sym_l: usize = (prop_sym_size / prop_h - 0.00001) as usize + 1;
 
 type attr_num = f64;
 
