@@ -2,7 +2,7 @@ Test Complicated Card
 Level 2, Tribute 200, Offense 200, Defense 200, Health 200, Lethality 200, Power 200, Giant, Dragon, Creature
 A; This is Complicated too; Flip, Spell; Use only if you control at least one ¤(cwa(Wanderer));
 Deal 1 damage to a hero of your choice.
-P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while it is attacking.
+P5; This is Complicated; Fire; This card ¤(p_gives_one(First Strike)) while attacking.
 T5; This, Is, So, Complicated, It, Has, Attributes, That, Cover, Multiple, Lines, Of, Text;; Whenever this card takes damage, it takes 1 less damage.
 
 
@@ -16,6 +16,7 @@ Summon 6
 Test Simple Card
 Tribute 2
 Summon 2
+P5; All other friendly cards have ¤(p_mods_many(Offense, 10)).
 
 
 Many Attributes

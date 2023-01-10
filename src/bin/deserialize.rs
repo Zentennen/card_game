@@ -16,169 +16,10 @@ pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left_;
 pub const default_text_mod: TextModifier = TextModifier::none_;
 
-pub struct DeserializedProperty {
-    pub efct_limited: String,
-    pub efct_non_limited: String,
-    pub attr_limited: String,
-    pub attr_non_limited: String,
-    pub efct_limited_l: usize,
-    pub efct_non_limited_l: usize,
-    pub attr_limited_l: usize,
-    pub attr_non_limited_l: usize,
-}
-
-impl DeserializedProperty {
-    pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
-        let mut attr_limited = String::with_capacity(default_attr_string_alloc);
-        let mut attr_non_limited = String::with_capacity(default_attr_string_alloc);
-        let mut attr_non_limited_l = 0;
-        let mut attr_limited_l = 0;
-        if !prop.attr.is_empty() {
-            ph.set_font_modded(font_name, font_size, attr_text_mod);
-            
-            let mut attr = String::with_capacity(default_attr_string_alloc);
-            for at in &prop.attr {
-                add_attr_to_string(at, &mut attr);
-                attr.push_str(", ");
-            }
-            attr.pop();
-            attr.pop();
-            attr = process_commands(&attr);
-
-            let (a, b) = ph.text_on_limited_lines(&attr, prop_top_w, prop_h, default_text_align, prop_sym_l);
-            attr_limited = a.to_string();
-            attr_non_limited = b.to_string();
-            attr_limited_l = ph.multi_cell_l(&attr_limited, prop_top_w, prop_h, default_text_align);
-            if !attr_non_limited.is_empty() {
-                attr_non_limited_l = ph.multi_cell_l(&attr_non_limited, card_inner_w, prop_h, default_text_align);
-            }
-
-            ph.set_font_modded(font_name, font_size, default_text_mod);
-        }
-
-        let efct = process_commands(&prop.efct);
-        let efct_max_limited_l = i32::max(prop_sym_l as i32 - attr_limited_l as i32, 0) as usize;
-        let efct_limited;
-        let efct_non_limited;
-        let mut efct_limited_l = 0;
-        let mut efct_non_limited_l = 0;
-        if efct_max_limited_l == 0 {
-            efct_non_limited_l = ph.multi_cell_l(&efct, card_inner_w, prop_h, default_text_align);
-            efct_limited = String::new();
-            efct_non_limited = efct;
-        }
-        else {
-            let (a, b) = ph.text_on_limited_lines(&efct, prop_top_w, prop_h, default_text_align, efct_max_limited_l);
-            efct_limited = a.to_string();
-            efct_non_limited = b.to_string();
-            efct_limited_l = ph.multi_cell_l(&efct_limited, prop_top_w, prop_h, default_text_align);
-            if !efct_non_limited.is_empty() {
-                efct_non_limited_l = ph.multi_cell_l(&efct_non_limited, card_inner_w, prop_h, default_text_align);
-            }
-        }
-
-        Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
-    }
-
-    pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
-        if !self.efct_non_limited.is_empty() {
-            y -= self.efct_non_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
-            ph.multi_cell(&self.efct_non_limited, card_inner_w, prop_h, default_text_align);
-        }
-        if !self.efct_limited.is_empty() {
-            y -= self.efct_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
-            ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
-        }
-        
-        if !self.attr_limited.is_empty() {
-            ph.set_font_modded(font_name, font_size, attr_text_mod);
-            
-            if !self.attr_non_limited.is_empty() {
-                y -= self.attr_non_limited_l as f64 * prop_h;
-                ph.set_xy(base_x, y);
-                ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
-            }
-            y -= self.attr_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
-            ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
-
-            ph.set_font_modded(font_name, font_size, default_text_mod);
-        }
-    
-        ph.set_xy(base_x + prop_sym_pad_l, y);
-        ph.image(prop_sym_name, prop_sym_size, prop_sym_size);
-
-        y -= prop_h;
-        y
-    }
-
-    pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
-        let mut h = 0;
-        for prop in acti {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        for prop in trig {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        for prop in pass {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
-            h -= 1;
-        }
-        h
-    }
-}
-
 pub struct PdfHandler<'p> {
     py: Python<'p>,
     pdf: &'p PyAny,
     image_aliases: std::collections::HashMap<&'static str, &'static str>
-}
-
-#[derive(Copy, Clone, Debug)]
-pub enum TextModifier {
-    none_, bold_, italic_, bold_italic_
-}
-
-impl Into<&str> for TextModifier {
-    fn into(self) -> &'static str {
-        match self {
-            TextModifier::none_ => "",
-            TextModifier::bold_ => "B",
-            TextModifier::italic_ => "I",
-            TextModifier::bold_italic_ => "BI"
-        }
-    }
-}
-
-#[derive(Copy, Clone, Debug)]
-pub enum Alignment {
-    left_, center_, right_
-}
-
-impl Into<&str> for Alignment {
-    fn into(self) -> &'static str {
-        match self {
-            Alignment::left_ => "L",
-            Alignment::center_ => "C",
-            Alignment::right_ => "R"
-        }
-    }
 }
 
 impl PdfHandler<'_> {
@@ -194,7 +35,7 @@ impl PdfHandler<'_> {
 
     pub fn init(&mut self) {
         //image aliases
-        self.image_aliases.insert("Test Complicated Card.png", "Test Simple Card.png");
+        //self.image_aliases.insert("Test Complicated Card.png", "Test Simple Card.png");
 
         //fonts
         let entries = std::fs::read_dir("deserialize/fonts").expect("Could not find directory deserialize/fonts");
@@ -382,6 +223,165 @@ impl PdfHandler<'_> {
         print("Deserialized");
         let args = types::PyTuple::new(self.py, &["cards.pdf"]);
         self.pdf.call_method1("output", args).unwrap();
+    }
+}
+
+pub struct DeserializedProperty {
+    pub efct_limited: String,
+    pub efct_non_limited: String,
+    pub attr_limited: String,
+    pub attr_non_limited: String,
+    pub efct_limited_l: usize,
+    pub efct_non_limited_l: usize,
+    pub attr_limited_l: usize,
+    pub attr_non_limited_l: usize,
+}
+
+impl DeserializedProperty {
+    pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
+        let mut attr_limited = String::with_capacity(default_attr_string_alloc);
+        let mut attr_non_limited = String::with_capacity(default_attr_string_alloc);
+        let mut attr_non_limited_l = 0;
+        let mut attr_limited_l = 0;
+        if !prop.attr.is_empty() {
+            ph.set_font_modded(font_name, font_size, attr_text_mod);
+            
+            let mut attr = String::with_capacity(default_attr_string_alloc);
+            for at in &prop.attr {
+                add_attr_to_string(at, &mut attr);
+                attr.push_str(", ");
+            }
+            attr.pop();
+            attr.pop();
+            attr = process_commands(&attr);
+
+            let (a, b) = ph.text_on_limited_lines(&attr, prop_top_w, prop_h, default_text_align, prop_sym_l);
+            attr_limited = a.to_string();
+            attr_non_limited = b.to_string();
+            attr_limited_l = ph.multi_cell_l(&attr_limited, prop_top_w, prop_h, default_text_align);
+            if !attr_non_limited.is_empty() {
+                attr_non_limited_l = ph.multi_cell_l(&attr_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+
+            ph.set_font_modded(font_name, font_size, default_text_mod);
+        }
+
+        let efct = process_commands(&prop.efct);
+        let efct_max_limited_l = i32::max(prop_sym_l as i32 - attr_limited_l as i32, 0) as usize;
+        let efct_limited;
+        let efct_non_limited;
+        let mut efct_limited_l = 0;
+        let mut efct_non_limited_l = 0;
+        if efct_max_limited_l == 0 {
+            efct_non_limited_l = ph.multi_cell_l(&efct, card_inner_w, prop_h, default_text_align);
+            efct_limited = String::new();
+            efct_non_limited = efct;
+        }
+        else {
+            let (a, b) = ph.text_on_limited_lines(&efct, prop_top_w, prop_h, default_text_align, efct_max_limited_l);
+            efct_limited = a.to_string();
+            efct_non_limited = b.to_string();
+            efct_limited_l = ph.multi_cell_l(&efct_limited, prop_top_w, prop_h, default_text_align);
+            if !efct_non_limited.is_empty() {
+                efct_non_limited_l = ph.multi_cell_l(&efct_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+        }
+
+        Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
+    }
+
+    pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
+        if !self.efct_non_limited.is_empty() {
+            y -= self.efct_non_limited_l as f64 * prop_h;
+            ph.set_xy(base_x, y);
+            ph.multi_cell(&self.efct_non_limited, card_inner_w, prop_h, default_text_align);
+        }
+        if !self.efct_limited.is_empty() {
+            y -= self.efct_limited_l as f64 * prop_h;
+            ph.set_xy(base_x, y);
+            ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
+        }
+        
+        if !self.attr_limited.is_empty() {
+            ph.set_font_modded(font_name, font_size, attr_text_mod);
+            
+            if !self.attr_non_limited.is_empty() {
+                y -= self.attr_non_limited_l as f64 * prop_h;
+                ph.set_xy(base_x, y);
+                ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
+            }
+            y -= self.attr_limited_l as f64 * prop_h;
+            ph.set_xy(base_x, y);
+            ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
+
+            ph.set_font_modded(font_name, font_size, default_text_mod);
+        }
+    
+        ph.set_xy(base_x + prop_sym_pad_l, y);
+        ph.image(prop_sym_name, prop_sym_size, prop_sym_size);
+
+        y -= prop_h;
+        y
+    }
+
+    pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
+        let mut h = 0;
+        for prop in acti {
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
+        }
+        for prop in trig {
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
+        }
+        for prop in pass {
+            h += prop.attr_non_limited_l;
+            h += prop.attr_limited_l;
+            h += prop.efct_non_limited_l;
+            h += prop.efct_limited_l;
+            h += 1;
+        }
+        if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
+            h -= 1;
+        }
+        h
+    }
+}
+
+#[derive(Copy, Clone, Debug)]
+pub enum TextModifier {
+    none_, bold_, italic_, bold_italic_
+}
+
+impl Into<&str> for TextModifier {
+    fn into(self) -> &'static str {
+        match self {
+            TextModifier::none_ => "",
+            TextModifier::bold_ => "B",
+            TextModifier::italic_ => "I",
+            TextModifier::bold_italic_ => "BI"
+        }
+    }
+}
+
+#[derive(Copy, Clone, Debug)]
+pub enum Alignment {
+    left_, center_, right_
+}
+
+impl Into<&str> for Alignment {
+    fn into(self) -> &'static str {
+        match self {
+            Alignment::left_ => "L",
+            Alignment::center_ => "C",
+            Alignment::right_ => "R"
+        }
     }
 }
 
@@ -745,7 +745,9 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 
     if let Some(_) = get_attribute_ref_with_name(&card.attr, "Advanced") {
         ph.set_xy(base_x, base_y);
-        //ph.image("advanced.png", advanced_w, name_h);
+        ph.image("advanced_l.png", advanced_sym_size, advanced_sym_size);
+        ph.set_xy(base_x + card_outer_w - advanced_sym_size, base_y);
+        ph.image("advanced_r.png", advanced_sym_size, advanced_sym_size);
     }
 
     //set the x and y coordinates to be inside the card margins

@@ -33,14 +33,15 @@ pub const card_upper_alpha_h_short: f64 = name_h + main_attr_h + gradient_h;
 pub const upper_alpha_h: f64 = 5.0;
 
 //name
-pub const name_h: f64 = 8.0;
-pub const advanced_w: f64 = 12.0;
+pub const name_h: f64 = 7.0;
+pub const advanced_sym_size: f64 = 12.0;
+
 //attr
-pub const main_attr_icon_w: f64 = 3.6;
-pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.38;
+pub const main_attr_icon_w: f64 = 2.9;
+pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.32;
 pub const main_attr_text_pad_l: f64 = 0.8;
-pub const main_attr_h: f64 = 3.6;
-pub const main_attr_pad_b: f64 = 1.7;
+pub const main_attr_h: f64 = 2.9;
+pub const main_attr_pad_b: f64 = 1.2;
 pub const main_attr_font_size: f64 = 7.0;
 pub const other_attr_h: f64 = 3.2;
 pub const gradient_h: f64 = 3.0;
