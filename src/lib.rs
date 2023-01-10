@@ -35,6 +35,7 @@ pub const upper_alpha_h: f64 = 5.0;
 //name
 pub const name_h: f64 = 7.0;
 pub const advanced_sym_size: f64 = 12.0;
+pub const advanced_offset_r: f64 = card_outer_w - advanced_sym_size;
 
 //attr
 pub const main_attr_icon_w: f64 = 2.9;

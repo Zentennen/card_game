@@ -746,7 +746,7 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     if let Some(_) = get_attribute_ref_with_name(&card.attr, "Advanced") {
         ph.set_xy(base_x, base_y);
         ph.image("advanced_l.png", advanced_sym_size, advanced_sym_size);
-        ph.set_xy(base_x + card_outer_w - advanced_sym_size, base_y);
+        ph.set_xy(base_x + advanced_offset_r, base_y);
         ph.image("advanced_r.png", advanced_sym_size, advanced_sym_size);
     }
 
