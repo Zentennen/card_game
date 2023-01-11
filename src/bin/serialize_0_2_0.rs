@@ -266,6 +266,9 @@ fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
     let attribute_strings = s.split(',');
     for attribute_string in attribute_strings {
         let attribute_string = attribute_string.trim();
+        if attribute_string.is_empty() {
+            continue;
+        }
         let name_end = attribute_string.find(|c: char| !c.is_alphabetic() && c != ' ' && c != '¤' && c != '(' && c != ')');
         let name;
         let subattribute_part;
@@ -353,13 +356,19 @@ fn parse_action(s: &str) -> Res<Property> {
         effect.push_str(". ");
     }
     effect.push_str(parts[current].trim());
-    let mut action = Property::with_effect_string(effect);
+    let mut property = Property::with_effect_string(effect);
+
     current -= 2;
-    if current <= 0 { return Ok(action); }   
+    if current <= 0 { return Ok(property); }
 
-    parse_attributes(&mut action.attr, parts[current].trim());
+    parse_attributes(&mut property.attr, parts[current].trim());
 
-    Ok(action)
+    current -= 1;
+    if current <= 0 { return Ok(property); }
+
+    property.name.push_str(parts[current].trim());
+
+    Ok(property)
 }
 
 #[inline(always)]
@@ -376,20 +385,26 @@ fn parse_triggered(s: &str) -> Res<Property> {
         effect.push_str(". ");
     }
     effect.push_str(parts[current].trim());
+    let mut property = Property::with_effect_string(effect);
 
-    let mut triggered = Property::with_effect_string(effect);
     let prio = str::parse::<f64>(&parts[0].trim()[1..])?;
     if prio != 5.0 {
         let mut attr = Attribute::with_name("Priority");
         attr.f.push(prio);
-        triggered.attr.push(attr);
+        property.attr.push(attr);
     }
 
     current -= 2;
-    if current <= 0 { return Ok(triggered); }
+    if current <= 0 { return Ok(property); }
 
-    parse_attributes(&mut triggered.attr, parts[current].trim());
-    Ok(triggered)
+    parse_attributes(&mut property.attr, parts[current].trim());
+
+    current -= 1;
+    if current <= 0 { return Ok(property); }
+
+    property.name.push_str(parts[current].trim());
+
+    Ok(property)
 }
 
 #[inline(always)]
@@ -397,20 +412,25 @@ fn parse_passive(s: &str) -> Res<Property> {
     let parts: Vec<&str> = s.split(";").collect();
     let mut current = parts.len() - 1;
     
-    let mut passive = Property::with_effect(parts[current].trim());
+    let mut property = Property::with_effect(parts[current].trim());
     let prio = str::parse::<f64>(&parts[0].trim()[1..]).expect(format!("ERROR: Failed to parse passive priority from: '{}'", &parts[0]).as_str());
     if prio != 5.0 {
         let mut attr = Attribute::with_name("Priority");
         attr.f.push(prio);
-        passive.attr.push(attr);
+        property.attr.push(attr);
     }
 
     current -= 1;
-    if current == 0 { return Ok(passive); }
+    if current == 0 { return Ok(property); }
 
-    parse_attributes(&mut passive.attr, parts[current].trim());
+    parse_attributes(&mut property.attr, parts[current].trim());
     
-    Ok(passive)
+    current -= 1;
+    if current <= 0 { return Ok(property); }
+
+    property.name.push_str(parts[current].trim());
+
+    Ok(property)
 }
 
 fn parse_property(card: &mut Card, s: &str, property_type: PropertyType) -> Maybe {
@@ -534,11 +554,6 @@ fn main() {
         }
         if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Offense") {
             attribute.f[0] = 2.0 * attribute.f[0];
-        }
-        if let Some(attribute) = get_attribute_mut_with_name(&mut card.attr, "Level") {
-            attribute.f.clear();
-            attribute.n.clear();
-            attribute.n.push_str("Advanced");
         }
         else {
             card.attr.push(Attribute{n: "Offense".to_string(), f: vec![0.0], a: vec![], s: vec![]});

@@ -8,9 +8,9 @@ pub const default_subattrib_alloc: usize = 1;
 pub const default_card_name_alloc: usize = 10;
 pub const default_card_attribute_alloc: usize = 5;
 pub const default_card_property_alloc: usize = 5;
-pub const default_property_name_alloc: usize = 10;
+pub const default_property_name_alloc: usize = 20;
 pub const default_property_attribute_alloc: usize = 5;
-pub const default_property_effect_alloc: usize = 30;
+pub const default_property_effect_alloc: usize = 50;
 pub const default_action_text_alloc: usize = 100;
 pub const default_effects_alloc: usize = 1;
 pub const default_attr_string_alloc: usize = 100;
@@ -147,6 +147,7 @@ pub fn get_attribute_value(attributes: &Vec<Attribute>, name: &str) -> Option<at
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Property {
+    pub name: String, 
     pub attr: Vec<Attribute>, 
     pub efct: String,
 }
@@ -154,6 +155,7 @@ pub struct Property {
 impl Property {
     pub fn new() -> Self {
         Self { 
+            name: String::with_capacity(default_property_name_alloc),
             attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
             efct: String::with_capacity(default_property_effect_alloc),
         }
@@ -161,6 +163,7 @@ impl Property {
 
     pub fn with_effect(effect: &str) -> Self {
         Self { 
+            name: String::with_capacity(default_property_name_alloc),
             attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
             efct: effect.to_string(),
         }
@@ -168,6 +171,7 @@ impl Property {
 
     pub fn with_effect_string(effect: String) -> Self {
         Self { 
+            name: String::with_capacity(default_property_name_alloc),
             attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
             efct: effect,
         }

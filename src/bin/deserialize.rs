@@ -708,6 +708,20 @@ fn get_other_attr_string(card: &Card) -> String {
     string
 }
 
+fn organize_property_data(card: &Card) -> (Vec<(PropertyType, &str)>, Vec<DeserializedProperty>, Vec<DeserializedProperty>, Vec<DeserializedProperty>) {
+    let short: Vec<(PropertyType, &str)> = Vec::new();
+    Vec<DeserializedProperty> acti;
+    
+    
+    for prop in card.pass {
+        if prop.attr.is_empty() && prop.efct.is_empty() {
+
+        }
+    }
+
+
+}
+
 fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name) {
@@ -745,9 +759,19 @@ fn deserialize_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 
     if let Some(_) = get_attribute_ref_with_name(&card.attr, "Advanced") {
         ph.set_xy(base_x, base_y);
-        ph.image("advanced_l.png", advanced_sym_size, advanced_sym_size);
+        ph.image("advanced_tl.png", advanced_sym_size, advanced_sym_size);
         ph.set_xy(base_x + advanced_offset_r, base_y);
-        ph.image("advanced_r.png", advanced_sym_size, advanced_sym_size);
+        ph.image("advanced_tr.png", advanced_sym_size, advanced_sym_size);
+        //h.set_xy(base_x, base_y + card_outer_h - advanced_sym_size);
+        //h.image("advanced_bl.png", advanced_sym_size, advanced_sym_size);
+        //h.set_xy(base_x + advanced_offset_r, base_y + card_outer_h - advanced_sym_size);
+        //h.image("advanced_br.png", advanced_sym_size, advanced_sym_size);
+    }
+    else {
+        //ph.set_xy(base_x, base_y);
+        //ph.image("non_advanced_tl.png", advanced_sym_size, advanced_sym_size);
+        //ph.set_xy(base_x + advanced_offset_r, base_y);
+        //ph.image("non_advanced_tr.png", advanced_sym_size, advanced_sym_size);
     }
 
     //set the x and y coordinates to be inside the card margins
