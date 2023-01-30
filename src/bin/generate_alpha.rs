@@ -12,7 +12,7 @@ use card_game::*;
 const pixels_per_mm: f64 = 10.0;
 const gradient_height: usize = (gradient_h * pixels_per_mm as f64) as usize;
 const width: usize = (pixels_per_mm * card_outer_w) as usize;
-const max_alpha: u8 = 160;
+const max_alpha: u8 = 180;
 const row_to_alpha_exponent: f64 = 1.15;
 const row_to_alpha_factor: f64 = 4.0;
 
@@ -56,7 +56,7 @@ fn main() {
         }
         let height = (pixels_per_mm * height) as usize;
         
-        let file_name = format!("deserialize/images/upper{}.png", other_attr_lines);
+        let file_name = format!("deserialize/alpha/upper{}.png", other_attr_lines);
         let mut buf_writer = make_writer(&file_name);
         let encoder = make_encoder(height + gradient_height, &mut buf_writer);
         let mut writer = encoder.write_header().unwrap();
@@ -88,11 +88,11 @@ fn main() {
     }
     println!("Upper alphas generated");
 
-    for prop_lines in 1..20 {
+    for prop_lines in 0..20 {
         let height = prop_lines as f64 * prop_h + card_pad;
         let height = (pixels_per_mm * height) as usize;
         
-        let file_name = format!("deserialize/images/lower{}.png", prop_lines);
+        let file_name = format!("deserialize/alpha/lower{}.png", prop_lines);
         let mut buf_writer = make_writer(&file_name);
         let encoder = make_encoder(height + gradient_height, &mut buf_writer);
         let mut writer = encoder.write_header().unwrap();

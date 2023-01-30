@@ -13,24 +13,26 @@ pub const default_property_attribute_alloc: usize = 5;
 pub const default_property_effect_alloc: usize = 50;
 pub const default_action_text_alloc: usize = 100;
 pub const default_effects_alloc: usize = 1;
+pub const default_name_string_alloc: usize = 100;
 pub const default_attr_string_alloc: usize = 100;
 pub const string_indicator_char: char = '\"';
 
 //page
 pub const page_pad_t: f64 = 5.0;
 pub const page_pad_l: f64 = 12.0;
-
-//card
 pub const cards_per_column: usize = 3;
 pub const cards_per_row: usize = 3;
 pub const cards_per_page: usize = cards_per_column * cards_per_row;
+
+//card
 pub const card_outer_w: f64 = 63.0;
 pub const card_outer_h: f64 = 88.0;
 pub const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
 pub const card_inner_h: f64 = card_outer_h - card_pad;
-pub const card_pad: f64 = 1.9;
+pub const card_pad: f64 = 2.6;
 pub const card_upper_alpha_h_short: f64 = name_h + main_attr_h + gradient_h;
 pub const upper_alpha_h: f64 = 5.0;
+pub const text_offset: f64 = 1.0;
 
 //name
 pub const name_h: f64 = 7.0;
@@ -42,18 +44,23 @@ pub const main_attr_icon_w: f64 = 2.9;
 pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.32;
 pub const main_attr_text_pad_l: f64 = 0.8;
 pub const main_attr_h: f64 = 2.9;
-pub const main_attr_pad_b: f64 = 1.2;
+pub const main_attr_pad_b: f64 = 1.6;
 pub const main_attr_font_size: f64 = 7.0;
 pub const other_attr_h: f64 = 3.2;
 pub const gradient_h: f64 = 3.0;
 
 //prop
-pub const prop_h: f64 = 2.8;
-pub const prop_top_w: f64 = card_inner_w - prop_sym_size - card_pad;
-pub const prop_sym_size: f64 = 2.6;
-pub const prop_sym_pad_l: f64 = prop_top_w + card_pad;
-pub const prop_sym_pad_t: f64 = prop_h * prop_sym_l as f64 - prop_sym_size;
+pub const prop_h: f64 = 3.0;
+pub const prop_sym_size: f64 = 2.0;
+pub const prop_sym_pad_l: f64 = card_inner_w + text_offset - prop_sym_size;
+pub const prop_sym_pad_t: f64 = (prop_h * prop_sym_l as f64 - prop_sym_size) / 2.0;
+pub const prop_efct_pad_r: f64 = 0.1;
 pub const prop_sym_l: usize = (prop_sym_size / prop_h - 0.00001) as usize + 1;
+pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
+
+pub mod serialize;
+pub mod to_pdf;
+pub mod serialize_0_2_0;
 
 type attr_num = f64;
 

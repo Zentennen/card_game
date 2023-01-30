@@ -1,0 +1,68 @@
+Fiery Rose
+Tribute 5, Fire,
+Power 50,
+Flower
+A; Summon 5;;
+T; At the end of each round, ¤(i) ¤(act_mods_one(Bloom, 1)). Then, you may choose up to X susceptible cards, where X is ¤(my) Bloom value. If you do, destroy ¤(me) and deal 1 damage to all chosen cards.
+
+Amulet of +20
+Tribute 3, Defense 20, Artifact
+A; Equip 3;;
+P; If ¤(i am) attached to a card, that card has +20 Offense, +20 Defense and +20 Power.
+
+Borrowed Time
+Temporal, Spell, Tribute 1
+A; Instant, Trap; ¤(Pay(1)).
+T; At the end of your turn, exhaust ¤(me), then take another turn.
+T; At the beginning of your turn, destroy ¤(me), then end your turn.
+
+Fire Blast
+Fire, Spell, Power 100
+T; Volatile;;
+A; Trap; ¤(Pay(3)) and deal 1 damage to a susceptible card of your choice.
+
+Fireball
+Fire, Spell, Power 80
+T; Volatile;;
+A; Trap; ¤(Pay(7)) and choose a position. Deal 1 damage to all susceptible cards in that position or adjacent to it.
+
+Rain of Fire
+Fire, Spell, Power 60
+T; Volatile;;
+A; Trap; ¤(Pay(5)) and deal 1 damage to all fielded cards.
+A; Trap; ¤(Pay(9)) and choose an opponent. Deal 1 damage to all susceptible fielded cards that opponent controls.
+
+Freeze
+Water, Air, Spell, Power 40
+T; Volatile;;
+A; Trap; Exhaust a susceptible card of your choice.
+
+Gust
+Air, Spell, Power 60
+T; Volatile;;
+A; Trap; Move a friendly or susceptible fielded card of your choice to a position of your choice on the same field.
+
+True Strike
+T; Decaying;;
+A; Trap; ¤(Pay(1)) and attach this card to a card of your choice.
+P; If ¤(i am) attached to a card, that card has +50 Offense and +1 Lethality.
+
+Duel at Dawn
+T; Volatile;;
+A; Trap; ¤(Pay(1)) and choose a friendly fielded card. That card battles a nearby enemy card.
+
+Silvershire Horseman
+Warrior, Human, Cavalry, Offense 40, Defense 20
+T; Swift;;
+A; Summon 1;;
+
+Efreet
+Fire, Spirit, Offense 50, Defense 30, Health 2, Power 60
+A; Summon 7;;
+A; ¤(Pay(2)), exhaust this card and deal 1 damage to a susceptible card.
+P; All Fire cards you control ¤(p_mods_many(Power, 20)).
+
+Standard Bearer
+Warrior, Human, Offense 40, Defense 30
+A; Summon 3;;
+P; All nearby cards ¤(p_mods_many(Offense, 20)).

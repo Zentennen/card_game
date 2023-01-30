@@ -1,0 +1,11 @@
+Inanimate Object
+Level 1, Tribute 1,
+Offense 0, Defense 40, 
+Illusion, Defender, Immobile
+A; Onslaught;;;
+P; Onslaught;;
+T; Onslaught;;;
+A; ¤(ho), ¤(ho), Fire, Fire, Fire, Fire, Fire, Fire, Firef; Use only if no hero has 10 or more experience. ¤(Choose_your_cpos) and pay 1 in that position;
+¤(Set_my_pos_to_chosen).
+T; Non-existent;; When any hero reaches 10 experience;
+Remove me from tiii game.

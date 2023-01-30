@@ -1,0 +1,14 @@
+Sapphire Dragon
+Advanced, Tribute 8, Offense 200, Defense 150, Strength 2, Health 5, Dragon
+T; Onslaught;;
+A; Sumon 9;;
+
+Blast from the Past
+Advanced, Temporal, Spell, Power 150
+T; Volatile;;
+A; Trap; ¤(Pay(5)) and deal damage to a susceptible card of your choice equal to the amount of damage it took the last time it took damage this turn.
+
+Inner Fire
+Power 120, Spell, Enchantment, Fire
+A; Reveal; ¤(Pay(3)) and attach ¤(me) to friendly or susceptible card of your choice.
+P; The card that I am attached to has +100 Offense, +1 Lethality and gains Decaying.

@@ -1,8 +1,0 @@
-Inanimate Object
-Level 1, Tribute 1,
-Offense 0, Defense 40, 
-Illusion, Defender, Immobile
-A; ¤(ho); Use only if no hero has 10 or more experience. ¤(Choose_your_cpos) and pay 1 in that position;
-¤(Set_my_pos_to_chosen).
-T5; Non-existent;; When any hero reaches 10 experience;
-Remove me from the game.
