@@ -6,13 +6,13 @@ A; Sumon 9;;
 Blast from the Past
 Advanced, Temporal, Spell, Power 150
 T; Volatile;;
-A; Trap; ¤(Pay(5)) and deal damage to a susceptible card of your choice equal to the amount of damage it took the last time it took damage this turn.
+A; Instant, Trap; Pay 5 and deal damage to a susceptible card of your choice equal to the amount of damage it took the last time it took damage this turn.
 
 Inner Fire
 Advanced, Power 120, Spell, Enchantment, Fire
-A; Reveal; ¤(Pay(3)) and attach ¤(me) to friendly or susceptible card of your choice.
-P; If ¤(i am) attached to another card, that card +100 Offense and +1 Lethality.
-T; If ¤(i am) attached to another card, deal 1 damage to that card.
+A; Reveal; Pay 1 and attach this card to a friendly or susceptible card of your choice.
+P; If this card is attached to another card, that card +100 Offense and +1 Lethality.
+T; At the end of each round, if this card is attached to another card, deal 1 damage to that card.
 
 Tempest
 Advanced
