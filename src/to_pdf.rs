@@ -451,215 +451,29 @@ pub fn process_commands(string: &str) -> String {
         return String::new();
     }
 
-    let string = string.replacen("¤(ho)", "Hand Only", usize::MAX);
-    let string = string.replacen("¤(co)", "Combat Only", usize::MAX);
-    let string = string.replacen("¤(any_phase)", "Any Phase", usize::MAX);
-    let string = string.replacen("¤(flip)", "Flip", usize::MAX);
-    let string = string.replacen("¤(quick)", "Quick", usize::MAX);
-    let string = string.replacen("¤(instant)", "Instant", usize::MAX);
-    let string = string.replacen("¤(passing)", "Passing", usize::MAX);
-    let string = string.replacen("¤(Choose_your_c)", "Choose a card you control", usize::MAX);
-    let string = string.replacen("¤(choose_your_c)", "choose a card you control", usize::MAX);
-    let string = string.replacen("¤(Boost)", "Boost", usize::MAX);
-    let string = string.replacen("¤(Boost)", "boost", usize::MAX);
-    let string = string.replacen("¤(I have)", "This card has", usize::MAX);
-    let string = string.replacen("¤(i have)", "this card has", usize::MAX);
-    let string = string.replacen("¤(C_to_lane)", "Card's lane", usize::MAX);
-    let string = string.replacen("¤(c_to_lane)", "card's lane", usize::MAX);
-    let string = string.replacen("¤(Choose_your_pos)", "Choose a position on your board", usize::MAX);
-    let string = string.replacen("¤(choose_your_pos)", "choose a position on your board", usize::MAX);
-    let string = string.replacen("¤(Choose_your_r)", "Choose one of your reserves", usize::MAX);
-    let string = string.replacen("¤(choose_your_r)", "choose one of your reserves", usize::MAX);
-    let string = string.replacen("¤(Choose_your_cpos)", "Choose one of your field positions", usize::MAX);
-    let string = string.replacen("¤(choose_your_cpos)", "choose one of your field positions", usize::MAX);
-    let string = string.replacen("¤(Pos_to_lane)", "Position's lane", usize::MAX);
-    let string = string.replacen("¤(pos_to_lane)", "position's lane", usize::MAX);
-    let string = string.replacen("¤(Move_me_to_r)", "Move this card to the chosen reserve", usize::MAX);
-    let string = string.replacen("¤(move_me_to_r)", "move this card to the chosen reserve", usize::MAX);
-    let string = string.replacen("¤(Attach_me_to_chosen)", "Attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤(attach_me_to_chosen)", "attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤(Xp)", "XP", usize::MAX);
-    let string = string.replacen("¤(xp)", "XP", usize::MAX);
-    let string = string.replacen("¤(Mana)", "Mana", usize::MAX);
-    let string = string.replacen("¤(mana)", "mana", usize::MAX);
-    let string = string.replacen("¤(Me)", "This card", usize::MAX);
-    let string = string.replacen("¤(me)", "this card", usize::MAX);
-    let string = string.replacen("¤(I)", "This card", usize::MAX);
-    let string = string.replacen("¤(I am)", "This card is", usize::MAX);
-    let string = string.replacen("¤(i)", "this card", usize::MAX);
-    let string = string.replacen("¤(i am)", "this card is", usize::MAX);
-    let string = string.replacen("¤(my)", "this card's", usize::MAX);
-    let string = string.replacen("¤(My)", "This card's", usize::MAX);
-    let string = string.replacen("¤(Set_my_pos_to_chosen)", "Move this card to the chosen position", usize::MAX);
-    let mut string = string.replacen("¤(set_my_pos_to_chosen)", "move this card to the chosen position", usize::MAX);
-    
-    while let Some(pos) = string.find("¤(mod(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(mod()) was not correctly terminated");
-        let substr = &string[start..end];
-        let num = substr.split(',').nth(1).unwrap().trim();
-        let num: f64 = str::parse(num).unwrap();
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        if num >= 0.0 {
-            let replacement = format!("+{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-        else {
-            let replacement = format!("-{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-    }
-    while let Some(pos) = string.find("¤(p_mods_one(") {
-        let start = pos + 14;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(p_mods_one()) was not correctly terminated");
-        let substr = &string[start..end];
-        let num = substr.split(',').nth(1).unwrap().trim();
-        let num: f64 = str::parse(num).unwrap();
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        if num >= 0.0 {
-            let replacement = format!("has +{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-        else {
-            let replacement = format!("has -{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-    }
-    while let Some(pos) = string.find("¤(p_mods_many(") {
-        let start = pos + 15;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(p_mods_many()) was not correctly terminated");
-        let substr = &string[start..end];
-        let num = substr.split(',').nth(1).unwrap().trim();
-        let num: f64 = str::parse(num).unwrap();
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        if num >= 0.0 {
-            let replacement = format!("have +{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-        else {
-            let replacement = format!("have -{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-    }
-    while let Some(pos) = string.find("¤(p_gives_one(") {
-        let start = pos + 15;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(p_gives_one()) was not correctly terminated");
-        let substr = &string[start..end];
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        let replacement = format!("has the {} attribute", attr);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(p_gives_many(") {
-        let start = pos + 16;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(p_gives_many()) was not correctly terminated");
-        let substr = &string[start..end];
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        let replacement = format!("have the {} attribute", attr);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(act_mods_one(") {
-        let start = pos + 16;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(act_mods_one()) was not correctly terminated");
-        let substr = &string[start..end];
-        let num = substr.split(',').nth(1).unwrap().trim();
-        let num: f64 = str::parse(num).unwrap();
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        if num >= 0.0 {
-            let replacement = format!("gets +{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-        else {
-            let replacement = format!("gets -{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-    }
-    while let Some(pos) = string.find("¤(act_mods_many(") {
-        let start = pos + 17;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(act_mods_many()) was not correctly terminated");
-        let substr = &string[start..end];
-        let num = substr.split(',').nth(1).unwrap().trim();
-        let num: f64 = str::parse(num).unwrap();
-        let attr = substr.split(',').nth(0).unwrap().trim();
-        if num >= 0.0 {
-            let replacement = format!("get +{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-        else {
-            let replacement = format!("get -{} {}", num, attr);
-            string.replace_range(pos..end + 2, &replacement);
-        }
-    }
-    while let Some(pos) = string.find("¤(Cswa(") {
-        let start = pos + 8;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Cswa()) was not correctly terminated");
-        let attr_string = get_attr_condition_string(&string[start..end]);
-        let replacement;
-        if attr_string.starts_with('n') {
-            replacement = format!("N{} cards", &attr_string[1..]);
-        }
-        else {
-            replacement = format!("{} cards", &attr_string);
-        }
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(cswa(") {
-        let start = pos + 8;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(cswa()) was not correctly terminated");
-        let replacement = format!("{} cards", get_attr_condition_string(&string[start..end]));
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(Cwa(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Cwa()) was not correctly terminated");
-        let attr_string = get_attr_condition_string(&string[start..end]);
-        let replacement;
-        if attr_string.starts_with('n') {
-            replacement = format!("N{} card", &attr_string[1..]);
-        }
-        else {
-            replacement = format!("{} card", &attr_string);
-        }
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(cwa(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(cwa()) was not correctly terminated");
-        let replacement = format!("{} card", get_attr_condition_string(&string[start..end]));
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(Pay(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Pay()) was not correctly terminated");
-        let replacement = format!("Pay {}", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(pay(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(pay()) was not correctly terminated");
-        let replacement = format!("pay {}", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(Sum(") {
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Sum()) was not correctly terminated");
-        let replacement = format!("Move this card to an empty friendly field position of your choice, then pay {}.", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(Evo("){
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Evo()) was not correctly terminated");
-        let replacement = format!("Move this card to a friendly reserve of your choice, then pay {}.", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-    while let Some(pos) = string.find("¤(Equ("){
-        let start = pos + 7;
-        let end = start + string[start..].find(')').expect("EXPECT ERR: ¤(Equ()) was not correctly terminated");
-        let replacement = format!("Attach this card to a friendly non-attached card of your choice, then pay {}.", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
-    }
-
-    let string = string.replacen("¤(zone)", "zone", usize::MAX);
-    let string = string.replacen("¤(Zone)", "Zone", usize::MAX);
+    let string = string.replacen("¤quick", "Quick", usize::MAX);
+    let string = string.replacen("¤instant", "Instant", usize::MAX);
+    let string = string.replacen("¤passing", "Passing", usize::MAX);
+    let string = string.replacen("¤Choose_your_c", "Choose a friendly card", usize::MAX);
+    let string = string.replacen("¤choose_your_c", "choose a friendly card", usize::MAX);
+    let string = string.replacen("¤Boost", "Boost", usize::MAX);
+    let string = string.replacen("¤Boost", "boost", usize::MAX);
+    let string = string.replacen("¤I_have", "This card has", usize::MAX);
+    let string = string.replacen("¤i_have", "this card has", usize::MAX);
+    let string = string.replacen("¤Choose_your_pos", "Choose a friendly position", usize::MAX);
+    let string = string.replacen("¤choose_your_pos", "choose a friendly position", usize::MAX);
+    let string = string.replacen("¤Attach_me_to_chosen", "Attach this card to the chosen card", usize::MAX);
+    let string = string.replacen("¤attach_me_to_chosen", "attach this card to the chosen card", usize::MAX);
+    let string = string.replacen("¤Me", "This card", usize::MAX);
+    let string = string.replacen("¤me", "this card", usize::MAX);
+    let string = string.replacen("¤I_am", "This card is", usize::MAX);
+    let string = string.replacen("¤i_am", "this card is", usize::MAX);
+    let string = string.replacen("¤I", "This card", usize::MAX);
+    let string = string.replacen("¤i", "this card", usize::MAX);
+    let string = string.replacen("¤My", "This card's", usize::MAX);
+    let string = string.replacen("¤my", "this card's", usize::MAX);
+    let string = string.replacen("¤Set_my_pos_to_chosen", "Move this card to the chosen position", usize::MAX);
+    let string = string.replacen("¤set_my_pos_to_chosen", "move this card to the chosen position", usize::MAX);
 
     return string;
 }

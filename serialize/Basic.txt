@@ -17,17 +17,17 @@ T; At the end of your turn, exhaust ¤(me), then take another turn.
 T; At the beginning of your turn, destroy ¤(me), then end your turn.
 
 Fire Blast
-Fire, Spell, Power 100
+Fire, Spell, Power 120
 T; Volatile;;
 A; Trap; ¤(Pay(3)) and deal 1 damage to a susceptible card of your choice.
 
 Fireball
-Fire, Spell, Power 80
+Fire, Spell, Power 100
 T; Volatile;;
 A; Trap; ¤(Pay(7)) and choose a position. Deal 1 damage to all susceptible cards in that position or adjacent to it.
 
 Rain of Fire
-Fire, Spell, Power 60
+Fire, Spell, Power 70
 T; Volatile;;
 A; Trap; ¤(Pay(5)) and deal 1 damage to all fielded cards.
 A; Trap; ¤(Pay(9)) and choose an opponent. Deal 1 damage to all susceptible fielded cards that opponent controls.
@@ -37,10 +37,10 @@ Water, Air, Spell, Power 40
 T; Volatile;;
 A; Trap; Exhaust a susceptible card of your choice.
 
-Gust
+Gale
 Air, Spell, Power 60
 T; Volatile;;
-A; Trap; Move a friendly or susceptible fielded card of your choice to a position of your choice on the same field.
+A; Trap; ¤(Pay(1)) and move a friendly or susceptible fielded card of your choice to a position of your choice on the same field.
 
 True Strike
 T; Decaying;;
@@ -60,9 +60,19 @@ Efreet
 Fire, Spirit, Offense 50, Defense 30, Health 2, Power 60
 A; Summon 7;;
 A; ¤(Pay(2)), exhaust this card and deal 1 damage to a susceptible card.
-P; All Fire cards you control ¤(p_mods_many(Power, 20)).
+P; All other ¤(cwa(Fire)) you control ¤(p_mods_many(Power, 20)).
 
 Standard Bearer
-Warrior, Human, Offense 40, Defense 30
+Warrior, Human, Offense 50, Defense 40
 A; Summon 3;;
 P; All nearby cards ¤(p_mods_many(Offense, 20)).
+
+Guardian Spirit
+Spirit, Offense 60, Health 2
+A; Summon 5;;
+P; All nearby friendly cards ¤p_mods_many(Health, 1).
+
+Ghost Whisperer
+Human, Mage, Offense 40, Defense 80
+A; Summon 3;;
+P; While there is a nearby friendly ¤cwa(Spirit), ¤i ¤p_mods(Offense, 40).
