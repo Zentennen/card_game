@@ -288,6 +288,7 @@ impl DeserializedProperty {
         let mut name_limited_l = 0;
         let mut name_non_limited_l = 0;
         if !prop.name.is_empty() {
+            ph.set_font_modded(font_name, font_size, name_text_mod);
             split_limited(&prop.name, &mut total_limited_l, ph, &mut name_limited, &mut name_non_limited, &mut name_limited_l, &mut name_non_limited_l);
         }
 
@@ -297,7 +298,6 @@ impl DeserializedProperty {
         let mut attr_limited_l = 0;
         if !prop.attr.is_empty() {
             ph.set_font_modded(font_name, font_size, attr_text_mod);
-            
             let mut attr = String::with_capacity(default_attr_string_alloc);
             for at in &prop.attr {
                 add_attr_to_string(at, &mut attr);
@@ -306,22 +306,21 @@ impl DeserializedProperty {
             attr.pop();
             attr.pop();
             attr = process_commands(&attr);
-
             split_limited(&attr, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
-
-            ph.set_font_modded(font_name, font_size, default_text_mod);
         }
 
         let mut efct_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
         let mut efct_non_limited_l = 0;
+        ph.set_font_modded(font_name, font_size, default_text_mod);
         split_limited(&prop.efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         Self{ name_limited, name_non_limited, efct_limited, efct_non_limited, attr_limited, attr_non_limited, name_limited_l, name_non_limited_l, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
     }
 
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
+        ph.set_font_modded(font_name, font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
             y -= self.efct_non_limited_l as f64 * prop_h;
             ph.set_xy(base_x, y);
@@ -333,28 +332,26 @@ impl DeserializedProperty {
             ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
         }
         
+        ph.set_font_modded(font_name, font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
             y -= self.attr_non_limited_l as f64 * prop_h;
-            ph.set_font_modded(font_name, font_size, attr_text_mod);
             ph.set_xy(base_x, y);
             ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
         }
         if !self.attr_limited.is_empty() {
             y -= self.attr_limited_l as f64 * prop_h;
-            ph.set_font_modded(font_name, font_size, attr_text_mod);
             ph.set_xy(base_x, y);
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
         }
 
+        ph.set_font_modded(font_name, font_size, name_text_mod);
         if !self.name_non_limited.is_empty() {
             y -= self.name_non_limited_l as f64 * prop_h;
-            ph.set_font_modded(font_name, font_size, name_text_mod);
             ph.set_xy(base_x, y);
             ph.multi_cell(&self.name_non_limited, prop_top_w, prop_h, default_text_align);
         }
         if !self.name_non_limited.is_empty() {
             y -= self.name_limited_l as f64 * prop_h;
-            ph.set_font_modded(font_name, font_size, name_text_mod);
             ph.set_xy(base_x, y);
             ph.multi_cell(&self.name_limited, card_inner_w, prop_h, default_text_align);
         }
@@ -425,25 +422,6 @@ impl Into<&str> for Alignment {
             Alignment::right_ => "R"
         }
     }
-}
-
-fn get_attr_condition_string(string: &str) -> String {
-    let attrs = string.split(',');
-    let mut attr_string = String::with_capacity(100);
-    for attr in attrs {
-        let attr = attr.trim();
-        if attr.starts_with('!') { 
-            attr_string.push_str("non-");
-            attr_string.push_str(&attr[1..]);
-        } 
-        else { 
-            attr_string.push_str(attr);
-        };
-        attr_string.push_str(", ");
-    }
-    attr_string.pop();
-    attr_string.pop();
-    attr_string
 }
 
 pub fn process_commands(string: &str) -> String {
@@ -624,7 +602,8 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     }
 
     //attribute alpha background
-    let mut h = card_upper_alpha_h_short;
+    let main_attr_icon_data = get_main_attr_icon_data(card);
+    let mut h = upper_alpha_base_h;
     let mut l = 0;
     let other_attr = process_commands(&get_other_attr_string(card));
     if !other_attr.is_empty() {
@@ -678,7 +657,6 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //main attributes
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
     y += name_h;
-    let main_attr_icon_data = get_main_attr_icon_data(card);
     if !main_attr_icon_data.is_empty() {
         let step_w = card_inner_w / main_attr_icon_data.len() as f64;
         let a = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1);

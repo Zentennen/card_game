@@ -49,7 +49,7 @@ fn get_alpha(row: usize) -> u8 {
 
 fn main() {
     for other_attr_lines in 0..5 {
-        let mut height = card_upper_alpha_h_short;
+        let mut height = upper_alpha_base_h;
         if other_attr_lines > 0 {
             height += main_attr_pad_b;
             height += other_attr_h * other_attr_lines as f64;

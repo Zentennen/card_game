@@ -30,8 +30,7 @@ pub const card_outer_h: f64 = 88.0;
 pub const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
 pub const card_inner_h: f64 = card_outer_h - card_pad;
 pub const card_pad: f64 = 2.6;
-pub const card_upper_alpha_h_short: f64 = name_h + main_attr_h + gradient_h;
-pub const upper_alpha_h: f64 = 5.0;
+pub const upper_alpha_base_h: f64 = name_h + gradient_h + main_attr_h;
 pub const text_offset: f64 = 1.0;
 
 //name

@@ -63,7 +63,7 @@ A; Pay 2, exhaust this card and deal 1 damage to a susceptible card.
 P; All other friendly Fire cards have +30 Power.
 
 Standard Bearer
-Warrior, Human, Offense 50, Defense 40
+Warrior, Human, Offense 20, Defense 40
 A; Summon 3;;
 P; All nearby cards have +20 Offense.
 
@@ -73,7 +73,21 @@ A; Summon 5;;
 P; All nearby friendly cards have +1 Health.
 
 Kindred Spirits
-Spirit, Offense 40, Defense 80
+Spirit, Offense 30, Defense 70
 A; Summon 3;;
 P; While there is a nearby friendly Spirit card, this card has +40 Offense.
+
+Phantom Warrior
+Spirit, Warrior, Offense 70, Health 2
+A; Summon 3;;
+
+Phantom Assassin
+Spirit, Rogue, Offense 100, Defense 30, Strength 2
+A; Instant, Trap; Pay 9 and move this card to an empty friendly position of your choice.
+A; Instant; Pay 1 and move this card to an empty friendly position of your choice.
+A; Instant; Pay 1. This card gains Defense +20 during this turn.
+
+Flame Swordsman
+Warrior, Human, Fire, Wheeler, Offense 70, Defense 50, Health 2
+A; Summon 5;;
 

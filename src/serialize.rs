@@ -10,137 +10,6 @@ pub const nl_indicator_char: char = '$';
 pub const optional_indicator_char: char = '*';
 
 #[inline(always)]
-fn process_cost_at(pos: usize, string: &mut String) -> Res<usize> {
-    let mut num_end = pos;
-    for (p, c) in string.bytes().enumerate().skip(pos) {
-        if !string.is_char_boundary(p) {
-            continue;
-        }
-        let c = string[p..].chars().next().unwrap();
-        if !c.is_numeric() {
-            num_end = p;
-            break;
-        }
-    }
-
-    if pos == num_end {
-        num_end = string.len();
-    }
-
-    let s = &string[pos..num_end];
-    let num = str::parse::<f64>(s)? * 2.0;
-    string.replace_range(pos..num_end, &num.to_string());
-    
-    let mut end = pos;
-    for (p, c) in string.bytes().enumerate().skip(pos) {
-        if !string.is_char_boundary(p) {
-            continue;
-        }
-        let c = string[p..].chars().next().unwrap();
-        if !c.is_ascii_alphanumeric() {
-            end = p;
-            break;
-        }
-    }
-
-    if end == pos {
-        end = string.len();
-    }
-
-    Ok(end)
-}
-
-#[inline(always)]
-fn inject_serialization_commands(string: String) -> Res<String> {
-    let string = string.trim();
-    let string = &mut string;
-    while let Some(pos) = string.find("Card with") {
-        let mut end = pos;
-        for (p, c) in string.bytes().enumerate().skip(pos + 10) {
-            if !string.is_char_boundary(p) {
-                continue;
-            }
-            let c = string[p..].chars().next().unwrap();
-            if !c.is_ascii_alphabetic() {
-                end = p;
-                break;
-            }
-        }
-        if end != pos {
-            let concat = format!("¤(Cwsn({}))", &string[10+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    while let Some(pos) = string.find("card with") {
-        let mut end = pos;
-        for (p, c) in string.bytes().enumerate().skip(pos + 10) {
-            if !string.is_char_boundary(p) {
-                continue;
-            }
-            let c = string[p..].chars().next().unwrap();
-            if !c.is_ascii_alphabetic() {
-                end = p;
-                break;
-            }
-        }
-        if end != pos {
-            let concat = format!("¤(cwsn({}))", &string[10+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    while let Some(pos) = string.find("Cards with") {
-        let mut end = pos;
-        for (p, c) in string.bytes().enumerate().skip(pos + 11) {
-            if !string.is_char_boundary(p) {
-                continue;
-            }
-            let c = string[p..].chars().next().unwrap();
-            if !c.is_ascii_alphabetic() {
-                end = p;
-                break;
-            }
-        }
-        if end != pos {
-            let concat = format!("¤(Cswsn({}))", &string[11+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    while let Some(pos) = string.find("cards with") {
-        let mut end = pos;
-        for (p, c) in string.bytes().enumerate().skip(pos + 11) {
-            if !string.is_char_boundary(p) {
-                continue;
-            }
-            let c = string[p..].chars().next().unwrap();
-            if !c.is_ascii_alphabetic() {
-                end = p;
-                break;
-            }
-        }
-        if end != pos {
-            let concat = format!("¤(cswsn({}))", &string[11+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    while let Some(pos) = string.find("Pay ") {
-        let end = process_cost_at(pos + 4, string).unwrap();
-        if end != pos {
-            let concat = format!("¤(Pay({}))", &string[4+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    while let Some(pos) = string.find("pay ") {
-        let end = process_cost_at(pos + 4, string).unwrap();
-        if end != pos {
-            let concat = format!("¤(pay({}))", &string[4+pos..end]);
-            string.replace_range(pos..end, &concat);
-        }
-    }
-    
-    Ok(string.clone())
-}
-
-#[inline(always)]
 fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyType, usize)> {
     for (p, b) in string.bytes().enumerate().skip(start) {
         if !string.is_char_boundary(p) {
@@ -186,16 +55,7 @@ fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
             subattribute_part = "";
         }
         let name = name.trim();
-        let mut attribute = match name {
-            "Flip" => Attribute::with_name("¤(flip)"),
-            "Any Phase" => Attribute::with_name("¤(any_phase)"),
-            "Combat Only" => Attribute::with_name("¤(co)"),
-            "Hand Only" => Attribute::with_name("¤(ho)"),
-            "Quick" => Attribute::with_name("¤(quick)"),
-            "Instant" => Attribute::with_name("¤(instant)"),
-            "Passing" => Attribute::with_name("¤(passing)"),
-            _ => Attribute::with_name(name)
-        };
+        let mut attribute = Attribute::with_name(name);
         if subattribute_part != "" {
             let error_string = format!("ERROR: Failed to parse subattribute '{}' as part of attribute '{}'", subattribute_part, attribute_string);
             let sub = str::parse::<f64>(subattribute_part).expect(&error_string);
@@ -340,11 +200,7 @@ fn split_string_by_cards(string: &str) -> Vec<String> {
 
 #[inline(always)]
 fn parse_txt_string(string: String) -> Vec<Card> {
-    let string = inject_serialization_commands(string);
-    if let Err(e) = string {
-        panic!("Failed to inject serialization commands: {e:?}");
-    }
-    let card_strings = split_string_by_cards(&string.unwrap());
+    let card_strings = split_string_by_cards(&string);
     let cards = process_card_strings(card_strings);
 
     return cards;
