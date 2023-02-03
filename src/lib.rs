@@ -39,10 +39,9 @@ pub const advanced_sym_size: f64 = 12.0;
 pub const advanced_offset_r: f64 = card_outer_w - advanced_sym_size;
 
 //attr
-pub const main_attr_icon_w: f64 = 2.9;
-pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.32;
-pub const main_attr_text_pad_l: f64 = 0.8;
-pub const main_attr_h: f64 = 2.9;
+pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.36;
+pub const main_attr_text_pad_l: f64 = 1.0;
+pub const main_attr_h: f64 = 3.5;
 pub const main_attr_pad_b: f64 = 1.6;
 pub const main_attr_font_size: f64 = 7.0;
 pub const other_attr_h: f64 = 3.2;

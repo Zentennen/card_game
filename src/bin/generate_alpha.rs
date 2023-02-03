@@ -13,7 +13,7 @@ const pixels_per_mm: f64 = 10.0;
 const gradient_height: usize = (gradient_h * pixels_per_mm as f64) as usize;
 const width: usize = (pixels_per_mm * card_outer_w) as usize;
 const max_alpha: u8 = 180;
-const row_to_alpha_exponent: f64 = 1.15;
+const row_to_alpha_exponent: f64 = 1.16;
 const row_to_alpha_factor: f64 = 4.0;
 
 fn make_encoder<'a>(height: usize, buf_writer: &'a mut BufWriter<File>) -> Encoder<'a, &'a mut BufWriter<File>> {
@@ -48,7 +48,7 @@ fn get_alpha(row: usize) -> u8 {
 }
 
 fn main() {
-    for other_attr_lines in 0..5 {
+    for other_attr_lines in 0..10 {
         let mut height = upper_alpha_base_h;
         if other_attr_lines > 0 {
             height += main_attr_pad_b;
@@ -88,7 +88,7 @@ fn main() {
     }
     println!("Upper alphas generated");
 
-    for prop_lines in 0..20 {
+    for prop_lines in 0..25 {
         let height = prop_lines as f64 * prop_h + card_pad;
         let height = (pixels_per_mm * height) as usize;
         

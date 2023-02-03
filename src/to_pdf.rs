@@ -6,10 +6,10 @@ use extstd::*;
 use pyo3::*;
 use pyo3::types::IntoPyDict;
 
-pub const attr_text_align: Alignment = Alignment::center_;
-pub const attr_text_mod: TextModifier = TextModifier::italic_;
 pub const name_font_size: f64 = 9.0;
 pub const name_text_mod: TextModifier = TextModifier::bold_;
+pub const attr_text_align: Alignment = Alignment::center_;
+pub const attr_text_mod: TextModifier = TextModifier::italic_;
 pub const font_size: f64 = 6.5;
 pub const font_name: &'static str = "Merriweather";
 pub const font_line_width: f64 = 0.1;
@@ -645,30 +645,30 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         ph.image("advanced_tr.png", "icons", advanced_sym_size, advanced_sym_size);
     }
 
-    //set the x and y coordinates to be inside the card margins
-    let base_x = base_x + card_pad;
     let mut y = base_y;
-
+    
     //name
     ph.set_xy(base_x, y);
     ph.set_font_modded(font_name, name_font_size, name_text_mod);
-    ph.center_cell(&card.name, card_inner_w, name_h);
-
+    ph.center_cell(&card.name, card_outer_w, name_h);
+    
     //main attributes
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
     y += name_h;
     if !main_attr_icon_data.is_empty() {
         let step_w = card_inner_w / main_attr_icon_data.len() as f64;
         let a = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1);
-        let w = step_w * (main_attr_icon_data.len() - 1) as f64 + main_attr_icon_w + main_attr_text_pad_l + a;
-        let margin = (card_inner_w - w) / 2.0;
+        let w = step_w * (main_attr_icon_data.len() - 1) as f64 + main_attr_h + main_attr_text_pad_l + a;
+        let margin = (card_outer_w - w) / 2.0;
         for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
             let x = base_x + margin + i as f64 * step_w;
             ph.set_xy(x, y);
-            ph.image(icon, "icons", main_attr_icon_w, main_attr_h);
-            ph.text(&val, x + main_attr_icon_w + main_attr_text_pad_l, y + main_attr_text_pad_t);
+            ph.image(icon, "icons", main_attr_h, main_attr_h);
+            ph.text(&val, x + main_attr_h + main_attr_text_pad_l, y + main_attr_text_pad_t);
         }
     }
+
+    let base_x = base_x + card_pad;
 
     //other attributes
     if !other_attr.is_empty() {
