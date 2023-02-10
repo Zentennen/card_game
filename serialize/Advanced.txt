@@ -9,18 +9,18 @@ P; If this card is attached to another card, that card +100 Offense and +1 Letha
 T; At the end of each round, if this card is attached to another card, deal 1 damage to that card.
 
 Frost Elemental
-Advanced, Water, Air, Elemental, Offense 60, Defense 40, Health 3, Power 80
+Advanced, Tribute 1, Water, Air, Elemental, Offense 60, Defense 40, Health 3, Power 80, Strength 2
 A; Summon 3;;
 A; Pay 4, exhaust a susceptible fielded card and move this card to a friendly empty position.
 T; After this card ends combat with a susceptible fielded card, exhaust that card.
 
 Mana Fountain
-Advanced, Water, Structure, Health 2
+Advanced, Tribute 2, Water, Structure, Health 2
 A; Summon 5;;
 A; Exhaust this card and gain 1 mana.
 
 Steel Golem
-Advanced, Earth, Elemental, Offense 50, Defense 110, Health 4
+Advanced, Tribute 3, Earth, Elemental, Offense 50, Defense 110, Health 4
 A; Summon 5;;
 
 Chain Lightning
@@ -33,17 +33,17 @@ A; Pay 3, deal 2 damage to a susceptible fielded card.
 A; Pay 5, deal 2 damage to a susceptible fielded card, then move this card to a friendly empty position.
 
 Minotaur Horde
-Advanced, Monstrosity, Offense 100, Defense 30, Health 3
+Advanced, Tribute 3, Army, Monstrosity, Offense 100, Defense 30, Health 3
 T; Onslaught;;
 A; Summon 5;;
 
 Superior Firepower Doctrine
-Advanced, Doctrine, Fire
-A; Reserve 1;;
-P; All Fire cards have +X Offense, where X is 20 times the amount of damage that friendly Fire cards have dealt to enemy cards this turn.
+Advanced, Doctrine, Fire, Army
+A; Reserve 3;;
+P; All Fire and Army cards have +X Offense, where X is 20 times the amount of damage that friendly Fire cards have dealt to enemy cards this turn.
 
 Centaur Horde
-Advanced, Cavalry, Offense 60, Health 2 
+Advanced, Tribute 3, Army, Cavalry, Offense 60, Health 2 
 T; Swift;;
 T; Onslaught;;
 A; Summon 3;;

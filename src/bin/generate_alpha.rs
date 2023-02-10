@@ -12,7 +12,7 @@ use card_game::*;
 const pixels_per_mm: f64 = 10.0;
 const gradient_height: usize = (gradient_h * pixels_per_mm as f64) as usize;
 const width: usize = (pixels_per_mm * card_outer_w) as usize;
-const max_alpha: u8 = 180;
+const max_alpha: u8 = 200;
 const row_to_alpha_exponent: f64 = 1.16;
 const row_to_alpha_factor: f64 = 4.0;
 

@@ -252,5 +252,5 @@ pub fn serialize_all_cards() {
     let cards_as_string = serde_json::to_string(&cards).unwrap();
     let cards_as_string = cards_as_string.replacen("  ", " ", usize::MAX);
     std::fs::write("./cards.json", cards_as_string).expect("ERROR: Failed to write output!");
-    println!("{} card(s) serialized successfully\n", cards.len());
+    println!("Serialized {} card(s) successfully", cards.len());
 }

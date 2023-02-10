@@ -6,12 +6,10 @@ use extstd::*;
 use pyo3::*;
 use pyo3::types::IntoPyDict;
 
-pub const name_font_size: f64 = 9.0;
 pub const name_text_mod: TextModifier = TextModifier::bold_;
 pub const attr_text_align: Alignment = Alignment::center_;
 pub const attr_text_mod: TextModifier = TextModifier::italic_;
-pub const font_size: f64 = 6.5;
-pub const font_name: &'static str = "Merriweather";
+pub const font_name: &'static str = "sourceserifpro";
 pub const font_line_width: f64 = 0.1;
 pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left_;
@@ -239,7 +237,6 @@ impl PdfHandler<'_> {
     pub fn output(&self) {
         let args = types::PyTuple::new(self.py, &["cards.pdf"]);
         self.pdf.call_method1("output", args).unwrap();
-        print("Deserialized successfully\n");
     }
 }
 
@@ -288,7 +285,7 @@ impl DeserializedProperty {
         let mut name_limited_l = 0;
         let mut name_non_limited_l = 0;
         if !prop.name.is_empty() {
-            ph.set_font_modded(font_name, font_size, name_text_mod);
+            ph.set_font_modded(font_name, default_font_size, name_text_mod);
             split_limited(&prop.name, &mut total_limited_l, ph, &mut name_limited, &mut name_non_limited, &mut name_limited_l, &mut name_non_limited_l);
         }
 
@@ -297,7 +294,7 @@ impl DeserializedProperty {
         let mut attr_non_limited_l = 0;
         let mut attr_limited_l = 0;
         if !prop.attr.is_empty() {
-            ph.set_font_modded(font_name, font_size, attr_text_mod);
+            ph.set_font_modded(font_name, default_font_size, attr_text_mod);
             let mut attr = String::with_capacity(default_attr_string_alloc);
             for at in &prop.attr {
                 add_attr_to_string(at, &mut attr);
@@ -313,14 +310,14 @@ impl DeserializedProperty {
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
         let mut efct_non_limited_l = 0;
-        ph.set_font_modded(font_name, font_size, default_text_mod);
+        ph.set_font_modded(font_name, default_font_size, default_text_mod);
         split_limited(&prop.efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         Self{ name_limited, name_non_limited, efct_limited, efct_non_limited, attr_limited, attr_non_limited, name_limited_l, name_non_limited_l, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
     }
 
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
-        ph.set_font_modded(font_name, font_size, default_text_mod);
+        ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
             y -= self.efct_non_limited_l as f64 * prop_h;
             ph.set_xy(base_x, y);
@@ -332,7 +329,7 @@ impl DeserializedProperty {
             ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
         }
         
-        ph.set_font_modded(font_name, font_size, attr_text_mod);
+        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
             y -= self.attr_non_limited_l as f64 * prop_h;
             ph.set_xy(base_x, y);
@@ -344,7 +341,7 @@ impl DeserializedProperty {
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
         }
 
-        ph.set_font_modded(font_name, font_size, name_text_mod);
+        ph.set_font_modded(font_name, default_font_size, name_text_mod);
         if !self.name_non_limited.is_empty() {
             y -= self.name_non_limited_l as f64 * prop_h;
             ph.set_xy(base_x, y);
@@ -608,7 +605,7 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     let other_attr = process_commands(&get_other_attr_string(card));
     if !other_attr.is_empty() {
         h += main_attr_pad_b;
-        ph.set_font_modded(font_name, font_size, attr_text_mod);
+        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         l = ph.multi_cell_l(&other_attr, card_inner_w, other_attr_h, attr_text_align);
         h += other_attr_h * l as f64;
     }
@@ -617,7 +614,7 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
-    ph.set_font_modded(font_name, font_size, default_text_mod);
+    ph.set_font_modded(font_name, default_font_size, default_text_mod);
     let mut short_acti: Vec<&str> = Vec::with_capacity(card.acti.len());
     let mut short_trig: Vec<&str> = Vec::with_capacity(card.trig.len());
     let mut short_pass: Vec<&str> = Vec::with_capacity(card.pass.len());
@@ -656,12 +653,12 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
     y += name_h;
     if !main_attr_icon_data.is_empty() {
-        let step_w = card_inner_w / main_attr_icon_data.len() as f64;
-        let a = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1);
-        let w = step_w * (main_attr_icon_data.len() - 1) as f64 + main_attr_h + main_attr_text_pad_l + a;
-        let margin = (card_outer_w - w) / 2.0;
+        let step_w = main_attr_w / main_attr_icon_data.len() as f64;
+        let last_main_attr_w = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1) + main_attr_h + main_attr_text_pad_l;
+        let w = step_w * (main_attr_icon_data.len() - 1) as f64 + last_main_attr_w;
+        let base_x = base_x + (main_attr_w - w) / 2.0 + main_attr_pad_lr;
         for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
-            let x = base_x + margin + i as f64 * step_w;
+            let x = base_x + i as f64 * step_w;
             ph.set_xy(x, y);
             ph.image(icon, "icons", main_attr_h, main_attr_h);
             ph.text(&val, x + main_attr_h + main_attr_text_pad_l, y + main_attr_text_pad_t);
@@ -674,12 +671,12 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     if !other_attr.is_empty() {
         y += main_attr_h + main_attr_pad_b;
         ph.set_xy(base_x, y);
-        ph.set_font_modded(font_name, font_size, attr_text_mod);
+        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         ph.multi_cell(&other_attr, card_inner_w, other_attr_h, attr_text_align);
     }
 
     //properties
-    ph.set_font_modded(font_name, font_size, default_text_mod);
+    ph.set_font_modded(font_name, default_font_size, default_text_mod);
     y = base_y + card_inner_h;
     for prop in pass {
         y = prop.add_to_pdf(ph, base_x - text_offset, y, "passive.png");
@@ -690,7 +687,7 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     for prop in acti {
         y = prop.add_to_pdf(ph, base_x - text_offset, y, "action.png");
     }
-    ph.set_font_modded(font_name, font_size, name_text_mod);
+    ph.set_font_modded(font_name, default_font_size, name_text_mod);
     for prop in short_pass {
         y = add_short_prop_to_pdf(ph, prop, base_x, y, "passive.png");
     }
@@ -726,10 +723,12 @@ pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
 
 pub fn add_all_cards_to_pdf() {
     Python::with_gil(|py| {
+        print("Deserializing...");
         let ph = PdfHandler::new(py);
         let cards = std::fs::read_to_string("cards.json").unwrap();
         let cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
         add_cards_to_pdf(&ph, &cards);
         ph.output();
+        println!("Desieralized {} cards successfully", cards.len());
     });
 }
