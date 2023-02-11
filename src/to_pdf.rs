@@ -111,25 +111,15 @@ impl PdfHandler<'_> {
         self.pdf.call_method("set_xy", (), Some(args)).unwrap();
     }
 
-    pub fn cell(&self, txt: &str, w: f64, h: f64) {
-        let args = (w, h, txt);
-        self.pdf.call_method1("cell", args).unwrap();
-    }
-
-    pub fn center_cell(&self, txt: &str, w: f64, h: f64) {
-        let args = (w, h, txt);
-        let kwargs = [("align", "C")].into_py_dict(self.py);
-        self.pdf.call_method("cell", args, Some(kwargs)).unwrap();
-    }
-
     pub fn multi_cell(&self, txt: &str, w: f64, h: f64, align: Alignment) {
         let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
-        self.pdf.call_method1("multi_cell", args).unwrap();
+        let kwargs = [("markdown", true)].into_py_dict(self.py);
+        self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap();
     }
 
     pub fn multi_cell_h(&self, txt: &str, w: f64, h: f64, align: Alignment) -> f64 {
         let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
-        let kwargs = [("split_only", true)].into_py_dict(self.py);
+        let kwargs = [("split_only", true), ("markdown", true)].into_py_dict(self.py);
         let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).expect("ERROR!!!").to_object(self.py);
         let strings: Vec<&str> = strings.extract(self.py).unwrap();
         h * strings.len() as f64
@@ -137,7 +127,7 @@ impl PdfHandler<'_> {
 
     pub fn multi_cell_l(&self, txt: &str, w: f64, h: f64, align: Alignment) -> usize {
         let args: (f64, f64, &str, i32, &str) = (w, h, txt, 0, align.into());
-        let kwargs = [("split_only", true)].into_py_dict(self.py);
+        let kwargs = [("split_only", true), ("markdown", true)].into_py_dict(self.py);
         let strings = self.pdf.call_method("multi_cell", args, Some(kwargs)).unwrap().to_object(self.py);
         let strings: Vec<&str> = strings.extract(self.py).unwrap();
         strings.len()
@@ -449,6 +439,14 @@ pub fn process_commands(string: &str) -> String {
     let string = string.replacen("¤my", "this card's", usize::MAX);
     let string = string.replacen("¤Set_my_pos_to_chosen", "Move this card to the chosen position", usize::MAX);
     let string = string.replacen("¤set_my_pos_to_chosen", "move this card to the chosen position", usize::MAX);
+    let mut string = string;
+
+    while let Some(pos) = string.find( "¤summon(") {
+        let start = pos + 9;
+        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
+        let replacement = format!("[b]Summon {}[/b]", &string[start..end]);
+        string.replace_range(pos..end + 2, &replacement);
+    }
 
     return string;
 }
@@ -647,7 +645,7 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //name
     ph.set_xy(base_x, y);
     ph.set_font_modded(font_name, name_font_size, name_text_mod);
-    ph.center_cell(&card.name, card_outer_w, name_h);
+    ph.multi_cell(&card.name, card_outer_w, name_h, Alignment::center_);
     
     //main attributes
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
