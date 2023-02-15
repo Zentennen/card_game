@@ -37,7 +37,7 @@ impl PdfHandler<'_> {
         //self.image_aliases.insert("Test Complicated Card.png", "Test Simple Card.png");
 
         //fonts
-        let entries = std::fs::read_dir("deserialize/fonts").expect("Could not find directory deserialize/fonts");
+        let entries = std::fs::read_dir("fonts").expect("Could not find directory fonts");
         for entry in entries {
             if let Result::Ok(entry) = entry {
                 let name = entry.path().file_stem().unwrap().to_str().unwrap().to_string();
@@ -108,7 +108,12 @@ impl PdfHandler<'_> {
 
     pub fn write(&self, txt: &str) {
         let args = vec![("txt", txt)].into_py_dict(self.py);
-        self.pdf.call_method("set_xy", (), Some(args)).unwrap();
+        self.pdf.call_method("write", (), Some(args)).unwrap();
+    }
+
+    pub fn write_markdown(&self, txt: &str) {
+        let args = vec![("text", txt)].into_py_dict(self.py);
+        self.pdf.call_method("write_html", (), Some(args)).unwrap();
     }
 
     pub fn multi_cell(&self, txt: &str, w: f64, h: f64, align: Alignment) {
@@ -160,14 +165,14 @@ impl PdfHandler<'_> {
 
     pub fn image(&self, name: &str, folder: &str, w: f64, h: f64) {
         let name = *self.image_aliases.get(name).unwrap_or(&name);
-        let path = format!("deserialize/{}/{}", folder, name);
+        let path = format!("{}/{}", folder, name);
         let args = types::PyTuple::new(self.py, &[path]);
         let kwargs = [("w", w), ("h", h)].into_py_dict(self.py);
         self.pdf.call_method("image", args, Some(kwargs)).unwrap();
     }
 
     pub fn has_image(&self, name: &str, folder: &str) -> bool {
-        self.image_aliases.contains_key(name) || std::fs::metadata(&format!("deserialize/{}/{}", folder, name)).is_ok()
+        self.image_aliases.contains_key(name) || std::fs::metadata(&format!("{}/{}", folder, name)).is_ok()
     }
 
     pub fn rect(&self, x: f64, y: f64, w: f64, h: f64) {
@@ -230,6 +235,53 @@ impl PdfHandler<'_> {
     }
 }
 
+pub fn process_commands(string: &str) -> String {
+    if string.is_empty() {
+        return String::new();
+    }
+
+    let string = string.replacen("¤quick", "Quick", usize::MAX);
+    let string = string.replacen("¤instant", "Instant", usize::MAX);
+    let string = string.replacen("¤passing", "Passing", usize::MAX);
+    let string = string.replacen("¤Choose_your_c", "Choose a friendly card", usize::MAX);
+    let string = string.replacen("¤choose_your_c", "choose a friendly card", usize::MAX);
+    let string = string.replacen("¤Boost", "Boost", usize::MAX);
+    let string = string.replacen("¤Boost", "boost", usize::MAX);
+    let string = string.replacen("¤I_have", "This card has", usize::MAX);
+    let string = string.replacen("¤i_have", "this card has", usize::MAX);
+    let string = string.replacen("¤Choose_your_pos", "Choose a friendly position", usize::MAX);
+    let string = string.replacen("¤choose_your_pos", "choose a friendly position", usize::MAX);
+    let string = string.replacen("¤Attach_me_to_chosen", "Attach this card to the chosen card", usize::MAX);
+    let string = string.replacen("¤attach_me_to_chosen", "attach this card to the chosen card", usize::MAX);
+    let string = string.replacen("¤Me", "This card", usize::MAX);
+    let string = string.replacen("¤me", "this card", usize::MAX);
+    let string = string.replacen("¤I_am", "This card is", usize::MAX);
+    let string = string.replacen("¤i_am", "this card is", usize::MAX);
+    let string = string.replacen("¤I", "This card", usize::MAX);
+    let string = string.replacen("¤i", "this card", usize::MAX);
+    let string = string.replacen("¤My", "This card's", usize::MAX);
+    let string = string.replacen("¤my", "this card's", usize::MAX);
+    let string = string.replacen("¤Set_my_pos_to_chosen", "Move this card to the chosen position", usize::MAX);
+    let string = string.replacen("¤set_my_pos_to_chosen", "move this card to the chosen position", usize::MAX);
+    let mut string = string;
+
+    while let Some(pos) = string.find( "¤summon(") {
+        let start = pos + 9;
+        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
+        let replacement = format!("**Summon {}**", &string[start..end]);
+        string.replace_range(pos..end + 1, &replacement);
+    }
+
+    while let Some(pos) = string.find( "¤summon(") {
+        let start = pos + 9;
+        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
+        let replacement = format!("**Summon {}**", &string[start..end]);
+        string.replace_range(pos..end + 1, &replacement);
+    }
+
+    return string;
+}
+
 fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
     let string = process_commands(string);
     let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
@@ -251,33 +303,19 @@ fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limi
 }
 
 pub struct DeserializedProperty {
-    pub name_limited: String,
-    pub name_non_limited: String,
     pub efct_limited: String,
     pub efct_non_limited: String,
     pub attr_limited: String,
     pub attr_non_limited: String,
-    pub name_limited_l: usize,
-    pub name_non_limited_l: usize,
     pub efct_limited_l: usize,
     pub efct_non_limited_l: usize,
     pub attr_limited_l: usize,
     pub attr_non_limited_l: usize,
 }
 
-
 impl DeserializedProperty {
     pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
         let mut total_limited_l = 0;
-
-        let mut name_limited = String::with_capacity(default_name_string_alloc);
-        let mut name_non_limited = String::with_capacity(default_name_string_alloc);
-        let mut name_limited_l = 0;
-        let mut name_non_limited_l = 0;
-        if !prop.name.is_empty() {
-            ph.set_font_modded(font_name, default_font_size, name_text_mod);
-            split_limited(&prop.name, &mut total_limited_l, ph, &mut name_limited, &mut name_non_limited, &mut name_limited_l, &mut name_non_limited_l);
-        }
 
         let mut attr_limited = String::with_capacity(default_attr_string_alloc);
         let mut attr_non_limited = String::with_capacity(default_attr_string_alloc);
@@ -303,7 +341,7 @@ impl DeserializedProperty {
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         split_limited(&prop.efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
-        Self{ name_limited, name_non_limited, efct_limited, efct_non_limited, attr_limited, attr_non_limited, name_limited_l, name_non_limited_l, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
+        Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
     }
 
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
@@ -330,53 +368,12 @@ impl DeserializedProperty {
             ph.set_xy(base_x, y);
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
         }
-
-        ph.set_font_modded(font_name, default_font_size, name_text_mod);
-        if !self.name_non_limited.is_empty() {
-            y -= self.name_non_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
-            ph.multi_cell(&self.name_non_limited, prop_top_w, prop_h, default_text_align);
-        }
-        if !self.name_non_limited.is_empty() {
-            y -= self.name_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
-            ph.multi_cell(&self.name_limited, card_inner_w, prop_h, default_text_align);
-        }
     
         ph.set_xy(base_x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
         y -= prop_h;
         y
-    }
-
-    pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
-        let mut h = 0;
-        for prop in acti {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        for prop in trig {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        for prop in pass {
-            h += prop.attr_non_limited_l;
-            h += prop.attr_limited_l;
-            h += prop.efct_non_limited_l;
-            h += prop.efct_limited_l;
-            h += 1;
-        }
-        if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
-            h -= 1;
-        }
-        h
     }
 }
 
@@ -411,44 +408,38 @@ impl Into<&str> for Alignment {
     }
 }
 
-pub fn process_commands(string: &str) -> String {
-    if string.is_empty() {
-        return String::new();
+pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
+    let mut h = 0;
+
+    for prop in acti {
+        h += prop.attr_non_limited_l;
+        h += prop.attr_limited_l;
+        h += prop.efct_non_limited_l;
+        h += prop.efct_limited_l;
+        h += 1;
     }
 
-    let string = string.replacen("¤quick", "Quick", usize::MAX);
-    let string = string.replacen("¤instant", "Instant", usize::MAX);
-    let string = string.replacen("¤passing", "Passing", usize::MAX);
-    let string = string.replacen("¤Choose_your_c", "Choose a friendly card", usize::MAX);
-    let string = string.replacen("¤choose_your_c", "choose a friendly card", usize::MAX);
-    let string = string.replacen("¤Boost", "Boost", usize::MAX);
-    let string = string.replacen("¤Boost", "boost", usize::MAX);
-    let string = string.replacen("¤I_have", "This card has", usize::MAX);
-    let string = string.replacen("¤i_have", "this card has", usize::MAX);
-    let string = string.replacen("¤Choose_your_pos", "Choose a friendly position", usize::MAX);
-    let string = string.replacen("¤choose_your_pos", "choose a friendly position", usize::MAX);
-    let string = string.replacen("¤Attach_me_to_chosen", "Attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤attach_me_to_chosen", "attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤Me", "This card", usize::MAX);
-    let string = string.replacen("¤me", "this card", usize::MAX);
-    let string = string.replacen("¤I_am", "This card is", usize::MAX);
-    let string = string.replacen("¤i_am", "this card is", usize::MAX);
-    let string = string.replacen("¤I", "This card", usize::MAX);
-    let string = string.replacen("¤i", "this card", usize::MAX);
-    let string = string.replacen("¤My", "This card's", usize::MAX);
-    let string = string.replacen("¤my", "this card's", usize::MAX);
-    let string = string.replacen("¤Set_my_pos_to_chosen", "Move this card to the chosen position", usize::MAX);
-    let string = string.replacen("¤set_my_pos_to_chosen", "move this card to the chosen position", usize::MAX);
-    let mut string = string;
-
-    while let Some(pos) = string.find( "¤summon(") {
-        let start = pos + 9;
-        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
-        let replacement = format!("[b]Summon {}[/b]", &string[start..end]);
-        string.replace_range(pos..end + 2, &replacement);
+    for prop in trig {
+        h += prop.attr_non_limited_l;
+        h += prop.attr_limited_l;
+        h += prop.efct_non_limited_l;
+        h += prop.efct_limited_l;
+        h += 1;
     }
 
-    return string;
+    for prop in pass {
+        h += prop.attr_non_limited_l;
+        h += prop.attr_limited_l;
+        h += prop.efct_non_limited_l;
+        h += prop.efct_limited_l;
+        h += 1;
+    }
+
+    if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
+        h -= 1;
+    }
+
+    h
 }
 
 pub fn add_attr_to_string(attr: &Attribute, string: &mut String) {
@@ -537,42 +528,6 @@ pub fn get_other_attr_string(card: &Card) -> String {
     string
 }
 
-pub fn organize_property_data<'a>(card: &'a Card, 
-    ph: &PdfHandler,
-    short_acti: &mut Vec<&'a str>, 
-    short_trig: &mut Vec<&'a str>, 
-    short_pass: &mut Vec<&'a str>, 
-    acti: &mut Vec<DeserializedProperty>, 
-    trig: &mut Vec<DeserializedProperty>, 
-    pass: &mut Vec<DeserializedProperty>
-) 
-{
-    for prop in &card.pass {
-        if prop.attr.is_empty() && prop.efct.is_empty() {
-            short_pass.push(&prop.name);
-        }
-        else {
-            pass.push(DeserializedProperty::from_property(&prop, ph))
-        }
-    }
-    for prop in &card.trig {
-        if prop.attr.is_empty() && prop.efct.is_empty() {
-            short_trig.push(&prop.name);
-        }
-        else {
-            trig.push(DeserializedProperty::from_property(&prop, ph))
-        }
-    }
-    for prop in &card.acti {
-        if prop.attr.is_empty() && prop.efct.is_empty() {
-            short_acti.push(&prop.name);
-        }
-        else {
-            acti.push(DeserializedProperty::from_property(&prop, ph))
-        }
-    }
-}
-
 pub fn add_short_prop_to_pdf(ph: &PdfHandler, prop_name: &str,  base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
     let l = ph.multi_cell_l(prop_name, card_inner_w, prop_h, Alignment::left_);
     y -= l as f64 * prop_h;
@@ -613,21 +568,13 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    let mut short_acti: Vec<&str> = Vec::with_capacity(card.acti.len());
-    let mut short_trig: Vec<&str> = Vec::with_capacity(card.trig.len());
-    let mut short_pass: Vec<&str> = Vec::with_capacity(card.pass.len());
-    let mut acti: Vec<DeserializedProperty> = Vec::with_capacity(card.acti.len());
-    let mut trig: Vec<DeserializedProperty> = Vec::with_capacity(card.trig.len());
-    let mut pass: Vec<DeserializedProperty> = Vec::with_capacity(card.pass.len());
-    organize_property_data(card, ph, &mut short_acti, &mut short_trig, &mut short_pass, &mut acti, &mut trig, &mut pass);
+    let acti: Vec<DeserializedProperty> = card.acti.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
+    let trig: Vec<DeserializedProperty> = card.trig.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
+    let pass: Vec<DeserializedProperty> = card.pass.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
 
     //property alpha background
     ph.set_xy(base_x, base_y);
-    let l = DeserializedProperty::get_height_sum(&acti, &trig, &pass);
-    let short_l = ph.get_height_sum(&short_acti, card_inner_w - prop_sym_size, prop_h, default_text_align)
-        + ph.get_height_sum(&short_trig, card_inner_w - prop_sym_size, prop_h, default_text_align)
-        + ph.get_height_sum(&short_pass, card_inner_w - prop_sym_size, prop_h, default_text_align);
-    let l = if short_l == 0 { l } else { l + short_l + 1 };
+    let l = get_height_sum(&acti, &trig, &pass);
     let h = l as f64 * prop_h + gradient_h + card_pad;
     ph.set_xy(base_x, base_y + card_outer_h - h);
     ph.image(&format!("lower{}.png", l), "alpha", card_outer_w, h);
@@ -684,16 +631,6 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     }
     for prop in acti {
         y = prop.add_to_pdf(ph, base_x - text_offset, y, "action.png");
-    }
-    ph.set_font_modded(font_name, default_font_size, name_text_mod);
-    for prop in short_pass {
-        y = add_short_prop_to_pdf(ph, prop, base_x, y, "passive.png");
-    }
-    for prop in short_trig {
-        y = add_short_prop_to_pdf(ph, prop, base_x, y, "triggered.png");
-    }
-    for prop in short_acti {
-        y = add_short_prop_to_pdf(ph, prop, base_x, y, "action.png");
     }
 }
 

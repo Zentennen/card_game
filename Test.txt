@@ -1,5 +1,3 @@
-Frost Elemental
-Advanced, Tribute 1, Water, Air, Elemental, Offense 60, Defense 40, Health 3, Power 80, Strength 2
-A; Summon 3;;
-A; Pay 4, exhaust a susceptible fielded card and move this card to a friendly empty position.
-T; After this card ends combat with a susceptible fielded card, exhaust that card.
+Value over Time
+Giving your opponent a choice
+Spell to cleave nearby enemy positions

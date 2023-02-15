@@ -48,80 +48,82 @@ fn get_alpha(row: usize) -> u8 {
 }
 
 fn main() {
-    for other_attr_lines in 0..10 {
-        let mut height = upper_alpha_base_h;
-        if other_attr_lines > 0 {
-            height += main_attr_pad_b;
-            height += other_attr_h * other_attr_lines as f64;
-        }
-        let height = (pixels_per_mm * height) as usize;
-        
-        let file_name = format!("deserialize/alpha/upper{}.png", other_attr_lines);
-        let mut buf_writer = make_writer(&file_name);
-        let encoder = make_encoder(height + gradient_height, &mut buf_writer);
-        let mut writer = encoder.write_header().unwrap();
-    
-        let mut data: Vec<u8> = Vec::with_capacity(width * (height + gradient_height) * 4 );
-        data.resize(width * (height + gradient_height) * 4, 0);
-        for r in 0..height {
-            for c in 0..width {
-                let p = r * width * 4 + c * 4;
-                data[p] = 0u8;
-                data[p + 1] = 0u8;
-                data[p + 2] = 0u8;
-                data[p + 3] = max_alpha;
-            }
-        }
-
-        let offset = width * height * 4;
-        for r in 0..gradient_height {
-            for c in 0..width {
-                let p = offset + r * width * 4 + c * 4;
-                data[p] = 0u8;
-                data[p + 1] = 0u8;
-                data[p + 2] = 0u8;
-                data[p + 3] = get_alpha(r);
-            }
-        }
-    
-        writer.write_image_data(&data[..]).unwrap();
-    }
+    par_for(0..10, generate_upper_alpha);
     println!("Upper alphas generated");
+    par_for(0..25, generate_lower_alpha);
+    println!("Lower alphas generated");
+}
 
-    for prop_lines in 0..25 {
-        let height = prop_lines as f64 * prop_h + card_pad;
-        let height = (pixels_per_mm * height) as usize;
+fn generate_lower_alpha(prop_lines: i32) {
+    let height = prop_lines as f64 * prop_h + card_pad;
+    let height = (pixels_per_mm * height) as usize;
         
-        let file_name = format!("deserialize/alpha/lower{}.png", prop_lines);
-        let mut buf_writer = make_writer(&file_name);
-        let encoder = make_encoder(height + gradient_height, &mut buf_writer);
-        let mut writer = encoder.write_header().unwrap();
+    let file_name = format!("deserialize/alpha/lower{}.png", prop_lines);
+    let mut buf_writer = make_writer(&file_name);
+    let encoder = make_encoder(height + gradient_height, &mut buf_writer);
+    let mut writer = encoder.write_header().unwrap();
     
-        let mut data: Vec<u8> = Vec::with_capacity(width * (height + gradient_height) * 4 );
-        data.resize(width * (height + gradient_height) * 4, 0);
-        let offset = width * gradient_height * 4;
-        for r in 0..height {
-            for c in 0..width {
-                let p = offset + r * width * 4 + c * 4;
-                data[p] = 0u8;
-                data[p + 1] = 0u8;
-                data[p + 2] = 0u8;
-                data[p + 3] = max_alpha;
-            }
+    let mut data: Vec<u8> = Vec::with_capacity(width * (height + gradient_height) * 4 );
+    data.resize(width * (height + gradient_height) * 4, 0);
+    let offset = width * gradient_height * 4;
+    for r in 0..height {
+        for c in 0..width {
+            let p = offset + r * width * 4 + c * 4;
+            data[p] = 0u8;
+            data[p + 1] = 0u8;
+            data[p + 2] = 0u8;
+            data[p + 3] = max_alpha;
         }
-
-        for r in 0..gradient_height {
-            for c in 0..width {
-                let p = (gradient_height - r - 1) * width * 4 + c * 4;
-                data[p] = 0u8;
-                data[p + 1] = 0u8;
-                data[p + 2] = 0u8;
-                data[p + 3] = get_alpha(r);
-            }
-        }
-    
-        writer.write_image_data(&data[..]).unwrap();
     }
 
-    println!("Lower alphas generated");
+    for r in 0..gradient_height {
+        for c in 0..width {
+            let p = (gradient_height - r - 1) * width * 4 + c * 4;
+            data[p] = 0u8;
+            data[p + 1] = 0u8;
+            data[p + 2] = 0u8;
+            data[p + 3] = get_alpha(r);
+        }
+    }
+    
+    writer.write_image_data(&data[..]).unwrap();
+}
+
+fn generate_upper_alpha(other_attr_lines: usize) {
+    let mut height = upper_alpha_base_h;
+    if other_attr_lines > 0 {
+        height += main_attr_pad_b;
+        height += other_attr_h * other_attr_lines as f64;
+    }
+    let height = (pixels_per_mm * height) as usize;
+        
+    let file_name = format!("deserialize/alpha/upper{}.png", other_attr_lines);
+    let mut buf_writer = make_writer(&file_name);
+    let encoder = make_encoder(height + gradient_height, &mut buf_writer);
+    let mut writer = encoder.write_header().unwrap();
+    
+    let mut data: Vec<u8> = Vec::with_capacity(width * (height + gradient_height) * 4 );
+    data.resize(width * (height + gradient_height) * 4, 0);
+    for r in 0..height {
+        for c in 0..width {
+            let p = r * width * 4 + c * 4;
+            data[p] = 0u8;
+            data[p + 1] = 0u8;
+            data[p + 2] = 0u8;
+            data[p + 3] = max_alpha;
+        }
+    }
+
+    let offset = width * height * 4;
+    for r in 0..gradient_height {
+        for c in 0..width {
+            let p = offset + r * width * 4 + c * 4;
+            data[p] = 0u8;
+            data[p + 1] = 0u8;
+            data[p + 2] = 0u8;
+            data[p + 3] = get_alpha(r);
+        }
+    }
+    
+    writer.write_image_data(&data[..]).unwrap();
 }

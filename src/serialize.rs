@@ -75,12 +75,6 @@ fn parse_action(s: &str) -> Res<Property> {
     if current <= 0 { return Ok(property); }
 
     parse_attributes(&mut property.attr, parts[current].trim());
-
-    current -= 1;
-    if current <= 0 { return Ok(property); }
-
-    property.name.push_str(parts[current].trim());
-
     Ok(property)
 }
 
@@ -94,12 +88,6 @@ fn parse_triggered(s: &str) -> Res<Property> {
     if current <= 0 { return Ok(property); }
 
     parse_attributes(&mut property.attr, parts[current].trim());
-
-    current -= 1;
-    if current <= 0 { return Ok(property); }
-
-    property.name.push_str(parts[current].trim());
-
     Ok(property)
 }
 
@@ -113,12 +101,6 @@ fn parse_passive(s: &str) -> Res<Property> {
     if current == 0 { return Ok(property); }
 
     parse_attributes(&mut property.attr, parts[current].trim());
-    
-    current -= 1;
-    if current <= 0 { return Ok(property); }
-
-    property.name.push_str(parts[current].trim());
-
     Ok(property)
 }
 
@@ -209,7 +191,7 @@ fn parse_txt_string(string: String) -> Vec<Card> {
 pub fn serialize_all_cards() {
     let mut cards = Vec::<Card>::with_capacity(100_000);
 
-    let entries = std::fs::read_dir("serialize").expect("Could not find directory serialize");
+    let entries = std::fs::read_dir("cards").expect("Could not find directory cards");
     for entry in entries {
         if let Result::Ok(entry) = entry {
             if let Some(ext) = entry.path().extension() {
