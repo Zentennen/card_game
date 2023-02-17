@@ -510,15 +510,15 @@ pub fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
         }
     }
 
-    if let Some(val) = get_attribute_value(&card.attr, "Health") {
-        if val != 1.0 {
-            attribs.push(("heart.png", val.to_string()));
-        }
-    }
-
     if let Some(val) = get_attribute_value(&card.attr, "Strength") {
         if val != 1.0 {
             attribs.push(("fist.png", val.to_string()));
+        }
+    }
+
+    if let Some(val) = get_attribute_value(&card.attr, "Health") {
+        if val != 1.0 {
+            attribs.push(("heart.png", val.to_string()));
         }
     }
 
@@ -553,19 +553,6 @@ pub fn get_other_attr_string(card: &Card) -> String {
     string
 }
 
-pub fn add_short_prop_to_pdf(ph: &PdfHandler, prop_name: &str,  base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
-    let l = ph.multi_cell_l(prop_name, card_inner_w, prop_h, Alignment::left_);
-    y -= l as f64 * prop_h;
-    
-    ph.set_xy(base_x, y + prop_sym_pad_t);
-    ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
-    
-    ph.set_xy(base_x + prop_sym_size, y);
-    ph.multi_cell(prop_name, card_inner_w, prop_h, Alignment::left_);
-
-    y
-}
-
 pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
@@ -593,9 +580,9 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    let acti: Vec<DeserializedProperty> = card.acti.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
-    let trig: Vec<DeserializedProperty> = card.trig.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
-    let pass: Vec<DeserializedProperty> = card.pass.iter().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
+    let acti: Vec<DeserializedProperty> = card.acti.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
+    let trig: Vec<DeserializedProperty> = card.trig.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
+    let pass: Vec<DeserializedProperty> = card.pass.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph)}).collect();
 
     //property alpha background
     ph.set_xy(base_x, base_y);
@@ -669,8 +656,8 @@ pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
             for c in 0..cards_per_row {
                 let i = p * cards_per_page + r * cards_per_row + c;
                 if i < num_cards {
-                    let x = page_pad_l as f64 + c as f64 * card_outer_w;
-                    let y = page_pad_t as f64 + r as f64 * card_outer_h;
+                    let x = page_pad_l as f64 + c as f64 * card_separation_w;
+                    let y = page_pad_t as f64 + r as f64 * card_separation_h;
                     add_card_to_pdf(&ph, &cards[i], x, y)
                 }
                 else {

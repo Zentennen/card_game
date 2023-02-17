@@ -27,6 +27,8 @@ pub const cards_per_page: usize = cards_per_column * cards_per_row;
 //card
 pub const card_outer_w: f64 = 63.0;
 pub const card_outer_h: f64 = 88.0;
+pub const card_separation_w: f64 = card_outer_w + 3.0;
+pub const card_separation_h: f64 = card_outer_h + 3.0;
 pub const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
 pub const card_inner_h: f64 = card_outer_h - card_pad;
 pub const card_pad: f64 = 2.5;
@@ -41,8 +43,8 @@ pub const advanced_offset_r: f64 = card_outer_w - advanced_sym_size;
 
 //attr
 pub const main_attr_font_size: f64 = 8.0;
-pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.37;
-pub const main_attr_text_pad_l: f64 = 0.9;
+pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.35;
+pub const main_attr_text_pad_l: f64 = 1.0;
 pub const main_attr_h: f64 = 3.5;
 pub const main_attr_pad_b: f64 = 1.6;
 pub const main_attr_pad_lr: f64 = 1.5;

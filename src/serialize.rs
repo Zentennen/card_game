@@ -228,6 +228,7 @@ pub fn serialize_all_cards() {
         if !has_attribute_with_name(&card.attr, "Power") {
             card.attr.push(Attribute{n: "Power".to_string(), f: vec![0.0], a: vec![], s: vec![]});
         }
+        card.attr.sort_by(|a, b| { a.n.cmp(&b.n) });
     }
 
     print("Writing to json");
