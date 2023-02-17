@@ -9,7 +9,7 @@ use pyo3::types::IntoPyDict;
 pub const name_text_mod: TextModifier = TextModifier::bold_;
 pub const attr_text_align: Alignment = Alignment::center_;
 pub const attr_text_mod: TextModifier = TextModifier::italic_;
-pub const font_name: &'static str = "sourceserifpro";
+pub const font_name: &'static str = "Bitter";
 pub const font_line_width: f64 = 0.1;
 pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left_;
@@ -44,15 +44,21 @@ impl PdfHandler<'_> {
                 let base_path = entry.path().as_path().to_str().unwrap().to_string();
                 
                 if entry.metadata().unwrap().is_dir() {
-                    let path = format!("{}/{}-Regular.ttf", base_path, name);
+                    let mut end = "ttf";
+                    let mut path = format!("{}/{}-Regular.{}", base_path, name, end);
+                    if !std::fs::metadata(&path).is_ok() {
+                        end = "otf";
+                        path = format!("{}/{}-Regular.{}", base_path, name, end);
+                    }
+
                     let args = vec![("family", &name as &str), ("fname", &path as &str)].into_py_dict(self.py);
                     self.pdf.call_method("add_font", (), Some(args)).unwrap();
     
-                    let path = format!("{}/{}-Bold.ttf", base_path, name);
+                    let path = format!("{}/{}-Bold.{}", base_path, name, end);
                     let args = vec![("family", &name as &str), ("style", "B"), ("fname", &path as &str)].into_py_dict(self.py);
                     self.pdf.call_method("add_font", (), Some(args)).unwrap();
     
-                    let path = format!("{}/{}-Italic.ttf", base_path, name);
+                    let path = format!("{}/{}-Italic.{}", base_path, name, end);
                     let args = vec![("family", &name as &str), ("style", "I"), ("fname", &path as &str)].into_py_dict(self.py);
                     self.pdf.call_method("add_font", (), Some(args)).unwrap();
                 }
@@ -138,8 +144,13 @@ impl PdfHandler<'_> {
         strings.len()
     }
 
-    fn text_on_limited_lines<'a>(&self, txt: &'a str, w: f64, h: f64, align: Alignment, max_lines: usize) -> (&'a str, &'a str) {
-        let last = txt.num_chars() - 1;
+    fn split_on_lines<'a>(&self, txt: &'a str, w: f64, h: f64, align: Alignment, max_lines: usize) -> (&'a str, &'a str) {
+        let num_chars = txt.num_chars();
+        if num_chars == 0 {
+            return ("", "");
+        }
+
+        let last = num_chars - 1;
         let mut i = 0;
         let mut split_at = last + 1;
         while self.multi_cell_l(txt.to(i + 1), w, h, align) <= max_lines {
@@ -240,6 +251,7 @@ pub fn process_commands(string: &str) -> String {
         return String::new();
     }
 
+    let string = string.replacen("¤onslaught", "**Onslaught**", usize::MAX);
     let string = string.replacen("¤quick", "Quick", usize::MAX);
     let string = string.replacen("¤instant", "Instant", usize::MAX);
     let string = string.replacen("¤passing", "Passing", usize::MAX);
@@ -272,10 +284,17 @@ pub fn process_commands(string: &str) -> String {
         string.replace_range(pos..end + 1, &replacement);
     }
 
-    while let Some(pos) = string.find( "¤summon(") {
-        let start = pos + 9;
-        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
-        let replacement = format!("**Summon {}**", &string[start..end]);
+    while let Some(pos) = string.find( "¤equip(") {
+        let start = pos + 8;
+        let end = start + string[start..].find(')').expect("¤equip was not correctly terminated");
+        let replacement = format!("**Equip {}**", &string[start..end]);
+        string.replace_range(pos..end + 1, &replacement);
+    }
+
+    while let Some(pos) = string.find( "¤decay(") {
+        let start = pos + 8;
+        let end = start + string[start..].find(')').expect("¤equip was not correctly terminated");
+        let replacement = format!("**Decay {}**", &string[start..end]);
         string.replace_range(pos..end + 1, &replacement);
     }
 
@@ -290,7 +309,7 @@ fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limi
         non_limited.push_str(&string);
     }
     else {
-        let (a, b) = ph.text_on_limited_lines(&string, prop_top_w, prop_h, default_text_align, max_limited_l);
+        let (a, b) = ph.split_on_lines(&string, prop_top_w, prop_h, default_text_align, max_limited_l);
         limited.push_str(a);
         non_limited.push_str(b);
         *limited_l = ph.multi_cell_l(&limited, prop_top_w, prop_h, default_text_align);
@@ -509,6 +528,12 @@ pub fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
         }
     }
 
+    if let Some(val) = get_attribute_value(&card.attr, "Speed") {
+        if val != 0.0 {
+            attribs.push(("boot.png", val.to_string()));
+        }
+    }
+
     attribs
 }
 
@@ -516,7 +541,7 @@ pub fn get_other_attr_string(card: &Card) -> String {
     let mut string = String::with_capacity(default_attr_string_alloc);
     for attr in &card.attr {
         match &attr.n as &str {
-            "Tribute" | "Offense" | "Defense" | "Health" | "Strength" | "Power" | "Advanced" => continue,
+            "Tribute" | "Offense" | "Defense" | "Health" | "Strength" | "Power" | "Advanced" | "Speed" => continue,
             _ => {
                 add_attr_to_string(attr, &mut string);
                 string.push_str(", ");
@@ -543,9 +568,9 @@ pub fn add_short_prop_to_pdf(ph: &PdfHandler, prop_name: &str,  base_x: f64, mut
 
 pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     let image_name = &format!("{}.png", &card.name);
-    if ph.has_image(image_name, "cards") {
+    if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
-        ph.image(image_name, "cards", card_outer_w, card_outer_h);
+        ph.image(image_name, "card images", card_outer_w, card_outer_h);
     }
     else {
         ph.rect(base_x, base_y, card_outer_w, card_outer_h);
