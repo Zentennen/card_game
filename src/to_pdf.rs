@@ -251,6 +251,8 @@ pub fn process_commands(string: &str) -> String {
         return String::new();
     }
 
+    let string = string.replacen("¤immobile", "**Immobile**", usize::MAX);
+    let string = string.replacen("¤defender", "**Defender**", usize::MAX);
     let string = string.replacen("¤onslaught", "**Onslaught**", usize::MAX);
     let string = string.replacen("¤quick", "Quick", usize::MAX);
     let string = string.replacen("¤instant", "Instant", usize::MAX);

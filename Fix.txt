@@ -1,5 +1,0 @@
-Phantom Assassin
-Spirit, Rogue, Offense 100, Defense 30, Strength 2
-A; Instant, Trap; Pay 9 and move this card to an empty friendly position of your choice.
-A; Instant; Pay 1 and move this card to an empty friendly position of your choice.
-A; Instant; Pay 1. This card gains Defense +20 during this turn.
