@@ -373,32 +373,37 @@ impl DeserializedProperty {
     }
 
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
+        let x = base_x;
+
+        ph.set_xy(x, y + prop_sym_pad_t);
+        ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
+
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
             y -= self.efct_non_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
+            ph.set_xy(x, y);
             ph.multi_cell(&self.efct_non_limited, card_inner_w, prop_h, default_text_align);
         }
         if !self.efct_limited.is_empty() {
             y -= self.efct_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
+            ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
         }
         
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
             y -= self.attr_non_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
+            ph.set_xy(x, y);
             ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
         }
         if !self.attr_limited.is_empty() {
             y -= self.attr_limited_l as f64 * prop_h;
-            ph.set_xy(base_x, y);
+            ph.set_xy(x, y);
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
         }
     
-        ph.set_xy(base_x + prop_sym_pad_l, y + prop_sym_pad_t);
-        ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
+        //ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
+        //ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
         y -= prop_h;
         y
