@@ -295,8 +295,15 @@ pub fn process_commands(string: &str) -> String {
 
     while let Some(pos) = string.find( "¤decay(") {
         let start = pos + 8;
-        let end = start + string[start..].find(')').expect("¤equip was not correctly terminated");
+        let end = start + string[start..].find(')').expect("¤decay was not correctly terminated");
         let replacement = format!("**Decay {}**", &string[start..end]);
+        string.replace_range(pos..end + 1, &replacement);
+    }
+
+    while let Some(pos) = string.find( "¤upkeep(") {
+        let start = pos + 9;
+        let end = start + string[start..].find(')').expect("¤upkeep was not correctly terminated");
+        let replacement = format!("**Upkeep {}**", &string[start..end]);
         string.replace_range(pos..end + 1, &replacement);
     }
 

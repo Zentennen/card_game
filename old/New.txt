@@ -1,0 +1,37 @@
+Mobile Warfare
+Army, Doctrine, Earth
+A; ¤unique(Army, Doctrine)
+T; After a friendly Army card uses a movement property, that card gains +20 Offense.
+
+Superior Firepower
+Army, Doctrine, Fire
+A; ¤reserve(4)
+T; ¤exclusive(Army, Doctrine)
+P; All friendly Army cards have +20 Offense for each damage that friendly Fire cards have dealt during the current turn.
+
+Phantom Assassin
+Rogue, Spririt, Offense 100, Defense 20, Strength 2, Speed 5
+A; ¤assassinate(1)
+A; Pay 1, this card gains +20 Defense this turn.
+A; Trap; Pay 12 and move this card to an empty friendly position of your choice.
+
+Wall of Fire
+Offense 100, Strength 3, Speed 0
+P; ¤defender
+A; ¤summon(2)
+A; ¤summon(1 Fire)
+
+X
+Offense 40, Strength 2, Defense 40, Health 2, Speed 0
+A; ¤summon(6)
+
+X
+Offense 90, Defense 60, Health 2, Speed 0
+A; ¤summon(4)
+
+X
+Offense 60, Defense 60
+A; ¤summon(4)
+
+X
+Offense 50, Defense 60, Health 2, Tribute 5
