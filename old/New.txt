@@ -35,3 +35,23 @@ A; ¤summon(4)
 
 X
 Offense 50, Defense 60, Health 2, Tribute 5
+A; ¤summon(6)
+
+X
+Offense 50, Defense 50, Tribute 3
+A; ¤summon(4)
+A; ¤flanking(2)
+
+X
+Offense 70, Defense 
+
+X
+Offense 50, Defense 70, Health 2
+A; ¤summon(4)
+T; ¤upkeep(1)
+
+Spirit of Winter
+Offense 40, Defense 40, Strength 2, Power 60
+A; ¤summon(6)
+A; Pay 2 and exhaust a susceptible card of your choice.
+
