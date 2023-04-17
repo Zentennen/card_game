@@ -29,13 +29,14 @@ X
 Offense 80, Defense 50, Health 2, Speed 0
 A; ¤summon(4)
 
-X
-Offense 60, Defense 60
+Minotaur Warband
+Army, Offense 60, Defense 60
 A; ¤summon(4)
 
 X
-Offense 50, Defense 60, Health 2, Tribute 5
+Offense 50, Defense 40, Health 2, Tribute 5
 A; ¤summon(6)
+A; ¤flanking(1 Fire)
 
 X
 Offense 50, Defense 50, Tribute 3
@@ -82,3 +83,4 @@ X
 Offense 60, Defense 30, Strength 2, Health 2
 ¤summon(10)
 ¤flanking(1 Fire)
+
