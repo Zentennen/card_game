@@ -1,13 +1,17 @@
 Mobile Warfare
-Army, Doctrine, Earth
-A; ¤unique(Army, Doctrine)
-T; After a friendly Army card uses a movement property, that card gains +20 Offense.
+Army, Doctrine, Earth, German
+A; ¤reserve(2)
+P; All friendly Army cards have +20 Offense and +20 Power for each time they have used a Movement property during the current turn.
 
 Superior Firepower
-Army, Doctrine, Fire
-A; ¤reserve(4)
-T; ¤exclusive(Army, Doctrine)
-P; All friendly Army cards have +20 Offense for each damage that friendly Fire cards have dealt during the current turn.
+Army, Doctrine, Fire, American
+A; ¤reserve(2)
+P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire cards have dealt during the current turn.
+
+Schwerpunkt
+Army, Doctrine, German
+A; ¤reserve(2)
+P; Enemy cards have -20 Defense for each time they have defended in combat during the current turn.
 
 Phantom Assassin
 Rogue, Spririt, Offense 100, Defense 20, Strength 2, Speed 5
@@ -43,12 +47,12 @@ Offense 50, Defense 50, Tribute 3
 A; ¤summon(4)
 A; ¤flanking(1 Fire)
 
-X
+Dirlewanger Brigade
 Offense 50, Defense 70, Health 2, Tribute 2
 A; ¤summon(4)
 T; ¤upkeep(1)
 
-X
+Stormtroopers
 Offense 60, Defense 60, Health 2, Tribute 4
 A; ¤summon(6)
 A; ¤flanking(1)
@@ -81,6 +85,13 @@ P; Any card this card is attached to has +20 Offense, +20 Defense and +20 Power.
 
 X
 Offense 60, Defense 30, Strength 2, Health 2
-¤summon(10)
-¤flanking(1 Fire)
+A; ¤summon(10)
+A; ¤flanking(1 Fire)
 
+Giant Salamander
+Offense 80, Defense 40, Power 60, Health 2, Fire, Giant, Beast
+T; Whenever this card deals combat damage to another card, you may pay 1 Fire. If you do, deal 1 damage to all susceptible cards within range 1 of that card.
+
+M101 Light Howitzer
+
+War of Annihilation
