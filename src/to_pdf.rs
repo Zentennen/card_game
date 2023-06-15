@@ -375,8 +375,8 @@ impl DeserializedProperty {
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
         let x = base_x;
 
-        ph.set_xy(x, y + prop_sym_pad_t);
-        ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
+        //ph.set_xy(x, y + prop_sym_pad_t);
+        //ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
@@ -402,8 +402,8 @@ impl DeserializedProperty {
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
         }
     
-        //ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
-        //ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
+        ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
+        ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
         y -= prop_h;
         y
@@ -543,7 +543,7 @@ pub fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
     }
 
     if let Some(val) = get_attribute_value(&card.attr, "Speed") {
-        if val != 0.0 {
+        if val != 1.0 {
             attribs.push(("boot.png", val.to_string()));
         }
     }

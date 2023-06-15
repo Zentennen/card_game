@@ -1,0 +1,21 @@
+Inox Brute
+Offense 40, Defense 40, Health 3, Speed 2, Army, Infantry
+A; ¤summon(6)
+T; When this card deals combat damage to another card, this card gets +1 Strength for each damage it dealt for the rest of the current turn.
+T; This card has +10X Offense, where X is its Speed value.
+
+Valrath Quartermaster
+Offense 40, Defense 30, Health 2
+A; ¤summon(4)
+T; When you pay a cost for an Equipment card, you may exhaust this card to reduce the cost by 2.
+P; All cards within range 1.5 have +20 Offense and +20 Power for each Equipment card that is attached to them.
+
+Shock and Awe
+Power 50, Doctrine, Fire, American
+A; ¤reserve(6 or 3 Fire)
+T; When an enemy card is damaged or exhausted by another card you control, you may exhaust a susceptible enemy fielded card.
+
+Bewegungskrieg
+Army, Doctrine, Earth, German
+A; ¤reserve(2)
+P; All friendly Army cards have +20 Offense and +20 Power for each time they have used a Movement property during the current turn.

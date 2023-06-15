@@ -1,11 +1,6 @@
-Mobile Warfare
-Army, Doctrine, Earth, German
-A; ¤reserve(2)
-P; All friendly Army cards have +20 Offense and +20 Power for each time they have used a Movement property during the current turn.
-
 Superior Firepower
 Army, Doctrine, Fire, American
-A; ¤reserve(2)
+A; ¤reserve(2 or 1 Fire)
 P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire cards have dealt during the current turn.
 
 Schwerpunkt
@@ -19,46 +14,53 @@ A; ¤assassinate(1)
 A; Pay 1, this card gains +20 Defense this turn.
 A; Trap; Pay 12 and move this card to an empty friendly position of your choice.
 
-Wall of Fire
+Flaming Barrier
 Offense 100, Strength 2, Speed 0
 A; ¤summon(2)
 A; ¤summon(1 Fire)
 P; ¤defender
 
 Maginot Line
-Offense 100, Defense 100, Strength 2, Speed 0
+Offense 70, Defense 140, Strength 2, Speed 0
 A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
 
-X
+Saboteurs
 Offense 40, Strength 2, Defense 40, Health 2, Speed 0
 A; ¤summon(6)
 
-X
-Offense 80, Defense 50, Health 2, Speed 0
+Steel Golem
+Offense 60, Defense 60, Health 2, Speed 0, Magical, Elemental, Earth
 A; ¤summon(4)
 
 Minotaur Warband
-Army, Offense 60, Defense 60
+Army, Offense 60, Defense 60, Army, Minotaur
 A; ¤summon(4)
 
-X
-Offense 50, Defense 40, Health 2, Tribute 5
-A; ¤summon(6)
-A; ¤flanking(1 Fire)
-
-X
-Offense 50, Defense 50, Tribute 3
+Light Infantry
+Offense 50, Defense 50, Tribute 3, Army, Infantry
 A; ¤summon(4)
-A; ¤flanking(1 Fire)
+A; ¤flanking(1)
 
-Dirlewanger Brigade
-Offense 50, Defense 70, Health 2, Tribute 2
+Heavy Infantry
+Offense 50, Defense 70, Health 2, Tribute 2, Army, Infantry
 A; ¤summon(4)
 T; ¤upkeep(1)
 
+Special Forces
+Offense 50, Defense 50, Health 2, Tribute 2, Army
+A; ¤summon(4)
+T; ¤upkeep(1)
+T; ¤onslaught
+
 Stormtroopers
+Offense 80, Defense 40, Power 60, Health 2, Imperial, German, Army, Infantry
+A; ¤summon(6)
+T; ¤onslaught
+T; After this card deals combat damage to a susceptible card, you may pay 1 Fire. If you do, deal 1 damage to that card.
+
+Semi-Motorized Infantry
 Offense 60, Defense 60, Health 2, Tribute 4
 A; ¤summon(6)
 A; ¤flanking(1)
@@ -67,53 +69,49 @@ T; ¤upkeep(1)
 Spirit of Winter
 Offense 40, Defense 40, Strength 2, Power 60
 A; ¤summon(6)
-A; Pay 2 and exhaust a susceptible card of your choice.
+A; Pay 1 and exhaust a susceptible card of your choice.
 
-X
-Offense 50, Defense 10, Health 3
+Sun Spirit
+Offense 50, Defense 10, Health 3, Fire, Spirit
 A; ¤summon(2 Fire)
 A; ¤summon(2) Deal 2 damage to this card.
 
-X
-Offense 30, Defense 30, Health 2
+Drill Sergeant
+Offense 30, Defense 30, Health 2, Army
 A; ¤summon(4)
 A; Exhaust this card and give a friendly card within range 1.5 +30 Offense.
 
-X
-Offense 40, Defense 20, Health 2
+Keeper of the Flame
+Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
-A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +30 Offense.
+A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
 
 Amulet of +20
 Artifact
 A; ¤equip(2)
 P; Any card this card is attached to has +20 Offense, +20 Defense and +20 Power.
 
-X
-Offense 60, Defense 30, Strength 2, Health 2
-A; ¤summon(10)
-A; ¤flanking(1 Fire)
-
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 2, Fire, Giant, Beast
-T; Whenever this card deals combat damage to another card, you may pay 1 Fire. If you do, deal 1 damage to all susceptible cards within range 1 of that card.
+A; ¤summon(8)
+T; After this card deals combat damage to a card, you may pay 1 Fire. If you do, deal 1 damage to all susceptible cards within range 1 of that card.
 
 French 75
-Defense 20, Power 40, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
+Defense 20, Power 40, Speed 0.5, Tribute 3, French, American, Army, Artillery, Fire
 A; ¤summon(2)
 A; Pay 1 and exhaust this card. Exhaust a susceptible card of your choice within range 2.
 
-M101 Light Howitzer
+M101 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4)
 A; Pay 1 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 2.5 and deal 1 damage to it.
 
-M102 Light Howitzer
+M102 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(6)
 A; Pay 1 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 3 and deal 1 damage to it.
 
-M102 Light Howitzer
+X
 Defense 20, Power 70, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(8)
 A; Pay 2 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 4 and deal 2 damage to it.
@@ -121,12 +119,13 @@ A; Pay 2 Fire and exhaust this card. Exhaust a susceptible card of your choice w
 Winged Hussars
 Offense 60, Defense 60, Speed 2
 A; ¤summon(4)
+A; ¤flanking(1)
 T; ¤upkeep(1)
 
 War of Annihilation
 Policy
 A; ¤reserve(4)
-P; All enemy cards have +10 Defense.
+P; All enemy cards have +20 Defense.
 T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
 
 Backhand Blow
@@ -135,8 +134,33 @@ A; ¤equip(2)
 T; ¤decay(1)
 T; After a card this is attached to defends in combat, it prepares for attack and the card it fought gets -20 Offense and -20 Defense for the rest of the turn.
 
-E.R.A. Plates
+ERA Plates
 Army, Fire
-A; ¤equip(2)
+A; ¤equip(2 or 1 Fire)
 T; When damage is dealt to a card this is attached to, prevent the damage and destroy this card.
 
+Finest Hour
+A; ¤equip(2)
+T; ¤decay(1)
+P; Any card this is attached to has +40 Offense and +40 Defense.
+
+Mage Armor
+A; ¤equip(2)
+T; ¤decay(1)
+P; Any card this is attached to has +60 Defense.
+
+Witch of Salem
+Offense 100, Health 2, Power 100, Mage, Unholy
+A; ¤summon(6)
+P; Susceptible enemy cards within range 2.5 have -30 Defense.
+
+Coup de Grace
+A; ¤equip(1)
+T; ¤decay(1)
+P; Any card this is attached to has ¤culling(1).
+
+Reaper
+Offense 60, Health 3, Tribute 6, Spirit, Unholy 
+A; ¤summon(8)
+T; ¤onslaught
+T; ¤culling(1)
