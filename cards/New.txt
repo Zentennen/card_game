@@ -67,7 +67,7 @@ A; ¤flanking(1)
 T; ¤upkeep(1)
 
 Spirit of Winter
-Offense 40, Defense 40, Strength 2, Power 60
+Offense 40, Defense 40, Strength 2, Power 60, Spirit, Water, Frost
 A; ¤summon(6)
 A; Pay 1 and exhaust a susceptible card of your choice.
 
