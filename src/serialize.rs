@@ -188,7 +188,12 @@ fn parse_txt_string(string: String) -> Vec<Card> {
     return cards;
 }
 
-pub fn serialize_all_cards() {
+pub fn serialize_to_json(cards: &Vec<Card>) {
+    let cards = serde_json::to_string(cards).unwrap();
+    std::fs::write("./cards.json", cards).unwrap();
+}
+
+pub fn serialize_all_cards() -> Vec<Card> {
     let mut cards = Vec::<Card>::with_capacity(100_000);
 
     let entries = std::fs::read_dir("cards").expect("Could not find directory cards");
@@ -234,9 +239,5 @@ pub fn serialize_all_cards() {
         card.attr.sort_by(|a, b| { a.n.cmp(&b.n) });
     }
 
-    print("Writing to json");
-    let cards_as_string = serde_json::to_string(&cards).unwrap();
-    let cards_as_string = cards_as_string.replacen("  ", " ", usize::MAX);
-    std::fs::write("./cards.json", cards_as_string).expect("ERROR: Failed to write output!");
-    println!("Serialized {} card(s) successfully", cards.len());
+    cards
 }

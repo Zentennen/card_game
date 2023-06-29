@@ -246,72 +246,39 @@ impl PdfHandler<'_> {
     }
 }
 
-pub fn process_commands(string: &str) -> String {
-    if string.is_empty() {
-        return String::new();
-    }
+pub fn process_commands(string: &mut String) {
+    while let Some(start) = string.find('¤') {
+        let substring = &string[2 + start ..];
+        let mut command = String::with_capacity(string.capacity() + 100);
+        command.push_str("**");
+        command.push(substring.nth_char(0).unwrap().to_ascii_uppercase());
 
-    let string = string.replacen("¤immobile", "**Immobile**", usize::MAX);
-    let string = string.replacen("¤defender", "**Defender**", usize::MAX);
-    let string = string.replacen("¤onslaught", "**Onslaught**", usize::MAX);
-    let string = string.replacen("¤quick", "Quick", usize::MAX);
-    let string = string.replacen("¤instant", "Instant", usize::MAX);
-    let string = string.replacen("¤passing", "Passing", usize::MAX);
-    let string = string.replacen("¤Choose_your_c", "Choose a friendly card", usize::MAX);
-    let string = string.replacen("¤choose_your_c", "choose a friendly card", usize::MAX);
-    let string = string.replacen("¤Boost", "Boost", usize::MAX);
-    let string = string.replacen("¤Boost", "boost", usize::MAX);
-    let string = string.replacen("¤I_have", "This card has", usize::MAX);
-    let string = string.replacen("¤i_have", "this card has", usize::MAX);
-    let string = string.replacen("¤Choose_your_pos", "Choose a friendly position", usize::MAX);
-    let string = string.replacen("¤choose_your_pos", "choose a friendly position", usize::MAX);
-    let string = string.replacen("¤Attach_me_to_chosen", "Attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤attach_me_to_chosen", "attach this card to the chosen card", usize::MAX);
-    let string = string.replacen("¤Me", "This card", usize::MAX);
-    let string = string.replacen("¤me", "this card", usize::MAX);
-    let string = string.replacen("¤I_am", "This card is", usize::MAX);
-    let string = string.replacen("¤i_am", "this card is", usize::MAX);
-    let string = string.replacen("¤I", "This card", usize::MAX);
-    let string = string.replacen("¤i", "this card", usize::MAX);
-    let string = string.replacen("¤My", "This card's", usize::MAX);
-    let string = string.replacen("¤my", "this card's", usize::MAX);
-    let string = string.replacen("¤Set_my_pos_to_chosen", "Move this card to the chosen position", usize::MAX);
-    let string = string.replacen("¤set_my_pos_to_chosen", "move this card to the chosen position", usize::MAX);
-    let mut string = string;
-
-    while let Some(pos) = string.find( "¤summon(") {
-        let start = pos + 9;
-        let end = start + string[start..].find(')').expect("¤summon was not correctly terminated");
-        let replacement = format!("**Summon {}**", &string[start..end]);
-        string.replace_range(pos..end + 1, &replacement);
-    }
-
-    while let Some(pos) = string.find( "¤equip(") {
-        let start = pos + 8;
-        let end = start + string[start..].find(')').expect("¤equip was not correctly terminated");
-        let replacement = format!("**Equip {}**", &string[start..end]);
-        string.replace_range(pos..end + 1, &replacement);
-    }
-
-    while let Some(pos) = string.find( "¤decay(") {
-        let start = pos + 8;
-        let end = start + string[start..].find(')').expect("¤decay was not correctly terminated");
-        let replacement = format!("**Decay {}**", &string[start..end]);
-        string.replace_range(pos..end + 1, &replacement);
-    }
-
-    while let Some(pos) = string.find( "¤upkeep(") {
-        let start = pos + 9;
-        let end = start + string[start..].find(')').expect("¤upkeep was not correctly terminated");
-        let replacement = format!("**Upkeep {}**", &string[start..end]);
-        string.replace_range(pos..end + 1, &replacement);
-    }
-
-    return string;
+        if let Some(params_start) = substring.find('(') {
+            let end = substring.find(')').unwrap();
+            command.push_str(&substring[1..params_start]);
+            command.push(' ');
+            command.push_str(&substring[params_start + 1 .. end]);
+            command.push_str("**");
+            command = command.replacen('_', " ", usize::MAX);
+            string.replace_range(start .. start + end + 3, &command);
+        }
+        else {
+            command.push_str("**");
+            if let Some(end) = substring.find(' ') {
+                command.push_str(&substring[1..end]);
+                command = command.replacen('_', " ", usize::MAX);
+                string.replace_range(start .. start + end, &command);
+            }
+            else {
+                command.push_str(&substring[1..]);
+                command = command.replacen('_', " ", usize::MAX);
+                string.replace_range(start.., &command);
+            }
+        }
+    } 
 }
 
 fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
-    let string = process_commands(string);
     let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
     if max_limited_l == 0 {
         *non_limited_l = ph.multi_cell_l(&string, card_inner_w, prop_h, default_text_align);
@@ -358,16 +325,18 @@ impl DeserializedProperty {
             }
             attr.pop();
             attr.pop();
-            attr = process_commands(&attr);
+            process_commands(&mut attr);
             split_limited(&attr, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
         }
 
+        let mut efct = prop.efct.to_string();
         let mut efct_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
         let mut efct_non_limited_l = 0;
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
-        split_limited(&prop.efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
+        process_commands(&mut efct);
+        split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
     }
@@ -581,7 +550,8 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     let main_attr_icon_data = get_main_attr_icon_data(card);
     let mut h = upper_alpha_base_h;
     let mut l = 0;
-    let other_attr = process_commands(&get_other_attr_string(card));
+    let mut other_attr = get_other_attr_string(card);
+    process_commands(&mut other_attr);
     if !other_attr.is_empty() {
         h += main_attr_pad_b;
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
@@ -682,14 +652,11 @@ pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
     }
 }
 
-pub fn add_all_cards_to_pdf() {
+pub fn add_all_cards_to_pdf(cards: &Vec<Card>) {
     Python::with_gil(|py| {
-        print("Deserializing...");
+        println!("Writing {} cards to pdf...", cards.len());
         let ph = PdfHandler::new(py);
-        let cards = std::fs::read_to_string("cards.json").unwrap();
-        let cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
-        add_cards_to_pdf(&ph, &cards);
+        add_cards_to_pdf(&ph, cards);
         ph.output();
-        println!("Desieralized {} cards successfully", cards.len());
     });
 }

@@ -67,7 +67,7 @@ pub mod to_pdf;
 
 type attr_num = f64;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Attribute {
     pub n: String,
     pub a: Vec<Attribute>,
@@ -155,7 +155,7 @@ pub fn get_attribute_value(attributes: &Vec<Attribute>, name: &str) -> Option<at
     None
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Property {
     pub attr: Vec<Attribute>, 
     pub efct: String,
@@ -189,7 +189,7 @@ pub enum PropertyType {
     action_, triggered_, passive_
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Card {
     pub name: String,
     pub attr: Vec<Attribute>,

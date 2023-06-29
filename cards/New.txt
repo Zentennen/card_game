@@ -3,17 +3,6 @@ Army, Doctrine, Fire, American
 A; ¤reserve(2 or 1 Fire)
 P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire cards have dealt during the current turn.
 
-Schwerpunkt
-Army, Doctrine, German
-A; ¤reserve(2)
-T; Whenever an enemy card defends in combat, that card gets -20 Defense for the duration of the combat for each time it has previously defended in combat during the current turn.
-
-Phantom Assassin
-Rogue, Spririt, Offense 100, Defense 20, Strength 2, Speed 5
-A; ¤assassinate(1)
-A; Pay 1, this card gains +20 Defense this turn.
-A; Trap; Pay 12 and move this card to an empty friendly position of your choice.
-
 Flaming Barrier
 Offense 100, Strength 2, Speed 0
 A; ¤summon(2)
@@ -26,12 +15,8 @@ A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
 
-Saboteurs
-Offense 40, Strength 2, Defense 40, Health 2, Speed 0
-A; ¤summon(6)
-
 Steel Golem
-Offense 60, Defense 60, Health 2, Speed 0, Magical, Elemental, Earth
+Offense 60, Defense 60, Health 2, Speed 0, Elemental, Earth, Spell
 A; ¤summon(4)
 
 Minotaur Warband
@@ -48,17 +33,11 @@ Offense 50, Defense 70, Health 2, Tribute 2, Army, Infantry
 A; ¤summon(4)
 T; ¤upkeep(1)
 
-Special Forces
-Offense 50, Defense 50, Health 2, Tribute 2, Army
+Minotaur Berserker
+Offense 50, Defense 50, Health 2, Tribute 2, Army, Minotaur
 A; ¤summon(4)
 T; ¤upkeep(1)
 T; ¤onslaught
-
-Stormtroopers
-Offense 80, Defense 40, Power 60, Health 2, Imperial, German, Army, Infantry
-A; ¤summon(6)
-T; ¤onslaught
-T; After this card deals combat damage to a susceptible card, you may pay 1 Fire. If you do, deal 1 damage to that card.
 
 Semi-Motorized Infantry
 Offense 60, Defense 60, Health 2, Tribute 4
@@ -69,17 +48,12 @@ T; ¤upkeep(1)
 Spirit of Winter
 Offense 40, Defense 40, Strength 2, Power 60, Spirit, Water, Frost
 A; ¤summon(6)
-A; Pay 1 and exhaust a susceptible card of your choice.
+A; Pay 1 and pacify any susceptible card within range 2.
 
 Sun Spirit
-Offense 50, Defense 10, Health 3, Fire, Spirit
+Offense 50, Health 3, Fire, Spirit
 A; ¤summon(2 Fire)
-A; ¤summon(2) Deal 2 damage to this card.
-
-Drill Sergeant
-Offense 30, Defense 30, Health 2, Army
-A; ¤summon(4)
-A; Exhaust this card and give a friendly card within range 1.5 +30 Offense.
+A; Pay 2 and move this card to an empty friendly position, then deal 2 damage to it.
 
 Keeper of the Flame
 Offense 40, Defense 20, Health 2, Human, Fire, Cleric
@@ -89,35 +63,41 @@ A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense
 Amulet of +20
 Artifact
 A; ¤equip(2)
-P; Any card this card is attached to has +20 Offense, +20 Defense and +20 Power.
+P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
 Giant Salamander
-Offense 80, Defense 40, Power 60, Health 2, Fire, Giant, Beast
-A; ¤summon(8)
+Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
+A; ¤summon(10)
 T; After this card deals combat damage to a card, you may pay 1 Fire. If you do, deal 1 damage to all susceptible cards within range 1 of that card.
 
+King Salamander
+Offense 40, Defense 40, Power 20, Fire, Beast, Reptile
+A; ¤summon(4)
+P; This card has +10 Offense and +10 Power for each friendly Fire card.
+T; ¤critical_Hit(1 Fire)
+
 French 75
-Defense 20, Power 40, Speed 0.5, Tribute 3, French, American, Army, Artillery, Fire
+Defense 20, Power 40, Speed 0.5, Tribute 1, French, American, Army, Artillery, Fire
 A; ¤summon(2)
-A; Pay 1 and exhaust this card. Exhaust a susceptible card of your choice within range 2.
+A; Pay 1 and exhaust this card. Pacify any susceptible card within range 2.
 
 M101 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4)
-A; Pay 1 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 2.5 and deal 1 damage to it.
+A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 2.5 and deal 1 damage to it.
 
 M102 Howitzer
-Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
+Defense 20, Power 60, Speed 0.5, Tribute 4, American, Army, Artillery, Fire
 A; ¤summon(6)
-A; Pay 1 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 3 and deal 1 damage to it.
+A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 3 and deal 1 damage to it.
 
-X
-Defense 20, Power 70, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
-A; ¤summon(8)
-A; Pay 2 Fire and exhaust this card. Exhaust a susceptible card of your choice within range 4 and deal 2 damage to it.
+Big Bertha
+Defense 20, Power 50, Tribute 6, German, Army, Artillery, Fire
+A; ¤reserve(8)
+A; Pay 2 Fire and exhaust this card. Pacify any susceptible card and deal 2 damage to it.
 
 Winged Hussars
-Offense 60, Defense 60, Speed 2
+Offense 60, Defense 60, Speed 2, Tribute 2
 A; ¤summon(4)
 A; ¤flanking(1)
 T; ¤upkeep(1)
@@ -145,12 +125,13 @@ T; ¤decay(1)
 P; Any card this is attached to has +40 Offense and +40 Defense.
 
 Mage Armor
+Armor, Equipment, Spell
 A; ¤equip(2)
 T; ¤decay(1)
 P; Any card this is attached to has +60 Defense.
 
 Witch of Salem
-Offense 100, Health 2, Power 100, Mage, Unholy
+Tribute 4, Offense 100, Health 2, Power 100, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
