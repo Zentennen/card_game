@@ -25,45 +25,51 @@ pub const cards_per_row: usize = 3;
 pub const cards_per_page: usize = cards_per_column * cards_per_row;
 
 //card
-pub const card_outer_w: f64 = 63.0;
-pub const card_outer_h: f64 = 88.0;
-pub const card_separation_w: f64 = card_outer_w + 3.0;
-pub const card_separation_h: f64 = card_outer_h + 3.0;
-pub const card_inner_w: f64 = card_outer_w - card_pad * 2.0;
-pub const card_inner_h: f64 = card_outer_h - card_pad;
+pub const card_outer_width: f64 = 63.0;
+pub const card_outer_height: f64 = 88.2;
+pub const card_separation_width: f64 = card_outer_width + 3.0;
+pub const card_separation_height: f64 = card_outer_height + 3.0;
+pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
+pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
-pub const upper_alpha_base_h: f64 = name_h + gradient_h + main_attr_h;
+pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height + main_attr_height;
 pub const text_offset: f64 = 1.0;
 
 //name
 pub const name_font_size: f64 = 8.5;
 pub const name_h: f64 = 7.0;
 pub const advanced_sym_size: f64 = 12.0;
-pub const advanced_offset_r: f64 = card_outer_w - advanced_sym_size;
+pub const advanced_offset_r: f64 = card_outer_width - advanced_sym_size;
 
 //attr
 pub const main_attr_font_size: f64 = 8.0;
 pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.35;
 pub const main_attr_text_pad_l: f64 = 1.0;
-pub const main_attr_h: f64 = 3.5;
+pub const main_attr_height: f64 = 3.5;
 pub const main_attr_pad_b: f64 = 1.6;
 pub const main_attr_pad_lr: f64 = 1.5;
-pub const main_attr_w: f64 = card_outer_w - main_attr_pad_lr * 2.0;
-pub const other_attr_h: f64 = 3.2;
-pub const gradient_h: f64 = 3.0;
+pub const main_attr_weight: f64 = card_outer_width - main_attr_pad_lr * 2.0;
+pub const main_attr_per_line: usize = 6;
+pub const other_attr_height: f64 = 3.2;
 
 //prop
 pub const default_font_size: f64 = 6.5;
-pub const prop_h: f64 = 3.0;
-pub const prop_sym_size: f64 = 2.0;
-pub const prop_sym_pad_l: f64 = card_inner_w + text_offset - prop_sym_size;
-pub const prop_sym_pad_t: f64 = (prop_h * prop_sym_l as f64 - prop_sym_size) / 2.0;
+pub const prop_height: f64 = 3.0;
+pub const prop_half_height: f64 = prop_height / 2.0;
+pub const prop_sym_size: f64 = 2.5;
+pub const prop_sym_pad_l: f64 = card_inner_width + text_offset - prop_sym_size;
+pub const prop_sym_pad_t: f64 = (prop_height * prop_sym_l as f64 - prop_sym_size) / 2.0;
 pub const prop_efct_pad_r: f64 = 0.1;
-pub const prop_sym_l: usize = (prop_sym_size / prop_h - 0.00001) as usize + 1;
+pub const prop_sym_l: usize = (prop_sym_size / prop_height - 0.00001) as usize + 1;
 pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
 
+//alpha
+pub const alpha_gradient_height: f64 = 4.0;
+pub const max_alpha: u8 = 128;
+
+
 pub mod serialize;
-pub mod to_pdf;
+pub mod pdf;
 
 type attr_num = f64;
 

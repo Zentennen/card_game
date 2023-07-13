@@ -4,13 +4,13 @@ A; ¤reserve(2 or 1 Fire)
 P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire cards have dealt during the current turn.
 
 Flaming Barrier
-Offense 100, Strength 2, Speed 0
+Offense 100, Strength 2, Speed 0, Fire, Wall
 A; ¤summon(2)
 A; ¤summon(1 Fire)
 P; ¤defender
 
 Maginot Line
-Offense 70, Defense 140, Strength 2, Speed 0
+Offense 70, Defense 140, Strength 2, Speed 0, Army, French, Wall
 A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
@@ -20,7 +20,7 @@ Offense 60, Defense 60, Health 2, Speed 0, Elemental, Earth, Spell
 A; ¤summon(4)
 
 Minotaur Warband
-Army, Offense 60, Defense 60, Army, Minotaur
+Offense 60, Defense 60, Army, Minotaur
 A; ¤summon(4)
 
 Light Infantry
@@ -29,26 +29,21 @@ A; ¤summon(4)
 A; ¤flanking(1)
 
 Heavy Infantry
-Offense 50, Defense 70, Health 2, Tribute 2, Army, Infantry
+Offense 60, Defense 50, Health 2, Tribute 2, Army, Infantry
 A; ¤summon(4)
 T; ¤upkeep(1)
 
 Minotaur Berserker
-Offense 50, Defense 50, Health 2, Tribute 2, Army, Minotaur
+Offense 50, Defense 40, Health 2, Tribute 2, Army, Minotaur
 A; ¤summon(4)
 T; ¤upkeep(1)
 T; ¤onslaught
 
 Semi-Motorized Infantry
-Offense 60, Defense 60, Health 2, Tribute 4
+Offense 60, Defense 50, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry
 A; ¤summon(6)
 A; ¤flanking(1)
 T; ¤upkeep(1)
-
-Spirit of Winter
-Offense 40, Defense 40, Strength 2, Power 60, Spirit, Water, Frost
-A; ¤summon(6)
-A; Pay 1 and pacify any susceptible card within range 2.
 
 Sun Spirit
 Offense 50, Health 3, Fire, Spirit
@@ -61,7 +56,7 @@ A; ¤summon(4)
 A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
 
 Amulet of +20
-Artifact
+Artifact, Equipment
 A; ¤equip(2)
 P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
@@ -97,7 +92,7 @@ A; ¤reserve(8)
 A; Pay 2 Fire and exhaust this card. Pacify any susceptible card and deal 2 damage to it.
 
 Winged Hussars
-Offense 60, Defense 60, Speed 2, Tribute 2
+Offense 60, Defense 60, Speed 2, Tribute 2, Eastern European, Cavalry, Army
 A; ¤summon(4)
 A; ¤flanking(1)
 T; ¤upkeep(1)
@@ -131,7 +126,7 @@ T; ¤decay(1)
 P; Any card this is attached to has +60 Defense.
 
 Witch of Salem
-Tribute 4, Offense 100, Health 2, Power 100, Mage, Unholy
+Tribute 4, Offense 70, Health 2, Power 100, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
@@ -141,7 +136,7 @@ T; ¤decay(1)
 P; Any card this is attached to has ¤culling(1).
 
 Reaper
-Offense 60, Health 3, Tribute 6, Spirit, Unholy 
+Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
 A; ¤summon(8)
 T; ¤onslaught
 T; ¤culling(1)

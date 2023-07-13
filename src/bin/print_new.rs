@@ -1,5 +1,5 @@
 use card_game::serialize::*;
-use card_game::to_pdf::*;
+use card_game::pdf::*;
 
 fn main() {
     let cards = serialize_all_cards();

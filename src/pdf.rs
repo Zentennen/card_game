@@ -246,32 +246,41 @@ impl PdfHandler<'_> {
     }
 }
 
-pub fn process_commands(string: &mut String) {
+fn process_command(string: &str) -> String {
+    let parts = string.split('_');
+    let mut result = String::with_capacity(string.len() + 20);
+    for part in parts {
+        result.extend(part.nth_char(0).unwrap().to_uppercase());
+        result.extend(part.chars().skip(1));
+        result.push(' ');
+    }
+    result.pop();
+    result
+}
+
+fn process_commands(string: &mut String) {
     while let Some(start) = string.find('¤') {
         let substring = &string[2 + start ..];
-        let mut command = String::with_capacity(string.capacity() + 100);
+        let mut command = String::with_capacity(string.capacity() + 20);
         command.push_str("**");
-        command.push(substring.nth_char(0).unwrap().to_ascii_uppercase());
 
         if let Some(params_start) = substring.find('(') {
             let end = substring.find(')').unwrap();
-            command.push_str(&substring[1..params_start]);
+            command.push_str(&process_command(&substring[..params_start]));
             command.push(' ');
             command.push_str(&substring[params_start + 1 .. end]);
             command.push_str("**");
-            command = command.replacen('_', " ", usize::MAX);
             string.replace_range(start .. start + end + 3, &command);
         }
         else {
-            command.push_str("**");
             if let Some(end) = substring.find(' ') {
-                command.push_str(&substring[1..end]);
-                command = command.replacen('_', " ", usize::MAX);
+                command.push_str(&process_command(&substring[..end]));
+                command.push_str("**");
                 string.replace_range(start .. start + end, &command);
             }
             else {
-                command.push_str(&substring[1..]);
-                command = command.replacen('_', " ", usize::MAX);
+                command.push_str(&process_command(&substring[..]));
+                command.push_str("**");
                 string.replace_range(start.., &command);
             }
         }
@@ -281,16 +290,16 @@ pub fn process_commands(string: &mut String) {
 fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
     let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
     if max_limited_l == 0 {
-        *non_limited_l = ph.multi_cell_l(&string, card_inner_w, prop_h, default_text_align);
+        *non_limited_l = ph.multi_cell_l(&string, card_inner_width, prop_height, default_text_align);
         non_limited.push_str(&string);
     }
     else {
-        let (a, b) = ph.split_on_lines(&string, prop_top_w, prop_h, default_text_align, max_limited_l);
+        let (a, b) = ph.split_on_lines(&string, prop_top_w, prop_height, default_text_align, max_limited_l);
         limited.push_str(a);
         non_limited.push_str(b);
-        *limited_l = ph.multi_cell_l(&limited, prop_top_w, prop_h, default_text_align);
+        *limited_l = ph.multi_cell_l(&limited, prop_top_w, prop_height, default_text_align);
         if !non_limited.is_empty() {
-            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_w, prop_h, default_text_align);
+            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_width, prop_height, default_text_align);
         }
     }
 
@@ -349,32 +358,32 @@ impl DeserializedProperty {
 
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
-            y -= self.efct_non_limited_l as f64 * prop_h;
+            y -= self.efct_non_limited_l as f64 * prop_height;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.efct_non_limited, card_inner_w, prop_h, default_text_align);
+            ph.multi_cell(&self.efct_non_limited, card_inner_width, prop_height, default_text_align);
         }
         if !self.efct_limited.is_empty() {
-            y -= self.efct_limited_l as f64 * prop_h;
+            y -= self.efct_limited_l as f64 * prop_height;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.efct_limited, prop_top_w, prop_h, default_text_align);
+            ph.multi_cell(&self.efct_limited, prop_top_w, prop_height, default_text_align);
         }
         
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
-            y -= self.attr_non_limited_l as f64 * prop_h;
+            y -= self.attr_non_limited_l as f64 * prop_height;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_non_limited, card_inner_w, prop_h, default_text_align);
+            ph.multi_cell(&self.attr_non_limited, card_inner_width, prop_height, default_text_align);
         }
         if !self.attr_limited.is_empty() {
-            y -= self.attr_limited_l as f64 * prop_h;
+            y -= self.attr_limited_l as f64 * prop_height;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_limited, prop_top_w, prop_h, default_text_align);
+            ph.multi_cell(&self.attr_limited, prop_top_w, prop_height, default_text_align);
         }
     
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
-        y -= prop_h;
+        y -= prop_half_height;
         y
     }
 }
@@ -410,33 +419,34 @@ impl Into<&str> for Alignment {
     }
 }
 
-pub fn get_height_sum(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
+pub fn get_property_halflines(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
     let mut h = 0;
 
     for prop in acti {
-        h += prop.attr_non_limited_l;
-        h += prop.attr_limited_l;
-        h += prop.efct_non_limited_l;
-        h += prop.efct_limited_l;
+        h += prop.attr_non_limited_l * 2;
+        h += prop.attr_limited_l * 2;
+        h += prop.efct_non_limited_l * 2;
+        h += prop.efct_limited_l * 2;
         h += 1;
     }
 
     for prop in trig {
-        h += prop.attr_non_limited_l;
-        h += prop.attr_limited_l;
-        h += prop.efct_non_limited_l;
-        h += prop.efct_limited_l;
+        h += prop.attr_non_limited_l * 2;
+        h += prop.attr_limited_l * 2;
+        h += prop.efct_non_limited_l * 2;
+        h += prop.efct_limited_l * 2;
         h += 1;
     }
 
     for prop in pass {
-        h += prop.attr_non_limited_l;
-        h += prop.attr_limited_l;
-        h += prop.efct_non_limited_l;
-        h += prop.efct_limited_l;
+        h += prop.attr_non_limited_l * 2;
+        h += prop.attr_limited_l * 2;
+        h += prop.efct_non_limited_l * 2;
+        h += prop.efct_limited_l * 2;
         h += 1;
     }
 
+    //there will be one extra halfline added from the last property that doesn't need to be there, unless there are no properties.
     if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
         h -= 1;
     }
@@ -536,30 +546,30 @@ pub fn get_other_attr_string(card: &Card) -> String {
     string
 }
 
-pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
+pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
-        ph.image(image_name, "card images", card_outer_w, card_outer_h);
+        ph.image(image_name, "card images", card_outer_width, card_outer_height);
     }
     else {
-        ph.rect(base_x, base_y, card_outer_w, card_outer_h);
+        ph.rect(base_x, base_y, card_outer_width, card_outer_height);
     }
 
     //attribute alpha background
     let main_attr_icon_data = get_main_attr_icon_data(card);
-    let mut h = upper_alpha_base_h;
+    let mut h = upper_alpha_base_height;
     let mut l = 0;
     let mut other_attr = get_other_attr_string(card);
     process_commands(&mut other_attr);
     if !other_attr.is_empty() {
         h += main_attr_pad_b;
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        l = ph.multi_cell_l(&other_attr, card_inner_w, other_attr_h, attr_text_align);
-        h += other_attr_h * l as f64;
+        l = ph.multi_cell_l(&other_attr, card_inner_width, other_attr_height, attr_text_align);
+        h += other_attr_height * l as f64;
     }
     ph.set_xy(base_x, base_y);
-    ph.image(&format!("upper{}.png", l), "alpha", card_outer_w, h);
+    ph.image(&format!("upper{}.png", l), "alpha", card_outer_width, h);
 
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
@@ -570,13 +580,13 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 
     //property alpha background
     ph.set_xy(base_x, base_y);
-    let l = get_height_sum(&acti, &trig, &pass);
-    let h = l as f64 * prop_h + gradient_h + card_pad;
-    ph.set_xy(base_x, base_y + card_outer_h - h);
-    ph.image(&format!("lower{}.png", l), "alpha", card_outer_w, h);
+    let l = get_property_halflines(&acti, &trig, &pass);
+    let h = l as f64 * prop_half_height + alpha_gradient_height + card_pad;
+    ph.set_xy(base_x, base_y + card_outer_height - h);
+    ph.image(&format!("lower{}.png", l), "alpha", card_outer_width, h);
 
     //Add the corners for advanced cards
-    if let Some(_) = get_attribute_ref_with_name(&card.attr, "Advanced") {
+    if hero {
         ph.set_xy(base_x, base_y);
         ph.image("advanced_tl.png", "icons", advanced_sym_size, advanced_sym_size);
         ph.set_xy(base_x + advanced_offset_r, base_y);
@@ -588,45 +598,45 @@ pub fn add_card_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //name
     ph.set_xy(base_x, y);
     ph.set_font_modded(font_name, name_font_size, name_text_mod);
-    ph.multi_cell(&card.name, card_outer_w, name_h, Alignment::center_);
+    ph.multi_cell(&card.name, card_outer_width, name_h, Alignment::center_);
     
     //main attributes
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
     y += name_h;
     if !main_attr_icon_data.is_empty() {
-        let step_w = main_attr_w / main_attr_icon_data.len() as f64;
-        let last_main_attr_w = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1) + main_attr_h + main_attr_text_pad_l;
+        let step_w = main_attr_weight / main_attr_icon_data.len() as f64;
+        let last_main_attr_w = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1) + main_attr_height + main_attr_text_pad_l;
         let w = step_w * (main_attr_icon_data.len() - 1) as f64 + last_main_attr_w;
-        let base_x = base_x + (main_attr_w - w) / 2.0 + main_attr_pad_lr;
+        let base_x = base_x + (main_attr_weight - w) / 2.0 + main_attr_pad_lr;
         for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
             let x = base_x + i as f64 * step_w;
             ph.set_xy(x, y);
-            ph.image(icon, "icons", main_attr_h, main_attr_h);
-            ph.text(&val, x + main_attr_h + main_attr_text_pad_l, y + main_attr_text_pad_t);
+            ph.image(icon, "icons", main_attr_height, main_attr_height);
+            ph.text(&val, x + main_attr_height + main_attr_text_pad_l, y + main_attr_text_pad_t);
         }
     }
 
-    let base_x = base_x + card_pad;
+    let x = base_x + card_pad;
 
     //other attributes
     if !other_attr.is_empty() {
-        y += main_attr_h + main_attr_pad_b;
-        ph.set_xy(base_x, y);
+        y += main_attr_height + main_attr_pad_b;
+        ph.set_xy(x, y);
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        ph.multi_cell(&other_attr, card_inner_w, other_attr_h, attr_text_align);
+        ph.multi_cell(&other_attr, card_inner_width, other_attr_height, attr_text_align);
     }
 
     //properties
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    y = base_y + card_inner_h;
+    y = base_y + card_inner_height;
     for prop in pass {
-        y = prop.add_to_pdf(ph, base_x - text_offset, y, "passive.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "passive.png");
     }
     for prop in trig {
-        y = prop.add_to_pdf(ph, base_x - text_offset, y, "triggered.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "triggered.png");
     }
     for prop in acti {
-        y = prop.add_to_pdf(ph, base_x - text_offset, y, "action.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "action.png");
     }
 }
 
@@ -640,9 +650,9 @@ pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
             for c in 0..cards_per_row {
                 let i = p * cards_per_page + r * cards_per_row + c;
                 if i < num_cards {
-                    let x = page_pad_l as f64 + c as f64 * card_separation_w;
-                    let y = page_pad_t as f64 + r as f64 * card_separation_h;
-                    add_card_to_pdf(&ph, &cards[i], x, y)
+                    let x = page_pad_l as f64 + c as f64 * card_separation_width;
+                    let y = page_pad_t as f64 + r as f64 * card_separation_height;
+                    add_entity_to_pdf(&ph, &cards[i], x, y, false);
                 }
                 else {
                     return;
@@ -654,9 +664,10 @@ pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
 
 pub fn add_all_cards_to_pdf(cards: &Vec<Card>) {
     Python::with_gil(|py| {
-        println!("Writing {} cards to pdf...", cards.len());
+        println!("Printing {} cards as pdf...", cards.len());
         let ph = PdfHandler::new(py);
         add_cards_to_pdf(&ph, cards);
         ph.output();
+        println!("{} cards printed.", cards.len());
     });
 }

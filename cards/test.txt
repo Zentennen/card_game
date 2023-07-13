@@ -1,0 +1,4 @@
+Test card
+Offense 70
+A; ¤summon(3)
+P; Writing a very long test property here to test out what happens when the text reaches the right eee.
