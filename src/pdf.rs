@@ -23,7 +23,7 @@ pub struct PdfHandler<'p> {
 
 impl PdfHandler<'_> {
     pub fn new<'p>(py: Python<'p>) -> PdfHandler<'p> {
-        let fpdf = py.import("fpdf").unwrap();
+        let fpdf = py.import("fpdf").expect("ERR: fpdf not installed");
         let pdf = fpdf.getattr("FPDF").unwrap().call0().unwrap();
         let image_aliases = std::collections::HashMap::new();
 
@@ -552,9 +552,9 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
         ph.set_xy(base_x, base_y);
         ph.image(image_name, "card images", card_outer_width, card_outer_height);
     }
-    else {
-        ph.rect(base_x, base_y, card_outer_width, card_outer_height);
-    }
+    //else {
+    //    ph.rect(base_x, base_y, card_outer_width, card_outer_height);
+    //}
 
     //attribute alpha background
     let main_attr_icon_data = get_main_attr_icon_data(card);

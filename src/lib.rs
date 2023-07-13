@@ -34,6 +34,7 @@ pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
 pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height + main_attr_height;
 pub const text_offset: f64 = 1.0;
+pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
 
 //name
 pub const name_font_size: f64 = 8.5;
@@ -64,16 +65,18 @@ pub const prop_sym_l: usize = (prop_sym_size / prop_height - 0.00001) as usize +
 pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
 
 //alpha
-pub const alpha_gradient_height: f64 = 4.0;
-pub const max_alpha: u8 = 128;
-
+pub const max_alpha: u8 = 64;
+pub const pixels_per_alpha_step: usize = 4;
+pub const pixels_per_mm: f64 = 64.0;
+pub const alpha_gradient_pixel_height: usize = max_alpha as usize * pixels_per_alpha_step;
+pub const alpha_gradient_height: f64 = alpha_gradient_pixel_height as f64 / pixels_per_mm;
 
 pub mod serialize;
 pub mod pdf;
 
 type attr_num = f64;
 
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Attribute {
     pub n: String,
     pub a: Vec<Attribute>,
@@ -161,7 +164,7 @@ pub fn get_attribute_value(attributes: &Vec<Attribute>, name: &str) -> Option<at
     None
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Property {
     pub attr: Vec<Attribute>, 
     pub efct: String,
@@ -195,7 +198,7 @@ pub enum PropertyType {
     action_, triggered_, passive_
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Card {
     pub name: String,
     pub attr: Vec<Attribute>,
