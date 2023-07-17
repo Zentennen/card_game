@@ -54,16 +54,19 @@ A; Pay 2 and move this card to an empty friendly position, then deal 2 damage to
 French 75
 Defense 20, Power 40, Speed 0.5, Tribute 1, French, American, Army, Artillery, Fire
 A; ¤summon(2)
+P; ¤defender
 A; Pay 1 and exhaust this card. Pacify any susceptible card within range 2.
 
 M101 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4)
+P; ¤defender
 A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 2.5 and deal 1 damage to it.
 
 M102 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 4, American, Army, Artillery, Fire
 A; ¤summon(6)
+P; ¤defender
 A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 3 and deal 1 damage to it.
 
 Big Bertha
@@ -72,12 +75,12 @@ A; ¤reserve(8)
 A; Pay 2 Fire and exhaust this card. Pacify any susceptible card and deal 2 damage to it.
 
 Flaming Barrier
-Offense 100, Strength 2, Speed 0, Fire, Wall
+Offense 100, Strength 2, Speed 0, Fire
 A; ¤summon(2 or 1 Fire)
 P; ¤defender
 
 Maginot Line
-Offense 70, Defense 140, Strength 2, Speed 0, Army, French, Wall
+Offense 70, Defense 140, Strength 2, Speed 0, Army, French, Structure
 A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender

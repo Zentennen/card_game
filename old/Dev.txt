@@ -31,9 +31,15 @@ A; ¤summon(4)
 A; Exhaust this card and give a friendly card within range 1.5 +30 Offense.
 
 Dreikaiserbund
-Treaty
+Policy
 A; ¤reserve(2)
 T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 mana.
+
+Gaius Julius Caesar
+Commander, Imperial, Roman
+A; ¤reserve(6)
+P; All Roman cards have Offense +30 and Power +30.
+P; All Army cards have '¤build(Structure)'.
 
 Phantom Assassin
 Rogue, Spririt, Offense 100, Defense 20, Strength 2, Speed 5
