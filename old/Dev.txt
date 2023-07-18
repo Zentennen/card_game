@@ -36,7 +36,7 @@ A; ¤reserve(2)
 T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 mana.
 
 Gaius Julius Caesar
-Commander, Imperial, Roman
+Commander, Roman
 A; ¤reserve(6)
 P; All Roman cards have Offense +30 and Power +30.
 P; All Army cards have '¤build(Structure)'.

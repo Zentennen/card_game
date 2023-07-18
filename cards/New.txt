@@ -1,8 +1,3 @@
-Test card
-Offense 70
-A; ¤summon(3)
-P; Writing a very long test property here to test out what happens when the text reaches the right edge.
-
 Reaper
 Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
 A; ¤summon(8)
@@ -16,13 +11,13 @@ P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
-A; ¤summon(10)
+A; ¤summon(8)
 T; After this card deals combat damage to a card, you may pay 1 Fire. If you do, deal 1 damage to all a susceptible cards within range 1 of that card.
 
 King Salamander
-Offense 40, Defense 40, Power 20, Health 2, Fire, Beast, Reptile
-A; ¤summon(4)
-P; This card has +10 Offense and +10 Power for each friendly Fire card.
+Offense 40, Defense 40, Health 2, Fire, Beast, Reptile
+A; ¤summon(6)
+P; This card has +10 Offense for each friendly Fire entity.
 T; ¤critical_hit(1 Fire)
 
 Heavy Infantry
@@ -49,7 +44,7 @@ T; ¤upkeep(1)
 Sun Spirit
 Offense 50, Health 3, Fire, Spirit
 A; ¤summon(2 Fire)
-A; Pay 2 and move this card to an empty friendly position, then deal 2 damage to it.
+A; ¤summon(2) Deal 2 damage to this card.
 
 French 75
 Defense 20, Power 40, Speed 0.5, Tribute 1, French, American, Army, Artillery, Fire
@@ -84,3 +79,66 @@ Offense 70, Defense 140, Strength 2, Speed 0, Army, French, Structure
 A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
+
+Superior Firepower
+Army, Doctrine, Fire, American
+A; ¤reserve(2 or 1 Fire)
+P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire entities have dealt during the current turn.
+
+Steel Golem
+Offense 40, Defense 70, Health 2, Speed 0, Elemental, Earth, Spell
+A; ¤summon(4)
+
+Light Infantry
+Offense 50, Defense 50, Tribute 3, Army, Infantry
+A; ¤summon(4)
+A; ¤flanking(1)
+
+Keeper of the Flame
+Offense 40, Defense 20, Health 2, Human, Fire, Cleric
+A; ¤summon(4)
+A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
+
+Amulet of +20
+Artifact, Equipment
+A; ¤equip(2)
+P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
+
+Winged Hussars
+Offense 60, Defense 60, Speed 2, Tribute 2, Eastern European, Cavalry, Army
+A; ¤summon(4)
+A; ¤flanking(1)
+T; ¤upkeep(1)
+
+War of Annihilation
+Policy
+A; ¤reserve(4)
+P; All enemy cards have +20 Defense.
+T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
+
+Backhand Blow
+Tactic
+A; ¤equip(2)
+T; ¤decay(1)
+T; After a card this is attached to defends in combat, it immediately attacks and the card that attacked it gets -30 Defense.
+
+ERA Plates
+Army, Fire
+A; ¤equip(2 or 1 Fire)
+T; When damage is dealt to a card this is attached to, prevent the damage and destroy this card.
+
+Finest Hour
+A; ¤equip(2)
+T; ¤decay(1)
+P; Any card this is attached to has +40 Offense and +40 Defense.
+
+Mage Armor
+Armor, Equipment, Spell
+A; ¤equip(2)
+T; ¤decay(1)
+P; Any card this is attached to has +60 Defense.
+
+Coup de Grace
+A; ¤equip(0)
+T; ¤decay(1)
+P; Any card this is attached to has ¤critical_Hit(1).
