@@ -62,3 +62,13 @@ Tribute 4, Offense 50, Defense 30, German, Army
 A; ¤summon(8)
 T; In the beginning of each of your combat phases, exhaust a friendly card within range 1.5, give it +1 Lethality and prepare it for attack.
 P; All friendly cards within range 1.5 have Offense +50. 
+
+Sun Spirit
+Offense 50, Health 3, Fire, Spirit
+A; ¤summon(2 Fire)
+A; ¤summon(2) Deal 2 damage to this card.
+
+Walther Model
+Commander, German
+A; ¤reserve(4)
+A; Exhaust a friendly card and give it +30 Defense.
