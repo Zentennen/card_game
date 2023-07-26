@@ -164,6 +164,15 @@ pub fn get_attribute_value(attributes: &Vec<Attribute>, name: &str) -> Option<at
     None
 }
 
+pub fn get_attribute_text<'a>(attributes: &'a Vec<Attribute>, name: &str) -> Option<&'a str> {
+    for attribute in attributes {
+        if attribute.n == name && attribute.s.len() > 0 {
+           return Some(&attribute.s[0]);
+        }
+    }
+    None
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Property {
     pub attr: Vec<Attribute>, 

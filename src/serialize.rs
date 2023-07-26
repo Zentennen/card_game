@@ -215,27 +215,6 @@ pub fn serialize_all_cards() -> Vec<Card> {
     }
 
     for card in cards.iter_mut() {
-        if !has_attribute_with_name(&card.attr, "Tribute") {
-            card.attr.push(Attribute{n: "Tribute".to_string(), f: vec![0.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Offense") {
-            card.attr.push(Attribute{n: "Offense".to_string(), f: vec![0.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Health") {
-            card.attr.push(Attribute{n: "Health".to_string(), f: vec![1.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Strength") {
-            card.attr.push(Attribute{n: "Strength".to_string(), f: vec![1.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Defense") {
-            card.attr.push(Attribute{n: "Defense".to_string(), f: vec![0.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Power") {
-            card.attr.push(Attribute{n: "Power".to_string(), f: vec![0.0], a: vec![], s: vec![]});
-        }
-        if !has_attribute_with_name(&card.attr, "Health") {
-            card.attr.push(Attribute{n: "Health".to_string(), f: vec![1.0], a: vec![], s: vec![]});
-        }
         card.attr.sort_by(|a, b| { a.n.cmp(&b.n) });
     }
 

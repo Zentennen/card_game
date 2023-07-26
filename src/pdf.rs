@@ -14,6 +14,8 @@ pub const font_line_width: f64 = 0.1;
 pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left_;
 pub const default_text_mod: TextModifier = TextModifier::none_;
+pub const main_attributes: [&str; 7] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute"];
+pub const main_properties: [&str; 9] = ["deploy", "equip", "reserve", "flanking", "critical_hit", "upkeep", "onslaught", "defender", "decay"];
 
 pub struct PdfHandler<'p> {
     py: Python<'p>,
@@ -482,53 +484,19 @@ pub fn add_attr_to_string(attr: &Attribute, string: &mut String) {
     }
 }
 
-pub fn get_main_attr_icon_data(card: &Card) -> Vec<(&str, String)> {
-    let mut attribs: Vec<(&str, String)> = Vec::new();
-
-    if let Some(val) = get_attribute_value(&card.attr, "Tribute") {
-        if val != 0.0 {
-            attribs.push(("drop.png", val.to_string()));
-        }
+pub fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, data: &'a mut Vec<(&'a str, String)>) {
+    if let Some(val) = get_attribute_value(&card.attr, attribute) {
+        data.push((attribute, val.to_string()));
     }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Offense") {
-        if val != 0.0 {
-            attribs.push(("sword.png", val.to_string()));
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Defense") {
-        if val != 0.0 {
-            attribs.push(("shield.png", val.to_string()));
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Strength") {
-        if val != 1.0 {
-            attribs.push(("fist.png", val.to_string()));
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Health") {
-        if val != 1.0 {
-            attribs.push(("heart.png", val.to_string()));
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Power") {
-        if val != 0.0 {
-            attribs.push(("star.png", val.to_string()));
-        }
-    }
-
-    if let Some(val) = get_attribute_value(&card.attr, "Speed") {
-        if val != 1.0 {
-            attribs.push(("boot.png", val.to_string()));
-        }
-    }
-
-    attribs
 }
+
+pub fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, data: &'a mut Vec<(&'a str, String)>) {
+    if let Some(val) = get_attribute_text(&card.attr, attribute) {
+        data.push((attribute, val.to_string()));
+    }
+}
+
+
 
 pub fn get_other_attr_string(card: &Card) -> String {
     let mut string = String::with_capacity(default_attr_string_alloc);
