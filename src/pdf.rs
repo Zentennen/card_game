@@ -484,34 +484,56 @@ pub fn add_attr_to_string(attr: &Attribute, string: &mut String) {
     }
 }
 
-pub fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, data: &'a mut Vec<(&'a str, String)>) {
+struct IconData<'a> {
+    image: &'a str,
+    text: String
+}
+
+pub fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData>) -> Vec<IconData<'a>>{
     if let Some(val) = get_attribute_value(&card.attr, attribute) {
-        data.push((attribute, val.to_string()));
+        let icon_data = IconData{ image: attribute, text: val.to_string() };
+        data.push(icon_data);
     }
+
+    data
 }
 
-pub fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, data: &'a mut Vec<(&'a str, String)>) {
-    if let Some(val) = get_attribute_text(&card.attr, attribute) {
-        data.push((attribute, val.to_string()));
+pub fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData>) -> Vec<IconData<'a>>{
+    if let Some(val) = get_attribute_value(&card.attr, attribute) {
+        let icon_data = IconData{ image: attribute, text: val.to_string() };
+        data.push(icon_data);
     }
+
+    data
 }
-
-
 
 pub fn get_other_attr_string(card: &Card) -> String {
     let mut string = String::with_capacity(default_attr_string_alloc);
-    for attr in &card.attr {
-        match &attr.n as &str {
-            "Tribute" | "Offense" | "Defense" | "Health" | "Strength" | "Power" | "Advanced" | "Speed" => continue,
-            _ => {
-                add_attr_to_string(attr, &mut string);
-                string.push_str(", ");
-            }
+    for attribute in &card.attr {
+        if !main_attributes.contains(&attribute.n.as_str()) {
+            add_attr_to_string(attribute, &mut string);
+            string.push_str(", ");
         }
     }
     string.pop();
     string.pop();
     string
+}
+
+pub fn add_icon_data_to_pdf(ph: &PdfHandler, base_x: f64, y: f64, icon_data: Vec<(&str, String)>) {
+    ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
+    if !icon_data.is_empty() {
+        let step_w = main_attr_weight / icon_data.len() as f64;
+        let last_main_attr_w = ph.string_w(&icon_data[icon_data.len() - 1].1) + main_attr_height + main_attr_text_pad_l;
+        let w = step_w * (icon_data.len() - 1) as f64 + last_main_attr_w;
+        let x = base_x + (main_attr_weight - w) / 2.0 + main_attr_pad_lr;
+        for (i, (icon, val)) in icon_data.iter().enumerate() {
+            let x = x + i as f64 * step_w;
+            ph.set_xy(x, y);
+            ph.image(icon, "icons", main_attr_height, main_attr_height);
+            ph.text(&val, x + main_attr_height + main_attr_text_pad_l, y + main_attr_text_pad_t);
+        }
+    }
 }
 
 pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {
@@ -525,7 +547,6 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
     //}
 
     //attribute alpha background
-    let main_attr_icon_data = get_main_attr_icon_data(card);
     let mut h = upper_alpha_base_height;
     let mut l = 0;
     let mut other_attr = get_other_attr_string(card);
@@ -569,22 +590,13 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
     ph.multi_cell(&card.name, card_outer_width, name_h, Alignment::center_);
     
     //main attributes
-    ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
-    y += name_h;
-    if !main_attr_icon_data.is_empty() {
-        let step_w = main_attr_weight / main_attr_icon_data.len() as f64;
-        let last_main_attr_w = ph.string_w(&main_attr_icon_data[main_attr_icon_data.len() - 1].1) + main_attr_height + main_attr_text_pad_l;
-        let w = step_w * (main_attr_icon_data.len() - 1) as f64 + last_main_attr_w;
-        let base_x = base_x + (main_attr_weight - w) / 2.0 + main_attr_pad_lr;
-        for (i, (icon, val)) in main_attr_icon_data.iter().enumerate() {
-            let x = base_x + i as f64 * step_w;
-            ph.set_xy(x, y);
-            ph.image(icon, "icons", main_attr_height, main_attr_height);
-            ph.text(&val, x + main_attr_height + main_attr_text_pad_l, y + main_attr_text_pad_t);
-        }
-    }
-
     let x = base_x + card_pad;
+    y += name_h;
+    let mut main_attribute_icon_data: Vec<IconData> = Vec::with_capacity(100);
+
+    for attribute in main_attributes {
+        main_attribute_icon_data = add_attribute_value_to_icon_data(attribute, card, main_attribute_icon_data);
+    }
 
     //other attributes
     if !other_attr.is_empty() {
