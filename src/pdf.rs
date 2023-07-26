@@ -421,7 +421,7 @@ impl Into<&str> for Alignment {
     }
 }
 
-pub fn get_property_halflines(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
+fn get_property_halflines(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
     let mut h = 0;
 
     for prop in acti {
@@ -456,7 +456,7 @@ pub fn get_property_halflines(acti: &Vec<DeserializedProperty>, trig: &Vec<Deser
     h
 }
 
-pub fn add_attr_to_string(attr: &Attribute, string: &mut String) {
+fn add_attr_to_string(attr: &Attribute, string: &mut String) {
     string.push_str(&attr.n.replacen(' ', "\u{A0}", usize::MAX));
     if attr.count_subs() > 0 {
         string.push_str("\u{A0}(");
@@ -489,7 +489,7 @@ struct IconData<'a> {
     text: String
 }
 
-pub fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData>) -> Vec<IconData<'a>>{
+fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData<'a>>) -> Vec<IconData<'a>>{
     if let Some(val) = get_attribute_value(&card.attr, attribute) {
         let icon_data = IconData{ image: attribute, text: val.to_string() };
         data.push(icon_data);
@@ -498,7 +498,7 @@ pub fn add_attribute_value_to_icon_data<'a>(attribute: &'a str, card: &'a Card, 
     data
 }
 
-pub fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData>) -> Vec<IconData<'a>>{
+fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, mut data: Vec<IconData<'a>>) -> Vec<IconData<'a>>{
     if let Some(val) = get_attribute_value(&card.attr, attribute) {
         let icon_data = IconData{ image: attribute, text: val.to_string() };
         data.push(icon_data);
@@ -507,7 +507,7 @@ pub fn add_attribute_text_to_icon_data<'a>(attribute: &'a str, card: &'a Card, m
     data
 }
 
-pub fn get_other_attr_string(card: &Card) -> String {
+fn get_other_attr_string(card: &Card) -> String {
     let mut string = String::with_capacity(default_attr_string_alloc);
     for attribute in &card.attr {
         if !main_attributes.contains(&attribute.n.as_str()) {
@@ -520,18 +520,21 @@ pub fn get_other_attr_string(card: &Card) -> String {
     string
 }
 
-pub fn add_icon_data_to_pdf(ph: &PdfHandler, base_x: f64, y: f64, icon_data: Vec<(&str, String)>) {
+fn add_icon_data_to_pdf(ph: &PdfHandler, base_x: f64, y: f64, icon_data: &Vec<IconData>) {
     ph.set_font_modded(font_name, main_attr_font_size, default_text_mod);
+
+
+
     if !icon_data.is_empty() {
         let step_w = main_attr_weight / icon_data.len() as f64;
-        let last_main_attr_w = ph.string_w(&icon_data[icon_data.len() - 1].1) + main_attr_height + main_attr_text_pad_l;
+        let last_main_attr_w = ph.string_w(&icon_data[icon_data.len() - 1].text) + main_attr_height + main_attr_text_pad_l;
         let w = step_w * (icon_data.len() - 1) as f64 + last_main_attr_w;
         let x = base_x + (main_attr_weight - w) / 2.0 + main_attr_pad_lr;
-        for (i, (icon, val)) in icon_data.iter().enumerate() {
+        for (i, icon_data) in icon_data.iter().enumerate() {
             let x = x + i as f64 * step_w;
             ph.set_xy(x, y);
-            ph.image(icon, "icons", main_attr_height, main_attr_height);
-            ph.text(&val, x + main_attr_height + main_attr_text_pad_l, y + main_attr_text_pad_t);
+            ph.image(icon_data.image, "icons", main_attr_height, main_attr_height);
+            ph.text(&icon_data.text, x + main_attr_height + main_attr_text_pad_l, y + main_attr_text_pad_t);
         }
     }
 }
@@ -542,9 +545,6 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
         ph.set_xy(base_x, base_y);
         ph.image(image_name, "card images", card_outer_width, card_outer_height);
     }
-    //else {
-    //    ph.rect(base_x, base_y, card_outer_width, card_outer_height);
-    //}
 
     //attribute alpha background
     let mut h = upper_alpha_base_height;
@@ -619,7 +619,6 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
         y = prop.add_to_pdf(ph, x - text_offset, y, "action.png");
     }
 }
-
 
 pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
     ph.set_text_color(255.0, 255.0, 255.0);
