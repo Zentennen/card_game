@@ -32,6 +32,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "crossbeam",
+ "divrem",
  "extstd",
  "png",
  "pyo3",
@@ -120,6 +121,12 @@ checksum = "4fb766fa798726286dbbb842f174001dab8abc7b627a1dd86e0b7222a95d929f"
 dependencies = [
  "cfg-if",
 ]
+
+[[package]]
+name = "divrem"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "69dde51e8fef5e12c1d65e0929b03d66e4c0c18282bc30ed2ca050ad6f44dd82"
 
 [[package]]
 name = "extstd"

@@ -24,9 +24,9 @@ fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyTy
         if c2 != ';' { continue; }
 
         match c {
-            'A' => return Some((PropertyType::action_, p)),
-            'T' => return Some((PropertyType::triggered_, p)),
-            'P' => return Some((PropertyType::passive_, p)),
+            'A' => return Some((PropertyType::action, p)),
+            'T' => return Some((PropertyType::triggered, p)),
+            'P' => return Some((PropertyType::passive, p)),
             _ => continue
         }
     }
@@ -106,13 +106,13 @@ fn parse_passive(s: &str) -> Res<Property> {
 
 fn parse_property(card: &mut Card, s: &str, property_type: PropertyType) -> Maybe {
     match property_type {
-        PropertyType::action_ => {
+        PropertyType::action => {
             card.acti.push(parse_action(s)?)
         }
-        PropertyType::triggered_ => {
+        PropertyType::triggered => {
             card.trig.push(parse_triggered(s)?)
         }
-        PropertyType::passive_ => {
+        PropertyType::passive => {
             card.pass.push(parse_passive(s)?)
         }
     };

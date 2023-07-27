@@ -1,3 +1,7 @@
+Test Many Icons
+Offense 999, Defense 999, Strength 999, Health 999, Power 999, Tribute 999, Speed 999
+A; ¤summon(2)
+
 Reaper
 Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
 A; ¤summon(8)

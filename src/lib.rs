@@ -1,5 +1,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
+#![feature(int_roundings)]
 
 use serde::*;
 
@@ -32,9 +33,10 @@ pub const card_separation_height: f64 = card_outer_height + 3.0;
 pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
 pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
-pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height + main_attr_height;
+pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height + icon_size;
 pub const text_offset: f64 = 1.0;
 pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
+pub const max_icons_per_row: usize = 6;
 
 //name
 pub const name_font_size: f64 = 8.5;
@@ -42,18 +44,17 @@ pub const name_h: f64 = 7.0;
 pub const advanced_sym_size: f64 = 12.0;
 pub const advanced_offset_r: f64 = card_outer_width - advanced_sym_size;
 
-//attr
+//attribute
 pub const main_attr_font_size: f64 = 8.0;
 pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.35;
 pub const main_attr_text_pad_l: f64 = 1.0;
-pub const main_attr_height: f64 = 3.5;
+pub const icon_size: f64 = 3.5;
 pub const main_attr_pad_b: f64 = 1.6;
 pub const main_attr_pad_lr: f64 = 1.5;
-pub const main_attr_weight: f64 = card_outer_width - main_attr_pad_lr * 2.0;
-pub const main_attr_per_line: usize = 6;
+pub const main_attr_width: f64 = card_outer_width - main_attr_pad_lr * 2.0;
 pub const other_attr_height: f64 = 3.2;
 
-//prop
+//property
 pub const default_font_size: f64 = 6.5;
 pub const prop_height: f64 = 3.0;
 pub const prop_half_height: f64 = prop_height / 2.0;
@@ -204,7 +205,7 @@ impl Property {
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 pub enum PropertyType {
-    action_, triggered_, passive_
+    action, triggered, passive
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
