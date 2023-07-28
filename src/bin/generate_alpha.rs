@@ -48,7 +48,7 @@ fn main() {
     print("All alphas generated.");
 }
 
-fn generate_lower_alpha(prop_lines: i32) {
+fn generate_lower_alpha(prop_lines: usize) {
     let height = prop_lines as f64 * prop_half_height + card_pad;
     let height = (pixels_per_mm * height) as usize;
         
@@ -77,15 +77,15 @@ fn generate_lower_alpha(prop_lines: i32) {
     writer.write_image_data(&data[..]).unwrap();
 }
 
-fn generate_upper_alpha(other_attr_lines: usize) {
+fn generate_upper_alpha(main_attribute_lines: usize, other_attribute_lines: usize) {
     let mut height = upper_alpha_base_height;
-    if other_attr_lines > 0 {
+    if other_attribute_lines > 0 {
         height += main_attr_pad_b;
-        height += other_attr_height * other_attr_lines as f64;
+        height += other_attr_height * other_attribute_lines as f64;
     }
     let height = (pixels_per_mm * height) as usize;
         
-    let file_name = format!("alpha/upper{}.png", other_attr_lines);
+    let file_name = format!("alpha/upper_{}_{}.png", main_attribute_lines, other_attribute_lines);
     let mut buf_writer = make_writer(&file_name);
     let encoder = make_encoder(height + alpha_gradient_pixel_height, &mut buf_writer);
     let mut writer = encoder.write_header().unwrap();
