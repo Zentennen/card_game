@@ -81,7 +81,7 @@ fn generate_upper_alpha(main_attribute_lines: usize, other_attribute_lines: usiz
     let mut height = upper_alpha_base_height;
     if other_attribute_lines > 0 {
         height += main_attr_pad_b;
-        height += other_attr_height * other_attribute_lines as f64;
+        height += attribute_height * other_attribute_lines as f64;
     }
     let height = (pixels_per_mm * height) as usize;
         

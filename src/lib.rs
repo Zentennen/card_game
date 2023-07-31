@@ -44,15 +44,17 @@ pub const name_h: f64 = 7.0;
 pub const advanced_sym_size: f64 = 12.0;
 pub const advanced_offset_r: f64 = card_outer_width - advanced_sym_size;
 
-//attribute
-pub const main_attr_font_size: f64 = 8.0;
-pub const main_attr_text_pad_t: f64 = main_attr_font_size * 0.35;
-pub const main_attr_text_pad_l: f64 = 1.0;
+//icons
 pub const icon_size: f64 = 3.5;
 pub const icon_row_height: f64 = icon_size + 1.5;
-pub const main_attr_pad_lr: f64 = 1.5;
-pub const main_attr_width: f64 = card_outer_width - main_attr_pad_lr * 2.0;
-pub const other_attr_height: f64 = 3.2;
+pub const icon_text_font_size: f64 = 8.0;
+pub const icon_text_pad_t: f64 = icon_text_font_size * 0.35;
+pub const icon_text_pad_l: f64 = 1.0;
+pub const icon_horizontal_offset: f64 = 1.5;
+pub const icon_total_width: f64 = card_outer_width - icon_horizontal_offset * 2.0;
+
+//attribute
+pub const attribute_height: f64 = 3.2;
 
 //property
 pub const default_font_size: f64 = 6.5;
