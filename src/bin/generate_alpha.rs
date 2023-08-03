@@ -42,24 +42,28 @@ fn get_gradient_alpha(row: usize) -> u8 {
 
 fn main() {
     print("Generating upper alphas...");
-    par_for(0..5, generate_upper_alpha);
+    for main_attribute_line in 0..3 {
+        par_for(0..5, |other_attribute_line| generate_upper_alpha(main_attribute_line, other_attribute_line));
+    }
     print("Generating lower alphas...");
-    par_for(0..30, generate_lower_alpha);
+    for property_pads in 0..5 {
+        par_for(1..20, |property_lines| generate_lower_alpha(property_pads, property_lines));
+    }
     print("All alphas generated.");
 }
 
-fn generate_lower_alpha(prop_lines: usize) {
-    let height = prop_lines as f64 * prop_half_height + card_pad;
-    let height = (pixels_per_mm * height) as usize;
+fn generate_lower_alpha(property_pads: usize, property_lines: usize) {
+    let mm_height = lower_alpha_base_height + property_pads as f64 * prop_pad_v + property_lines as f64 * prop_height;
+    let pixel_height = (pixels_per_mm * mm_height) as usize;
         
-    let file_name = format!("alpha/lower{}.png", prop_lines);
+    let file_name = format!("alpha/lower_{}.png", mm_height);
     let mut buf_writer = make_writer(&file_name);
-    let encoder = make_encoder(height + alpha_gradient_pixel_height, &mut buf_writer);
+    let encoder = make_encoder(pixel_height + alpha_gradient_pixel_height, &mut buf_writer);
     let mut writer = encoder.write_header().unwrap();
     
-    let mut data: Vec<u8> = vec![0u8; pixel_width * (height + alpha_gradient_pixel_height) * 4];
+    let mut data: Vec<u8> = vec![0u8; pixel_width * (pixel_height + alpha_gradient_pixel_height) * 4];
     let offset = pixel_width * alpha_gradient_pixel_height * 4;
-    for r in 0..height {
+    for r in 0..pixel_height {
         for c in 0..pixel_width {
             let p = offset + r * pixel_width * 4 + c * 4;
             data[p + 3] = max_alpha;
@@ -78,27 +82,23 @@ fn generate_lower_alpha(prop_lines: usize) {
 }
 
 fn generate_upper_alpha(main_attribute_lines: usize, other_attribute_lines: usize) {
-    let mut height = upper_alpha_base_height;
-    if other_attribute_lines > 0 {
-        height += main_attr_pad_b;
-        height += attribute_height * other_attribute_lines as f64;
-    }
-    let height = (pixels_per_mm * height) as usize;
+    let mm_height = upper_alpha_base_height + other_attribute_lines as f64 * attribute_height + main_attribute_lines as f64 * icon_row_height;
+    let pixel_height = (pixels_per_mm * mm_height) as usize;
         
-    let file_name = format!("alpha/upper_{}_{}.png", main_attribute_lines, other_attribute_lines);
+    let file_name = format!("alpha/upper_{}.png", mm_height);
     let mut buf_writer = make_writer(&file_name);
-    let encoder = make_encoder(height + alpha_gradient_pixel_height, &mut buf_writer);
+    let encoder = make_encoder(pixel_height + alpha_gradient_pixel_height, &mut buf_writer);
     let mut writer = encoder.write_header().unwrap();
     
-    let mut data: Vec<u8> = vec![0u8; pixel_width * (height + alpha_gradient_pixel_height) * 4];
-    for r in 0..height {
+    let mut data: Vec<u8> = vec![0u8; pixel_width * (pixel_height + alpha_gradient_pixel_height) * 4];
+    for r in 0..pixel_height {
         for c in 0..pixel_width {
             let p = r * pixel_width * 4 + c * 4;
             data[p + 3] = max_alpha;
         }
     }
 
-    let offset = pixel_width * height * 4;
+    let offset = pixel_width * pixel_height * 4;
     for r in 0..alpha_gradient_pixel_height {
         let a = get_gradient_alpha(r);
         for c in 0..pixel_width {

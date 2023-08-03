@@ -311,14 +311,13 @@ fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limi
 
 pub struct DeserializedProperty {
     pub efct_limited: String,
-    pub efct_limited: String,
     pub efct_non_limited: String,
     pub attr_limited: String,
     pub attr_non_limited: String,
-    pub efct_limited_h: usize,
-    pub efct_non_limited_h: usize,
-    pub attr_limited_h: usize,
-    pub attr_non_limited_h: usize,
+    pub efct_limited_h: f64,
+    pub efct_non_limited_h: f64,
+    pub attr_limited_h: f64,
+    pub attr_non_limited_h: f64,
 }
 
 impl DeserializedProperty {
@@ -351,8 +350,16 @@ impl DeserializedProperty {
         process_commands(&mut efct);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
-
-        Self{ efct_limited, efct_non_limited, attr_limited, attr_non_limited, efct_non_limited_l, attr_non_limited_l, efct_limited_l, attr_limited_l }
+        Self{ 
+            efct_limited, 
+            efct_non_limited, 
+            attr_limited, 
+            attr_non_limited, 
+            efct_non_limited_h: efct_non_limited_l as f64 * prop_height, 
+            attr_non_limited_h: attr_non_limited_l as f64 * prop_height, 
+            efct_limited_h: efct_limited_l as f64 * prop_height, 
+            attr_limited_h: attr_limited_l  as f64 * prop_height,
+        }
     }
 
     pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
@@ -360,24 +367,24 @@ impl DeserializedProperty {
 
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
-            y -= self.efct_non_limited_l as f64 * prop_height;
+            y -= self.efct_non_limited_h;
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_non_limited, card_inner_width, prop_height, default_text_align);
         }
         if !self.efct_limited.is_empty() {
-            y -= self.efct_limited_l as f64 * prop_height;
+            y -= self.efct_limited_h;
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, prop_height, default_text_align);
         }
         
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
-            y -= self.attr_non_limited_l as f64 * prop_height;
+            y -= self.attr_non_limited_h;
             ph.set_xy(x, y);
             ph.multi_cell(&self.attr_non_limited, card_inner_width, prop_height, default_text_align);
         }
         if !self.attr_limited.is_empty() {
-            y -= self.attr_limited_l as f64 * prop_height;
+            y -= self.attr_limited_h;
             ph.set_xy(x, y);
             ph.multi_cell(&self.attr_limited, prop_top_w, prop_height, default_text_align);
         }
@@ -385,7 +392,7 @@ impl DeserializedProperty {
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
-        y -= prop_half_height;
+        y -= prop_pad_v;
         y
     }
 }
@@ -421,36 +428,31 @@ impl Into<&str> for Alignment {
     }
 }
 
-fn get_property_halflines(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> usize {
-    let mut h = 0;
+fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> f64 {
+    let mut h = 0.0;
 
     for prop in acti {
-        h += prop.attr_non_limited_l * 2;
-        h += prop.attr_limited_l * 2;
-        h += prop.efct_non_limited_l * 2;
-        h += prop.efct_limited_l * 2;
-        h += 1;
+        h += prop.attr_non_limited_h;
+        h += prop.attr_limited_h;
+        h += prop.efct_non_limited_h;
+        h += prop.efct_limited_h;
+        h += prop_pad_v;
     }
 
     for prop in trig {
-        h += prop.attr_non_limited_l * 2;
-        h += prop.attr_limited_l * 2;
-        h += prop.efct_non_limited_l * 2;
-        h += prop.efct_limited_l * 2;
-        h += 1;
+        h += prop.attr_non_limited_h;
+        h += prop.attr_limited_h;
+        h += prop.efct_non_limited_h;
+        h += prop.efct_limited_h;
+        h += prop_pad_v;
     }
 
     for prop in pass {
-        h += prop.attr_non_limited_l * 2;
-        h += prop.attr_limited_l * 2;
-        h += prop.efct_non_limited_l * 2;
-        h += prop.efct_limited_l * 2;
-        h += 1;
-    }
-
-    //there will be one extra halfline added from the last property that doesn't need to be there, unless there are no properties.
-    if !acti.is_empty() || !trig.is_empty() || !pass.is_empty() {
-        h -= 1;
+        h += prop.attr_non_limited_h;
+        h += prop.attr_limited_h;
+        h += prop.efct_non_limited_h;
+        h += prop.efct_limited_h;
+        h += prop_pad_v;
     }
 
     h
@@ -536,7 +538,7 @@ fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &V
         let step_w = card_inner_width / icons_this_row as f64;
         let last_main_attr_w = ph.string_w(&icon_data[icons_this_row - 1].text) + icon_size + icon_text_pad_l;
         let w = step_w * (icons_this_row - 1) as f64 + last_main_attr_w;
-        let x = x + (card_inner_width - w) / 2.0 + icon_horizontal_offset;
+        let x = x + (card_inner_width - w) / 2.0 + icon_pad_h;
 
         for i in 0..icons_this_row {
             let x = x + i as f64 * step_w;
@@ -569,18 +571,18 @@ fn separate_properties(properties: Vec<Property>) -> (Vec<IconData>, Vec<Propert
             command.push(' ');
             command.push_str(&substring[params_start + 1 .. end]);
             command.push_str("**");
-            string.replace_range(start .. start + end + 3, &command);
+            //string.replace_range(start .. start + end + 3, &command);
         }
         else {
             if let Some(end) = substring.find(' ') {
                 command.push_str(&process_command_name(&substring[..end]));
                 command.push_str("**");
-                string.replace_range(start .. start + end, &command);
+                //string.replace_range(start .. start + end, &command);
             }
             else {
                 command.push_str(&process_command_name(&substring[..]));
                 command.push_str("**");
-                string.replace_range(start.., &command);
+                //string.replace_range(start.., &command);
             }
         }
     }
@@ -596,32 +598,37 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
     }
 
     //attribute alpha background
-    let mut h = upper_alpha_base_height;
-    let mut l = 0;
+    let mut main_attribute_icon_data: Vec<IconData> = Vec::with_capacity(100);
+    for attribute in main_attributes {
+        main_attribute_icon_data = add_attribute_value_to_icon_data(attribute, card, main_attribute_icon_data);
+    }
+    let rows = main_attribute_icon_data.len().div_ceil(max_icons_per_row);
+    let mut h = upper_alpha_base_height + rows as f64 * icon_row_height;
+
     let mut other_attr = get_attribute_string(card);
     process_commands(&mut other_attr);
+
     if !other_attr.is_empty() {
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        l = ph.multi_cell_l(&other_attr, card_inner_width, attribute_height, attr_text_align);
+        let l = ph.multi_cell_l(&other_attr, card_inner_width, attribute_height, attr_text_align);
         h += attribute_height * l as f64;
     }
+
     ph.set_xy(base_x, base_y);
-    ph.image(&format!("upper{}.png", l), "alpha", card_outer_width, h);
+    ph.image(&format!("upper_{}.png", h), "alpha", card_outer_width, h);
 
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    print(&card.acti[0].efct);
     let acti: Vec<DeserializedProperty> = card.acti.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
     let trig: Vec<DeserializedProperty> = card.trig.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
     let pass: Vec<DeserializedProperty> = card.pass.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
 
     //property alpha background
     ph.set_xy(base_x, base_y);
-    let l = get_property_halflines(&acti, &trig, &pass);
-    let h = l as f64 * prop_half_height + alpha_gradient_height + card_pad;
+    let h = get_height_of_properties(&acti, &trig, &pass) + lower_alpha_base_height;
     ph.set_xy(base_x, base_y + card_outer_height - h);
-    ph.image(&format!("lower{}.png", l), "alpha", card_outer_width, h);
+    ph.image(&format!("lower_{}.png", h), "alpha", card_outer_width, h);
 
     //Add the corners for advanced cards
     if hero {
@@ -640,11 +647,6 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
     
     //main attributes
     y += name_h;
-    let mut main_attribute_icon_data: Vec<IconData> = Vec::with_capacity(100);
-    for attribute in main_attributes {
-        main_attribute_icon_data = add_attribute_value_to_icon_data(attribute, card, main_attribute_icon_data);
-    }
-    
     y = add_icons_to_pdf(ph, base_x, y, icon_row_height, &main_attribute_icon_data);
     
     //other attributes

@@ -33,7 +33,6 @@ pub const card_separation_height: f64 = card_outer_height + 3.0;
 pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
 pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
-pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height;
 pub const text_offset: f64 = 1.0;
 pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
 pub const max_icons_per_row: usize = 6;
@@ -50,8 +49,8 @@ pub const icon_row_height: f64 = icon_size + 1.5;
 pub const icon_text_font_size: f64 = 8.0;
 pub const icon_text_pad_t: f64 = icon_text_font_size * 0.35;
 pub const icon_text_pad_l: f64 = 1.0;
-pub const icon_horizontal_offset: f64 = 1.5;
-pub const icon_total_width: f64 = card_outer_width - icon_horizontal_offset * 2.0;
+pub const icon_pad_h: f64 = 1.5;
+pub const icon_total_width: f64 = card_outer_width - icon_pad_h * 2.0;
 
 //attribute
 pub const attribute_height: f64 = 3.2;
@@ -59,7 +58,7 @@ pub const attribute_height: f64 = 3.2;
 //property
 pub const default_font_size: f64 = 6.5;
 pub const prop_height: f64 = 3.0;
-pub const prop_half_height: f64 = prop_height / 2.0;
+pub const prop_pad_v: f64 = 2.0;
 pub const prop_sym_size: f64 = 2.5;
 pub const prop_sym_pad_l: f64 = card_inner_width + text_offset - prop_sym_size;
 pub const prop_sym_pad_t: f64 = (prop_height * prop_sym_l as f64 - prop_sym_size) / 2.0;
@@ -73,6 +72,8 @@ pub const pixels_per_alpha_step: usize = 2;
 pub const pixels_per_mm: f64 = 64.0;
 pub const alpha_gradient_pixel_height: usize = max_alpha as usize * pixels_per_alpha_step;
 pub const alpha_gradient_height: f64 = alpha_gradient_pixel_height as f64 / pixels_per_mm;
+pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height;
+pub const lower_alpha_base_height: f64 = card_pad + alpha_gradient_height;
 
 pub mod serialize;
 pub mod pdf;
