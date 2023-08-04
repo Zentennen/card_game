@@ -590,7 +590,7 @@ fn separate_properties(properties: Vec<Property>) -> (Vec<IconData>, Vec<Propert
     (icon_properties, other_properties)
 }
 
-pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {
+fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
@@ -671,7 +671,7 @@ pub fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64,
     }
 }
 
-pub fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
+fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
     ph.set_text_color(255.0, 255.0, 255.0);
     let num_cards = cards.len();
     for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
