@@ -1,0 +1,8 @@
+No Attributes
+A; ¤equip(2)
+P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
+
+Amulet of +10
+Artifact, Equipment
+A; ¤equip(2)
+P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.

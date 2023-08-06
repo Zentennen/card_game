@@ -1,3 +1,17 @@
+No Attributes
+A; ¤equip(2)
+P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
+
+Amulet of +10
+Artifact, Equipment
+A; ¤equip(2)
+P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
+
+Amulet of +20
+Artifact, Equipment
+A; ¤equip(2)
+P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
+
 Test Many Icons
 Offense 999, Defense 999, Strength 999, Health 999, Power 999, Tribute 999, Speed 999
 A; ¤summon(2)
@@ -112,11 +126,6 @@ Keeper of the Flame
 Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
 A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
-
-Amulet of +20
-Artifact, Equipment
-A; ¤equip(2)
-P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
 Winged Hussars
 Offense 60, Defense 60, Speed 2, Tribute 2, Eastern European, Cavalry, Army

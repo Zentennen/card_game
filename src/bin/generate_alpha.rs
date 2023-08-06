@@ -41,6 +41,8 @@ fn get_gradient_alpha(row: usize) -> u8 {
 }
 
 fn main() {
+    generate_upper_alpha(0, 0);
+    return;
     print("Generating upper alphas...");
     for main_attribute_line in 0..3 {
         par_for(0..5, |other_attribute_line| generate_upper_alpha(main_attribute_line, other_attribute_line));

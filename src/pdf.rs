@@ -616,7 +616,9 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
 
     ph.set_xy(base_x, base_y);
     ph.image(&format!("upper_{}.png", h), "alpha", card_outer_width, h);
-
+    ph.rect(base_x, base_y, card_outer_width, name_h);
+    ph.rect(base_x, base_y + name_h, card_outer_width, alpha_gradient_height);
+    print(alpha_gradient_height);
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
@@ -630,7 +632,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     ph.set_xy(base_x, base_y + card_outer_height - h);
     ph.image(&format!("lower_{}.png", h), "alpha", card_outer_width, h);
 
-    //Add the corners for advanced cards
+    //Add the corners for heroes
     if hero {
         ph.set_xy(base_x, base_y);
         ph.image("advanced_tl.png", "icons", advanced_sym_size, advanced_sym_size);
