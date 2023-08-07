@@ -13,7 +13,7 @@ A; ¤equip(2)
 P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
 Test Many Icons
-Offense 999, Defense 999, Strength 999, Health 999, Power 999, Tribute 999, Speed 999
+Offense 999, Defense 999, Strength 999, Health 999, Power 999, Tribute 999
 A; ¤summon(2)
 
 Reaper

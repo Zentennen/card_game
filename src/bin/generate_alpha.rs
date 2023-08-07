@@ -36,16 +36,14 @@ fn make_writer(file_name: &String) -> BufWriter<File> {
 
 fn get_gradient_alpha(row: usize) -> u8 {
     let reduction = row / pixels_per_alpha_step;
-    let reduction = reduction.clamp(u8::MIN as usize, u8::MAX as usize) as u8;
+    let reduction = reduction.clamp(u8::MIN as usize, max_alpha as usize) as u8;
     max_alpha - reduction
 }
 
 fn main() {
-    generate_upper_alpha(0, 0);
-    return;
     print("Generating upper alphas...");
     for main_attribute_line in 0..3 {
-        par_for(0..5, |other_attribute_line| generate_upper_alpha(main_attribute_line, other_attribute_line));
+        par_for(0..4, |other_attribute_line| generate_upper_alpha(main_attribute_line, other_attribute_line));
     }
     print("Generating lower alphas...");
     for property_pads in 0..5 {
@@ -55,10 +53,10 @@ fn main() {
 }
 
 fn generate_lower_alpha(property_pads: usize, property_lines: usize) {
-    let mm_height = lower_alpha_base_height + property_pads as f64 * prop_pad_v + property_lines as f64 * prop_height;
+    let mm_height = card_pad + property_pads as f64 * prop_pad_v + property_lines as f64 * prop_height;
     let pixel_height = (pixels_per_mm * mm_height) as usize;
         
-    let file_name = format!("alpha/lower_{}.png", mm_height);
+    let file_name = format!("alpha/lower_{}.png", mm_height + alpha_gradient_height);
     let mut buf_writer = make_writer(&file_name);
     let encoder = make_encoder(pixel_height + alpha_gradient_pixel_height, &mut buf_writer);
     let mut writer = encoder.write_header().unwrap();
@@ -84,10 +82,10 @@ fn generate_lower_alpha(property_pads: usize, property_lines: usize) {
 }
 
 fn generate_upper_alpha(main_attribute_lines: usize, other_attribute_lines: usize) {
-    let mm_height = upper_alpha_base_height + other_attribute_lines as f64 * attribute_height + main_attribute_lines as f64 * icon_row_height;
+    let mm_height = name_h + other_attribute_lines as f64 * attribute_height + main_attribute_lines as f64 * icon_row_height;
     let pixel_height = (pixels_per_mm * mm_height) as usize;
         
-    let file_name = format!("alpha/upper_{}.png", mm_height);
+    let file_name = format!("alpha/upper_{}.png", mm_height + alpha_gradient_height);
     let mut buf_writer = make_writer(&file_name);
     let encoder = make_encoder(pixel_height + alpha_gradient_pixel_height, &mut buf_writer);
     let mut writer = encoder.write_header().unwrap();

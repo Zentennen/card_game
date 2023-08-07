@@ -535,13 +535,13 @@ fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &V
     for row in 0..rows {
         let icons_this_row = usize::min(icons_per_row, icon_data.len() - icon);
         let y = y + delta_y * row as f64;
-        let step_w = card_inner_width / icons_this_row as f64;
-        let last_main_attr_w = ph.string_w(&icon_data[icons_this_row - 1].text) + icon_size + icon_text_pad_l;
-        let w = step_w * (icons_this_row - 1) as f64 + last_main_attr_w;
+        let step_width = card_inner_width / icons_this_row as f64;
+        let last_icon_width = ph.string_w(&icon_data[icons_this_row - 1].text) + icon_size + icon_text_pad_l;
+        let w = step_width * (icons_this_row - 1) as f64 + last_icon_width;
         let x = x + (card_inner_width - w) / 2.0 + icon_pad_h;
 
         for i in 0..icons_this_row {
-            let x = x + i as f64 * step_w;
+            let x = x + i as f64 * step_width;
             let icon_data = &icon_data[icon];
             icon += 1;
             ph.set_xy(x, y);
@@ -604,6 +604,9 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     }
     let rows = main_attribute_icon_data.len().div_ceil(max_icons_per_row);
     let mut h = upper_alpha_base_height + rows as f64 * icon_row_height;
+    if !main_attribute_icon_data.is_empty() {
+        
+    }
 
     let mut other_attr = get_attribute_string(card);
     process_commands(&mut other_attr);
@@ -616,9 +619,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
 
     ph.set_xy(base_x, base_y);
     ph.image(&format!("upper_{}.png", h), "alpha", card_outer_width, h);
-    ph.rect(base_x, base_y, card_outer_width, name_h);
-    ph.rect(base_x, base_y + name_h, card_outer_width, alpha_gradient_height);
-    print(alpha_gradient_height);
+
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
