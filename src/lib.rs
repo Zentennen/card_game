@@ -45,9 +45,9 @@ pub const advanced_offset_r: f64 = card_outer_width - advanced_sym_size;
 //icons
 pub const max_icons_per_row: usize = 6;
 pub const icon_size: f64 = 3.5;
-pub const icon_pad_v: f64 = 1.5;
+pub const icon_pad_vertical: f64 = 1.5;
 pub const icon_pad_h: f64 = 1.5;
-pub const icon_row_height: f64 = icon_size + icon_pad_v;
+pub const icon_row_height: f64 = icon_size + icon_pad_vertical;
 pub const icon_text_font_size: f64 = 8.0;
 pub const icon_text_pad_t: f64 = icon_text_font_size * 0.35;
 pub const icon_text_pad_l: f64 = 1.0;
