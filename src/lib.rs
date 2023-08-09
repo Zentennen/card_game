@@ -57,13 +57,13 @@ pub const attribute_height: f64 = 3.2;
 
 //property
 pub const default_font_size: f64 = 6.5;
-pub const prop_height: f64 = 3.0;
+pub const property_height: f64 = 3.0;
 pub const prop_pad_v: f64 = 2.0;
 pub const prop_sym_size: f64 = 2.5;
 pub const prop_sym_pad_l: f64 = card_inner_width + text_offset - prop_sym_size;
-pub const prop_sym_pad_t: f64 = (prop_height * prop_sym_l as f64 - prop_sym_size) / 2.0;
+pub const prop_sym_pad_t: f64 = (property_height * prop_sym_l as f64 - prop_sym_size) / 2.0;
 pub const prop_efct_pad_r: f64 = 0.1;
-pub const prop_sym_l: usize = (prop_sym_size / prop_height - 0.00001) as usize + 1;
+pub const prop_sym_l: usize = (prop_sym_size / property_height - 0.00001) as usize + 1;
 pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
 
 //alpha
