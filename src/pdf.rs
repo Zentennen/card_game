@@ -5,7 +5,6 @@ use crate::*;
 use extstd::*;
 use pyo3::*;
 use pyo3::types::IntoPyDict;
-use split_iter::*;
 
 pub const name_text_mod: TextModifier = TextModifier::bold;
 pub const attr_text_align: Alignment = Alignment::center;
@@ -16,7 +15,6 @@ pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left;
 pub const default_text_mod: TextModifier = TextModifier::none;
 pub const main_attributes: [&str; 7] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute"];
-pub const main_properties: [&str; 9] = ["deploy", "equip", "reserve", "flanking", "critical_hit", "upkeep", "onslaught", "defender", "decay"];
 
 pub struct PdfHandler<'p> {
     py: Python<'p>,
@@ -290,19 +288,32 @@ fn process_commands(string: &mut String) {
     } 
 }
 
+fn split_main_properties(string: String, main_effects: &mut Vec<String>) -> String {
+    let mut string = &string[..];
+    while string.starts_with("**") {
+        let substring = &string[2..];
+        let end = substring.find("**").unwrap() + 4;
+        let (a, b) = string.split_at(end);
+        main_effects.push(a.to_string());
+        string = b;
+    }
+
+    return string.to_string();
+}
+
 fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
     let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
     if max_limited_l == 0 {
-        *non_limited_l = ph.multi_cell_l(&string, card_inner_width, prop_height, default_text_align);
+        *non_limited_l = ph.multi_cell_l(&string, card_inner_width, property_height, default_text_align);
         non_limited.push_str(&string);
     }
     else {
-        let (a, b) = ph.split_on_lines(&string, prop_top_w, prop_height, default_text_align, max_limited_l);
+        let (a, b) = ph.split_on_lines(&string, prop_top_w, property_height, default_text_align, max_limited_l);
         limited.push_str(a);
         non_limited.push_str(b);
-        *limited_l = ph.multi_cell_l(&limited, prop_top_w, prop_height, default_text_align);
+        *limited_l = ph.multi_cell_l(&limited, prop_top_w, property_height, default_text_align);
         if !non_limited.is_empty() {
-            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_width, prop_height, default_text_align);
+            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_width, property_height, default_text_align);
         }
     }
 
@@ -310,6 +321,7 @@ fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limi
 }
 
 pub struct DeserializedProperty {
+    pub main_effects: Vec<String>,
     pub efct_limited: String,
     pub efct_non_limited: String,
     pub attr_limited: String,
@@ -341,24 +353,27 @@ impl DeserializedProperty {
             split_limited(&attr, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
         }
 
-        let mut efct = prop.efct.to_string();
+        let mut efct = prop.efct.clone();
         let mut efct_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
         let mut efct_non_limited_l = 0;
+        let mut main_effects = Vec::<String>::with_capacity(10);
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         process_commands(&mut efct);
+        efct = split_main_properties(efct, &mut main_effects);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         Self{ 
+            main_effects,
             efct_limited, 
             efct_non_limited, 
             attr_limited, 
             attr_non_limited, 
-            efct_non_limited_h: efct_non_limited_l as f64 * prop_height, 
-            attr_non_limited_h: attr_non_limited_l as f64 * prop_height, 
-            efct_limited_h: efct_limited_l as f64 * prop_height, 
-            attr_limited_h: attr_limited_l  as f64 * prop_height,
+            efct_non_limited_h: efct_non_limited_l as f64 * property_height, 
+            attr_non_limited_h: attr_non_limited_l as f64 * property_height, 
+            efct_limited_h: efct_limited_l as f64 * property_height, 
+            attr_limited_h: attr_limited_l  as f64 * property_height,
         }
     }
 
@@ -369,24 +384,24 @@ impl DeserializedProperty {
         if !self.efct_non_limited.is_empty() {
             y -= self.efct_non_limited_h;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.efct_non_limited, card_inner_width, prop_height, default_text_align);
+            ph.multi_cell(&self.efct_non_limited, card_inner_width, property_height, default_text_align);
         }
         if !self.efct_limited.is_empty() {
             y -= self.efct_limited_h;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.efct_limited, prop_top_w, prop_height, default_text_align);
+            ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
         
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
             y -= self.attr_non_limited_h;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_non_limited, card_inner_width, prop_height, default_text_align);
+            ph.multi_cell(&self.attr_non_limited, card_inner_width, property_height, default_text_align);
         }
         if !self.attr_limited.is_empty() {
             y -= self.attr_limited_h;
             ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_limited, prop_top_w, prop_height, default_text_align);
+            ph.multi_cell(&self.attr_limited, prop_top_w, property_height, default_text_align);
         }
     
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
@@ -551,43 +566,6 @@ fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &V
     }
 
     y + rows as f64 * delta_y
-}
-
-fn separate_properties(properties: Vec<Property>) -> (Vec<IconData>, Vec<Property>) {
-    let icon_properties: Vec<IconData> = Vec::with_capacity(properties.capacity());
-    let other_properties: Vec<Property> = Vec::with_capacity(properties.capacity());
-    for property in properties {
-        if !property.efct.starts_with('¤') {
-            continue;
-        }
-
-        let substring = &property.efct[2..];
-        let mut command = String::with_capacity(property.efct.capacity() + 20);
-        command.push_str("**");
-        
-        if let Some(params_start) = substring.find('(') {
-            let end = substring.find(')').unwrap();
-            command.push_str(&process_command_name(&substring[..params_start]));
-            command.push(' ');
-            command.push_str(&substring[params_start + 1 .. end]);
-            command.push_str("**");
-            //string.replace_range(start .. start + end + 3, &command);
-        }
-        else {
-            if let Some(end) = substring.find(' ') {
-                command.push_str(&process_command_name(&substring[..end]));
-                command.push_str("**");
-                //string.replace_range(start .. start + end, &command);
-            }
-            else {
-                command.push_str(&process_command_name(&substring[..]));
-                command.push_str("**");
-                //string.replace_range(start.., &command);
-            }
-        }
-    }
-
-    (icon_properties, other_properties)
 }
 
 fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {

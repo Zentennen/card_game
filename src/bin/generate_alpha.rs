@@ -53,7 +53,7 @@ fn main() {
 }
 
 fn generate_lower_alpha(property_pads: usize, property_lines: usize) {
-    let mm_height = card_pad + property_pads as f64 * prop_pad_v + property_lines as f64 * prop_height;
+    let mm_height = card_pad + property_pads as f64 * prop_pad_v + property_lines as f64 * property_height;
     let pixel_height = (pixels_per_mm * mm_height) as usize;
         
     let file_name = format!("alpha/lower_{}.png", mm_height + alpha_gradient_height);
