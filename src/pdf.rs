@@ -391,6 +391,11 @@ impl DeserializedProperty {
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
+        for main_effect in &self.main_effects {
+            y -= property_height;
+            ph.set_xy(x, y);
+            ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
+        }
         
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         if !self.attr_non_limited.is_empty() {
@@ -451,6 +456,7 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
+        h += prop.main_effects.len() as f64 * property_height;
         h += prop_pad_v;
     }
 
@@ -459,6 +465,7 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
+        h += prop.main_effects.len() as f64 * property_height;
         h += prop_pad_v;
     }
 
@@ -467,10 +474,11 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
+        h += prop.main_effects.len() as f64 * property_height;
         h += prop_pad_v;
     }
 
-    h
+    h - prop_pad_v
 }
 
 fn add_attribute_to_string(attr: &Attribute, string: &mut String) {
