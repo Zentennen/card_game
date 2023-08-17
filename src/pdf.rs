@@ -288,17 +288,19 @@ fn process_commands(string: &mut String) {
     } 
 }
 
-fn split_main_properties(string: String, main_effects: &mut Vec<String>) -> String {
-    let mut string = &string[..];
-    while string.starts_with("**") {
-        let substring = &string[2..];
+fn split_main_properties(string: &mut String, main_effects: &mut Vec<String>) {
+    let mut s = &string[..];
+    while s.starts_with("**") {
+        let substring = &s[2..];
         let end = substring.find("**").unwrap() + 4;
-        let (a, b) = string.split_at(end);
+        let (a, b) = s.split_at(end);
         main_effects.push(a.to_string());
-        string = b;
+        s = b;
     }
 
-    return string.to_string();
+    let s = s.to_string();
+    string.clear();
+    string.push_str(&s);
 }
 
 fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
@@ -361,7 +363,7 @@ impl DeserializedProperty {
         let mut main_effects = Vec::<String>::with_capacity(10);
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         process_commands(&mut efct);
-        efct = split_main_properties(efct, &mut main_effects);
+        split_main_properties(&mut efct, &mut main_effects);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         Self{ 
@@ -391,7 +393,11 @@ impl DeserializedProperty {
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
+        else {
+            print(self.efct_limited_h);
+        }
         for main_effect in &self.main_effects {
+            print(main_effect);
             y -= property_height;
             ph.set_xy(x, y);
             ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
@@ -412,8 +418,7 @@ impl DeserializedProperty {
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
-        y -= prop_pad_v;
-        y
+        y - property_pad_v
     }
 }
 
@@ -456,8 +461,8 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
-        h += prop_pad_v;
+        //h += prop.main_effects.len() as f64 * property_height;
+        h += property_pad_v;
     }
 
     for prop in trig {
@@ -465,8 +470,8 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
-        h += prop_pad_v;
+        //h += prop.main_effects.len() as f64 * property_height;
+        h += property_pad_v;
     }
 
     for prop in pass {
@@ -474,11 +479,11 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
-        h += prop_pad_v;
+        //h += prop.main_effects.len() as f64 * property_height;
+        h += property_pad_v;
     }
 
-    h - prop_pad_v
+    h - property_pad_v
 }
 
 fn add_attribute_to_string(attr: &Attribute, string: &mut String) {
@@ -649,13 +654,14 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     //properties
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
     y = base_y + card_inner_height;
-    for prop in pass {
+    let start = y;
+    for prop in &pass {
         y = prop.add_to_pdf(ph, x - text_offset, y, "passive.png");
     }
-    for prop in trig {
+    for prop in &trig {
         y = prop.add_to_pdf(ph, x - text_offset, y, "triggered.png");
     }
-    for prop in acti {
+    for prop in &acti {
         y = prop.add_to_pdf(ph, x - text_offset, y, "action.png");
     }
 }
