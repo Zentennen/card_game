@@ -247,81 +247,6 @@ impl PdfHandler<'_> {
     }
 }
 
-fn process_command_name(string: &str) -> String {
-    let parts = string.split('_');
-    let mut result = String::with_capacity(string.len() + 20);
-    for part in parts {
-        result.extend(part.nth_char(0).unwrap().to_uppercase());
-        result.extend(part.chars().skip(1));
-        result.push(' ');
-    }
-    result.pop();
-    result
-}
-
-fn process_commands(string: &mut String) {
-    while let Some(start) = string.find('¤') {
-        let substring = &string[2 + start ..];
-        let mut command = String::with_capacity(string.capacity() + 20);
-        command.push_str("**");
-        
-        if let Some(params_start) = substring.find('(') {
-            let end = substring.find(')').unwrap();
-            command.push_str(&process_command_name(&substring[..params_start]));
-            command.push(' ');
-            command.push_str(&substring[params_start + 1 .. end]);
-            command.push_str("**");
-            string.replace_range(start .. start + end + 3, &command);
-        }
-        else {
-            if let Some(end) = substring.find(' ') {
-                command.push_str(&process_command_name(&substring[..end]));
-                command.push_str("**");
-                string.replace_range(start .. start + end, &command);
-            }
-            else {
-                command.push_str(&process_command_name(&substring[..]));
-                command.push_str("**");
-                string.replace_range(start.., &command);
-            }
-        }
-    } 
-}
-
-fn split_main_properties(string: &mut String, main_effects: &mut Vec<String>) {
-    let mut s = &string[..];
-    while s.starts_with("**") {
-        let substring = &s[2..];
-        let end = substring.find("**").unwrap() + 4;
-        let (a, b) = s.split_at(end);
-        main_effects.push(a.to_string());
-        s = b;
-    }
-
-    let s = s.to_string();
-    string.clear();
-    string.push_str(&s);
-}
-
-fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
-    let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
-    if max_limited_l == 0 {
-        *non_limited_l = ph.multi_cell_l(&string, card_inner_width, property_height, default_text_align);
-        non_limited.push_str(&string);
-    }
-    else {
-        let (a, b) = ph.split_on_lines(&string, prop_top_w, property_height, default_text_align, max_limited_l);
-        limited.push_str(a);
-        non_limited.push_str(b);
-        *limited_l = ph.multi_cell_l(&limited, prop_top_w, property_height, default_text_align);
-        if !non_limited.is_empty() {
-            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_width, property_height, default_text_align);
-        }
-    }
-
-    *prev_limited_l += *limited_l;
-}
-
 pub struct DeserializedProperty {
     pub main_effects: Vec<String>,
     pub efct_limited: String,
@@ -344,15 +269,15 @@ impl DeserializedProperty {
         let mut attr_limited_l = 0;
         if !prop.attr.is_empty() {
             ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-            let mut attr = String::with_capacity(default_attr_string_alloc);
-            for at in &prop.attr {
-                add_attribute_to_string(at, &mut attr);
-                attr.push_str(", ");
+            let mut attribute_string = String::with_capacity(default_attr_string_alloc);
+            for attribute in &prop.attr {
+                add_attribute_to_string(attribute, &mut attribute_string);
+                attribute_string.push_str(", ");
             }
-            attr.pop();
-            attr.pop();
-            process_commands(&mut attr);
-            split_limited(&attr, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
+            attribute_string.pop();
+            attribute_string.pop();
+            process_commands(&mut attribute_string);
+            split_limited(&attribute_string, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
         }
 
         let mut efct = prop.efct.clone();
@@ -393,11 +318,7 @@ impl DeserializedProperty {
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
-        else {
-            print(self.efct_limited_h);
-        }
-        for main_effect in &self.main_effects {
-            print(main_effect);
+        for main_effect in self.main_effects.iter().rev() {
             y -= property_height;
             ph.set_xy(x, y);
             ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
@@ -453,6 +374,85 @@ impl Into<&str> for Alignment {
     }
 }
 
+fn process_command_name(string: &str) -> String {
+    let parts = string.split('_');
+    let mut result = String::with_capacity(string.len() + 20);
+    for part in parts {
+        result.extend(part.nth_char(0).unwrap().to_uppercase());
+        result.extend(part.chars().skip(1));
+        result.push(' ');
+    }
+    result.pop();
+    result
+}
+
+fn process_commands(string: &mut String) {
+    while let Some(start) = string.find('¤') {
+        let substring = &string[2 + start ..];
+        let mut command = String::with_capacity(string.capacity() + 20);
+        command.push_str("**");
+        
+        if let Some(params_start) = substring.find('(') {
+            let end = substring.find(')').unwrap();
+            command.push_str(&process_command_name(&substring[..params_start]));
+            command.push(' ');
+            command.push_str(&substring[params_start + 1 .. end]);
+            command.push_str("**");
+            string.replace_range(start .. start + end + 3, &command);
+        }
+        else {
+            if let Some(end) = substring.find(' ') {
+                command.push_str(&process_command_name(&substring[..end]));
+                command.push_str("**");
+                string.replace_range(start .. start + end + 2, &command);
+            }
+            else {
+                command.push_str(&process_command_name(&substring[..]));
+                command.push_str("**");
+                string.replace_range(start.., &command);
+            }
+        }
+    } 
+}
+
+fn split_main_properties(string: &mut String, main_effects: &mut Vec<String>) {
+    let mut s = &string[..];
+    while s.starts_with("**") {
+        let substring = &s[2..];
+        let end = substring.find("**").unwrap() + 4;
+        let (a, b) = s.split_at(end);
+        let a = a.trim();
+        let b = b.trim();
+        main_effects.push(a.to_string());
+        s = b;
+    }
+
+    let s = s.to_string();
+    string.clear();
+    string.push_str(&s);
+}
+
+fn split_limited(string: &str, prev_limited_l: &mut usize, ph: &PdfHandler, limited: &mut String, non_limited: &mut String, limited_l: &mut usize, non_limited_l: &mut usize) {
+    let max_limited_l = i32::max(prop_sym_l as i32 - *prev_limited_l as i32, 0) as usize;
+    if max_limited_l == 0 {
+        *non_limited_l = ph.multi_cell_l(&string, card_inner_width, property_height, default_text_align);
+        non_limited.push_str(&string);
+    }
+    else {
+        let (a, b) = ph.split_on_lines(&string, prop_top_w, property_height, default_text_align, max_limited_l);
+        limited.push_str(a);
+        non_limited.push_str(b);
+        if !limited.is_empty() {
+            *limited_l = ph.multi_cell_l(&limited, prop_top_w, property_height, default_text_align);
+        }
+        if !non_limited.is_empty() {
+            *non_limited_l = ph.multi_cell_l(&non_limited, card_inner_width, property_height, default_text_align);
+        }
+    }
+
+    *prev_limited_l += *limited_l;
+}
+
 fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<DeserializedProperty>, pass: &Vec<DeserializedProperty>) -> f64 {
     let mut h = 0.0;
 
@@ -461,7 +461,7 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        //h += prop.main_effects.len() as f64 * property_height;
+        h += prop.main_effects.len() as f64 * property_height;
         h += property_pad_v;
     }
 
@@ -470,7 +470,7 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        //h += prop.main_effects.len() as f64 * property_height;
+        h += prop.main_effects.len() as f64 * property_height;
         h += property_pad_v;
     }
 
@@ -479,7 +479,7 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        //h += prop.main_effects.len() as f64 * property_height;
+        h += prop.main_effects.len() as f64 * property_height;
         h += property_pad_v;
     }
 
@@ -593,19 +593,19 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     for attribute in main_attributes {
         main_attribute_icon_data = add_attribute_value_to_icon_data(attribute, card, main_attribute_icon_data);
     }
+
     let rows = main_attribute_icon_data.len().div_ceil(max_icons_per_row);
     let mut h = upper_alpha_base_height + rows as f64 * icon_row_height;
-    if !main_attribute_icon_data.is_empty() {
-        //h -= icon_pad_vertical;
-    }
-
     let mut other_attr = get_attribute_string(card);
     process_commands(&mut other_attr);
-
+    
     if !other_attr.is_empty() {
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
         let l = ph.multi_cell_l(&other_attr, card_inner_width, attribute_height, attr_text_align);
         h += attribute_height * l as f64;
+    }
+    else if !main_attribute_icon_data.is_empty() {
+        h -= icon_pad_vertical;
     }
 
     ph.set_xy(base_x, base_y);
@@ -654,7 +654,6 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     //properties
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
     y = base_y + card_inner_height;
-    let start = y;
     for prop in &pass {
         y = prop.add_to_pdf(ph, x - text_offset, y, "passive.png");
     }

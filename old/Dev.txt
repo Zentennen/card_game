@@ -36,9 +36,9 @@ A; ¤reserve(2)
 T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 mana.
 
 Gaius Julius Caesar
-Commander, Roman
+Commander, Italian
 A; ¤reserve(6)
-P; All Roman cards have Offense +30 and Power +30.
+P; All Italian cards have Offense +30 and Power +30.
 P; All Army cards have '¤build(Structure)'.
 
 Phantom Assassin
@@ -63,12 +63,28 @@ A; ¤summon(8)
 T; In the beginning of each of your combat phases, exhaust a friendly card within range 1.5, give it +1 Lethality and prepare it for attack.
 P; All friendly cards within range 1.5 have Offense +50. 
 
-Sun Spirit
-Offense 50, Health 3, Fire, Spirit
-A; ¤summon(2 Fire)
-A; ¤summon(2) Deal 2 damage to this card.
-
 Walther Model
 Commander, German
 A; ¤reserve(4)
 A; Exhaust a friendly card and give it +30 Defense.
+
+Suppressive Fireball
+Power 50, Fire, Spell
+A; Pay 6 Fire choose a position. Pacify all susceptible cards within range 1.5 of that position and deal 1 damage to all susceptible cards within range 1 of that position.
+
+Backhand Blow
+Tactic
+A; ¤equip(2)
+T; ¤decay(1)
+T; After a card this is attached to defends in combat, it immediately attacks and the card that attacked it gets -30 Defense.
+
+War of Annihilation
+Policy
+A; ¤reserve(4)
+P; All enemy cards have +20 Defense.
+T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
+
+Queen of Battle
+Offense 
+A; ¤summon(6)
+P; All friendly Infantry cards within range 1 have +30 Defense.

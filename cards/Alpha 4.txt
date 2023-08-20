@@ -1,48 +1,44 @@
-No Attributes
-A; ¤equip(2)
-P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
-
-Amulet of +10
-Artifact, Equipment
-A; ¤equip(2)
-P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
+Sun Spirit
+Offense 30, Defense 20, Health 2, Fire, Spirit
+A; ¤summon(2 Fire)
+A; ¤summon(2) Deal 1 damage to this card.
 
 Amulet of +20
 Artifact, Equipment
 A; ¤equip(2)
 P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
-Test Many Icons
-Offense 999, Defense 999, Strength 999, Health 999, Power 999, Tribute 999
-A; ¤summon(2)
-
 Reaper
 Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
 A; ¤summon(8)
 T; ¤onslaught
-T; ¤culling(1)
+T; When this card deals damage to another card in combat, if that card is 1 damage from being destroyed, destroy it.
 
 Witch of Salem
-Tribute 4, Offense 70, Health 2, Power 100, Mage, Unholy
+Tribute 4, Offense 30, Defense 50, Health 2, Power 100, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
 A; ¤summon(10)
-T; After this card deals combat damage to a card, you may pay 1 Fire. If you do, deal 1 damage to all a susceptible cards within range 1 of that card.
+T; After this card deals combat damage to a card, you may spend 1 Fire. If you do, deal 1 damage to all a susceptible cards within range 1 of that card.
 
 King Salamander
 Offense 40, Defense 40, Health 2, Fire, Beast, Reptile
 A; ¤summon(6)
-P; This card has +10 Offense for each friendly Fire entity.
+P; This card has +10 Offense for each other friendly Fire entity.
 T; ¤critical_hit(1 Fire)
 
-Heavy Infantry
-Offense 80, Defense 50, Health 2, Tribute 2, Army, Infantry
-A; ¤summon(4)
-T; ¤critical_hit(1 Fire)
-T; ¤upkeep(2)
+Giant Pyrausta
+Offense 50, Defense 30, Health 2, Fire, Air, Giant, Insect
+A; ¤summon(4 or 2 Fire)
+T; At the end of each round, if there are no other Fire cards within range 1, deal 1 damage to this card.
+
+Shepherd of Fire
+Offense 70, Defense 50, Health 2, Fire, Demon
+A; ¤summon(8)
+P; All friendly Fire cards have +1 Speed.
 
 Minotaur Warband
 Offense 60, Defense 60, Minotaur
@@ -60,41 +56,54 @@ T; ¤upkeep(1)
 T; ¤onslaught
 
 Semi-Motorized Infantry
-Offense 60, Defense 50, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry
+Offense 40, Defense 80, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry
 A; ¤summon(6)
-A; ¤flanking(1)
+T; ¤flanking(1)
+T; ¤upkeep(1)
+
+Cerberus
+Offense 60, Defense 20, Power 60, Strength 2, Health 4, Canine, Fire, Greek, Undead
+A; ¤summon(12)
+T; ¤upkeep(2 Fire)
+T; ¤bloodthirst You may choose any number of susceptible enemy cards. Spend 1 Fire for each card chosen and deal 1 damage to each of them.
+
+Cacus
+Offense 100, Defense 40, Health 3, Power 30, Italian, Fire, Giant, Artillery
+A; ¤summon(8)
+A; Spend 1 Fire and exhaust any susceptible card within range 2.
+
+PaK 38
+Offense 100, Defense 50, Speed 0.5, Tribute 3, Army, German, Artillery
+A; ¤summon(4)
+T; ¤critical_hit(1 Fire)
 T; ¤upkeep(1)
 
 French 75
 Defense 20, Power 40, Speed 0.5, Tribute 1, French, American, Army, Artillery, Fire
 A; ¤summon(2)
 P; ¤defender
-A; Pay 1 and exhaust this card. Pacify any susceptible card within range 2.
+A; Spend 1 and exhaust this card. Exhaust any susceptible card within range 2.
 
 M101 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4)
 P; ¤defender
-A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 2.5 and deal 1 damage to it.
+A; Spend 1 Fire and exhaust this card. Deal 2 damage to any suscpetible enemy card. You may exhaust that card.
 
 M102 Howitzer
 Defense 20, Power 60, Speed 0.5, Tribute 4, American, Army, Artillery, Fire
 A; ¤summon(6)
 P; ¤defender
-A; Pay 1 Fire and exhaust this card. Pacify any susceptible card within range 3 and deal 1 damage to it.
+A; Spend 1 Fire and exhaust this card. Deal 2 damage to any suscpetible enemy card. You may exhaust that card.
 
 Big Bertha
-Defense 20, Power 50, Tribute 6, German, Army, Artillery, Fire
+Defense 20, Power 50, Tribute 6, German, Army, Artillery, Fire, Giant
 A; ¤reserve(8)
-A; Pay 2 Fire and exhaust this card. Pacify any susceptible card and deal 2 damage to it.
-
-Suppressive Fireball
-Power 50, Fire, Spell
-A; Pay 6 Fire choose a position. Pacify all susceptible cards within range 1.5 of that position and deal 1 damage to all susceptible cards within range 1 of that position.
+A; Spend 2 Fire and exhaust this card. Deal 2 damage to any suscpetible enemy card. You may exhaust that card.
 
 Living Flame
 Offense 70, Defense 10, Strength 2, Health 2, Elemental, Fire, Spell
-A; ¤summon(6 Fire)
+A; ¤summon(4 Fire)
 T; ¤upkeep(2 Fire)
 
 Flaming Barrier
@@ -120,46 +129,50 @@ A; ¤summon(4)
 Light Infantry
 Offense 50, Defense 50, Tribute 3, Army, Infantry
 A; ¤summon(4)
-A; ¤flanking(1)
+T; ¤flanking(1)
+
+Schutztruppe
+Offense 40, Defense 60, Tribute 3, Army, German, Infantry
+A; ¤summon(4)
+P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
 
 Keeper of the Flame
 Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
-A; Pay 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
+A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
 
 Winged Hussars
-Offense 60, Defense 60, Speed 2, Tribute 2, Eastern European, Cavalry, Army
-A; ¤summon(4)
-A; ¤flanking(1)
+Offense 30, Defense 40, Speed 2, Tribute 2, Eastern European, Cavalry, Army
+A; ¤summon(2)
+T; ¤flanking(1)
 T; ¤upkeep(1)
 
-War of Annihilation
-Policy
-A; ¤reserve(4)
-P; All enemy cards have +20 Defense.
-T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
-
-Backhand Blow
-Tactic
-A; ¤equip(2)
-T; ¤decay(1)
-T; After a card this is attached to defends in combat, it immediately attacks and the card that attacked it gets -30 Defense.
+Cossack Cavalry
+Offense 10, Defense 10, Strength 0, Speed 2, Tribute 2, Eastern European, Cavalry, Army
+A; ¤summon(2)
+T; ¤flanking(1)
 
 ERA Plates
-Army, Fire
+Army, Fire, Armor, Equipment
 A; ¤equip(2 or 1 Fire)
 T; When damage is dealt to a card this is attached to, prevent the damage and destroy this card.
 
-Finest Hour
+Kriegsglück
+German
 A; ¤equip(2)
 T; ¤decay(1)
-P; Any card this is attached to has +40 Offense and +40 Defense.
+P; Any card this is attached to has +40 Offense, +40 Defense and +40 Power.
 
 Mage Armor
 Armor, Equipment, Spell
 A; ¤equip(2)
 T; ¤decay(1)
 P; Any card this is attached to has +60 Defense.
+
+Last Stand
+A; ¤equip(2)
+P; Any card this is attached to had +3 Health.
+T; At the end of each round, destroy this card and any card this is attached to.
 
 Coup de Grace
 A; ¤equip(0)

@@ -1,8 +1,4 @@
-No Attributes
-A; ¤equip(2)
-P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
-
-Amulet of +10
-Artifact, Equipment
-A; ¤equip(2)
-P; Any card this is attached to has +10 Offense, +10 Defense and +10 Power.
+Sun Spirit
+Offense 50, Health 3, Fire, Spirit
+A; ¤summon(2 Fire) ¤test ¤critical_hit
+A; ¤summon(2) ¤onslaught Deal 2 damage to this card.

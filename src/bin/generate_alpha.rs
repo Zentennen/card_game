@@ -35,7 +35,10 @@ fn make_writer(file_name: &String) -> BufWriter<File> {
 }
 
 fn get_gradient_alpha(row: usize) -> u8 {
-    let reduction = row / pixels_per_alpha_step;
+    if row < gradient_buffer_pixels { 
+        return max_alpha;
+    }
+    let reduction = row - gradient_buffer_pixels / pixels_per_alpha_step;
     let reduction = reduction.clamp(u8::MIN as usize, max_alpha as usize) as u8;
     max_alpha - reduction
 }
