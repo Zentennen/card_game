@@ -85,6 +85,11 @@ P; All enemy cards have +20 Defense.
 T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
 
 Queen of Battle
-Offense 
+Offense 20, Defense 50, 
 A; ¤summon(6)
-P; All friendly Infantry cards within range 1 have +30 Defense.
+P; All other friendly Infantry cards within range 1 have +30 Defense.
+
+Schutztruppe
+Offense 40, Defense 60, Tribute 3, Army, German, Infantry
+A; ¤summon(4)
+P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
