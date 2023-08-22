@@ -93,3 +93,8 @@ Schutztruppe
 Offense 40, Defense 60, Tribute 3, Army, German, Infantry
 A; ¤summon(4)
 P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
+
+Cain
+Offense 40, Defense 60, Tribute 3, Unholy
+A; ¤summon(4)
+P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.

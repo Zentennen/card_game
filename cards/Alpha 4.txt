@@ -1,5 +1,5 @@
 Sun Spirit
-Offense 30, Defense 20, Health 2, Fire, Spirit
+Offense 50, Defense 10, Health 2, Fire, Spirit
 A; ¤summon(2 Fire)
 A; ¤summon(2) Deal 1 damage to this card.
 
@@ -8,7 +8,7 @@ Artifact, Equipment
 A; ¤equip(2)
 P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
-Reaper
+Grim Reaper
 Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
 A; ¤summon(8)
 T; ¤onslaught
@@ -18,6 +18,11 @@ Witch of Salem
 Tribute 4, Offense 40, Defense 40, Health 2, Power 100, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
+
+Cain
+Offense 40, Defense 60, Tribute 3, Unholy
+A; ¤summon(4)
+P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
@@ -36,7 +41,7 @@ A; ¤summon(4 or 2 Fire)
 T; At the end of each round, if there are no other Fire cards within range 1, deal 1 damage to this card.
 
 Shepherd of Fire
-Offense 70, Defense 50, Health 2, Fire, Demon
+Offense 70, Defense 50, Health 2, Fire, Unholy
 A; ¤summon(8)
 P; All friendly Fire cards have +1 Speed.
 
@@ -49,13 +54,9 @@ Offense 60, Defense 60, Health 3, Minotaur, Giant
 A; ¤summon(8)
 T; ¤critical_hit(2)
 
-Gigantic Giant
-Offense 50, Defense 20, Health 5, Strength 2, Speed 0.5, Giant
+Porphyrion
+Offense 50, Defense 20, Health 5, Strength 2, Giant, Greek, Italian
 A; ¤summon(12)
-
-Eurymedon
-Offense 50, Defense 20, Health 4, Giant, Greek, Italian
-A; ¤summon(10)
 P; All friendly Giant cards have +1 Health.
 
 Minotaur Berserker
@@ -65,7 +66,7 @@ T; ¤upkeep(1)
 T; ¤onslaught
 
 Semi-Motorized Infantry
-Offense 40, Defense 80, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry
+Offense 40, Defense 80, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry, Italian
 A; ¤summon(6)
 T; ¤flanking(1)
 T; ¤upkeep(1)
