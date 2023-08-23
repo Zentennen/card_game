@@ -22,7 +22,7 @@ P; Susceptible enemy cards within range 2.5 have -30 Defense.
 Cain
 Offense 40, Defense 60, Tribute 3, Unholy
 A; ¤summon(4)
-P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
+P; This card has +5 Offense and +5 Defense for each enemy card within range 3.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
@@ -36,7 +36,7 @@ P; This card has +10 Offense for each other friendly Fire entity.
 T; ¤critical_hit(1 Fire)
 
 Giant Pyrausta
-Offense 40, Defense 40, Health 2, Fire, Air, Giant, Insect
+Offense 40, Defense 40, Health 2, Fire, Air, Giant, Insect, Italian
 A; ¤summon(4 or 2 Fire)
 T; At the end of each round, if there are no other Fire cards within range 1, deal 1 damage to this card.
 
@@ -127,11 +127,6 @@ A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
 
-Superior Firepower
-Army, Doctrine, Fire, American
-A; ¤reserve(2 or 1 Fire)
-P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire entities have dealt during the current turn.
-
 Steel Golem
 Offense 40, Defense 70, Health 2, Speed 0, Elemental, Earth, Spell
 A; ¤summon(4)
@@ -153,7 +148,7 @@ T; ¤flanking(1)
 T; ¤upkeep(1)
 
 Cossack Cavalry
-Offense 10, Defense 10, Strength 0, Speed 2, Tribute 2, Eastern European, Cavalry, Army
+Defense 10, Strength 0, Speed 2, Tribute 1, Eastern European, Cavalry, Army
 A; ¤summon(2)
 T; ¤flanking(1)
 
@@ -183,3 +178,7 @@ Coup de Grace
 A; ¤equip(0)
 T; ¤decay(1)
 P; Any card this is attached to has ¤critical_hit(2).
+
+One Man Army
+A; ¤equip(2) Attach only to an Army card.
+T; ¤decay(1)

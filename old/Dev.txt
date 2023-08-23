@@ -98,3 +98,8 @@ Cain
 Offense 40, Defense 60, Tribute 3, Unholy
 A; ¤summon(4)
 P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
+
+Superior Firepower
+Army, Doctrine, Fire, American
+A; ¤reserve(2 or 1 Fire)
+P; All friendly Army cards have +20 Offense and +20 Power for each damage that friendly Fire entities have dealt during the current turn.
