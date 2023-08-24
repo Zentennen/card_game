@@ -5,10 +5,9 @@ T; When this card deals combat damage to another card, this card gets +1 Strengt
 T; This card has +10X Offense, where X is its Speed value.
 
 Valrath Quartermaster
-Offense 40, Defense 30, Health 2
+Offense 30, Defense 50, Army
 A; ¤summon(4)
-T; When you pay a cost for an Equipment card, you may exhaust this card to reduce the cost by 2.
-P; All cards within range 1.5 have +20 Offense and +20 Power for each Equipment card that is attached to them.
+P; All cards within range 1 have +20 Offense and +20 Power for each Equipment card that is attached to them.
 
 Shock and Awe
 Power 50, Doctrine, Fire, American
@@ -98,6 +97,11 @@ Cain
 Offense 40, Defense 60, Tribute 3, Unholy
 A; ¤summon(4)
 P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
+
+Dwight D. Eisenhower
+American, Officer
+A; ¤reserve(4)
+P; All friendly cards that are either American, British or Russian have all of those attributes.
 
 Superior Firepower
 Army, Doctrine, Fire, American
