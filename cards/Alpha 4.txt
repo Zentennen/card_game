@@ -1,21 +1,21 @@
 Sun Spirit
-Offense 50, Defense 10, Health 2, Fire, Spirit
+Offense 60, Defense 10, Health 2, Fire, Spirit
 A; ¤summon(2 Fire)
 A; ¤summon(2) Deal 1 damage to this card.
 
 Amulet of +20
-Artifact, Equipment
+Tribute 1, Artifact, Equipment
 A; ¤equip(2)
 P; The card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
 Grim Reaper
-Offense 60, Health 3, Tribute 6, Spirit, Unholy, Undead
+Offense 60, Health 3, Tribute 7, Spirit, Unholy, Undead
 A; ¤summon(8)
-T; ¤onslaught
+T; ¤breakthrough(1)
 T; When this card deals damage to another card in combat, if that card is 1 damage from being destroyed, destroy it.
 
 Witch of Salem
-Tribute 4, Offense 40, Defense 40, Health 2, Power 100, Mage, Unholy
+Tribute 5, Offense 40, Defense 40, Health 2, Power 100, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
@@ -60,13 +60,18 @@ A; ¤summon(12)
 P; All friendly Giant cards have +1 Health.
 
 Minotaur Berserker
-Offense 60, Defense 60, Tribute 2, Minotaur
+Offense 60, Defense 60, Tribute 3, Minotaur
 A; ¤summon(4)
 T; ¤upkeep(1)
-T; ¤onslaught
+T; ¤breakthrough(1)
+
+Spirit of Deceit
+Offense 30, Defense 40, Spirit, Unholy
+A; ¤summon(4)
+T; When another Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
 
 Semi-Motorized Infantry
-Offense 40, Defense 80, Health 2, Tribute 4, Speed 1.5, Army, Motorized, Infantry, Italian
+Offense 40, Defense 70, Health 2, Tribute 5, Speed 1.5, Army, Motorized, Infantry, Italian
 A; ¤summon(6)
 T; ¤flanking(1)
 T; ¤upkeep(1)
@@ -89,27 +94,22 @@ T; ¤critical_hit(1 Fire)
 T; ¤upkeep(1)
 
 M2 Howitzer 105mm
-Defense 20, Power 40, Speed 0.5, Tribute 3, American, Army, Artillery, Fire
+Defense 20, Power 40, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4) Exhaust this card.
 P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 2.5. You may exhaust that card.
 
 Long Tom 155mm
-Defense 20, Power 60, Speed 0.5, Tribute 4, American, Army, Artillery, Fire
+Defense 20, Power 60, Speed 0.5, Tribute 5, American, Army, Artillery, Fire
 A; ¤summon(6) Exhaust this card.
 P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 3. You may exhaust that card.
 
 Black Dragon 240mm
-Defense 20, Power 70, Speed 0.5, Tribute 4, American, Army, Artillery, Fire, Giant, Reptile
+Defense 20, Power 70, Speed 0, Tribute 7, American, Army, Artillery, Fire, Giant, Reptile
 A; ¤summon(8) Exhaust this card.
 P; ¤defender
 A; Spend 2 Fire and exhaust this card. Deal 2 damage to any susceptible card within range 3. You may exhaust that card.
-
-Big Bertha
-Defense 20, Power 50, Tribute 6, Army, Artillery, Fire, German, Giant
-A; ¤reserve(8) Exhaust this card.
-A; Spend 4 Fire and exhaust this card. Deal 3 damage to any suscpetible card. You may exhaust that card.
 
 Living Flame
 Offense 70, Defense 10, Strength 2, Health 2, Elemental, Fire, Spell
@@ -128,21 +128,16 @@ T; ¤upkeep(1)
 P; ¤defender
 
 Steel Golem
-Offense 40, Defense 70, Health 2, Speed 0, Elemental, Earth, Spell
+Offense 40, Defense 70, Health 2, Speed 0, Earth, Elemental, Spell
 A; ¤summon(4)
-
-Light Infantry
-Offense 50, Defense 50, Tribute 3, Army, Infantry
-A; ¤summon(4)
-T; ¤flanking(1)
 
 Keeper of the Flame
 Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
-A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +40 Offense and +40 Power.
+A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +30 Offense and +30 Power this round.
 
 Winged Hussars
-Offense 30, Defense 40, Speed 2, Tribute 2, Eastern European, Cavalry, Army
+Offense 30, Defense 40, Speed 2, Tribute 1, Eastern European, Cavalry, Army
 A; ¤summon(2)
 T; ¤flanking(1)
 T; ¤upkeep(1)
@@ -163,15 +158,9 @@ A; ¤equip(2)
 T; ¤decay(1)
 P; The card this is attached to has +40 Offense, +40 Defense and +40 Power.
 
-Mage Armor
-Armor, Equipment, Spell
-A; ¤equip(2)
-T; ¤decay(1)
-P; The card this is attached to has +60 Defense.
-
 Last Stand
 A; ¤equip(2)
-P; The card this is attached to had +3 Health.
+P; The card this is attached to has +3 Health.
 T; At the end of each round, destroy the card this is attached to.
 
 Coup de Grace

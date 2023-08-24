@@ -528,14 +528,14 @@ fn add_attribute_value_to_icon_data(attribute: &str, card: & Card, mut data: Vec
     data
 }
 
-fn add_attribute_text_to_icon_data(attribute: &str, card: & Card, mut data: Vec<IconData>) -> Vec<IconData> {
-    if let Some(val) = get_attribute_value(&card.attr, attribute) {
-        let icon_data = IconData{ image: format!("{}.png", attribute), text: val.to_string() };
-        data.push(icon_data);
-    }
-
-    data
-}
+//fn add_attribute_text_to_icon_data(attribute: &str, card: & Card, mut data: Vec<IconData>) -> Vec<IconData> {
+//    if let Some(val) = get_attribute_value(&card.attr, attribute) {
+//        let icon_data = IconData{ image: format!("{}.png", attribute), text: val.to_string() };
+//        data.push(icon_data);
+//    }
+//
+//    data
+//}
 
 fn get_attribute_string(card: &Card) -> String {
     let mut string = String::with_capacity(default_attr_string_alloc);

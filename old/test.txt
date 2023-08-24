@@ -1,4 +1,0 @@
-Sun Spirit
-Offense 50, Health 3, Fire, Spirit
-A; ¤summon(2 Fire) ¤test ¤critical_hit
-A; ¤summon(2) ¤onslaught Deal 2 damage to this card.
