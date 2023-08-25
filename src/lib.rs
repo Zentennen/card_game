@@ -28,8 +28,8 @@ pub const cards_per_page: usize = cards_per_column * cards_per_row;
 //card
 pub const card_outer_width: f64 = 63.0;
 pub const card_outer_height: f64 = 88.2;
-pub const card_separation_width: f64 = card_outer_width + 3.0;
-pub const card_separation_height: f64 = card_outer_height + 3.0;
+pub const card_separation_width: f64 = card_outer_width + 4.0;
+pub const card_separation_height: f64 = card_outer_height + 4.0;
 pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
 pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;

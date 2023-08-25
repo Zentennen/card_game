@@ -32,7 +32,7 @@ A; Exhaust this card and give a friendly card within range 1.5 +30 Offense.
 Dreikaiserbund
 Policy
 A; ¤reserve(2)
-T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 mana.
+T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 supply.
 
 Gaius Julius Caesar
 Commander, Italian
@@ -83,18 +83,8 @@ A; ¤reserve(4)
 P; All enemy cards have +20 Defense.
 T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
 
-Queen of Battle
-Offense 20, Defense 50, 
-A; ¤summon(6)
-P; All other friendly Infantry cards within range 1 have +30 Defense.
-
 Schutztruppe
 Offense 40, Defense 60, Tribute 3, Army, German, Infantry
-A; ¤summon(4)
-P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
-
-Cain
-Offense 40, Defense 60, Tribute 3, Unholy
 A; ¤summon(4)
 P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
 
@@ -110,9 +100,8 @@ P; All friendly Army cards have +20 Offense and +20 Power for each damage that f
 
 Rock Slide
 Defense 40, Earth, Obstacle
-A; 
+A; ¤use_from_hand Spend 2 and move this card to an empty position.
+A; ¤use_by_anyone Spend 3 and destroy this card.
 
-Big Bertha
-Defense 20, Power 50, Tribute 7, Army, Artillery, Fire, German, Giant
-A; ¤reserve(8) Exhaust this card.
-A; Spend 4 Fire and exhaust this card. Deal 3 damage to any suscpetible card. You may exhaust that card.
+Duel at Dawn
+A; Spend 2 and choose a friendly fielded card. That card battles an enemy card within range 1.

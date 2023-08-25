@@ -1,0 +1,72 @@
+Cherufe
+Fire, Earth, Spell, Elemental, American, Offense 40, Defense 70, Strength 2, Health 3
+A; ¤summon(8)
+T; ¤upkeep(1 Fire)
+
+Surtr
+Fire, Giant, Norse, Offense 70, Defense 50, Health 2, Strength 2
+A; ¤summon(12)
+A; Pay 1 Fire and give this card the ¤onslaught property this turn.
+
+True Strike
+T; ¤decay(1)
+A; Trap; Pay 2 and attach this card to a card of your choice.
+P; If this card is attached to a card, that card has +20 Offense and +1 Strength.
+
+Berserk
+T; ¤decay(1)
+A; Trap; Pay 2 and attach this card to a card of your choice.
+P; If this card is attached to a card, that card has +40 Offense and the ¤onslaught property.
+
+Big Bertha
+Defense 20, Power 80, Tribute 7, Army, Artillery, Fire, German, Giant
+A; ¤reserve(6 Fire) Exhaust this card.
+A; Spend 4 Fire and exhaust this card. Deal 3 damage to any suscpetible card. You may exhaust that card.
+
+Queen of Battle
+Offense 20, Defense 50, Infantry
+A; ¤summon(4)
+P; All other friendly Infantry cards within range 1 have +30 Offense.
+
+Forced March
+A; ¤equip(1)
+P; The card this is equipped to has '¤decay(1)' and +2 Speed.
+
+Minotaur Horde
+Army, Human, Fire, Wheeler, Offense 90, Defense 40, Health 2
+A; ¤summon(6)
+
+Centaur Horde
+Army, Cavalry, Offense 60, Defense 20, Health 2, Speed 2
+T; ¤breakthrough
+A; ¤summon(6)
+
+Kindred Spirits
+Spirit, Offense 30, Defense 70
+A; ¤summon(4)
+P; While there is a nearby friendly Spirit card, this card has +40 Offense.
+
+Phantom Warrior
+Offense 70, Defense 10, Health 2, Army, Infantry, Spirit
+A; ¤summon(4)
+
+Guardian Spirit
+Offense 50, Health 2, Holy, Spirit
+A; ¤summon(6)
+P; All friendly cards within range 1 have +1 Health.
+
+Rock Golem
+Offense 30, Defense 80, Speed 0.5, Earth, Elemental, Spell 
+A; ¤summon(4)
+
+Walking Fortress
+Offense 50, Defense 100, Earth, Structure
+A; ¤summon(4)
+P; ¤defender
+
+Romulus
+Offense 30, Defense 30, Holy, Italian
+A; ¤summon(6)
+P; All friendly Italian cards have +20 Defense.
+T; When this card is destroyed, refresh all friendly Italian cards.
+
