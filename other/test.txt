@@ -1,4 +1,5 @@
-Sun Spirit
-Offense 50, Health 3, Fire, Spirit
-A; ¤summon(2 Fire) ¤test ¤critical_hit
-A; ¤summon(2) ¤onslaught Deal 2 damage to this card.
+Grim Reaper
+Offense 60, Defense 20, Health 3, Tribute 7, Spirit, Unholy, Undead
+A; ¤summon(8)
+T; ¤breakthrough(1)
+T; When this card deals damage to another card in combat, if that card is 1 damage from being destroyed, destroy it.

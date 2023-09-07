@@ -67,10 +67,10 @@ pub const prop_sym_l: usize = (prop_sym_size / property_height - 0.00001) as usi
 pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
 
 //alpha
-pub const max_alpha: u8 = 140;
+pub const max_alpha: u8 = 128;
 pub const pixels_per_alpha_step: usize = 1;
-pub const gradient_buffer_pixels: usize = 10;
-pub const pixels_per_mm: f64 = 50.0;
+pub const gradient_buffer_pixels: usize = 8;
+pub const pixels_per_mm: f64 = 32.0;
 pub const alpha_gradient_pixel_height: usize = (max_alpha as usize + gradient_buffer_pixels) * pixels_per_alpha_step;
 pub const alpha_gradient_height: f64 = alpha_gradient_pixel_height as f64 / pixels_per_mm;
 pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height;

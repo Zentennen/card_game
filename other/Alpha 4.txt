@@ -15,14 +15,14 @@ T; ¤breakthrough(1)
 T; When this card deals damage to another card in combat, if that card is 1 damage from being destroyed, destroy it.
 
 Witch of Salem
-Tribute 5, Offense 40, Defense 40, Health 2, Power 100, Mage, Unholy
+Tribute 5, Offense 30, Defense 40, Power 90, Mage, Unholy
 A; ¤summon(6)
 P; Susceptible enemy cards within range 2.5 have -30 Defense.
 
 Cain
 Offense 40, Defense 60, Tribute 3, Unholy
 A; ¤summon(4)
-P; This card has +5 Offense and +5 Defense for each enemy card within range 3.
+P; This card has +5 Offense and +5 Defense for each enemy card within range 1.5.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
@@ -65,11 +65,6 @@ A; ¤summon(4)
 T; ¤upkeep(1)
 T; ¤breakthrough(1)
 
-Spirit of Deceit
-Offense 30, Defense 40, Spirit, Unholy
-A; ¤summon(4)
-T; When another Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
-
 Semi-Motorized Infantry
 Offense 40, Defense 70, Health 2, Tribute 5, Speed 1.5, Army, Motorized, Infantry, Italian
 A; ¤summon(6)
@@ -100,7 +95,7 @@ P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 2.5. You may exhaust that card.
 
 Long Tom 155mm
-Defense 20, Power 60, Speed 0.5, Tribute 5, American, Army, Artillery, Fire
+Defense 20, Power 50, Speed 0.5, Tribute 5, American, Army, Artillery, Fire
 A; ¤summon(6) Exhaust this card.
 P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 3. You may exhaust that card.
@@ -113,7 +108,7 @@ A; Spend 2 Fire and exhaust this card. Deal 2 damage to any susceptible card wit
 
 Living Flame
 Offense 70, Defense 10, Strength 2, Health 2, Elemental, Fire, Spell
-A; ¤summon(4 Fire)
+A; ¤summon(4 Fire) 
 T; ¤upkeep(2 Fire)
 
 Flaming Barrier
@@ -127,8 +122,8 @@ A; ¤summon(2)
 T; ¤upkeep(1)
 P; ¤defender
 
-Steel Golem
-Offense 40, Defense 70, Health 2, Speed 0, Earth, Elemental, Spell
+Iron Giant
+Offense 40, Defense 70, Health 2, Speed 0, Earth, Elemental, Giant, Spell
 A; ¤summon(4)
 
 Keeper of the Flame
@@ -159,7 +154,7 @@ T; ¤decay(1)
 P; The card this is attached to has +40 Offense, +40 Defense and +40 Power.
 
 Last Stand
-A; ¤equip(2)
+A; ¤equip(1)
 P; The card this is attached to has +3 Health.
 T; At the end of each round, destroy the card this is attached to.
 
@@ -169,6 +164,6 @@ T; ¤decay(1)
 P; The card this is attached to has ¤critical_hit(2).
 
 One Man Army
-A; ¤equip(2)
+A; ¤equip(1)
 T; ¤decay(1)
 T; Any Army card this is attached to has +10 Offense and +10 Defense for each enemy card within range 2.5.

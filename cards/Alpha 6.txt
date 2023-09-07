@@ -1,0 +1,124 @@
+Cherufe
+Offense 40, Defense 70, Strength 2, Health 3, American, Earth, Elemental, Fire, Spell
+A; ¤summon(8)
+T; ¤upkeep(1 Fire)
+
+Surtr
+Fire, Giant, Norse, Offense 70, Defense 50, Health 2, Strength 2
+A; ¤summon(12)
+A; Pay 1 Fire and give this card the ¤onslaught property this turn.
+
+True Strike
+T; ¤decay(1)
+A; Trap; Pay 2 and attach this card to a card of your choice.
+P; If this card is attached to a card, that card has +20 Offense and +1 Strength.
+
+Berserk
+T; ¤decay(1)
+A; Trap; Pay 2 and attach this card to a card of your choice.
+P; If this card is attached to a card, that card has +40 Offense and the ¤onslaught property.
+
+Big Bertha
+Defense 20, Power 80, Tribute 7, Army, Artillery, Fire, German, Giant
+A; ¤reserve(6 Fire) Exhaust this card.
+A; Spend 4 Fire and exhaust this card. Deal 3 damage to any suscpetible card. You may exhaust that card.
+
+Queen of Battle
+Offense 20, Defense 50, Infantry
+A; ¤summon(4)
+P; This card has +5 Offense and +5 Defense for each friendly Infantry card.
+
+Forced March
+A; ¤equip(1)
+P; The card this is equipped to has '¤decay(1)' and +2 Speed.
+
+Minotaur Horde
+Army, Human, Fire, Wheeler, Offense 90, Defense 40, Health 2
+A; ¤summon(6)
+
+Centaur Horde
+Army, Cavalry, Offense 60, Defense 20, Health 2, Speed 2
+T; ¤breakthrough
+A; ¤summon(6)
+
+Kindred Spirits
+Spirit, Offense 30, Defense 70
+A; ¤summon(4)
+P; While there is a nearby friendly Spirit card, this card has +40 Offense.
+
+Phantom Warrior
+Offense 70, Defense 10, Health 1, Army, Infantry, Spell, Spirit
+A; ¤summon(2)
+T; ¤decay(1)
+
+Phantom Beast
+Offense 90, Defense 10, Health 3, Beast, Spell, Spirit
+A; ¤summon(4)
+T; ¤decay(1)
+
+Guardian Spirit
+Offense 50, Health 2, Holy, Spirit
+A; ¤summon(6)
+P; All friendly cards within range 1 have +1 Health.
+
+Rock Golem
+Offense 30, Defense 80, Speed 0.5, Earth, Elemental, Spell 
+A; ¤summon(4)
+
+Walking Fortress
+Offense 50, Defense 100, Earth, Structure
+A; ¤summon(4)
+P; ¤defender
+
+Romulus
+Offense 30, Defense 30, Holy, Italian
+A; ¤summon(6)
+P; All friendly Italian cards have +20 Defense.
+T; When this card is destroyed, refresh all friendly Italian cards.
+
+Burma Road
+Defense 30
+A; ¤summon(2)
+T; When a card within range 1 spends supply, you may exhaust this card to recover 1 of the spent supply.
+
+Giuseppe Garibaldi
+Offense 40, Defense 20, Tribute 3, Italian, Officer, Politician
+A; ¤equip(4)
+P; Enemy cards within range 3 have -20 Defense for each time they have been in combat against a defending Italian card in the current round.
+
+Ludwig von Crüwell
+German, Officer
+A; ¤equip(4)
+P; All friendly German and Italian cards within range 1.5 have +20 Offense and +20 Defense.
+
+Sickle Cut
+Tactic
+A; ¤equip(0)
+P; If this is attached to a friendly German card, it has 'Breakthrough(2) and 'Flanking(2)'
+
+Heinz Guderian
+German, Officer  
+A; ¤equip(4)
+P; All friendly German cards within range 1.5 have 'Breakthrough(1)'
+
+Annihilation Fire
+German, Tactic
+A; ¤reserve(4)
+T; ¤decay(1)
+P; All friendly Artillery cards deal double damage.
+
+Sturmgewehr
+Equipment, German, Infantry
+A; ¤equip(2)
+P; Any friendly Infantry card this is attached to has +20 Offense and +20 Defense
+
+Spirit of Deceit
+Offense 30, Defense 40, Spirit, Unholy
+A; ¤summon(4)
+T; When another Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+
+Cerberus
+Offense 60, Defense 20, Power 60, Strength 2, Health 4, Canine, Fire, Greek, Italian, Undead
+A; ¤summon(12)
+T; ¤upkeep(2 Fire)
+T; ¤bloodthirst You may choose any number of susceptible enemy cards. Spend 1 Fire for each card chosen and deal 1 damage to each of them.
