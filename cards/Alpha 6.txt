@@ -1,3 +1,80 @@
+Burma Road
+Defense 30
+A; ¤summon(2)
+T; When a card within range 1 spends supply, you may exhaust this card to recover 1 of the spent supply.
+
+Giant Minotaur
+Offense 60, Defense 60, Health 3, Minotaur, Giant
+A; ¤summon(8)
+T; ¤dire_hit(1)
+
+Giant Salamander
+Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
+A; ¤summon(8 or 4 Fire)
+T; After this card deals combat damage to a card, you may spend 1 Fire. If you do, deal 1 damage to all a susceptible cards within range 1 of that card.
+
+Porphyrion
+Offense 50, Defense 20, Health 4, Strength 2, Giant, Greek, Italian
+A; ¤summon(10)
+P; All friendly Giant cards have +1 Health.
+
+Cacus
+Offense 100, Defense 40, Health 3, Power 30, Greek, Italian, Fire, Giant, Artillery
+A; ¤summon(8)
+A; Spend 1 Fire and exhaust any susceptible card within range 2.
+
+M2 Howitzer 105mm
+Defense 20, Power 40, Tribute 3, American, Army, Artillery, Fire
+A; ¤summon(4) Exhaust this card.
+P; ¤defender
+A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 2.5. You may exhaust that card.
+
+Long Tom 155mm
+Defense 20, Power 50, Speed 0.5, Tribute 5, American, Army, Artillery, Fire
+A; ¤summon(6) Exhaust this card.
+P; ¤defender
+A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 3. You may exhaust that card.
+
+Black Dragon 240mm
+Defense 20, Power 60, Speed 0, Tribute 7, American, Army, Artillery, Fire, Giant, Reptile
+A; ¤summon(8) Exhaust this card.
+P; ¤defender
+A; Spend 2 Fire and exhaust this card. Deal 2 damage to any susceptible card within range 3. You may exhaust that card.
+
+Iron Giant
+Offense 40, Defense 70, Health 2, Speed 0, Earth, Elemental, Giant, Spell
+A; ¤summon(4)
+
+One Man Army
+A; ¤equip(1)
+T; ¤decay(1)
+T; Any Army card this is attached to has +10 Offense and +10 Defense for each enemy card within range 2.5.
+
+Last Stand
+A; ¤equip(1)
+P; The card this is attached to has +3 Health.
+T; At the end of each round, destroy the card this is attached to.
+
+Cossack Cavalry
+Defense 10, Strength 0, Speed 2, Tribute 1, Eastern European, Cavalry, Army
+A; ¤summon(2)
+T; ¤flanking(1)
+
+Living Flame
+Offense 150, Defense 10, Elemental, Fire, Spell
+A; ¤summon(2 Fire) 
+T; ¤upkeep(1 Fire)
+T; ¤critical_hit(1 Fire)
+
+Flaming Barrier
+Offense 100, Speed 0, Fire
+A; ¤summon(2 or 1 Fire)
+T; ¤critical_hit(1 Fire)
+P; ¤defender
+
+
+
+
 Cherufe
 Offense 40, Defense 70, Strength 2, Health 3, American, Earth, Elemental, Fire, Spell
 A; ¤summon(8)
@@ -94,18 +171,19 @@ P; All friendly German and Italian cards within range 1.5 have +20 Offense and +
 Sickle Cut
 Tactic
 A; ¤equip(0)
-P; If this is attached to a friendly German card, it has 'Breakthrough(2) and 'Flanking(2)'
+P; Any German card this is attached to has 'Breakthrough(2) and 'Flanking(2)'
 
 Heinz Guderian
 German, Officer  
 A; ¤equip(4)
 P; All friendly German cards within range 1.5 have 'Breakthrough(1)'
 
-Annihilation Fire
-German, Tactic
-A; ¤reserve(4)
+Vernichtungsfeuer
+Artillery, German, Tactic
+A; ¤reserve(4 or 2 Fire)
 T; ¤decay(1)
-P; All friendly Artillery cards deal double damage.
+T; When another friendly Artillery card damages another card, damage that card again.
+T; When an Artillery card destroys a card, eliminate that card.
 
 Sturmgewehr
 Equipment, German, Infantry
@@ -122,3 +200,7 @@ Offense 60, Defense 20, Power 60, Strength 2, Health 4, Canine, Fire, Greek, Ita
 A; ¤summon(12)
 T; ¤upkeep(2 Fire)
 T; ¤bloodthirst You may choose any number of susceptible enemy cards. Spend 1 Fire for each card chosen and deal 1 damage to each of them.
+
+Inner Flame
+Power 50, 
+A; ¤flip Spend 2 
