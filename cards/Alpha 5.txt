@@ -6,7 +6,7 @@ A; ¤summon(2) Damage this card.
 Amulet of +20
 Tribute 1, Artifact, Equipment
 A; ¤equip(3)
-P; The card this is attached to has +20 Offense, +20 Defense and +20 Power.
+P; Any card this is attached to has +20 Offense, +20 Defense and +20 Power.
 
 Grim Reaper
 Offense 60, Defense 20, Health 3, Tribute 7, Spirit, Unholy, Undead
@@ -26,8 +26,8 @@ P; This card has +5 Offense and +5 Defense for each enemy card within range 1.5.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
-A; ¤summon(10)
-T; After this card deals combat damage to a card, you may spend 1 Fire. If you do, deal 1 damage to all a susceptible cards within range 1 of that card.
+A; ¤summon(8 or 4 Fire)
+T; After this card damages another card in combat, you may spend 1 Fire to damage all a susceptible cards within range 1 of that card.
 
 King Salamander
 Offense 40, Defense 40, Health 2, Fire, Beast, Reptile
@@ -55,8 +55,8 @@ A; ¤summon(8)
 T; critical_hit(2)
 
 Porphyrion
-Offense 50, Defense 20, Health 5, Strength 2, Giant, Greek, Italian
-A; ¤summon(12)
+Offense 80, Defense 20, Health 4, Giant, Greek, Italian
+A; ¤summon(8)
 P; All friendly Giant cards have +1 Health.
 
 Minotaur Berserker
@@ -78,7 +78,7 @@ T; ¤upkeep(2 Fire)
 T; ¤bloodthirst You may choose any number of susceptible enemy cards. Spend 1 Fire for each card chosen and deal 1 damage to each of them.
 
 Cacus
-Offense 100, Defense 40, Health 3, Power 30, Greek, Italian, Fire, Giant, Artillery
+Offense 100, Defense 20, Health 3, Power 40, Greek, Italian, Fire, Giant, Artillery
 A; ¤summon(8)
 A; Spend 1 Fire and exhaust any susceptible card within range 2.
 
@@ -88,32 +88,34 @@ A; ¤summon(4)
 T; ¤critical_hit(1 Fire)
 T; ¤upkeep(1)
 
-M2 Howitzer 105mm
+M2 Howitzer
 Defense 20, Power 40, Tribute 3, American, Army, Artillery, Fire
 A; ¤summon(4) Exhaust this card.
 P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 2.5. You may exhaust that card.
 
-Long Tom 155mm
+M1 Long Tom
 Defense 20, Power 50, Speed 0.5, Tribute 5, American, Army, Artillery, Fire
 A; ¤summon(6) Exhaust this card.
 P; ¤defender
 A; Spend 1 Fire and exhaust this card. Deal 1 damage to any susceptible card within range 3. You may exhaust that card.
 
-Black Dragon 240mm
-Defense 20, Power 70, Speed 0, Tribute 7, American, Army, Artillery, Fire, Giant, Reptile
+M1 Black Dragon
+Defense 20, Power 60, Speed 0, Tribute 7, American, Army, Artillery, Fire, Giant, Reptile
 A; ¤summon(8) Exhaust this card.
 P; ¤defender
 A; Spend 2 Fire and exhaust this card. Deal 2 damage to any susceptible card within range 3. You may exhaust that card.
 
 Living Flame
-Offense 70, Defense 10, Strength 2, Health 2, Elemental, Fire, Spell
-A; ¤summon(4 Fire) 
-T; ¤upkeep(2 Fire)
+Offense 150, Defense 10, Elemental, Fire, Spell
+A; ¤summon(2 Fire) 
+T; ¤upkeep(1 Fire)
+T; ¤critical_hit(1 Fire)
 
 Flaming Barrier
-Offense 100, Strength 2, Speed 0, Fire
+Offense 100, Speed 0, Fire, Spell
 A; ¤summon(2 or 1 Fire)
+T; ¤critical_hit(1 Fire)
 P; ¤defender
 
 Maginot Line
@@ -138,11 +140,6 @@ A; ¤summon(2)
 T; ¤flanking(1)
 T; ¤upkeep(1)
 
-Cossack Cavalry
-Defense 10, Strength 0, Speed 2, Tribute 1, Eastern European, Cavalry, Army
-A; ¤summon(2)
-T; ¤flanking(1)
-
 ERA Plates
 Army, Fire, Armor, Equipment
 A; ¤equip(2 or 1 Fire)
@@ -152,19 +149,25 @@ Kriegsglück
 German
 A; ¤equip(2)
 T; ¤decay(1)
-P; The card this is attached to has +40 Offense, +40 Defense and +40 Power.
+P; Any card this is attached to has +40 Offense, +40 Defense and +40 Power.
 
 Last Stand
 A; ¤equip(1)
-P; The card this is attached to has +3 Health.
-T; At the end of each round, destroy the card this is attached to.
+P; Any card this is attached to has +3 Health.
+T; At the end of each round, destroy any card this is attached to.
 
 Coup de Grace
 A; ¤equip(0)
 T; ¤decay(1)
-P; The card this is attached to has ¤critical_hit(2).
+P; Any card this is attached to has ¤critical_hit(2).
 
 One Man Army
 A; ¤equip(1)
 T; ¤decay(1)
-T; Any Army card this is attached to has +10 Offense and +10 Defense for each enemy card within range 2.5.
+T; Any Army card this is attached to has +10 Offense and +10 Defense for each enemy card within range 1.5.
+
+Sickle Cut
+Tactic
+A; ¤equip(0)
+P; Any German card this is attached to has 'Breakthrough(2) and 'Flanking(2)'
+

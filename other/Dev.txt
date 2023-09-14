@@ -105,3 +105,13 @@ A; ¤use_by_anyone Spend 3 and destroy this card.
 
 Duel at Dawn
 A; Spend 2 and choose a friendly fielded card. That card battles an enemy card within range 1.
+
+Burma Road
+Defense 30
+A; ¤summon(2)
+T; When a card within range 1 spends supply, you may exhaust this card to recover 1 of the spent supply.
+
+Cossack Cavalry
+Defense 10, Strength 0, Speed 2, Tribute 1, Eastern European, Cavalry, Army
+A; ¤summon(2)
+T; ¤flanking(1)
