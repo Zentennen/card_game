@@ -180,7 +180,7 @@ impl PdfHandler<'_> {
         let path = format!("{}/{}", folder, name);
         let args = types::PyTuple::new(self.py, &[path]);
         let kwargs = [("w", w), ("h", h)].into_py_dict(self.py);
-        self.pdf.call_method("image", args, Some(kwargs)).expect("");
+        self.pdf.call_method("image", args, Some(kwargs)).expect(name);
     }
 
     pub fn has_image(&self, name: &str, folder: &str) -> bool {

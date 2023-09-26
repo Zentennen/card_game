@@ -28,8 +28,8 @@ pub const cards_per_page: usize = cards_per_column * cards_per_row;
 //card
 pub const card_outer_width: f64 = 63.0;
 pub const card_outer_height: f64 = 88.2;
-pub const card_separation_width: f64 = card_outer_width + 4.0;
-pub const card_separation_height: f64 = card_outer_height + 4.0;
+pub const card_separation_width: f64 = card_outer_width + 3.0;
+pub const card_separation_height: f64 = card_outer_height + 3.0;
 pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
 pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
@@ -67,10 +67,10 @@ pub const prop_sym_l: usize = (prop_sym_size / property_height - 0.00001) as usi
 pub const prop_top_w: f64 = prop_sym_pad_l - prop_efct_pad_r;
 
 //alpha
-pub const max_alpha: u8 = 128;
+pub const max_alpha: u8 = 124;
 pub const pixels_per_alpha_step: usize = 1;
-pub const gradient_buffer_pixels: usize = 8;
-pub const pixels_per_mm: f64 = 32.0;
+pub const gradient_buffer_pixels: usize = 6;
+pub const pixels_per_mm: f64 = 40.0;
 pub const alpha_gradient_pixel_height: usize = (max_alpha as usize + gradient_buffer_pixels) * pixels_per_alpha_step;
 pub const alpha_gradient_height: f64 = alpha_gradient_pixel_height as f64 / pixels_per_mm;
 pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height;
