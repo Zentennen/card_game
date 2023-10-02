@@ -30,15 +30,13 @@ A; ¤summon(4)
 A; Exhaust this card and give a friendly card within range 1.5 +30 Offense.
 
 Dreikaiserbund
-Policy
+German, Policy
 A; ¤reserve(2)
 T; In the beginning of each round, if you control at least 3 Imperial cards, gain 1 supply.
 
 Gaius Julius Caesar
 Commander, Italian
-A; ¤reserve(6)
-P; All Italian cards have Offense +30 and Power +30.
-P; All Army cards have '¤build(Structure)'.
+T; When a friendly Structure card enters the board, you may exhaust 2 friendly Army card to resupply 1.
 
 Phantom Assassin
 Rogue, Spririt, Offense 100, Defense 20, Strength 2, Speed 5
@@ -126,3 +124,31 @@ Keeper of the Flame
 Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
 A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +30 Offense and +30 Power this round.
+
+Sickle Cut
+Tactic
+A; ¤equip(0)
+P; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'
+
+Manhattan Project
+American
+A; ¤reserve(3) Exhaust this card.
+A; Spend 1 Fire and exhaust this card. If this ability has now been used 3 times, you win the game.
+
+AC-130 Gunship
+
+A; Spend 3 Fire to make any enemy damage 3 cards they control.
+A; Exhaust this card and spend 1 Air to resupply 4.
+
+Ker
+Offense 80, Defense 60, Air, Greek, Italian, Spirit, Unholy
+A; ¤summon(6 or 3 Air)
+T; When a card within range 2 is destroyed, unexhaust this card.
+
+Thanatos
+Offense 40, Defense 60, Power 40, Air, Greek, Italian, Unholy 
+A; ¤deploy(6 or 3 Air)
+T; In the beginning of your Maneuver phase, damage all susceptible cards within range 1.5.
+
+Hypnos
+

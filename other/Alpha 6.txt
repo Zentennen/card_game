@@ -74,7 +74,7 @@ Romulus
 Offense 30, Defense 30, Holy, Italian
 A; ¤summon(6)
 P; All friendly Italian cards have +20 Defense.
-T; When this card is destroyed, refresh all friendly Italian cards.
+T; When this card is destroyed, unexhaust all friendly Italian cards.
 
 Burma Road
 Defense 30
@@ -100,7 +100,7 @@ Vernichtungsfeuer
 Artillery, German, Tactic
 A; ¤reserve(4 or 2 Fire)
 T; ¤decay(1)
-T; When another friendly Artillery card damages another card, damage that card again.
+T; When another friendly Artillery card damages another card, damage that card again. 
 T; When an Artillery card destroys a card, eliminate that card.
 
 Sturmgewehr
@@ -112,12 +112,6 @@ Spirit of Deceit
 Offense 30, Defense 40, Spirit, Unholy
 A; ¤summon(4)
 T; When another Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
-
-Cerberus
-Offense 60, Defense 20, Power 60, Strength 2, Health 4, Canine, Fire, Greek, Italian, Undead
-A; ¤summon(12)
-T; ¤upkeep(2 Fire)
-T; ¤bloodthirst You may choose any number of susceptible enemy cards. Spend 1 Fire for each card chosen and deal 1 damage to each of them.
 
 Inner Flame
 Power 50, 
