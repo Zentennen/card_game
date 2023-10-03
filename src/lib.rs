@@ -175,6 +175,7 @@ pub fn get_attribute_text<'a>(attributes: &'a Vec<Attribute>, name: &str) -> Opt
            return Some(&attribute.s[0]);
         }
     }
+    
     None
 }
 
