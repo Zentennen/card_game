@@ -8,14 +8,16 @@ Army, Human, Fire, Wheeler, Offense 60, Defense 60, Health 2
 A; ¤summon(6)
 
 Cherufe
-Offense 40, Defense 70, Strength 2, Health 3, American, Earth, Elemental, Fire, Spell
+Offense 50, Defense 70, Health 3, American, Earth, Elemental, Fire, Spell
 A; ¤summon(8)
 T; ¤upkeep(1 Fire)
+T; ¤critical_Hit(0)
 
 Surtr
-Fire, Giant, Norse, Offense 70, Defense 50, Health 2, Strength 2
-A; ¤summon(12)
-A; Pay 1 Fire and give this card the ¤onslaught property this turn.
+Offense 70, Defense 50, Health 2, Fire, Giant, Norse
+A; ¤summon(8)
+A; ¤critical_Hit(1 Fire)
+A; ¤breakthrough(1 Fire)
 
 Manhattan Project
 American
@@ -33,4 +35,33 @@ A; ¤summon(6)
 P; All other friendly cards within range 1 have +1 Health.
 
 
-T; When a friendly card within range 1 attacks, you may exhaust this card to give that card +30 Offense this turn.
+P; Any other friendly card in the same column as this card has +30 Offense while attacking.
+
+Romulus
+Offense 30, Defense 30, Holy, Italian
+A; ¤summon(6)
+P; All friendly Italian cards have +20 Defense.
+T; When this card is destroyed, unexhaust all friendly Italian cards.
+
+Inner Flame
+Power 50, 
+A; ¤
+T; When a card this is attached to attacks, unexhaust it, then spend 1 Fire or damage it.  
+
+Sturmzug
+Offense 50, Defense 70, German, Infantry
+A; ¤summon(6)
+T; ¤flanking(1 Fire)
+
+Vernichtungsfeuer
+Artillery, German
+A; ¤reserve(4 or 2 Fire)
+T; ¤upkeep(1 Fire)
+T; When another friendly Artillery card damages another card, damage that card again. 
+T; When an Artillery card destroys a card, eliminate that card.
+
+Centaur Horde
+Army, Cavalry, Offense 50, Defense 50, Health 2, Speed 2
+T; ¤breakthrough(1)
+A; ¤summon(6)
+
