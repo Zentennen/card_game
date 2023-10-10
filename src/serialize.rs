@@ -9,7 +9,6 @@ use extstd::*;
 pub const nl_indicator_char: char = '$';
 pub const optional_indicator_char: char = '*';
 
-#[inline(always)]
 fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyType, usize)> {
     for (p, b) in string.bytes().enumerate().skip(start) {
         if !string.is_char_boundary(p) {
@@ -34,7 +33,6 @@ fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyTy
     None
 }
 
-#[inline(always)]
 fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
     let s = s.trim();
     let attribute_strings = s.split(',');
@@ -65,7 +63,6 @@ fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
     }
 }
 
-#[inline(always)]
 fn parse_action(s: &str) -> Res<Property> {
     let parts: Vec<&str> = s.split(";").collect();
     let mut current = parts.len() - 1;
@@ -78,7 +75,6 @@ fn parse_action(s: &str) -> Res<Property> {
     Ok(property)
 }
 
-#[inline(always)]
 fn parse_triggered(s: &str) -> Res<Property> {
     let parts: Vec<&str> = s.split(";").collect();
     let mut current = parts.len() - 1;
@@ -91,7 +87,6 @@ fn parse_triggered(s: &str) -> Res<Property> {
     Ok(property)
 }
 
-#[inline(always)]
 fn parse_passive(s: &str) -> Res<Property> {
     let parts: Vec<&str> = s.split(";").collect();
     let mut current = parts.len() - 1;
@@ -119,20 +114,24 @@ fn parse_property(card: &mut Card, s: &str, property_type: PropertyType) -> Mayb
     ok
 }
 
-#[inline(always)]
 fn process_card(card: &mut Card, s: &str) -> Maybe {
-    let mut prev = find_next_property_position(s, 0).expect(&format!("No property found on card: {s}"));
-    parse_attributes(&mut card.attr, &s[..prev.1]);
-    while let Some(next) = find_next_property_position(s, prev.1 + 1) {
-        let substr = &s[prev.1..next.1];
-        parse_property(card, substr, prev.0)?;
-        prev = next;
+    let prev = find_next_property_position(s, 0);
+    if let Some((mut prop, mut offset)) = prev {
+        parse_attributes(&mut card.attr, &s[..offset]);
+        while let Some(next) = find_next_property_position(s, offset + 1) {
+            let substr = &s[offset..next.1];
+            parse_property(card, substr, prop)?;
+            (prop, offset) = next;
+        }
+        parse_property(card, &s[offset..], prop)?;
+        ok
     }
-    parse_property(card, &s[prev.1..], prev.0)?;
-    ok
+    else {
+        parse_attributes(&mut card.attr, s);
+        ok
+    }
 }
 
-#[inline(always)]
 fn process_card_strings(card_strings: Vec<String>) -> Vec<Card> {
     let mut cards = Vec::<Card>::with_capacity(card_strings.len());
 
@@ -154,7 +153,6 @@ fn process_card_strings(card_strings: Vec<String>) -> Vec<Card> {
     cards
 }
 
-#[inline(always)]
 fn split_string_by_cards(string: &str) -> Vec<String> {
     let mut card_strings = Vec::<String>::with_capacity(string.lines().count());
     
@@ -180,7 +178,6 @@ fn split_string_by_cards(string: &str) -> Vec<String> {
     card_strings
 }
 
-#[inline(always)]
 fn parse_txt_string(string: String) -> Vec<Card> {
     let card_strings = split_string_by_cards(&string);
     let cards = process_card_strings(card_strings);
@@ -193,10 +190,10 @@ pub fn serialize_to_json(cards: &Vec<Card>) {
     std::fs::write("./cards.json", cards).unwrap();
 }
 
-pub fn serialize_all_cards() -> Vec<Card> {
+pub fn serialize_all_cards(directory: &str) -> Vec<Card> {
     let mut cards = Vec::<Card>::with_capacity(100_000);
 
-    let entries = std::fs::read_dir("cards").expect("Could not find directory cards");
+    let entries = std::fs::read_dir(directory).expect("Could not find directory");
     for entry in entries {
         if let Result::Ok(entry) = entry {
             if let Some(ext) = entry.path().extension() {

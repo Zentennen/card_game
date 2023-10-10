@@ -85,13 +85,10 @@ fn generate_lower_alpha(property_pads: usize, property_lines: usize) {
 }
 
 fn generate_upper_alpha(main_attribute_lines: usize, other_attribute_lines: usize) {
-    let mm_height = name_h + main_attribute_lines as f64 * icon_row_height + other_attribute_lines as f64 * attribute_height;
-    let mm_height = if main_attribute_lines != 0 && other_attribute_lines == 0 {
-        mm_height - icon_pad_vertical
+    let mut mm_height = name_h + main_attribute_lines as f64 * icon_row_height + other_attribute_lines as f64 * attribute_height;
+    if main_attribute_lines != 0 && other_attribute_lines == 0 {
+        mm_height -= icon_pad_vertical;
     }
-    else {
-        mm_height
-    };
     let pixel_height = (pixels_per_mm * mm_height) as usize;
     let file_name = format!("alpha/upper_{}.png", mm_height + alpha_gradient_height);
     let mut buf_writer = make_writer(&file_name);

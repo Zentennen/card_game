@@ -39,8 +39,8 @@ pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as
 //name
 pub const name_font_size: f64 = 8.5;
 pub const name_h: f64 = 7.0;
-pub const advanced_sym_size: f64 = 12.0;
-pub const advanced_offset_r: f64 = card_outer_width - advanced_sym_size;
+pub const commander_size: f64 = 12.0;
+pub const commander_offset_right: f64 = card_outer_width - commander_size;
 
 //icons
 pub const max_icons_per_row: usize = 6;

@@ -14,7 +14,7 @@ pub const font_line_width: f64 = 0.1;
 pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left;
 pub const default_text_mod: TextModifier = TextModifier::none;
-pub const main_attributes: [&str; 7] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute"];
+pub const main_attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute", "Morale", "Tactics", "Logistics"];
 
 pub struct PdfHandler<'p> {
     py: Python<'p>,
@@ -581,7 +581,7 @@ fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &V
     y + rows as f64 * delta_y
 }
 
-fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, hero: bool) {
+fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, commander: bool) {
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
@@ -625,11 +625,11 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     ph.image(&format!("lower_{}.png", h), "alpha", card_outer_width, h);
 
     //Add the corners for heroes
-    if hero {
+    if commander {
         ph.set_xy(base_x, base_y);
-        ph.image("advanced_tl.png", "icons", advanced_sym_size, advanced_sym_size);
-        ph.set_xy(base_x + advanced_offset_r, base_y);
-        ph.image("advanced_tr.png", "icons", advanced_sym_size, advanced_sym_size);
+        ph.image("commander_left.png", "icons", commander_size, commander_size);
+        ph.set_xy(base_x + commander_offset_right, base_y);
+        ph.image("commander_right.png", "icons", commander_size, commander_size);
     }
 
     let mut y = base_y;
@@ -665,7 +665,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, her
     }
 }
 
-fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
+fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
     ph.set_text_color(255.0, 255.0, 255.0);
     let num_cards = cards.len();
     for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
@@ -676,7 +676,7 @@ fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
                 if i < num_cards {
                     let x = page_pad_l as f64 + c as f64 * card_separation_width;
                     let y = page_pad_t as f64 + r as f64 * card_separation_height;
-                    add_entity_to_pdf(&ph, &cards[i], x, y, false);
+                    add_entity_to_pdf(&ph, &cards[i], x, y, commanders);
                 }
                 else {
                     return;
@@ -686,11 +686,11 @@ fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>) {
     }
 }
 
-pub fn add_all_cards_to_pdf(cards: &Vec<Card>) {
+pub fn add_all_cards_to_pdf(cards: &Vec<Card>, commanders: bool) {
     Python::with_gil(|py| {
         println!("Printing {} cards as pdf...", cards.len());
         let ph = PdfHandler::new(py);
-        add_cards_to_pdf(&ph, cards);
+        add_cards_to_pdf(&ph, cards, commanders);
         ph.output();
         println!("{} cards printed.", cards.len());
     });
