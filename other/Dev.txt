@@ -269,12 +269,18 @@ A; ¤reserve(4 or 2 Air)
 A; Spend 2 Air and damage a susceptible card.
 P; All Italian cards have +20 Offense, all Greek cards have +20 Defense, all Air cards have +20 Power.
 
+Eye of the Storm
+Air, Spell
+A; Spend 4. Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
+
 Rendezvous with Destiny
 American
 A; ¤reserve(1)
 T; ¤decay(1)
-T; When a friendly American card enters play, gain 1.
+T; When a friendly American card enters the board, gain 1.
 
-Eye of the Storm
-Air, Spell
-A; Spend 5. Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
+Phoenix
+Offense 100, Defense 50, Speed 4, Air, Fire
+¤deploy(2 Air and 2 Fire)
+T; When this card is destroyed, move it to your reserve instead.
+T; In the beginning of your maneuver phase, if this card is in your reserve, you may move it to any empty position.

@@ -60,8 +60,23 @@ T; ¤upkeep(1 Fire)
 T; When another friendly Artillery card damages another card, damage that card again. 
 T; When an Artillery card destroys a card, eliminate that card.
 
+Centaur Warband
+Offense 50, Defense 50, Health 1, Speed 2, Cavalry
+T; ¤breakthrough(1)
+A; ¤summon(4)
+
 Centaur Horde
-Army, Cavalry, Offense 50, Defense 50, Health 2, Speed 2
+Offense 50, Defense 50, Health 2, Speed 2, Cavalry
 T; ¤breakthrough(1)
 A; ¤summon(6)
 
+Rendezvous with Destiny
+American
+A; ¤reserve(1)
+T; ¤upkeep(3)
+T; When a friendly American card enters the board, resupply 1.
+
+History Repeats Itself
+A; ¤reserve(2)
+T; ¤upkeep(3)
+T; When a friendly card's reaction triggers, trigger it again.
