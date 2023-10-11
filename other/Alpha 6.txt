@@ -76,7 +76,25 @@ A; ¤reserve(1)
 T; ¤upkeep(3)
 T; When a friendly American card enters the board, resupply 1.
 
-History Repeats Itself
-A; ¤reserve(2)
-T; ¤upkeep(3)
-T; When a friendly card's reaction triggers, trigger it again.
+Sickle Cut
+A; ¤equip(0)
+P; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'.
+
+Berserk
+A; ¤equip(0)
+P; Any card this is attached to has '¤breakthrough(2)'
+
+Kindred Spirits
+Spirit, Offense 30, Defense 70
+A; ¤summon(4)
+P; While there is a nearby friendly Spirit card, this card has +40 Offense.
+
+Giuseppe Garibaldi
+Tribute 2, Italian, Officer, Politician
+A; ¤equip(4)
+P; Enemy cards within range 3 have -20 Defense for each time they have been in combat against a defending Italian card in the current round.
+
+Pienaar's Battalion
+Offense 30, Defense 40, British, Infantry
+A; ¤deploy(2)
+T; When this card is unexhausted, spend 1 or exhaust it.

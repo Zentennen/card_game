@@ -136,8 +136,8 @@ A; ¤reserve(3) Exhaust this card.
 A; Spend 1 Fire and exhaust this card. If this ability has now been used 3 times, you win the game.
 
 AC-130 Gunship
-
-A; Spend 3 Fire to make any enemy damage 3 cards they control.
+Power 100, Defense 40, Air, Aircraft, American, Fire
+A; Exhaust this card and spend 3 Fire. Any enemy chooses 3 of their cards and damages them. You may exhaust any of them.
 A; Exhaust this card and spend 1 Air to resupply 4.
 
 Ker
@@ -284,3 +284,4 @@ Offense 100, Defense 50, Speed 4, Air, Fire
 ¤deploy(2 Air and 2 Fire)
 T; When this card is destroyed, move it to your reserve instead.
 T; In the beginning of your maneuver phase, if this card is in your reserve, you may move it to any empty position.
+
