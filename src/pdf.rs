@@ -665,7 +665,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, com
     }
 }
 
-fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
+fn add_cards(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
     ph.set_text_color(255.0, 255.0, 255.0);
     let num_cards = cards.len();
     for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
@@ -686,11 +686,11 @@ fn add_cards_to_pdf(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
     }
 }
 
-pub fn add_all_cards_to_pdf(cards: &Vec<Card>, commanders: bool) {
+pub fn add_cards_to_pdf(cards: &Vec<Card>, commanders: bool) {
     Python::with_gil(|py| {
         println!("Printing {} cards as pdf...", cards.len());
         let ph = PdfHandler::new(py);
-        add_cards_to_pdf(&ph, cards, commanders);
+        add_cards(&ph, cards, commanders);
         ph.output();
         println!("{} cards printed.", cards.len());
     });
