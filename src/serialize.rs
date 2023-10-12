@@ -6,9 +6,6 @@
 use crate::*;
 use extstd::*;
 
-pub const nl_indicator_char: char = '$';
-pub const optional_indicator_char: char = '*';
-
 fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyType, usize)> {
     for (p, b) in string.bytes().enumerate().skip(start) {
         if !string.is_char_boundary(p) {
@@ -191,9 +188,9 @@ pub fn serialize_to_json(cards: &Vec<Card>) {
 }
 
 pub fn serialize_all_cards(directory: &str) -> Vec<Card> {
-    let mut cards = Vec::<Card>::with_capacity(100_000);
+    let mut cards = Vec::<Card>::with_capacity(10000);
 
-    let entries = std::fs::read_dir(directory).expect("Could not find directory");
+    let entries = std::fs::read_dir(directory).expect(directory);
     for entry in entries {
         if let Result::Ok(entry) = entry {
             if let Some(ext) = entry.path().extension() {
