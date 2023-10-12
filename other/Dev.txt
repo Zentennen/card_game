@@ -238,7 +238,7 @@ A; ¤equip(4)
 P; All friendly German and Italian cards within range 1.5 have +20 Offense and +20 Defense.
 
 Heinz Guderian
-German, Officer  
+German, Officer
 A; ¤equip(4)
 P; All friendly German cards within range 1.5 have 'Breakthrough(1)'
 
