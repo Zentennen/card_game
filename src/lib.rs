@@ -220,6 +220,7 @@ pub struct Card {
     pub acti: Vec<Property>,
     pub trig: Vec<Property>,
     pub pass: Vec<Property>,
+    pub commander: bool,
 }
 
 impl Card {
@@ -230,6 +231,7 @@ impl Card {
             acti: Vec::<Property>::with_capacity(default_card_property_alloc),
             trig: Vec::<Property>::with_capacity(default_card_property_alloc),
             pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+            commander: false,
         }
     }
 
@@ -240,6 +242,7 @@ impl Card {
             acti: Vec::<Property>::with_capacity(default_card_property_alloc),
             trig: Vec::<Property>::with_capacity(default_card_property_alloc),
             pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
+            commander: false,
         }
     }
 }

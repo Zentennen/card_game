@@ -187,7 +187,7 @@ pub fn serialize_to_json(cards: &Vec<Card>) {
     std::fs::write("./cards.json", cards).unwrap();
 }
 
-pub fn serialize_all_cards(directory: &str) -> Vec<Card> {
+pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     let mut cards = Vec::<Card>::with_capacity(10000);
 
     let entries = std::fs::read_dir(directory).expect(directory);
@@ -210,6 +210,7 @@ pub fn serialize_all_cards(directory: &str) -> Vec<Card> {
 
     for card in cards.iter_mut() {
         card.attr.sort_by(|a, b| { a.n.cmp(&b.n) });
+        card.commander = commanders;
     }
 
     cards

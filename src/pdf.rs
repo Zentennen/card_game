@@ -581,7 +581,9 @@ fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &V
     y + rows as f64 * delta_y
 }
 
-fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, commander: bool) {
+fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
+    print(&card.name);
+
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
@@ -625,7 +627,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, com
     ph.image(&format!("lower_{}.png", h), "alpha", card_outer_width, h);
 
     //Add the corners for heroes
-    if commander {
+    if card.commander {
         ph.set_xy(base_x, base_y);
         ph.image("commander_left.png", "icons", commander_size, commander_size);
         ph.set_xy(base_x + commander_offset_right, base_y);
@@ -665,7 +667,7 @@ fn add_entity_to_pdf(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64, com
     }
 }
 
-fn add_cards(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
+fn add_cards(ph: &PdfHandler, cards: &Vec<Card>) {
     ph.set_text_color(255.0, 255.0, 255.0);
     let num_cards = cards.len();
     for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
@@ -676,7 +678,7 @@ fn add_cards(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
                 if i < num_cards {
                     let x = page_pad_l as f64 + c as f64 * card_separation_width;
                     let y = page_pad_t as f64 + r as f64 * card_separation_height;
-                    add_entity_to_pdf(&ph, &cards[i], x, y, commanders);
+                    add_card(&ph, &cards[i], x, y);
                 }
                 else {
                     return;
@@ -686,11 +688,11 @@ fn add_cards(ph: &PdfHandler, cards: &Vec<Card>, commanders: bool) {
     }
 }
 
-pub fn add_cards_to_pdf(cards: &Vec<Card>, commanders: bool) {
+pub fn add_cards_to_pdf(cards: &Vec<Card>) {
     Python::with_gil(|py| {
         println!("Printing {} cards as pdf...", cards.len());
         let ph = PdfHandler::new(py);
-        add_cards(&ph, cards, commanders);
+        add_cards(&ph, cards);
         ph.output();
         println!("{} cards printed.", cards.len());
     });

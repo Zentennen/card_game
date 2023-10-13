@@ -5,10 +5,11 @@ use card_game::Card;
 fn main() {
     let cards = std::fs::read_to_string("cards.json").unwrap();
     let mut cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
-    let new_cards = serialize_all_cards("cards");
+    let mut new_cards = serialize_all_cards("cards", false);
+    new_cards.extend(serialize_all_cards("commanders", true));
 
     for new_card in new_cards {
-        if let Some(card) = cards.iter_mut().find(|c| c.name == new_card.name) {
+        if let Some(card) = cards.iter_mut().find(|c| c.name == new_card.name && c.commander == new_card.commander) {
             *card = new_card;
         }
         else {
@@ -17,15 +18,5 @@ fn main() {
     }
 
     serialize_to_json(&cards);
-
-    let mut cards_to_print = Vec::<Card>::new();
-    let lines = std::fs::read_to_string("print.txt").unwrap();
-    let lines: Vec<&str> = lines.lines().collect();
-    for card in cards {
-        if lines.contains(&card.name.as_str()) {
-            cards_to_print.push(card);
-        }
-    }
-
-    add_cards_to_pdf(&cards_to_print, false);
+    add_cards_to_pdf(&cards);
 }
