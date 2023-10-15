@@ -28,19 +28,19 @@ M2 Howitzer
 Defense 20, Power 40, Tribute 3, American, Artillery, Fire
 A; ¤deploy(4) Exhaust this card.
 P; ¤defender
-A; Spend 1 Fire, exhaust this card and damage any susceptible card within range 2.5. You may exhaust that card.
+A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 2.5.
 
 M1 Long Tom
 Defense 20, Power 50, Speed 0.5, Tribute 5, American, Artillery, Fire
 A; ¤deploy(6) Exhaust this card.
 P; ¤defender
-A; Spend 1 Fire, exhaust this card and damage any susceptible card within range 3. You may exhaust that card.
+A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 3.
 
 M1 Black Dragon
 Defense 20, Power 200, Speed 0, Tribute 7, American, Artillery, Fire, Giant
 A; ¤deploy(8) Exhaust this card.
 P; ¤defender
-A; Spend 1 Fire, exhaust this card and damage any susceptible card within range 3. You may exhaust that card.
+A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 3.
 
 ERA Plates
 Fire, Armor, Equipment

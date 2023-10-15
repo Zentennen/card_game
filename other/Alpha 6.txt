@@ -24,11 +24,6 @@ American
 A; ¤reserve(1) Exhaust this card.
 A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
 
-AC-130 Gunship
-Power 100, Defense 40, Air, Aircraft, American, Fire
-A; Exhaust this card and spend 3 Fire. Any enemy chooses 3 of their cards and damages them. You may exhaust any of them.
-A; Exhaust this card and spend 1 Air to resupply 4.
-
 Ker
 Offense 80, Defense 60, Air, Greek, Italian, Spirit, Unholy
 A; ¤summon(6 or 3 Air)
@@ -198,11 +193,49 @@ P; ¤indescrutible
 
 Big Bertha
 Defense 20, Power 200, Tribute 4, Artillery, Fire, German, Giant
-A; ¤reserve(4 and 1 Fire) Exhaust this card.
-A; Spend 2 Fire and exhaust this card. Damage any suscpetible card. Exhaust that card if possible.
+A; ¤reserve(3 and 1 Fire) Exhaust this card.
+A; Spend 2 Fire and exhaust this card. Damage and suppress any suscpetible card.
 
 Pegasus
 Cavalry, Greek, Italian
-A; ¤equip(2)
+A; ¤equip(1 Air)
 P; Any card this is attached to has +3 Speed.
 P; You may look at any cards other players draw.
+
+Gates of Olympus
+Greek, Italian, Structure
+A; ¤reserve(3)
+A; Exhaust this card and reveal the top card of your deck. If the card revealed is Greek, unexhaust a friendly Greek card. If the card revealed is Italian, unexhaust a friendly Italian card.
+
+Ju 52
+Defense 50, Air, German, Transport
+A; ¤reserve(4)
+A; Spend 1 Air and exhaust this card to resupply 4.
+
+Ju 87 Stuka
+Power 100, Air, Bomber, German
+A; ¤reserve(4)
+
+Ju 88 
+
+A; ¤reserve(2 and 1 Air)
+
+Bf 109
+
+A; ¤reserve()
+
+Rapid Dragon
+Power 200, American, Chinese
+A; ¤action Exhaust any number of Air Transport cards and spend 1 Fire for each card exhausted. Choose that many susceptible enemy cards and suppress and damage each of them.
+
+F-15 Eagle
+Offense 300, Defense 200, Air, American, Fighter
+A; ¤reserve(4 Air)
+T; ¤intercept(1 Air)
+T; ¤critical_hit(2 Fire)
+
+AC-130 Gunship
+Power 100, Defense 40, Air, American, Fire, Bomber, Transport
+A; ¤reserve(2 Air and 2 Fire)
+A; Exhaust this card and spend 2 Fire. Any enemy chooses 3 of their cards and damages them. Exhaust all unexhausted cards that were damaged.
+A; Exhaust this card and spend 1 Air to resupply 3 Fire.
