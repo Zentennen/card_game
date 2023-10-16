@@ -7,7 +7,7 @@ T; ¤critical_hit(1 Fire)
 Cerberus
 Offense 70, Defense 30, Power 50, Health 3, Fire, Greek, Italian, Undead
 A; ¤deploy(8)
-T; When this card attacks, you may choose any number of susceptible cards, spend 1 Fire per card chosen and deal 1 damage to each of them.
+T; When this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and deal 1 damage to each of them.
 
 Forced March
 A; ¤equip(1)
