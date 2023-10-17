@@ -165,10 +165,6 @@ Tactic
 A; ¤equip(0)
 P; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'
 
-
-
-
-
 Giant Minotaur
 Offense 60, Defense 60, Health 3, Minotaur, Giant
 A; ¤deploy(8)
