@@ -165,7 +165,7 @@ Army, Human, Fire, Wheeler, Offense 60, Defense 60, Health 2
 A; ¤summon(6)
 
 Cherufe
-Offense 50, Defense 70, Health 3, American, Earth, Elemental, Fire, Spell
+Offense 50, Defense 70, Health 3, American, Earth, Elemental, Fire
 A; ¤summon(8)
 T; ¤upkeep(1 Fire)
 T; ¤critical_Hit(0)
@@ -338,11 +338,11 @@ T; In the beginning of your Attack phase, exhaust any card this is attached to a
 
 Field Marshal Erwin Rommel
 Morale 4, Tactics 6, Logistics 3 Air, Logistics 3 Earth, Logistics 3 Fire, Defense 500, German, Officer
-A; ¤reserve(10) Eliminate your Commander, destroy all friendly cards named "General Erwin Rommel", then resupply 2 if a card with that name is in your discard pile.
+A; ¤assign(10) Eliminate your Commander, destroy all friendly cards named "General Erwin Rommel", then resupply 2 if a card with that name is in your discard pile.
 
 Big Bertha
 Defense 20, Power 200, Tribute 4, Artillery, Fire, German, Giant
-A; ¤reserve(2 Fire) Exhaust this card.
+A; ¤assign(2 Fire) Exhaust this card.
 A; Spend 2 Fire and exhaust this card. Damage and suppress any suscpetible fielded card.
 
 Pegasus
@@ -369,7 +369,7 @@ P; ¤defender
 
 Skunkworks
 Defense 50, Air, American, Structure
-A; ¤reserve(1 Air) Exhaust this card.
+A; ¤assign(1 Air) Exhaust this card.
 A; Exhaust this card, spend 1 and resupply 1 Air.
 
 Ju 52
@@ -395,7 +395,7 @@ A; ¤action Exhaust any number of Air Transport cards and spend 1 Fire for each 
 
 F-15 Eagle
 Offense 200, Defense 200, Air, American, Fighter
-A; ¤reserve(4 Air)
+A; ¤assign(4 Air)
 T; ¤intercept(1 Air)
 T; ¤critical_hit(2 Fire)
 
@@ -408,3 +408,8 @@ A; Exhaust this card, spend 1 Air and resupply 3 Fire.
 P; This card has +10 Offense for each Fire supply you have spent this turn.
 
 P; This card has +10 Defense for each friendly Greek card.
+
+Firestorm
+Power 60, Fire
+A; ¤assign(2 Fire)
+T; In the beginning of your Maneuver Phase, each player that is able to damages one of their susceptible cards.
