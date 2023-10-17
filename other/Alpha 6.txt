@@ -410,6 +410,6 @@ P; This card has +10 Offense for each Fire supply you have spent this turn.
 P; This card has +10 Defense for each friendly Greek card.
 
 Firestorm
-Power 60, Fire
+Defense 250, Power 60, Fire
 A; ¤assign(2 Fire)
 T; In the beginning of your Maneuver Phase, each player that is able to damages one of their susceptible cards.
