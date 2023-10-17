@@ -110,8 +110,6 @@ Offense 40, Defense 20, Health 2, Human, Fire, Cleric
 A; ¤summon(4)
 A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +30 Offense and +30 Power this round.
 
-Hypnos
-
 True Strike
 T; ¤decay(1)
 A; Trap; Pay 2 and attach this card to a card of your choice.

@@ -413,3 +413,8 @@ Firestorm
 Defense 250, Power 60, Fire
 A; ¤assign(2 Fire)
 T; In the beginning of your Maneuver Phase, each player that is able to damages one of their susceptible cards.
+
+Hypnos
+OFfense 20, Defense 40, Health 2, Power 50, Greek, Holy, Italian
+A; ¤summon(6 or 3 Air)
+T; When a friendly or susceptible card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
