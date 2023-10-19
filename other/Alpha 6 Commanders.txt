@@ -9,5 +9,8 @@ P; All Italian cards have +20 Offense and all Greek cards have +20 Defense.
 
 Walther Model
 Morale 6, Tactics 4, Logistics 2 Fire, Logistics 3, German, Officer
-P; All friendly German cards have +10 Defense for time an enemy Attack Phase has ended without you taking morale damage.
+P; All friendly German cards have +10 Defense for each time an enemy Attack Phase has ended without you taking morale damage.
 
+Curtis LeMay
+Morale 4, Tactics 4, Logistics 2 Air, Logistics 2 Fire, Logistics 2, Air, American, Officer, Unholy
+T; ¤Objective When friendly cards have dealt 4 damage in total this turn, this card gains +1 Air Logistics and +1 Fire Logistics.  
