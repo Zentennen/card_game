@@ -183,3 +183,13 @@ The Weak Suffer as they Must
 Greek
 A; ¤reserve(2 Quintessence)
 A; ¤upkeep(3 Quintessence)
+
+Santcifying Grace
+Holy
+A; ¤equip(1 Quintessence) Attach only to a non-Unholy card.
+T; When a card this is attached to is destroyed, 
+
+William of Occam
+Defense 10, Holy
+A; ¤deploy_rearward(2 Quintessence)
+P; All friendly cards have +5 Defense for each empty position on your field.
