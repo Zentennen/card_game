@@ -193,3 +193,16 @@ William of Occam
 Defense 10, Holy
 A; ¤deploy_rearward(2 Quintessence)
 P; All friendly cards have +5 Defense for each empty position on your field.
+
+Field Marshal Erwin Rommel
+Morale 4, Tactics 6, Logistics 3 Air, Logistics 3 Earth, Logistics 3 Fire, Defense 500, German, Officer
+A; ¤deploy_rearward(10) Eliminate your Commander, destroy all friendly cards named "General Erwin Rommel", then resupply 2 if a card with that name is in your discard pile.
+
+Dust Devil
+Offense 50, Defense 50, Air, Earth, Fire 
+A; ¤deploy_rearward(1 Air, 1 Earth and 1 Fire)
+
+Apotheosis
+Holy
+A; ¤equip(1 Holy and 1 Quintessence)
+P; Any Holy card this is attached to has +30 OFfense, +30 Defense and +30 Power. 

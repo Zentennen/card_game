@@ -342,10 +342,6 @@ German, Officer
 A; ¤equip(3)
 T; In the beginning of your Attack phase, exhaust any card this is attached to and attack with it. That attack does not start combat with cards in frontline positions, and moves on to .
 
-Field Marshal Erwin Rommel
-Morale 4, Tactics 6, Logistics 3 Air, Logistics 3 Earth, Logistics 3 Fire, Defense 500, German, Officer
-A; ¤deploy_rearward(10) Eliminate your Commander, destroy all friendly cards named "General Erwin Rommel", then resupply 2 if a card with that name is in your discard pile.
-
 Big Bertha
 Defense 20, Power 200, Salvage 4, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(2 Fire) Exhaust this card.
@@ -392,8 +388,27 @@ Power 80, Air, Bomber, German
 A; ¤deploy_rearward(2 and 1 Air)
 
 Bf 109
+Offense 70, Defense 60, Air, Fighter, German
+A; ¤deploy_rearward(2 Air)
+T; ¤intercept(1)
 
+Supermarine Spitfire
+Offense 60, Defense 70, Air, British, Fighter
 A; ¤deploy_rearward(3)
+T; ¤intercept(1 Air)
+
+P-38 Lightning
+Offense 80, Defense 90, Air, American, Fighter
+A; ¤deploy_rearward(3 Air)
+T; ¤intercept(1 Air)
+
+Me 262
+Offense 100, Defense 100, 
+
+The Red Baron
+German, Pilot
+A; ¤equip(2)
+T; Any Air card this is attached to has +30 Defense.
 
 Rapid Dragon
 Power 200, American, Chinese
@@ -406,14 +421,15 @@ T; ¤intercept(1 Air)
 T; ¤critical_hit(2 Fire)
 
 AC-130 Gunship
-Power 50, Defense 40, Air, American, Fire, Bomber, Transport
-A; ¤deploy_rearward(3 Air and 3 Fire)
-A; Exhaust this card, spend 5 Fire and choose a player. Damage and suppress all susceptible cards in that player's field.
-A; Exhaust this card, spend 1 Air and resupply 5 Fire.
+Power 50, Defense 40, Air, American, Fire, Giant, Transport
+A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
+A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
+A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 
-
+X
 P; This card has +10 Offense for each Fire supply you have spent this turn.
 
+X
 P; This card has +10 Defense for each friendly Greek card.
 
 Firestorm
@@ -426,7 +442,15 @@ OFfense 20, Defense 40, Health 2, Power 50, Greek, Holy, Italian
 A; ¤deploy_forward(6 or 3 Air)
 T; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
 
-
+X
 P; All susceptible friendly Fire cards have +10 Offense.
 P; This card has +10 Power for each friendly Air card.
 
+Benito Mussolini
+Defense 30, Italian, Unholy
+A; ¤deploy_rearward(3)
+P; All German cards have +10 OFfense, all Italian cards have +10 Defense and all Unholy cards have +10 Power.
+
+When a friendly Unholy card damages another card, damage that card again.
+
+When a friendly 
