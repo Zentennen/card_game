@@ -399,13 +399,16 @@ T; ¤intercept(1 Air)
 
 P-38 Lightning
 Offense 80, Defense 90, Air, American, Fighter
-A; ¤deploy_rearward(3 Air)
+A; ¤deploy_rearward(2 Air)
 T; ¤intercept(1 Air)
 
 Me 262
-Offense 100, Defense 100, 
+Offense 100, Defense 100
+A; ¤deploy_rearward(2 Air)
+A; ¤airstrike(1 Fire) Damage and suppress any susceptible card.
+T; ¤intercept(2 Air)
 
-The Red Baron
+Red Baron
 German, Pilot
 A; ¤equip(2)
 T; Any Air card this is attached to has +30 Defense.
@@ -415,10 +418,10 @@ Power 200, American, Chinese
 A; ¤action Exhaust any number of Air Transport cards and spend 1 Fire for each card exhausted. Choose that many susceptible enemy cards and suppress and damage each of them.
 
 F-15 Eagle
-Offense 200, Defense 200, Air, American, Fighter
+Offense 200, Defense 200, Power 200, Air, American, Fighter
 A; ¤deploy_rearward(4 Air)
-T; ¤intercept(1 Air)
-T; ¤critical_hit(2 Fire)
+A; ¤airstrike(2 Fire) Eliminate any susceptible card.
+T; ¤intercept(2 Air) Eliminate any card damaged in the combat.
 
 AC-130 Gunship
 Power 50, Defense 40, Air, American, Fire, Giant, Transport
