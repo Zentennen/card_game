@@ -466,8 +466,10 @@ Offense 40, Defense 50, Greek, Italian, Unholy
 A; ¤deploy_forward(5)
 T; When an Unholy card enters your board, resupply 2.
 
+Equalizer
+Power 20, 
+A; ¤action(2 Fire) The frontline or backline of any player 
+
 Holy Flame
-
-When a friendly Unholy card damages another card, damage that card again.
-
-When a friendly 
+T; When a friendly Unholy card damages another card, damage that card again.
+T; When a friendly 
