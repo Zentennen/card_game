@@ -7,7 +7,7 @@ Grim Reaper
 Offense 70, Defense 20, Health 3, Salvage 7, Spirit, Unholy, Undead
 A; ¤deploy_forward(8)
 T; ¤breakthrough(1)
-T; When this card deals damage to another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
+T; When this card damages another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
 
 Witch of Salem
 Salvage 5, Offense 30, Defense 50, Power 100, Mage, Unholy
@@ -114,13 +114,13 @@ T; When this card attacks, you may choose any number of susceptible cards, spend
 
 Forced March
 A; ¤equip(1)
-T; At the beginning of your Maneuver phase, destroy this card or damage to any card this is attached to.
+T; In the beginning of your Maneuver phase, destroy this card or damage any card this is attached to.
 P; Any card this is attached to has +1 Speed.
 
 Giant Salamander
 Offense 80, Defense 40, Power 60, Health 3, Fire, Giant, Beast, Reptile
 A; ¤deploy_forward(8 or 4 Fire)
-T; After this card damages another card in combat, you may spend 1 Fire to damage all susceptible cards within range 1 of that card.
+T; After this card damages another card in combat, you may spend 1 Fire and damage all susceptible cards within range 1 of that card.
 
 Giant Pyrausta
 Offense 40, Defense 40, Health 2, Fire, Air, Giant, Insect, Italian
@@ -218,9 +218,9 @@ P; All friendly Italian cards have +20 Defense.
 T; When this card is destroyed, unexhaust all friendly Italian cards.
 
 Inner Flame
-Power 50, 
-A; ¤action Attach this card to a susceptible or friendly card.
-T; When a card this is attached to attacks, unexhaust it, then spend 1 Fire or damage it.  
+Power 50, Fire, Spell
+A; ¤action(1 Fire) and attach this card to a susceptible or friendly card.
+T; When a card this is attached to attacks, damage and unexhaust it.  
 
 Sturmzug
 Offense 50, Defense 70, German, Infantry
@@ -275,7 +275,7 @@ T; When this card is unexhausted, spend 1 or exhaust it.
 
 Eye of the Storm
 Air, Spell
-A; Spend 3. Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
+A; ¤action(3) Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
 
 Rendezvous with Destiny
 American
@@ -311,14 +311,15 @@ Offense 50, Defense 50, Speed 0
 A; ¤deploy_forward(2)
 T; ¤cumbersome
 
+
  Health 3
 T; ¤cumbersome
-T; When this card attacks, you may damage it, spend 1 Fire and unexhaust it.
+T; When this card attacks, you may damage it and unexhaust it.
 
-M1919 Browning Machine Gun
+M1919 Machine Gun
 Power 40, American, Equipment
 A; ¤equip(2)
-T; When a card this is attached to is damaged by a susceptible card, you may spend 1 to damage that card.
+T; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
 
 Valkyrie
 Offense 80, Defense 60, Power 80, Air, Holy, Nordic
@@ -328,8 +329,8 @@ T; When a susceptible enemy card within range 1.5 engages in combat, you may exh
 
 Day of Wrath
 Power 50, Fire, Holy
-A; ¤action Spend 1 Fire to damage all susceptible cards.
-A; ¤action Spend 3 Fire to destroy all susceptible cards. 
+A; ¤action(1 Fire) Damage all susceptible cards.
+A; ¤action(3 Fire) Destroy all susceptible cards. 
 
 Sippenhaft
 German, Defense 200
@@ -415,7 +416,7 @@ T; Any Air card this is attached to has +30 Defense.
 
 Rapid Dragon
 Power 200, American, Chinese
-A; ¤action Exhaust any number of Air Transport cards and spend 1 Fire for each card exhausted. Choose that many susceptible enemy cards and suppress and damage each of them.
+A; ¤action(X) where is any number of Air Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
 
 F-15 Eagle
 Offense 200, Defense 200, Power 200, Air, American, Fighter
@@ -441,8 +442,8 @@ A; ¤deploy_rearward(2 Fire)
 T; In the beginning of your Maneuver Phase, each player that is able to damages one of their susceptible cards.
 
 Hypnos
-OFfense 20, Defense 40, Health 2, Power 50, Greek, Holy, Italian
-A; ¤deploy_forward(6 or 3 Air)
+OFfense 20, Defense 60, Power 50, Greek, Holy, Italian
+A; ¤deploy_forward(6)
 T; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
 
 X
@@ -452,7 +453,20 @@ P; This card has +10 Power for each friendly Air card.
 Benito Mussolini
 Defense 30, Italian, Unholy
 A; ¤deploy_rearward(3)
-P; All German cards have +10 OFfense, all Italian cards have +10 Defense and all Unholy cards have +10 Power.
+P; All German cards have +10 Offense, all Italian cards have +10 Defense and all Unholy cards have +10 Power.
+
+Armageddon
+Holy
+A; ¤deploy_rearward(2)
+P; All friendly cards have +50 Offense.
+T; In the beginning of your Manuver Phase, you lose the game.
+
+Echidna
+Offense 40, Defense 50, Greek, Italian, Unholy
+A; ¤deploy_forward(5)
+T; When an Unholy card enters your board, resupply 2.
+
+Holy Flame
 
 When a friendly Unholy card damages another card, damage that card again.
 
