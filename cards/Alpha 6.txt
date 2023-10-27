@@ -104,7 +104,7 @@ P; Any card this is attached to has +40 Offense, +40 Defense and +40 Power.
 King Salamander
 Offense 40, Defense 40, Fire, Beast, Reptile
 A; ¤deploy_forward(4 or 2 Fire)
-P; This card has +10 Offense for each other friendly Fire card.
+P; This card has +10 Offense for each friendly Fire card.
 T; ¤critical_hit(1 Fire)
 
 Cerberus
@@ -148,12 +148,12 @@ A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card 
 Porphyrion
 Offense 80, Defense 20, Health 4, Giant, Greek, Italian
 A; ¤deploy_forward(8)
-P; All other friendly Giant cards have +1 Health.
+P; All friendly Giant cards have +1 Health.
 
 Shepherd of Fire
 Offense 70, Defense 30, Health 2, Fire, Spirit, Unholy
 A; ¤deploy_forward(6)
-P; All other friendly Fire cards have +1 Speed.
+P; All friendly Fire cards have +1 Speed.
 
 Dirlewanger Brigade
 Offense 30, Defense 20, Health 2, Army, German, Infantry, Unholy
@@ -168,7 +168,7 @@ Cherufe
 Offense 50, Defense 70, Health 3, American, Earth, Elemental, Fire
 A; ¤deploy_forward(8)
 T; ¤upkeep(1 Fire)
-T; ¤critical_Hit(0)
+T; ¤critical_Hit(1 Fire)
 
 Surtr
 Offense 70, Defense 50, Health 2, Fire, Giant, Nordic
@@ -187,14 +187,14 @@ A; ¤deploy_forward(6 or 3 Air)
 T; When a card within range 2 is destroyed, unexhaust this card.
 
 Thanatos
-Offense 40, Defense 60, Power 40, Air, Greek, Italian, Unholy 
+Offense 40, Defense 60, Power 40, Air, Greek, Italian, Unholy
 A; ¤deploy_forward(6 or 3 Air)
 T; In the beginning of your Maneuver phase, damage all susceptible cards within range 1.5.
 
 Ludwig von Crüwell
 German, Officer
 A; ¤equip(4)
-P; All other friendly German and Italian cards within range 1 have +40 Offense.
+P; All friendly German and Italian cards within range 1 have +40 Offense.
 
 Guardian Spirit
 Offense 50, Health 2, Holy, Spirit
@@ -231,7 +231,7 @@ Vernichtungsfeuer
 Artillery, German
 A; ¤deploy_rearward(4 or 2 Fire)
 T; ¤upkeep(1 Fire)
-T; When another friendly Artillery card damages another card, damage that card again. 
+T; When friendly Artillery card damages another card, damage that card again. 
 T; When an Artillery card destroys a card, eliminate that card.
 
 Centaur Warband
@@ -246,9 +246,7 @@ A; ¤deploy_forward(6)
 
 Rendezvous with Destiny
 American
-A; ¤deploy_rearward(1)
-T; ¤upkeep(3)
-T; When a friendly American card enters the board, resupply 1.
+A; ¤covert_action(2) Resupply 1 for each friendly American card.
 
 Sickle Cut
 A; ¤equip(0)
@@ -286,15 +284,8 @@ T; When a friendly American card enters the board, gain 1.
 Phoenix
 Offense 70, Defense 40, Speed 4, Air, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
-T; When this card is destroyed, if you have another Fire card, heal all damage from this card and move it to your rear instead.
+T; When this card is destroyed, you may heal all damage on a friendly Fire card heal all damage from this card and move it to your rear instead.
 T; In the beginning of your maneuver phase, if this card is in your rear, you may move it to any empty position.
-
-Vernichtungsfeuer
-Artillery, German, Tactic
-A; ¤deploy_rearward(4 or 2 Fire)
-T; ¤decay(1)
-T; When another friendly Artillery card damages another card, damage that card again.
-T; When an Artillery card destroys a card, eliminate that card.
 
 Sturmgewehr
 Equipment, German, Infantry
@@ -302,8 +293,8 @@ A; ¤equip(2)
 P; Any friendly Infantry card this is attached to has +20 Offense and +20 Defense.
 
 Library of Alexandria
-Defense 30, Health 2, Speed 0, Tactics 1
-A; ¤deploy_forward(1)
+Health 2, Tactics 1
+A; ¤deploy_rearward(1)
 T; When a Fire card damages this card, damage this card again.
 
 Maxim Gunner
@@ -467,8 +458,9 @@ A; ¤deploy_forward(5)
 T; When an Unholy card enters your board, resupply 2.
 
 Equalizer
-Power 20, 
-A; ¤action(2 Fire) The frontline or backline of any player 
+Power 30, Fire
+A; ¤action(2 Fire) All susceptible cards in the frontline or backline of any player is damaged twice.
+P; This card has +10 Power for each friendly Fire card.
 
 Holy Flame
 T; When a friendly Unholy card damages another card, damage that card again.

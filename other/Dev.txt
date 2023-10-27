@@ -205,4 +205,8 @@ A; ¤deploy_rearward(1 Air, 1 Earth and 1 Fire)
 Apotheosis
 Holy
 A; ¤equip(1 Holy and 1 Quintessence)
-P; Any Holy card this is attached to has +30 OFfense, +30 Defense and +30 Power. 
+P; Any Holy card this is attached to has +30 OFfense, +30 Defense and +30 Power.
+
+Azrael
+
+A; ¤deploy_forward(1 Light and 1 Dark)
