@@ -6,7 +6,7 @@
 use crate::*;
 use extstd::*;
 
-fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyType, usize)> {
+fn find_next_property_position(string: &str, start: usize) -> Option<(char, usize)> {
     for (p, b) in string.bytes().enumerate().skip(start) {
         if !string.is_char_boundary(p) {
             continue;
@@ -19,112 +19,66 @@ fn find_next_property_position(string: &str, start: usize) -> Option<(PropertyTy
         let c2 = c2.unwrap();
         if c2 != ';' { continue; }
 
-        match c {
-            'A' => return Some((PropertyType::action, p)),
-            'T' => return Some((PropertyType::triggered, p)),
-            'P' => return Some((PropertyType::passive, p)),
-            _ => continue
-        }
+        return Some((c, p));
     }
 
     None
 }
 
-fn parse_attributes(attributes: &mut Vec<Attribute>, s: &str) {
+fn initialize_card(card: &mut Card, s: &str) {
     let s = s.trim();
-    let attribute_strings = s.split(',');
-    for attribute_string in attribute_strings {
-        let attribute_string = attribute_string.trim();
-        if attribute_string.is_empty() {
+    let strings = s.split(',');
+    for string in strings {
+        let string = string.trim();
+        if string.is_empty() {
             continue;
         }
-        let name_end = attribute_string.find(|c: char| !c.is_alphabetic() && c != ' ' && c != '¤' && c != '(' && c != ')');
-        let name;
-        let subattribute_part;
-        if let Some(name_end) = name_end {
-            name = attribute_string[..name_end].trim();
-            subattribute_part = attribute_string[name_end..].trim();
+
+        let space = string.find(' ');
+        if let Some(space) = space {
+            let name = string[..space].trim();
+            
+            if attributes.contains(&name) {
+                let value = string[space..].trim();
+                card.attributes.push(Attribute{ n: name.to_string(), v: value.to_string() });
+            }
+            else {
+                card.types.push(name.to_string());
+            }
         }
         else {
-            name = attribute_string;
-            subattribute_part = "";
+            card.types.push(string.to_string());
         }
-        let name = name.trim();
-        let mut attribute = Attribute::with_name(name);
-        if subattribute_part != "" {
-            let error_string = format!("ERROR: Failed to parse subattribute '{}' as part of attribute '{}'", subattribute_part, attribute_string);
-            let sub = str::parse::<f64>(subattribute_part).expect(&error_string);
-            attribute.f.push(sub);
-        }
-        attributes.push(attribute);
     }
-}
-
-fn parse_action(s: &str) -> Res<Property> {
-    let parts: Vec<&str> = s.split(";").collect();
-    let mut current = parts.len() - 1;
-    let mut property = Property::with_effect(parts[current].trim());
-
-    current -= 1;
-    if current <= 0 { return Ok(property); }
-
-    parse_attributes(&mut property.attr, parts[current].trim());
-    Ok(property)
-}
-
-fn parse_triggered(s: &str) -> Res<Property> {
-    let parts: Vec<&str> = s.split(";").collect();
-    let mut current = parts.len() - 1;
-    let mut property = Property::with_effect(parts[current].trim());
-
-    current -= 1;
-    if current <= 0 { return Ok(property); }
-
-    parse_attributes(&mut property.attr, parts[current].trim());
-    Ok(property)
-}
-
-fn parse_passive(s: &str) -> Res<Property> {
-    let parts: Vec<&str> = s.split(";").collect();
-    let mut current = parts.len() - 1;
-    let mut property = Property::with_effect(parts[current].trim());
-
-    current -= 1;
-    if current == 0 { return Ok(property); }
-
-    parse_attributes(&mut property.attr, parts[current].trim());
-    Ok(property)
-}
-
-fn parse_property(card: &mut Card, s: &str, property_type: PropertyType) -> Maybe {
-    match property_type {
-        PropertyType::action => {
-            card.acti.push(parse_action(s)?)
-        }
-        PropertyType::triggered => {
-            card.trig.push(parse_triggered(s)?)
-        }
-        PropertyType::passive => {
-            card.pass.push(parse_passive(s)?)
-        }
-    };
-    ok
 }
 
 fn process_card(card: &mut Card, s: &str) -> Maybe {
     let prev = find_next_property_position(s, 0);
     if let Some((mut prop, mut offset)) = prev {
-        parse_attributes(&mut card.attr, &s[..offset]);
+        initialize_card(card, &s[..offset]);
         while let Some(next) = find_next_property_position(s, offset + 1) {
             let substr = &s[offset..next.1];
-            parse_property(card, substr, prop)?;
+            match next.0 {
+                'A' => card.abiilities.push(substr.to_string()),
+                'R' => card.reactions.push(substr.to_string()),
+                'T' => card.traits.push(substr.to_string()),
+                _ => anyhow::bail!("Invalid property char: {}", next.0)
+            }
             (prop, offset) = next;
         }
-        parse_property(card, &s[offset..], prop)?;
+
+        let substr = &s[offset..];
+        match prop {
+            'A' => card.abiilities.push(substr.to_string()),
+            'R' => card.reactions.push(substr.to_string()),
+            'T' => card.traits.push(substr.to_string()),
+            _ => anyhow::bail!("Invalid property char: {}", prop)
+        }
+
         ok
     }
     else {
-        parse_attributes(&mut card.attr, s);
+        initialize_card(card, s);
         ok
     }
 }
@@ -209,7 +163,7 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     }
 
     for card in cards.iter_mut() {
-        card.attr.sort_by(|a, b| { a.n.cmp(&b.n) });
+        card.attributes.sort_by(|a, b| { a.n.cmp(&b.n) });
         card.commander = commanders;
     }
 

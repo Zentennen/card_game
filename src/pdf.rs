@@ -14,7 +14,6 @@ pub const font_line_width: f64 = 0.1;
 pub const rect_line_w: f64 = 0.2;
 pub const default_text_align: Alignment = Alignment::left;
 pub const default_text_mod: TextModifier = TextModifier::none;
-pub const main_attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute", "Morale", "Tactics", "Logistics"];
 
 pub struct PdfHandler<'p> {
     py: Python<'p>,
@@ -251,36 +250,14 @@ pub struct DeserializedProperty {
     pub main_effects: Vec<String>,
     pub efct_limited: String,
     pub efct_non_limited: String,
-    pub attr_limited: String,
-    pub attr_non_limited: String,
     pub efct_limited_h: f64,
     pub efct_non_limited_h: f64,
-    pub attr_limited_h: f64,
-    pub attr_non_limited_h: f64,
 }
 
 impl DeserializedProperty {
-    pub fn from_property(prop: &Property, ph: &PdfHandler) -> DeserializedProperty {
+    pub fn from_property(prop: &String, ph: &PdfHandler) -> DeserializedProperty {
         let mut total_limited_l = 0;
-
-        let mut attr_limited = String::with_capacity(default_attr_string_alloc);
-        let mut attr_non_limited = String::with_capacity(default_attr_string_alloc);
-        let mut attr_non_limited_l = 0;
-        let mut attr_limited_l = 0;
-        if !prop.attr.is_empty() {
-            ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-            let mut attribute_string = String::with_capacity(default_attr_string_alloc);
-            for attribute in &prop.attr {
-                add_attribute_to_string(attribute, &mut attribute_string);
-                attribute_string.push_str(", ");
-            }
-            attribute_string.pop();
-            attribute_string.pop();
-            process_commands(&mut attribute_string);
-            split_limited(&attribute_string, &mut total_limited_l, ph, &mut attr_limited, &mut attr_non_limited, &mut attr_limited_l, &mut attr_non_limited_l);
-        }
-
-        let mut efct = prop.efct.clone();
+        let mut efct = prop.clone();
         let mut efct_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
@@ -295,12 +272,8 @@ impl DeserializedProperty {
             main_effects,
             efct_limited, 
             efct_non_limited, 
-            attr_limited, 
-            attr_non_limited, 
             efct_non_limited_h: efct_non_limited_l as f64 * property_height, 
-            attr_non_limited_h: attr_non_limited_l as f64 * property_height, 
             efct_limited_h: efct_limited_l as f64 * property_height, 
-            attr_limited_h: attr_limited_l  as f64 * property_height,
         }
     }
 
@@ -322,18 +295,6 @@ impl DeserializedProperty {
             y -= property_height;
             ph.set_xy(x, y);
             ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
-        }
-        
-        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        if !self.attr_non_limited.is_empty() {
-            y -= self.attr_non_limited_h;
-            ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_non_limited, card_inner_width, property_height, default_text_align);
-        }
-        if !self.attr_limited.is_empty() {
-            y -= self.attr_limited_h;
-            ph.set_xy(x, y);
-            ph.multi_cell(&self.attr_limited, prop_top_w, property_height, default_text_align);
         }
     
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
@@ -457,8 +418,6 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
     let mut h = 0.0;
 
     for prop in acti {
-        h += prop.attr_non_limited_h;
-        h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.main_effects.len() as f64 * property_height;
@@ -466,8 +425,6 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
     }
 
     for prop in trig {
-        h += prop.attr_non_limited_h;
-        h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.main_effects.len() as f64 * property_height;
@@ -475,8 +432,6 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
     }
 
     for prop in pass {
-        h += prop.attr_non_limited_h;
-        h += prop.attr_limited_h;
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.main_effects.len() as f64 * property_height;
@@ -486,69 +441,9 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
     h - property_pad_v
 }
 
-fn add_attribute_to_string(attr: &Attribute, string: &mut String) {
-    string.push_str(&attr.n.replacen(' ', "\u{A0}", usize::MAX));
-    if attr.count_subs() > 0 {
-        string.push_str("\u{A0}(");
-        
-        for sub in &attr.f {
-            string.push_str(&sub.to_string());
-            string.push_str(",\u{A0}");
-        }
-
-        for sub in &attr.s {
-            string.push(string_indicator_char);
-            string.push_str(sub);
-            string.push(string_indicator_char);
-            string.push_str(",\u{A0}");
-        }
-
-        for sub in &attr.a {
-            sub.add_rules_text_to_string(string);
-            string.push_str(",\u{A0}");
-        }
-
-        string.pop();
-        string.pop();
-        string.push(')');
-    }
-}
-
 struct IconData {
     image: String,
     text: String
-}
-
-fn add_attribute_value_to_icon_data(attribute: &str, card: & Card, mut data: Vec<IconData>) -> Vec<IconData> {
-    if let Some(val) = get_attribute_value(&card.attr, attribute) {
-        let icon_data = IconData{ image: format!("{}.png", attribute), text: val.to_string() };
-        data.push(icon_data);
-    }
-
-    data
-}
-
-//fn add_attribute_text_to_icon_data(attribute: &str, card: & Card, mut data: Vec<IconData>) -> Vec<IconData> {
-//    if let Some(val) = get_attribute_value(&card.attr, attribute) {
-//        let icon_data = IconData{ image: format!("{}.png", attribute), text: val.to_string() };
-//        data.push(icon_data);
-//    }
-//
-//    data
-//}
-
-fn get_attribute_string(card: &Card) -> String {
-    let mut string = String::with_capacity(default_attr_string_alloc);
-    for attribute in &card.attr {
-        if !main_attributes.contains(&attribute.n.as_str()) {
-            add_attribute_to_string(attribute, &mut string);
-            string.push_str(", ");
-        }
-    }
-
-    string.pop();
-    string.pop();
-    string
 }
 
 fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &Vec<IconData>) -> f64 {
@@ -591,22 +486,29 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     }
 
     //attribute alpha background
-    let mut main_attribute_icon_data: Vec<IconData> = Vec::with_capacity(100);
-    for attribute in main_attributes {
-        main_attribute_icon_data = add_attribute_value_to_icon_data(attribute, card, main_attribute_icon_data);
+    let mut icon_data: Vec<IconData> = Vec::with_capacity(100);
+    for attribute in &card.attributes {
+        icon_data.push(IconData{ image: format!("{}.png", attribute.n), text: attribute.v.clone() });
     }
 
-    let rows = main_attribute_icon_data.len().div_ceil(max_icons_per_row);
+    let rows = icon_data.len().div_ceil(max_icons_per_row);
     let mut h = upper_alpha_base_height + rows as f64 * icon_row_height;
-    let mut other_attr = get_attribute_string(card);
-    process_commands(&mut other_attr);
     
-    if !other_attr.is_empty() {
+    let mut types = String::with_capacity(default_attr_string_alloc);
+    for t in &card.types {
+        types.push_str(t);
+        types.push_str(", ");
+    }
+
+    types.pop();
+    types.pop();
+    process_commands(&mut types);
+    if !types.is_empty() {
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        let l = ph.multi_cell_l(&other_attr, card_inner_width, attribute_height, attr_text_align);
+        let l = ph.multi_cell_l(&types, card_inner_width, attribute_height, attr_text_align);
         h += attribute_height * l as f64;
     }
-    else if !main_attribute_icon_data.is_empty() {
+    else if !icon_data.is_empty() {
         h -= icon_pad_vertical;
     }
 
@@ -616,9 +518,9 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    let acti: Vec<DeserializedProperty> = card.acti.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
-    let trig: Vec<DeserializedProperty> = card.trig.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
-    let pass: Vec<DeserializedProperty> = card.pass.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
+    let acti: Vec<DeserializedProperty> = card.abiilities.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
+    let trig: Vec<DeserializedProperty> = card.reactions.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
+    let pass: Vec<DeserializedProperty> = card.traits.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
 
     //property alpha background
     ph.set_xy(base_x, base_y);
@@ -643,14 +545,14 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     
     //main attributes
     y += name_h;
-    y = add_icons_to_pdf(ph, base_x, y, icon_row_height, &main_attribute_icon_data);
+    y = add_icons_to_pdf(ph, base_x, y, icon_row_height, &icon_data);
     
     //other attributes
     let x = base_x + card_pad;
-    if !other_attr.is_empty() {
+    if !types.is_empty() {
         ph.set_xy(x, y);
         ph.set_font_modded(font_name, default_font_size, attr_text_mod);
-        ph.multi_cell(&other_attr, card_inner_width, attribute_height, attr_text_align);
+        ph.multi_cell(&types, card_inner_width, attribute_height, attr_text_align);
     }
 
     //properties

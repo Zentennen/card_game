@@ -3,14 +3,14 @@ Morale 7, Tactics 4, Logistics 7, Italian
 T; When a friendly Structure card enters the board, you may exhaust 2 friendly Infantry cards to resupply 1.
 
 Zeus
-Morale 5, Tactics 3, Logistics 3 Air, Logistics 2, Power 80, Air, Greek, Holy, Italian
+Morale 5, Tactics 3, Logistics 2 Air, Logistics 1 Fire, Logistics 3, Power 80, Air, Greek, Holy, Italian
 A; Spend 2 Air and damage a susceptible card.
 P; All Italian cards have +20 Offense and all Greek cards have +20 Defense.
 
 Walther Model
-Morale 6, Tactics 4, Logistics 2 Fire, Logistics 3, German, Officer
+Morale 6, Tactics 5, Logistics 2 Fire, Logistics 3, German, Officer
 P; All friendly German cards have +10 Defense for each time an enemy Attack Phase has ended without you taking morale damage.
 
 Curtis LeMay
-Morale 4, Tactics 4, Logistics 2 Air, Logistics 2 Fire, Logistics 2, Air, American, Officer, Unholy
-T; ¤Objective When friendly cards have dealt 4 damage in total this turn, this card gains +1 Air Logistics and +1 Fire Logistics.  
+Morale 4, Tactics 4, Logistics 2 Air, Logistics 2 Fire, Logistics 1, Air, American, Fire, Unholy
+T; ¤objective When friendly Fire or Air cards have dealt 4 damage in total this turn, this card gains +1 Air Logistics and +1 Fire Logistics.  

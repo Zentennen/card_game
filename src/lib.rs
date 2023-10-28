@@ -35,6 +35,7 @@ pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
 pub const text_offset: f64 = 1.0;
 pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
+pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Tribute", "Morale", "Tactics", "Logistics"];
 
 //name
 pub const name_font_size: f64 = 8.5;
@@ -79,170 +80,45 @@ pub const lower_alpha_base_height: f64 = card_pad + alpha_gradient_height;
 pub mod serialize;
 pub mod pdf;
 
-type attr_num = f64;
-
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Attribute {
     pub n: String,
-    pub a: Vec<Attribute>,
-    pub f: Vec<attr_num>,
-    pub s: Vec<String>,
-}
-
-impl Attribute {
-    pub fn with_name(name: &str) -> Attribute {
-        Attribute{ 
-            n: name.to_string(), 
-            a: Vec::<Attribute>::with_capacity(default_subattrib_alloc),
-            f: Vec::<attr_num>::with_capacity(default_subattrib_alloc),
-            s: Vec::<String>::with_capacity(default_subattrib_alloc),
-        }
-    }
-
-    pub fn count_subs(&self) -> usize {
-        self.a.len() + self.f.len() + self.s.len()
-    }
-
-    pub fn add_rules_text_to_string(&self, s: &mut String) {
-        let string = self.n.replacen(' ', "\u{A0}", usize::MAX);
-        s.push_str(&string);
-        if self.count_subs() > 0 {
-            s.push_str("\u{A0}(");
-            
-            for sub in &self.f {
-                s.push_str(&sub.to_string());
-                s.push_str(",\u{A0}");
-            }
-
-            for sub in &self.s {
-                s.push(string_indicator_char);
-                s.push_str(sub);
-                s.push(string_indicator_char);
-                s.push_str(",\u{A0}");
-            }
-
-            for sub in &self.a {
-                sub.add_rules_text_to_string(s);
-                s.push_str(",\u{A0}");
-            }
-
-            s.pop();
-            s.pop();
-            s.push(')');
-        }
-    }
-}
-
-pub fn get_attribute_ref_with_name<'a>(attributes: &'a Vec<Attribute>, name: &str) -> Option<&'a Attribute> {
-    for attribute in attributes {
-        if attribute.n == name {
-           return Some(attribute);
-        }
-    }
-    None
-}
-
-pub fn has_attribute_with_name(attributes: &Vec<Attribute>, name: &str) -> bool {
-    for attribute in attributes {
-        if attribute.n == name {
-            return true;
-        }
-    }
-    false
-}
-
-pub fn get_attribute_mut_with_name<'a>(attributes: &'a mut Vec<Attribute>, name: &str) -> Option<&'a mut Attribute> {
-    for attribute in attributes {
-        if attribute.n == name {
-           return Some(attribute);
-        }
-    }
-    None
-}
-
-pub fn get_attribute_value(attributes: &Vec<Attribute>, name: &str) -> Option<attr_num> {
-    for attribute in attributes {
-        if attribute.n == name && attribute.f.len() > 0 {
-           return Some(attribute.f[0]);
-        }
-    }
-    None
-}
-
-pub fn get_attribute_text<'a>(attributes: &'a Vec<Attribute>, name: &str) -> Option<&'a str> {
-    for attribute in attributes {
-        if attribute.n == name && attribute.s.len() > 0 {
-           return Some(&attribute.s[0]);
-        }
-    }
-    
-    None
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
-pub struct Property {
-    pub attr: Vec<Attribute>, 
-    pub efct: String,
-}
-
-impl Property {
-    pub fn new() -> Self {
-        Self { 
-            attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
-            efct: String::with_capacity(default_property_effect_alloc),
-        }
-    }
-
-    pub fn with_effect(effect: &str) -> Self {
-        Self { 
-            attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
-            efct: effect.to_string(),
-        }
-    }
-
-    pub fn with_effect_string(effect: String) -> Self {
-        Self { 
-            attr: Vec::<Attribute>::with_capacity(default_property_attribute_alloc),
-            efct: effect,
-        }
-    }
-}
-
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-pub enum PropertyType {
-    action, triggered, passive
+    pub v: String,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Card {
     pub name: String,
-    pub attr: Vec<Attribute>,
-    pub acti: Vec<Property>,
-    pub trig: Vec<Property>,
-    pub pass: Vec<Property>,
     pub commander: bool,
+    pub attributes: Vec<Attribute>,
+    pub types: Vec<String>,
+    pub abiilities: Vec<String>,
+    pub reactions: Vec<String>,
+    pub traits: Vec<String>,
 }
 
 impl Card {
     pub fn new() -> Self {
         Self { 
             name: String::with_capacity(default_card_name_alloc), 
-            attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
-            acti: Vec::<Property>::with_capacity(default_card_property_alloc),
-            trig: Vec::<Property>::with_capacity(default_card_property_alloc),
-            pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
             commander: false,
+            attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            types: Vec::<String>::with_capacity(default_card_property_alloc),
+            abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
+            reactions: Vec::<String>::with_capacity(default_card_property_alloc),
+            traits: Vec::<String>::with_capacity(default_card_property_alloc),
         }
     }
 
     pub fn with_name(s: impl Into<String>) -> Self {
         Self { 
             name: s.into(), 
-            attr: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
-            acti: Vec::<Property>::with_capacity(default_card_property_alloc),
-            trig: Vec::<Property>::with_capacity(default_card_property_alloc),
-            pass: Vec::<Property>::with_capacity(default_card_property_alloc), 
             commander: false,
+            attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            types: Vec::<String>::with_capacity(default_card_property_alloc),
+            abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
+            reactions: Vec::<String>::with_capacity(default_card_property_alloc),
+            traits: Vec::<String>::with_capacity(default_card_property_alloc),
         }
     }
 }
