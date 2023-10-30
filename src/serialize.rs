@@ -59,9 +59,9 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
         while let Some(next) = find_next_property_position(s, offset + 1) {
             let substr = &s[offset..next.1];
             match next.0 {
-                'A' => card.abiilities.push(substr.to_string()),
-                'R' => card.reactions.push(substr.to_string()),
-                'T' => card.traits.push(substr.to_string()),
+                'A' => card.abiilities.push(substr[2..].trim().to_string()),
+                'R' => card.reactions.push(substr[2..].trim().to_string()),
+                'T' => card.traits.push(substr[2..].trim().to_string()),
                 _ => anyhow::bail!("Invalid property char: {}", next.0)
             }
             (prop, offset) = next;
