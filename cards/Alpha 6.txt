@@ -392,7 +392,9 @@ A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
 A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 
-X
+Houdou
+Offense 40, Defense 20, Beast, Chinese, Fire
+A; ¤deploy_forward(3)
 T; This card has +10 Offense for each Fire supply you have spent this turn.
 
 Leonidas
