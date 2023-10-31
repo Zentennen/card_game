@@ -6,11 +6,12 @@
 use crate::*;
 use extstd::*;
 
-fn find_next_property_position(string: &str, start: usize) -> Option<(char, usize)> {
+fn find_item(string: &str, start: usize) -> Option<(char, usize)> {
     for (p, b) in string.bytes().enumerate().skip(start) {
         if !string.is_char_boundary(p) {
             continue;
         }
+
         let mut chars = string[p..].chars();
         let c = chars.next().unwrap();
 
@@ -53,15 +54,16 @@ fn initialize_card(card: &mut Card, s: &str) {
 }
 
 fn process_card(card: &mut Card, s: &str) -> Maybe {
-    let prev = find_next_property_position(s, 0);
+    let prev = find_item(s, 0);
     if let Some((mut prop, mut offset)) = prev {
         initialize_card(card, &s[..offset]);
-        while let Some(next) = find_next_property_position(s, offset + 1) {
-            let substr = &s[offset..next.1];
+        while let Some(next) = find_item(s, offset + 1) {
+            let substr = &s[2 + offset..next.1].trim();
             match next.0 {
-                'A' => card.abiilities.push(substr[2..].trim().to_string()),
-                'R' => card.reactions.push(substr[2..].trim().to_string()),
-                'T' => card.traits.push(substr[2..].trim().to_string()),
+                'A' => card.abiilities.push(substr.to_string()),
+                'R' => card.reactions.push(substr.to_string()),
+                'T' => card.traits.push(substr.to_string()),
+                'F' => card.flavor_text.push_str(substr),
                 _ => anyhow::bail!("Invalid property char: {}", next.0)
             }
             (prop, offset) = next;
@@ -72,15 +74,15 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
             'A' => card.abiilities.push(substr.to_string()),
             'R' => card.reactions.push(substr.to_string()),
             'T' => card.traits.push(substr.to_string()),
+            'F' => card.flavor_text.push_str(substr),
             _ => anyhow::bail!("Invalid property char: {}", prop)
         }
-
-        ok
     }
     else {
         initialize_card(card, s);
-        ok
     }
+
+    ok
 }
 
 fn process_card_strings(card_strings: Vec<String>) -> Vec<Card> {

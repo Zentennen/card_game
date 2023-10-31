@@ -268,7 +268,7 @@ impl DeserializedProperty {
         split_main_properties(&mut efct, &mut main_effects);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
-        Self{ 
+        Self { 
             main_effects,
             efct_limited, 
             efct_non_limited, 
@@ -524,7 +524,14 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 
     //property alpha background
     ph.set_xy(base_x, base_y);
-    let h = get_height_of_properties(&acti, &trig, &pass) + lower_alpha_base_height;
+    
+    //flavor text
+    let mut flavor_text_h = 0.0;
+    if !card.flavor_text.is_empty() {
+        flavor_text_h = ph.multi_cell_h(&card.flavor_text, card_inner_width, property_height, Alignment::left) + property_pad_v;
+    }
+
+    let h = get_height_of_properties(&acti, &trig, &pass) + lower_alpha_base_height + flavor_text_h;
     ph.set_xy(base_x, base_y + card_outer_height - h);
     ph.image(&format!("lower_{}.png", h), "alpha", card_outer_width, h);
 
@@ -558,14 +565,20 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //properties
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
     y = base_y + card_inner_height;
+
+    if flavor_text_h != 0.0 {
+        ph.multi_cell(&card.flavor_text, card_inner_width, property_height, Alignment::left);
+        y -= flavor_text_h;
+    }
+
     for prop in &pass {
-        y = prop.add_to_pdf(ph, x - text_offset, y, "passive.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "trait.png");
     }
     for prop in &trig {
-        y = prop.add_to_pdf(ph, x - text_offset, y, "triggered.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "reaction.png");
     }
     for prop in &acti {
-        y = prop.add_to_pdf(ph, x - text_offset, y, "action.png");
+        y = prop.add_to_pdf(ph, x - text_offset, y, "ability.png");
     }
 }
 

@@ -89,6 +89,7 @@ pub struct Attribute {
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Card {
     pub name: String,
+    pub flavor_text: String,
     pub commander: bool,
     pub attributes: Vec<Attribute>,
     pub types: Vec<String>,
@@ -101,6 +102,7 @@ impl Card {
     pub fn new() -> Self {
         Self { 
             name: String::with_capacity(default_card_name_alloc), 
+            flavor_text: String::with_capacity(default_card_property_alloc), 
             commander: false,
             attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
@@ -113,6 +115,7 @@ impl Card {
     pub fn with_name(s: impl Into<String>) -> Self {
         Self { 
             name: s.into(), 
+            flavor_text: String::with_capacity(default_card_property_alloc), 
             commander: false,
             attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
