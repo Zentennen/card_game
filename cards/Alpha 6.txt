@@ -446,4 +446,8 @@ A; ¤deploy_forward(6 or 3 Fire)
 T; Friendly Unholy cards have +20 Offense.
 T; Friendly Fire cards have +20 Power.
 
+Achilles
+Offense 30, Defense 60, Greek, Human, Infantry
+A; ¤deploy_forward(4) 
+
 R; When a friendly Unholy card damages another card, damage that card again.
