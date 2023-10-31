@@ -156,14 +156,13 @@ P; All friendly German cards within range 1.5 have 'Breakthrough(1)'
 
 Ludwig von Mises
 German
-A; ¤reserve(3 and 1 Quintessence)
+A; ¤reserve(1 and 1 Quintessence)
 P; All your Human cards have +10 Defense for each ability that includes '¤action' you have used this turn.
 
 Henry George
 American
-A; ¤reserve(2 and 1 Quintessence)
-T; When an enemy card would cause you to lose supply, store that supply on this card.
-P; You may use supply stored on this card to pay for supply on American cards.
+A; ¤reserve(1 and 1 Quintessence)
+A; Exhaust this card and spend 2 Quintessence. Resupply 1 for each friendly position that isn't empty.
 
 History Repeats Itself
 A; ¤reserve(2 Quintessence)
@@ -208,5 +207,45 @@ A; ¤equip(1 Holy and 1 Quintessence)
 P; Any Holy card this is attached to has +30 OFfense, +30 Defense and +30 Power.
 
 Azrael
-
+Offense 70, 
 A; ¤deploy_forward(1 Light and 1 Dark)
+
+Sippenhaft
+German, Defense 14
+A; ¤deploy_rearward(1 Quintessence)
+R; When one of your German cards is destroyed, damage your other German cards.
+T; All German cards have +15 Defense.
+
+X
+T; All susceptible friendly Fire cards have +10 Offense.
+T; This card has +10 Power for each friendly Air card.
+
+Cherufe
+Offense 40, Defense 60, Health 3, American, Earth, Fire
+A; ¤deploy_forward(4 and 2 Earth)
+R; ¤upkeep(1 Fire)
+R; ¤critical_Hit(1 Fire)
+
+Rapid Dragon
+Power 100, American, Chinese
+A; ¤action(X) where is any number of Air Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
+
+Bf 109
+Offense 60, Defense 50, Air, Fighter, German
+A; ¤deploy_rearward(2 Air)
+R; ¤intercept(1)
+
+Spitfire Mk. 1
+Offense 50, Defense 60, Air, British, Fighter, Russian
+A; ¤deploy_rearward(3)
+R; ¤intercept(1 Air)
+
+Spitfire Mk. 24
+Offense 50, Defense 60, Air, British, Fighter, Russian
+A; ¤deploy_rearward(3)
+R; ¤intercept(1 Air)
+
+P-38 Lightning
+Offense 70, Defense 80, Air, American, Fighter
+A; ¤deploy_rearward(2 Air)
+R; ¤intercept(1 Air)
