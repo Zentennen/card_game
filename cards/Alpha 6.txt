@@ -201,8 +201,8 @@ A; ¤deploy_forward(3)
 T; This card has +40 Defense while not in combat.
 
 Ares
-Offense 60, Defense 40, Greek, Italian 
-A; ¤deploy_forward(3)
+Offense 60, Health 2, Greek, Italian 
+A; ¤deploy_forward(6)
 T; All other allied cards within range 1 have +30 Offense while attacking.
 
 Romulus
@@ -285,14 +285,10 @@ A; ¤deploy_rearward(1)
 R; When a Fire card damages this card, damage this card again.
 
 Maxim Gunner
-Offense 40, Defense 40, Speed 0
+Offense 10, Defense 40, Speed 0
 A; ¤deploy_forward(2)
-R; ¤cumbersome
-
-
- Health 3
-R; ¤cumbersome
-R; When this card attacks, damage it and unexhaust it.
+T; ¤defender
+T; This card has +30 Offense while unexhausted.
 
 M1919 Machine Gun
 Power 30, American, Equipment
@@ -359,26 +355,6 @@ Ju 88
 Power 70, Air, Bomber, German
 A; ¤deploy_rearward(2 and 1 Air)
 
-Bf 109
-Offense 60, Defense 50, Air, Fighter, German
-A; ¤deploy_rearward(2 Air)
-R; ¤intercept(1)
-
-Spitfire Mk. 1
-Offense 50, Defense 60, Air, British, Fighter, Russian
-A; ¤deploy_rearward(3)
-R; ¤intercept(1 Air)
-
-Spitfire Mk. 24
-Offense 50, Defense 60, Air, British, Fighter, Russian
-A; ¤deploy_rearward(3)
-R; ¤intercept(1 Air)
-
-P-38 Lightning
-Offense 70, Defense 80, Air, American, Fighter
-A; ¤deploy_rearward(2 Air)
-R; ¤intercept(1 Air)
-
 Me 262
 Offense 100, Defense 100, Power 90
 A; ¤deploy_rearward(2 Air)
@@ -419,13 +395,10 @@ A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 X
 T; This card has +10 Offense for each Fire supply you have spent this turn.
 
-X
-T; This card has +10 Defense for each friendly Greek card.
-
-Firestorm
-Defense 250, Power 50, Fire
-A; ¤deploy_rearward(2 Fire)
-R; In the beginning of your Maneuver Phase, each player that is able to damages one of their susceptible cards.
+Leonidas
+Offense 10, Defense 60, Greek, Infantry
+A; ¤deploy_forward(3)
+T; Friendly Greek cards within range 1 have +20 Defense.
 
 Hypnos
 OFfense 20, Defense 50, Power 40, Greek, Holy, Italian
@@ -466,4 +439,9 @@ R; ¤critical_hit(2)
 T; This card has +10 Defense for each friendly German card.
 
 Efreet
+Offense 60, Defense 60, Fire, Spirit, Unholy
+A; ¤deploy_forward(6 or 3 Fire)
+T; Friendly Unholy cards have +20 Offense.
+T; Friendly Fire cards have +20 Power.
+
 R; When a friendly Unholy card damages another card, damage that card again.
