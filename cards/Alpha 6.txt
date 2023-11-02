@@ -131,19 +131,19 @@ M2 Howitzer
 Power 30, Salvage 3, American, Artillery, Fire
 A; ¤deploy_forward(4) Exhaust this card.
 T; ¤defender
-A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 2.5.
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 2.5.
 
 M1 Long Tom
 Power 40, Speed 0.5, Salvage 5, American, Artillery, Fire
 A; ¤deploy_forward(6) Exhaust this card.
 T; ¤defender
-A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
 
 M1 Black Dragon
 Power 80, Speed 0, Salvage 7, American, Artillery, Fire, Giant
 A; ¤deploy_forward(8) Exhaust this card.
 T; ¤defender
-A; Spend 1 Fire, exhaust this card and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
 
 Porphyrion
 Offense 70, Defense 10, Health 4, Giant, Greek, Italian
@@ -187,8 +187,8 @@ R; In the beginning of your Maneuver phase, damage all susceptible cards within 
 
 Ludwig von Crüwell
 German, Officer
-A; ¤equip(4)
-T; All friendly German and Italian cards within range 1 have +40 Offense.
+A; ¤equip(3)
+T; All friendly German and Italian cards within range 1 have +20 Offense.
 
 Guardian Spirit
 Offense 40, Health 2, Holy, Spirit
@@ -269,10 +269,10 @@ Air
 A; ¤action(3) Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
 
 Phoenix
-Offense 60, Defense 30, Speed 4, Air, Fire
+Offense 60, Defense 30, Power 60, Speed 4, Air, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
-R; When this card is destroyed, you may heal all damage on a friendly Fire card heal all damage from this card and move it to your rear instead.
-R; In the beginning of your maneuver phase, if this card is in your rear, you may move it to any empty position.
+R; ¤airstrike(1 Air or 1 Fire) Damage a susceptible card on the field.
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
 
 Sturmgewehr
 Equipment, German, Infantry
@@ -292,7 +292,7 @@ T; This card has +30 Offense while unexhausted.
 
 M1919 Machine Gun
 Power 30, American, Equipment
-A; ¤equip(2)
+A; ¤equip(1)
 R; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
 
 Valkyrie
@@ -313,7 +313,7 @@ R; In the beginning of your Attack phase, exhaust any card this is attached to a
 Big Bertha
 Power 100, Salvage 4, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(2 Fire) Exhaust this card.
-A; Spend 2 Fire and exhaust this card. Damage and suppress any suscpetible fielded card.
+A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on the field.
 
 Pegasus
 Cavalry, Greek, Holy, Italian
@@ -334,7 +334,7 @@ R; When another Unholy card within range 1 attacks, you may exhaust this card to
 French 75
 Power 40, Salvage 1, American, Artillery, Fire
 A; ¤deploy_forward(2) Exhaust this card.
-A; Spend 1, exhaust this card and damage and suppress any susceptible card within range 2.
+A; Exhaust this card, spend 1 and suppress any susceptible card within range 2.
 T; ¤defender
 
 Skunkworks
@@ -343,13 +343,14 @@ A; ¤deploy_rearward(1 Air) Exhaust this card.
 A; Exhaust this card, spend 1 and resupply 1 Air.
 
 Ju 52
-Defense 40, Air, German, Transport
+Air, German, Transport
 A; ¤deploy_rearward(4)
-A; Spend 1 Air and exhaust this card to resupply 4.
+A; Exhaust this card, spend 1 Air and resupply 4.
 
 Ju 87 Stuka
 Power 40, Air, Bomber, German
 A; ¤deploy_rearward(4)
+A; ¤airstrike(1) Damage and suppress a susceptible card.
 
 Ju 88 
 Power 70, Air, Bomber, German
@@ -371,17 +372,13 @@ Offense 30, Defense 50, Power 100, Air, Fighter, Russian
 A; ¤deploy_forward(2)
 A; ¤airstrike(2)
 
-A-10 Thunderbolt
+A-10 Warthog
+Offense 30, Defense 30, Power 30, Air, American, Bomber
 A; ¤deploy_rearward(3 Air)
-A; ¤airstrike(1) Damage up to 2 susceptible cards of you choice on the field.
-
-Red Baron
-German, Pilot
-A; ¤assign(2)
-R; Any Air card this is attached to has +30 Defense.
+A; ¤airstrike(3) Damage and suppress up to 3 susceptible cards on the field.
 
 F-15 Eagle
-Offense 150, Defense 150, Power 100, Air, American, Fighter
+Offense 100, Defense 100, Power 100, Air, American, Fighter
 A; ¤deploy_rearward(4 Air)
 A; ¤airstrike(2 Fire) Eliminate any susceptible card.
 R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
@@ -397,7 +394,7 @@ Offense 40, Defense 20, Beast, Chinese, Fire
 A; ¤deploy_forward(3)
 T; This card has +10 Offense for each Fire supply you have spent this turn.
 
-Leonidas
+King Leonidas
 Offense 10, Defense 60, Greek, Infantry
 A; ¤deploy_forward(3)
 T; Friendly Greek cards within range 1 have +20 Defense.
@@ -412,10 +409,10 @@ Defense 20, Italian, Unholy
 A; ¤deploy_rearward(3)
 T; All German cards have +10 Offense, all Italian cards have +10 Defense and all Unholy cards have +10 Power.
 
-Ragnarok
-Health 3, German, Holy
+Ragnarök
+Defense 100, Health 3, German, Holy
 A; ¤deploy_rearward(2)
-R; ¤upkeep(1 Fire)
+R; ¤upkeep(2 Fire)
 R; When this card is destroyed, you lose the game.
 T; All friendly cards have +30 Offense.
 
@@ -448,6 +445,9 @@ T; Friendly Fire cards have +20 Power.
 
 Achilles
 Offense 30, Defense 60, Greek, Human, Infantry
-A; ¤deploy_forward(4) 
+A; ¤deploy_forward(4)
 
-R; When a friendly Unholy card damages another card, damage that card again.
+King Leonidas
+Defense 30, Greek, Infantry
+A; ¤deploy_forward(3)
+T; All friendly Greek cards within range 1 have +10 Defense.

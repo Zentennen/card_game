@@ -69,7 +69,7 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
             (prop, offset) = next;
         }
 
-        let substr = &s[offset..];
+        let substr = &s[2 + offset..];
         match prop {
             'A' => card.abiilities.push(substr.to_string()),
             'R' => card.reactions.push(substr.to_string()),

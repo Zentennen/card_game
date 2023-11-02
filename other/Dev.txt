@@ -249,3 +249,11 @@ P-38 Lightning
 Offense 70, Defense 80, Air, American, Fighter
 A; ¤deploy_rearward(2 Air)
 R; ¤intercept(1 Air)
+
+
+Red Baron
+German, Pilot
+A; ¤assign(2)
+R; Any Air card this is attached to has +30 Defense.
+
+R; When a friendly Unholy card damages another card, damage that card again.
