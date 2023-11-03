@@ -257,7 +257,7 @@ T; While there is a nearby friendly Spirit card, this card has +40 Offense.
 Giuseppe Garibaldi
 Salvage 2, Italian, Officer, Politician
 A; ¤equip(4)
-T; Enemy cards within range 3 have -20 Defense for each time they have been in combat against a defending Italian card in the current round.
+T; Enemy cards within range 3 have -20 Defense for each time they have attacked a friendly Italian card this turn.
 
 Pienaar's Battalion
 Offense 20, Defense 30, British, Infantry
@@ -282,7 +282,7 @@ T; Any friendly Infantry card this is attached to has +20 Offense and +20 Defens
 Library of Alexandria
 Health 2, Tactics 1
 A; ¤deploy_rearward(1)
-R; When a Fire card damages this card, damage this card again.
+R; When a Fire card damages this card, damage it again.
 
 Maxim Gunner
 Offense 10, Defense 40, Speed 0
@@ -290,13 +290,13 @@ A; ¤deploy_forward(2)
 T; ¤defender
 T; This card has +30 Offense while unexhausted.
 
-M1919 Machine Gun
+Browning M1919
 Power 30, American, Equipment
 A; ¤equip(1)
 R; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
 
 Valkyrie
-Offense 70, Defense 50, Power 70, Air, German, Holy
+Offense 70, Defense 40, Power 70, Air, German, Holy
 A; ¤deploy_forward(6 or 3 Air)
 R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
 R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
@@ -308,7 +308,7 @@ A; ¤action(3 Fire) Damage all susceptible cards.
 General Erwin Rommel
 German, Officer
 A; ¤equip(3)
-R; In the beginning of your Attack phase, exhaust any card this is attached to and attack with it. That attack does not start combat with cards in frontline positions, and moves on to .
+R; In the beginning of your Attack phase, exhaust any card this is attached to and attack with it. That attack bypasses the enemy frontline.
 
 Big Bertha
 Power 100, Salvage 4, Artillery, Fire, German, Giant
@@ -317,7 +317,7 @@ A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card 
 
 Pegasus
 Cavalry, Greek, Holy, Italian
-A; ¤equip(1 Air)
+A; ¤equip(2 Air)
 T; Any card this is attached to has +3 Speed.
 T; You may look at any cards other players draw.
 
@@ -344,12 +344,12 @@ A; Exhaust this card, spend 1 and resupply 1 Air.
 
 Ju 52
 Air, German, Transport
-A; ¤deploy_rearward(4)
+A; ¤deploy_rearward(6)
 A; Exhaust this card, spend 1 Air and resupply 4.
 
 Ju 87 Stuka
 Power 40, Air, Bomber, German
-A; ¤deploy_rearward(4)
+A; ¤deploy_rearward(4 and 1 Air)
 A; ¤airstrike(1) Damage and suppress a susceptible card.
 
 Ju 88 
@@ -363,17 +363,17 @@ A; ¤airstrike(1 Fire) Damage and suppress any susceptible card.
 R; ¤intercept(2 Air)
 
 Il-2 Ilyusha
-Offense 30, Defense 50, Power 100, Air, Fighter, Russian
-A; ¤deploy_forward(2)
+Offense 20, Defense 40, Power 60, Air, Fighter, Russian
+A; ¤deploy_rearward(2)
 A; ¤airstrike(2)
 
-Il-10
-Offense 30, Defense 50, Power 100, Air, Fighter, Russian
+Il-10 Sturmovik
+Offense 30, Defense 50, Power 70, Air, Fighter, Russian
 A; ¤deploy_forward(2)
 A; ¤airstrike(2)
 
 A-10 Warthog
-Offense 30, Defense 30, Power 30, Air, American, Bomber
+Offense 20, Defense 30, Power 40, Air, American, Bomber
 A; ¤deploy_rearward(3 Air)
 A; ¤airstrike(3) Damage and suppress up to 3 susceptible cards on the field.
 
@@ -384,7 +384,7 @@ A; ¤airstrike(2 Fire) Eliminate any susceptible card.
 R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
 
 AC-130 Gunship
-Power 40, Defense 30, Air, American, Fire, Giant, Transport
+Power 30, Defense 30, Air, American, Fire, Giant, Transport
 A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
 A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
@@ -451,3 +451,9 @@ King Leonidas
 Defense 30, Greek, Infantry
 A; ¤deploy_forward(3)
 T; All friendly Greek cards within range 1 have +10 Defense.
+
+Rendezvous with Destiny
+Defense 100, American
+A; ¤deploy_rearward(2)
+R; ¤upkeep(2)
+T; All friendly American cards have +10 Offense.
