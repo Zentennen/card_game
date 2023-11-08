@@ -110,7 +110,7 @@ R; ¤critical_hit(1 Fire)
 Cerberus
 Offense 60, Defense 20, Power 40, Health 3, Fire, Greek, Italian, Undead
 A; ¤deploy_forward(8)
-R; When this card attacks, you may choose any number of susceptible cards, spend 1 Fire per card chosen and damage each of them.
+R; When this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and damage each of them.
 
 Forced March
 A; ¤equip(1)
@@ -322,9 +322,9 @@ T; Any card this is attached to has +3 Speed.
 T; You may look at any cards other players draw.
 
 Gates of Olympus
-Greek, Italian, Structure
+Defense 20, Morale 1, Greek, Italian, Structure
 A; ¤deploy_rearward(3)
-A; Exhaust this card and reveal the top card of your deck. If the card revealed is Greek, unexhaust a friendly Greek card. If the card revealed is Italian, unexhaust a friendly Italian card.
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Italian, resupply 1. If it's Greek, draw it to your hand.
 
 Spirit of Deceit
 Offense 20, Defense 30, Spirit, Unholy
@@ -348,29 +348,26 @@ A; ¤deploy_rearward(6)
 A; Exhaust this card, spend 1 Air and resupply 4.
 
 Ju 87 Stuka
-Power 40, Air, Bomber, German
-A; ¤deploy_rearward(4 and 1 Air)
-A; ¤airstrike(1) Damage and suppress a susceptible card.
-
-Ju 88 
-Power 70, Air, Bomber, German
-A; ¤deploy_rearward(2 and 1 Air)
+Power 30, Air, Bomber, German
+A; ¤deploy_rearward(2 and 2 Air)
+A; ¤airstrike(1 Fire) Damage and suppress a susceptible card.
 
 Me 262
-Offense 100, Defense 100, Power 90
-A; ¤deploy_rearward(2 Air)
-A; ¤airstrike(1 Fire) Damage and suppress any susceptible card.
+Offense 50, Defense 60, Power 50
+A; ¤deploy_rearward(1 and 3 Air)
+A; ¤airstrike(1 Fire) Damage and suppress any susceptible card on the field.
 R; ¤intercept(2 Air)
 
 Il-2 Ilyusha
-Offense 20, Defense 40, Power 60, Air, Fighter, Russian
+Offense 20, Defense 40, Power 50, Air, Bomber, Russian
 A; ¤deploy_rearward(2)
-A; ¤airstrike(2)
+A; ¤airstrike(2) Damage and suppress any susceptible card on the field.
+A; ¤airstrike(2) Suppress any card on the field.
 
 Il-10 Sturmovik
-Offense 30, Defense 50, Power 70, Air, Fighter, Russian
+Offense 30, Defense 50, Air, Bomber, Russian
 A; ¤deploy_forward(2)
-A; ¤airstrike(2)
+A; ¤airstrike(2) Damage and suppress any 
 
 A-10 Warthog
 Offense 20, Defense 30, Power 40, Air, American, Bomber
@@ -393,6 +390,10 @@ Houdou
 Offense 40, Defense 20, Beast, Chinese, Fire
 A; ¤deploy_forward(3)
 T; This card has +10 Offense for each Fire supply you have spent this turn.
+
+Burma Road
+Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
 
 King Leonidas
 Offense 10, Defense 60, Greek, Infantry
