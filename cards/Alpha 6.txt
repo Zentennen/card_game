@@ -201,7 +201,7 @@ A; ¤deploy_forward(3)
 T; This card has +40 Defense while not in combat.
 
 Ares
-Offense 60, Health 2, Greek, Italian 
+Offense 60, Health 2, Morale 1, Tactics 1, Greek, Italian 
 A; ¤deploy_forward(6)
 T; All other allied cards within range 1 have +30 Offense while attacking.
 
@@ -267,12 +267,6 @@ R; When this card is unexhausted, spend 1 or exhaust it.
 Eye of the Storm
 Air
 A; ¤action(3) Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
-
-Phoenix
-Offense 60, Defense 30, Power 60, Speed 4, Air, Fire
-A; ¤deploy_forward(2 Air and 2 Fire)
-R; ¤airstrike(1 Air or 1 Fire) Damage a susceptible card on the field.
-R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
 
 Sturmgewehr
 Equipment, German, Infantry
@@ -347,45 +341,6 @@ Air, German, Transport
 A; ¤deploy_rearward(6)
 A; Exhaust this card, spend 1 Air and resupply 4.
 
-Ju 87 Stuka
-Power 30, Air, Bomber, German
-A; ¤deploy_rearward(2 and 2 Air)
-A; ¤airstrike(1 Fire) Damage and suppress a susceptible card.
-
-Me 262
-Offense 50, Defense 60, Power 50
-A; ¤deploy_rearward(1 and 3 Air)
-A; ¤airstrike(1 Fire) Damage and suppress any susceptible card on the field.
-R; ¤intercept(2 Air)
-
-Il-2 Ilyusha
-Offense 20, Defense 40, Power 50, Air, Bomber, Russian
-A; ¤deploy_rearward(2)
-A; ¤airstrike(2) Damage and suppress any susceptible card on the field.
-A; ¤airstrike(2) Suppress any card on the field.
-
-Il-10 Sturmovik
-Offense 30, Defense 50, Air, Bomber, Russian
-A; ¤deploy_forward(2)
-A; ¤airstrike(2) Damage and suppress any 
-
-A-10 Warthog
-Offense 20, Defense 30, Power 40, Air, American, Bomber
-A; ¤deploy_rearward(3 Air)
-A; ¤airstrike(3) Damage and suppress up to 3 susceptible cards on the field.
-
-F-15 Eagle
-Offense 100, Defense 100, Power 100, Air, American, Fighter
-A; ¤deploy_rearward(4 Air)
-A; ¤airstrike(2 Fire) Eliminate any susceptible card.
-R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
-
-AC-130 Gunship
-Power 30, Defense 30, Air, American, Fire, Giant, Transport
-A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
-A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
-A; Exhaust this card, spend 1 Air and resupply 4 Fire.
-
 Houdou
 Offense 40, Defense 20, Beast, Chinese, Fire
 A; ¤deploy_forward(3)
@@ -401,7 +356,7 @@ A; ¤deploy_forward(3)
 T; Friendly Greek cards within range 1 have +20 Defense.
 
 Hypnos
-OFfense 20, Defense 50, Power 40, Greek, Holy, Italian
+Offense 20, Defense 50, Power 40, Greek, Holy, Italian
 A; ¤deploy_forward(6)
 R; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
 
@@ -458,3 +413,53 @@ Defense 100, American
 A; ¤deploy_rearward(2)
 R; ¤upkeep(2)
 T; All friendly American cards have +10 Offense.
+
+Urbi et Orbi
+Italian
+A; ¤deploy_rearward(3)
+R; ¤upkeep(3)
+T; All allied cards have +5 Offense for each friendly Italian card.
+
+Ju 87 Stuka
+Power 30, Air, Bomber, German
+A; ¤deploy_rearward(5)
+A; ¤airstrike(1 Air) Suppress any card and damage it if it's susceptible.
+
+Me 262
+Offense 60, Defense 60, Power 60
+A; ¤deploy_rearward(6)
+A; ¤airstrike(2 Air) Suppress any card on the field and damage it if it's susceptible.
+R; ¤intercept(2 Air)
+
+Il-2 Ilyusha
+Offense 20, Defense 40, Power 50, Air, Bomber, Russian
+A; ¤deploy_rearward(2) 
+A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+
+Il-10 Sturmovik
+Offense 20, Defense 40, Power 60, Air, Bomber, Russian
+A; ¤deploy_forward(2)
+A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+
+A-10 Warthog
+Offense 20, Defense 20, Power 70, Air, American, Bomber
+A; ¤deploy_rearward(3 and 2 Air)
+A; ¤airstrike(3) Suppress up to 2 cards on the field. Damage all susceptible ones.
+
+F-15 Eagle
+Offense 100, Defense 100, Power 100, Air, American, Fighter
+A; ¤deploy_rearward(5 Air)
+A; ¤airstrike(2 Fire) Eliminate any susceptible card on the field.
+R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
+
+AC-130 Gunship
+Power 30, Defense 30, Air, American, Fire, Giant, Transport
+A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
+A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
+A; Exhaust this card, spend 1 Air and resupply 4 Fire.
+
+Phoenix
+Offense 60, Defense 30, Power 60, Speed 4, Air, Fire
+A; ¤deploy_forward(2 Air and 2 Fire)
+R; ¤airstrike(1 Air or 1 Fire) Damage a susceptible card on the field.
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
