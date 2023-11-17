@@ -55,8 +55,10 @@ fn initialize_card(card: &mut Card, s: &str) {
 
 fn process_card(card: &mut Card, s: &str) -> Maybe {
     let prev = find_item(s, 0);
+    
     if let Some((mut prop, mut offset)) = prev {
         initialize_card(card, &s[..offset]);
+        
         while let Some(next) = find_item(s, offset + 1) {
             let substr = &s[2 + offset..next.1].trim();
             match next.0 {
@@ -66,6 +68,8 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
                 'F' => card.flavor_text.push_str(substr),
                 _ => anyhow::bail!("Invalid property char: {}", next.0)
             }
+            
+            print(next.0);
             (prop, offset) = next;
         }
 
@@ -146,7 +150,10 @@ pub fn serialize_to_json(cards: &Vec<Card>) {
 pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     let mut cards = Vec::<Card>::with_capacity(10000);
 
+    //find the provided directory
     let entries = std::fs::read_dir(directory).expect(directory);
+    
+    //find every txt file in the direcyory
     for entry in entries {
         if let Result::Ok(entry) = entry {
             if let Some(ext) = entry.path().extension() {
@@ -154,6 +161,7 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
                     println!("Processing file: {}", &entry.path().to_str().unwrap());
                     let string = std::fs::read_to_string(entry.path());
                     if let Ok(string) = string {
+                        //parse the file as a list of cards
                         cards.append(&mut parse_txt_string(string));
                     }
                     else {
@@ -165,8 +173,18 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     }
 
     for card in cards.iter_mut() {
-        card.attributes.sort_by(|a, b| { a.n.cmp(&b.n) });
+        print(card.abiilities.len());
         card.commander = commanders;
+        
+        //sort types alphabetically
+        card.types.sort_by(|a, b| { a.cmp(&b) });
+        
+        //sort attributes by position in the attributes array
+        card.attributes.sort_by(|a, b| {
+            let i = attributes.iter().position(|x| *x == a.n).unwrap();
+            let j = attributes.iter().position(|x| *x == b.n).unwrap();
+            i.cmp(&j)
+        });
     }
 
     cards

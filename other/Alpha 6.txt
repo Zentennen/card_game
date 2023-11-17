@@ -1,0 +1,471 @@
+Sun Spirit
+Offense 50, Health 2, Fire, Spirit
+A; ¤deploy_forward(2 Fire)
+A; ¤deploy_forward(2) Damage this card.
+
+Grim Reaper
+Offense 60, Health 3, Salvage 7, Spirit, Unholy
+A; ¤deploy_forward(8)
+R; ¤breakthrough(1)
+R; When this card damages another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
+
+Witch of Salem
+Offense 30, Defense 30, Power 80, Salvage 5, Mage, Unholy
+A; ¤deploy_forward(6)
+T; Susceptible enemy cards within range 2 have -20 Defense.
+
+Cain
+Offense 30, Defense 50, Salvage 3, Human, Unholy
+A; ¤deploy_forward(4)
+T; This card has +5 Offense and +5 Defense for each enemy card within range 1.5.
+
+Minotaur Warband
+Offense 50, Defense 50, Infantry, Minotaur
+A; ¤deploy_forward(4)
+
+Minotaur Berserker
+Offense 50, Defense 50, Salvage 3, Infantry, Minotaur
+A; ¤deploy_forward(4)
+R; ¤upkeep(1)
+R; ¤breakthrough(1)
+
+Semi-Motorized Infantry
+Offense 30, Defense 60, Health 2, Salvage 5, Speed 1.5, Motorized, Infantry, Italian
+A; ¤deploy_forward(6)
+R; ¤flanking(1)
+R; ¤upkeep(1)
+
+Cacus
+Offense 100, Defense 10, Health 3, Power 30, Greek, Italian, Fire, Giant, Artillery
+A; ¤deploy_forward(8)
+A; Spend 1 Fire and exhaust any susceptible card within range 2.
+
+PaK 38
+Offense 100, Defense 40, Speed 0.5, Salvage 3, Artillery, Fire, German
+A; ¤deploy_forward(3)
+R; ¤critical_hit(1 Fire)
+R; ¤upkeep(1)
+
+Living Flame
+Offense 100, Fire
+A; ¤deploy_forward(2 Fire) 
+R; ¤upkeep(1 Fire)
+R; ¤critical_hit(1 Fire)
+
+Flaming Barrier
+Offense 100, Speed 0, Fire, Structure
+A; ¤deploy_forward(2 or 1 Fire)
+R; ¤critical_hit(1 Fire)
+T; ¤defender
+
+Maginot Line
+Offense 100, Defense 100, Speed 0, French, Structure
+A; ¤deploy_forward(2)
+R; ¤upkeep(1)
+R; ¤critical_hit(0)
+T; ¤defender
+
+Iron Giant
+Offense 30, Defense 60, Health 2, Speed 0, Earth, Giant
+A; ¤deploy_forward(4)
+
+Winged Hussars
+Offense 20, Defense 30, Speed 2, Salvage 1, Eastern European, Cavalry
+A; ¤deploy_forward(2)
+R; ¤flanking(1)
+R; ¤upkeep(1)
+
+Last Stand
+A; ¤equip(1)
+T; Any card this is attached to has +3 Health.
+R; At the end of each round, destroy any card this is attached to.
+
+Giant Minotaur
+Offense 50, Defense 50, Health 3, Giant, Minotaur
+A; ¤deploy_forward(8)
+R; ¤critical_hit(2)
+
+Coup de Grace
+A; ¤equip(0)
+R; upkeep(2)
+T; Any card this is attached to has ¤critical_hit(2).
+
+One Man Army
+A; ¤equip(1)
+R; ¤upkeep(2)
+R; Any card this is attached to has +10 Offense and +10 Defense for each enemy card within range 1.5.
+
+Kriegsglück
+German
+A; ¤equip(2)
+R; ¤upkeep(3)
+T; Any card this is attached to has +40 Offense, +40 Defense and +40 Power.
+
+King Salamander
+Offense 30, Defense 30, Fire, Beast, Reptile
+A; ¤deploy_forward(4 or 2 Fire)
+R; ¤critical_hit(1 Fire)
+T; This card has +10 Offense for each friendly Fire card.
+
+Cerberus
+Offense 60, Defense 20, Power 40, Health 3, Fire, Greek, Italian, Undead
+A; ¤deploy_forward(8)
+R; When this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and damage each of them.
+
+Forced March
+A; ¤equip(1)
+R; In the beginning of your Maneuver phase, destroy this card or damage any card this is attached to.
+T; Any card this is attached to has +1 Speed.
+
+Giant Salamander
+Offense 70, Defense 30, Power 50, Health 3, Fire, Giant, Beast, Reptile
+A; ¤deploy_forward(8 or 4 Fire)
+R; After this card damages another card in combat, you may spend 1 Fire and damage all susceptible cards within range 1 of that card.
+
+Giant Pyrausta
+Offense 30, Defense 30, Health 2, Fire, Air, Giant, Italian
+A; ¤deploy_forward(4 or 2 Fire)
+R; At the end of each round, if there are no other Fire cards within range 1, damage this card.
+
+M2 Howitzer
+Power 30, Salvage 3, American, Artillery, Fire
+A; ¤deploy_forward(4) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 2.5.
+
+M1 Long Tom
+Power 40, Speed 0.5, Salvage 5, American, Artillery, Fire
+A; ¤deploy_forward(6) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
+
+M1 Black Dragon
+Power 80, Speed 0, Salvage 7, American, Artillery, Fire, Giant
+A; ¤deploy_forward(8) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
+
+Porphyrion
+Offense 70, Defense 10, Health 4, Giant, Greek, Italian
+A; ¤deploy_forward(8)
+T; All friendly Giant cards have +1 Health.
+
+Shepherd of Fire
+Offense 60, Defense 20, Health 2, Fire, Spirit, Unholy
+A; ¤deploy_forward(6)
+T; All friendly Fire cards have +1 Speed.
+
+Dirlewanger Brigade
+Offense 20, Defense 10, Health 2, German, Infantry, Unholy
+A; ¤deploy_forward(3)
+R; ¤critical_hit(3)
+
+Minotaur Horde
+Offense 50, Defense 50, Health 2, Infantry, Minotaur
+A; ¤deploy_forward(6)
+
+Surtr
+Offense 60, Defense 40, Health 2, Fire, German, Giant
+A; ¤deploy_forward(8)
+A; ¤critical_hit(1 Fire)
+A; ¤breakthrough(1 Fire)
+
+Manhattan Project
+American
+A; ¤deploy_rearward(1) Exhaust this card.
+A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
+
+Ker
+Offense 70, Defense 50, Air, Greek, Italian, Spirit, Unholy
+A; ¤deploy_forward(6 or 3 Air)
+R; When a card within range 2 is destroyed, unexhaust this card.
+
+Thanatos
+Offense 30, Defense 50, Power 30, Air, Greek, Italian, Unholy
+A; ¤deploy_forward(6 or 3 Air)
+R; In the beginning of your Maneuver phase, damage all susceptible cards within range 1.5.
+
+Ludwig von Crüwell
+German, Officer
+A; ¤equip(3)
+T; All friendly German and Italian cards within range 1 have +20 Offense.
+
+Guardian Spirit
+Offense 40, Health 2, Holy, Spirit
+A; ¤deploy_forward(6)
+T; All other allied cards within range 1 have +1 Health.
+
+Chuikov's Chosen
+Offense 30, Defense 50, Infantry, Russian
+A; ¤deploy_forward(3)
+T; This card has +40 Defense while not in combat.
+
+Ares
+Offense 60, Health 2, Morale 1, Tactics 1, Greek, Infantry, Italian 
+A; ¤deploy_forward(6)
+T; All other allied cards within range 1 have +30 Offense while attacking.
+
+Romulus
+Offense 20, Defense 20, Holy, Italian
+A; ¤deploy_forward(6)
+T; All friendly Italian cards have +20 Defense.
+R; When this card is destroyed, unexhaust all friendly Italian cards.
+
+Inner Flame
+Power 40, Fire
+A; ¤action(1 Fire) and attach this card to a susceptible or friendly card.
+R; When a card this is attached to attacks, damage and unexhaust it.  
+
+Sturmzug
+Offense 40, Defense 60, German, Infantry
+A; ¤deploy_forward(6)
+R; ¤flanking(1 Fire)
+
+Vernichtungsfeuer
+Artillery, German
+A; ¤deploy_rearward(4 or 2 Fire)
+R; ¤upkeep(2 Fire)
+R; When friendly Artillery card damages another card, if that card is 1 damage from being destroyed, eliminate it.
+
+Centaur Warband
+Offense 40, Defense 40, Health 1, Speed 2, Cavalry
+R; ¤breakthrough(1)
+A; ¤deploy_forward(4)
+
+Centaur Horde
+Offense 40, Defense 40, Health 2, Speed 2, Cavalry
+R; ¤breakthrough(1)
+A; ¤deploy_forward(6)
+
+Sickle Cut
+A; ¤equip(0)
+T; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'.
+
+Berserk
+A; ¤equip(0)
+T; Any card this is attached to has '¤breakthrough(2)'
+
+Kindred Spirits
+Offense 20, Defense 70, Spririt
+A; ¤deploy_forward(4)
+T; While there is a nearby friendly Spirit card, this card has +40 Offense.
+
+Giuseppe Garibaldi
+Salvage 2, Italian, Officer, Politician
+A; ¤equip(4)
+T; Enemy cards within range 3 have -20 Defense for each time they have attacked a friendly Italian card this turn.
+
+Pienaar's Battalion
+Offense 20, Defense 30, British, Infantry
+A; ¤deploy_forward(2)
+R; When this card is unexhausted, spend 1 or exhaust it.
+
+Eye of the Storm
+Air
+A; ¤action(3) Spend 1 less for each friendly Air card. Look at the hand of any enemy player.
+
+Sturmgewehr
+Equipment, German, Infantry
+A; ¤equip(2)
+T; Any friendly Infantry card this is attached to has +20 Offense and +20 Defense.
+
+Library of Alexandria
+Health 2, Tactics 1
+A; ¤deploy_rearward(1)
+R; When a Fire card damages this card, damage it again.
+
+Maxim Gunner
+Offense 10, Defense 40, Speed 0
+A; ¤deploy_forward(2)
+T; ¤defender
+T; This card has +30 Offense while unexhausted.
+
+Browning M1919
+Power 30, American, Equipment
+A; ¤equip(1)
+R; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
+
+Valkyrie
+Offense 70, Defense 40, Power 70, Air, German, Holy
+A; ¤deploy_forward(6 or 3 Air)
+R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
+R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
+
+Day of Wrath
+Power 40, Fire, Holy
+A; ¤action(3 Fire) Damage all susceptible cards.
+
+General Erwin Rommel
+German, Officer
+A; ¤equip(3)
+R; In the beginning of your Attack phase, exhaust any card this is attached to and attack with it. That attack bypasses the enemy frontline.
+
+Big Bertha
+Power 100, Salvage 4, Artillery, Fire, German, Giant
+A; ¤deploy_rearward(2 Fire) Exhaust this card.
+A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on the field.
+
+Pegasus
+Cavalry, Greek, Holy, Italian
+A; ¤equip(2 Air)
+T; Any card this is attached to has +3 Speed.
+T; You may look at any cards other players draw.
+
+Gates of Olympus
+Defense 20, Morale 1, Greek, Italian, Structure
+A; ¤deploy_rearward(3)
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Italian, resupply 1. If it's Greek, draw it to your hand.
+
+Spirit of Deceit
+Offense 20, Defense 30, Spirit, Unholy
+A; ¤deploy_forward(4)
+R; When another Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+
+French 75
+Power 40, Salvage 1, American, Artillery, Fire
+A; ¤deploy_forward(2) Exhaust this card.
+A; Exhaust this card, spend 1 and suppress any susceptible card within range 2.
+T; ¤defender
+
+Skunkworks
+Defense 40, Air, American, Structure
+A; ¤deploy_rearward(1 Air) Exhaust this card.
+A; Exhaust this card, spend 1 and resupply 1 Air.
+
+Ju 52
+Air, German, Transport
+A; ¤deploy_rearward(6)
+A; Exhaust this card, spend 1 Air and resupply 4.
+
+Houdou
+Offense 40, Defense 20, Beast, Chinese, Fire
+A; ¤deploy_forward(3)
+T; This card has +10 Offense for each Fire supply you have spent this turn.
+
+Burma Road
+Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
+King Leonidas
+Offense 10, Defense 60, Greek, Infantry
+A; ¤deploy_forward(3)
+T; Friendly Greek cards within range 1 have +20 Defense.
+
+Hypnos
+Offense 20, Defense 50, Power 40, Greek, Holy, Italian
+A; ¤deploy_forward(6)
+R; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
+
+Benito Mussolini
+Defense 20, Italian, Unholy
+A; ¤deploy_rearward(3)
+T; All German cards have +10 Offense, all Italian cards have +10 Defense and all Unholy cards have +10 Power.
+
+Ragnarök
+Defense 100, Health 3, German, Holy
+A; ¤deploy_rearward(2)
+R; ¤upkeep(2 Fire)
+R; When this card is destroyed, you lose the game.
+T; All friendly cards have +30 Offense.
+
+Echidna
+Offense 30, Defense 40, Greek, Italian, Unholy
+A; ¤deploy_forward(5)
+R; When an Unholy card enters your board, resupply 2.
+
+Equalizer
+Power 20, Fire
+A; ¤action(2 Fire) All susceptible cards in the frontline or backline of any player is damaged twice.
+T; This card has +10 Power for each friendly Fire card.
+
+Holy Flame
+Power 30, Fire, Holy
+A; ¤action(2 Fire) Damage any susceptible card. 
+T; This card has +10 Power for each friendly Holy card.
+
+Dietrich von Bern
+Offense 70, Defense 30, 
+A; ¤deploy_forward(5)
+R; ¤critical_hit(2)
+T; This card has +10 Defense for each friendly German card.
+
+Efreet
+Offense 60, Defense 60, Fire, Spirit, Unholy
+A; ¤deploy_forward(6 or 3 Fire)
+T; Friendly Unholy cards have +20 Offense.
+T; Friendly Fire cards have +20 Power.
+
+Achilles
+Offense 30, Defense 60, Greek, Human, Infantry
+A; ¤deploy_forward(4)
+
+King Leonidas
+Defense 30, Greek, Infantry
+A; ¤deploy_forward(3)
+T; All friendly Greek cards within range 1 have +10 Defense.
+
+Rendezvous with Destiny
+Defense 100, American
+A; ¤deploy_rearward(1)
+R; ¤upkeep(2)
+T; All friendly American cards have +10 Offense and +10 Power.
+
+Urbi et Orbi
+Italian
+A; ¤deploy_rearward(3)
+R; ¤upkeep(3)
+T; All allied cards have +5 Offense for each friendly Italian card.
+
+Ju 87 Stuka
+Power 30, Air, Bomber, German
+A; ¤deploy_rearward(5)
+A; ¤airstrike(1 Air) Suppress any card and damage it if it's susceptible.
+
+Me 262
+Offense 60, Defense 60, Power 60
+A; ¤deploy_rearward(6)
+A; ¤airstrike(2 Air) Suppress any card on the field and damage it if it's susceptible.
+R; ¤intercept(2 Air)
+
+Il-2 Ilyusha
+Offense 20, Defense 40, Power 50, Air, Bomber, Russian
+A; ¤deploy_rearward(2)
+A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+
+Il-10 Sturmovik
+Offense 20, Defense 40, Power 60, Air, Bomber, Russian
+A; ¤deploy_forward(2)
+A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+
+A-10 Warthog
+Offense 20, Defense 20, Power 70, Air, American, Bomber
+A; ¤deploy_rearward(3 and 2 Air)
+A; ¤airstrike(3) Suppress up to 2 cards on the field. Damage all susceptible ones.
+
+F-15 Eagle
+Offense 100, Defense 100, Power 100, Air, American, Fighter
+A; ¤deploy_rearward(4 and 3 Air)
+A; ¤airstrike(2 Fire) Eliminate any susceptible card on the field.
+R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
+
+AC-130 Gunship
+Power 30, Defense 30, Air, American, Fire, Giant, Transport
+A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
+A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
+A; Exhaust this card, spend 1 Air and resupply 4 Fire.
+
+Phoenix
+Offense 60, Defense 30, Power 30, Speed 4, Air, Fire
+A; ¤deploy_forward(2 Air and 2 Fire)
+A; ¤airstrike(1 Air or 1 Fire) Suppress any card on the field and damage it if it's susceptible.
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
+
+Thunderbird
+Offense 60, Defense 30, Power 30, Speed 4, Air, American
+A; ¤deploy_forward(3 and 2 Air)
+A; ¤airstrike(1 Air) Suppress any 2 cards on the field.
+
+Artemis
+Offense 30, Defense 30, Power 30, Artillery, Greek, Italian
+A; ¤deploy_forward(4) Exhaust this card.
+A; Exhaust this card, spend 2 and damage any susceptible card within range 2.

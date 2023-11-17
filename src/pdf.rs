@@ -571,6 +571,7 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         y -= flavor_text_h;
     }
 
+
     for prop in &pass {
         y = prop.add_to_pdf(ph, x - text_offset, y, "trait.png");
     }
