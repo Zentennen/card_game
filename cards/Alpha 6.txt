@@ -98,14 +98,14 @@ R; Any card this is attached to has +10 Offense and +10 Defense for each enemy c
 Kriegsglück
 German
 A; ¤equip(2)
-R; ¤upkeep(3)
+R; ¤upkeep(2)
 T; Any card this is attached to has +40 Offense, +40 Defense and +40 Power.
 
 King Salamander
 Offense 30, Defense 30, Fire, Beast, Reptile
 A; ¤deploy_forward(4 or 2 Fire)
-R; ¤critical_hit(1 Fire)
 T; This card has +10 Offense for each friendly Fire card.
+R; ¤critical_hit(1 Fire)
 
 Cerberus
 Offense 60, Defense 20, Power 40, Health 3, Fire, Greek, Italian, Undead
@@ -201,7 +201,7 @@ A; ¤deploy_forward(3)
 T; This card has +40 Defense while not in combat.
 
 Ares
-Offense 60, Health 2, Morale 1, Tactics 1, Greek, Infantry, Italian 
+Offense 60, Health 2, Morale 1, Tactics 1, Greek, Italian 
 A; ¤deploy_forward(6)
 T; All other allied cards within range 1 have +30 Offense while attacking.
 
@@ -236,6 +236,10 @@ Centaur Horde
 Offense 40, Defense 40, Health 2, Speed 2, Cavalry
 R; ¤breakthrough(1)
 A; ¤deploy_forward(6)
+
+Rendezvous with Destiny
+American
+A; ¤covert_action(2) Resupply 1 for each friendly American card.
 
 Sickle Cut
 A; ¤equip(0)
@@ -406,9 +410,9 @@ T; All friendly Greek cards within range 1 have +10 Defense.
 
 Rendezvous with Destiny
 Defense 100, American
-A; ¤deploy_rearward(1)
+A; ¤deploy_rearward(2)
 R; ¤upkeep(2)
-T; All friendly American cards have +10 Offense and +10 Power.
+T; All friendly American cards have +10 Offense.
 
 Urbi et Orbi
 Italian
@@ -429,7 +433,7 @@ R; ¤intercept(2 Air)
 
 Il-2 Ilyusha
 Offense 20, Defense 40, Power 50, Air, Bomber, Russian
-A; ¤deploy_rearward(2)
+A; ¤deploy_rearward(2) 
 A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
 
 Il-10 Sturmovik
@@ -438,13 +442,13 @@ A; ¤deploy_forward(2)
 A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
 
 A-10 Warthog
-Offense 20, Defense 20, Power 70, Air, American, Bomber
+Offense 20, Defense 20, Power 80, Air, American, Bomber
 A; ¤deploy_rearward(3 and 2 Air)
-A; ¤airstrike(3) Suppress up to 2 cards on the field. Damage all susceptible ones.
+A; ¤airstrike(3) Suppress up to 2 cards on the field. Damage each one that is susceptible.
 
 F-15 Eagle
 Offense 100, Defense 100, Power 100, Air, American, Fighter
-A; ¤deploy_rearward(4 and 3 Air)
+A; ¤deploy_rearward(5 Air)
 A; ¤airstrike(2 Fire) Eliminate any susceptible card on the field.
 R; ¤intercept(2 Air) Eliminate any card damaged in the combat.
 
@@ -455,17 +459,7 @@ A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 
 Phoenix
-Offense 60, Defense 30, Power 30, Speed 4, Air, Fire
+Offense 60, Defense 30, Power 60, Speed 4, Air, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
-A; ¤airstrike(1 Air or 1 Fire) Suppress any card on the field and damage it if it's susceptible.
+R; ¤airstrike(1 Air or 1 Fire) Damage a susceptible card on the field.
 R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
-
-Thunderbird
-Offense 60, Defense 30, Power 30, Speed 4, Air, American
-A; ¤deploy_forward(3 and 2 Air)
-A; ¤airstrike(1 Air) Suppress any 2 cards on the field.
-
-Artemis
-Offense 30, Defense 30, Power 30, Artillery, Greek, Italian
-A; ¤deploy_forward(4) Exhaust this card.
-A; Exhaust this card, spend 2 and damage any susceptible card within range 2.
