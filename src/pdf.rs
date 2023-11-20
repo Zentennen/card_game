@@ -268,6 +268,10 @@ impl DeserializedProperty {
         split_main_properties(&mut efct, &mut main_effects);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
+        if efct.contains(|c| c == '(' || c == ')' || c == '¤') {
+            panic!("Unprocessed commands");
+        }
+
         Self { 
             main_effects,
             efct_limited, 

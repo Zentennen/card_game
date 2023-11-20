@@ -56,12 +56,12 @@ fn initialize_card(card: &mut Card, s: &str) {
 fn process_card(card: &mut Card, s: &str) -> Maybe {
     let prev = find_item(s, 0);
     
-    if let Some((mut prop, mut offset)) = prev {
-        initialize_card(card, &s[..offset]);
+    if let Some(mut prev) = prev {
+        initialize_card(card, &s[..prev.1]);
         
-        while let Some(next) = find_item(s, offset + 1) {
-            let substr = &s[2 + offset..next.1].trim();
-            match next.0 {
+        while let Some(next) = find_item(s, prev.1 + 1) {
+            let substr = &s[2 + prev.1..next.1].trim();
+            match prev.0 {
                 'A' => card.abiilities.push(substr.to_string()),
                 'R' => card.reactions.push(substr.to_string()),
                 'T' => card.traits.push(substr.to_string()),
@@ -69,17 +69,16 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
                 _ => anyhow::bail!("Invalid property char: {}", next.0)
             }
             
-            print(next.0);
-            (prop, offset) = next;
+            prev = next;
         }
 
-        let substr = &s[2 + offset..];
-        match prop {
+        let substr = &s[2 + prev.1..];
+        match prev.0 {
             'A' => card.abiilities.push(substr.to_string()),
             'R' => card.reactions.push(substr.to_string()),
             'T' => card.traits.push(substr.to_string()),
             'F' => card.flavor_text.push_str(substr),
-            _ => anyhow::bail!("Invalid property char: {}", prop)
+            _ => anyhow::bail!("Invalid property char: {}", prev.0)
         }
     }
     else {
@@ -173,7 +172,6 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     }
 
     for card in cards.iter_mut() {
-        print(card.abiilities.len());
         card.commander = commanders;
         
         //sort types alphabetically
