@@ -1,0 +1,15 @@
+Storm Sylph
+Offense 3, Defense 3, Power 3, Air, Elemental, Spirit
+A; ¤deploy_forward(4)
+A; ¤airstrike(1 Air) Suppress any susceptible card.
+T; This card has +1 Power for each friendly Air card.
+
+Tempestarius
+Offense 2, Defense 2, Power 3, Air
+A; ¤deploy_forward(3)
+A; Exhaust this card, spend 1 Air and move any susceptible card to a position within range 1 of it.
+
+Paracelsus
+German
+A; ¤deploy_rearward(1)
+R; When an Elemental card uses an ability that spends supply, resupply 1.
