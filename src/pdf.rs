@@ -248,7 +248,7 @@ impl PdfHandler<'_> {
 }
 
 pub struct DeserializedProperty {
-    pub main_effects: Vec<String>,
+    pub keywords: Vec<String>,
     pub efct_limited: String,
     pub efct_non_limited: String,
     pub efct_limited_h: f64,
@@ -263,10 +263,10 @@ impl DeserializedProperty {
         let mut efct_non_limited = String::with_capacity(default_property_effect_alloc);
         let mut efct_limited_l = 0;
         let mut efct_non_limited_l = 0;
-        let mut main_effects = Vec::<String>::with_capacity(10);
+        let mut keywords = Vec::<String>::with_capacity(10);
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         process_commands(&mut efct);
-        split_main_properties(&mut efct, &mut main_effects);
+        split_main_properties(&mut efct, &mut keywords);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         if efct.contains(|c| c == '(' || c == ')' || c == '¤') {
@@ -277,7 +277,7 @@ impl DeserializedProperty {
         }
 
         Self { 
-            main_effects,
+            keywords,
             efct_limited, 
             efct_non_limited, 
             efct_non_limited_h: efct_non_limited_l as f64 * property_height, 
@@ -299,11 +299,11 @@ impl DeserializedProperty {
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
-        //for main_effect in self.main_effects.iter().rev() {
-            //y -= property_height;
-            //ph.set_xy(x, y);
-            //ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
-        //}
+        for keyword in self.keywords.iter().rev() {
+            y -= property_height;
+            ph.set_xy(x, y);
+            ph.multi_cell(&keyword, card_inner_width, property_height, default_text_align);
+        }
     
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
@@ -428,21 +428,21 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
     for prop in acti {
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
+        h += prop.keywords.len() as f64 * property_height;
         h += property_pad_v;
     }
 
     for prop in trig {
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
+        h += prop.keywords.len() as f64 * property_height;
         h += property_pad_v;
     }
 
     for prop in pass {
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
-        h += prop.main_effects.len() as f64 * property_height;
+        h += prop.keywords.len() as f64 * property_height;
         h += property_pad_v;
     }
 

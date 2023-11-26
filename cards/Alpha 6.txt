@@ -30,7 +30,7 @@ R; ¤upkeep(1)
 R; ¤breakthrough(1)
 
 Semi-Motorized Infantry
-Offense 3, Defense 6, Health 2, Salvage 5, Speed 1.5, Motorized, Infantry, Italian
+Offense 3, Defense 6, Health 2, Salvage 5, Speed 1.5, Infantry, Italian
 A; ¤deploy_forward(6)
 R; ¤flanking(1)
 R; ¤upkeep(1)
@@ -82,7 +82,7 @@ A; ¤deploy_forward(2)
 Last Stand
 A; ¤equip(1)
 T; Any card this is attached to has +3 Health.
-R; At the end of each round, destroy any card this is attached to.
+R; When your Maneuver Phase begins, destroy any card this is attached to.
 
 Coup de Grace
 A; ¤equip(0)
@@ -432,8 +432,8 @@ A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptibl
 
 A-10 Warthog
 Offense 2, Defense 2, Power 8, Salvage 6, Air, American, Bomber
-A; ¤deploy_rearward(8)
-A; ¤airstrike(2 Air) Choose up to 2 cards on any field. Damage each one that is susceptible and suppress each one that is unsuppressed.
+A; ¤deploy_rearward(4 and 3 Air)
+A; ¤airstrike(1) Choose up to 2 cards on any field. Damage each one that is susceptible and suppress each one that is unsuppressed.
 
 F-15 Eagle
 Offense 10, Defense 10, Power 10, Air, American, Fighter
@@ -442,19 +442,19 @@ A; ¤airstrike(2 Air) Choose any card. Damage it twice if it's susceptible and s
 R; ¤intercept(2 Air)
 
 AC-130 Gunship
-Power 3, Defense 3, Air, American, Fire, Giant, Transport
+Power 4, Defense 3, Air, American, Fire, Giant, Transport
 A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
-A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
+A; ¤airstrike(3 Fire) Damage all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 
 Phoenix
-Offense 6, Defense 3, Power 3, Speed 4, Air, Elemental, Fire
+Offense 6, Defense 3, Power 3, Speed 4, Air, Beast, Elemental, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
 A; ¤airstrike(1 Air or 1 Fire) Damage any susceptible card.
 R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
 
 Thunderbird
-Offense 7, Defense 4, Power 4, Speed 4, Air, American, Elemental
+Offense 7, Defense 4, Power 4, Speed 4, Air, American, Beast, Elemental
 A; ¤deploy_forward(3 and 2 Air)
 A; ¤airstrike(1 Air) Damage any susceptible card.
 
@@ -494,3 +494,8 @@ Paracelsus
 German
 A; ¤deploy_rearward(1)
 R; When an Elemental card uses an ability that spends supply, resupply 1.
+
+Elemental Apparition
+Offense 7, Defense 7, Health 2, Air, Earth, Elemental, Fire, Water
+A; ¤deploy_forward(5)
+R; When your Maneuver Phase begins, if there are no Elemental cards within range 1, damage this card.
