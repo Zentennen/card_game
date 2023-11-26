@@ -136,19 +136,19 @@ M2 Howitzer
 Power 3, Salvage 3, American, Artillery, Fire
 A; ¤deploy_forward(4) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 2.5.
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Suppress that card if it's unsuppressed.
 
 M1 Long Tom
 Power 4, Speed 0.5, Salvage 5, American, Artillery, Fire
 A; ¤deploy_forward(6) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Suppress that card if it's unsuppressed.
 
 M1 Black Dragon
 Power 8, Speed 0, Salvage 7, American, Artillery, Fire, Giant
 A; ¤deploy_forward(8) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Suppress that card if it's unsuppressed.
 
 Porphyrion
 Offense 3, Health 4, Giant, Greek, Italian
@@ -302,7 +302,7 @@ R; When your Attack Phase begins, exhaust any card this is attached to and attac
 Big Bertha
 Defense 2, Power 10, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(8 or 4 Fire) Exhaust this card.
-A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on any field.
+A; Exhaust this card and spend 2 Fire. Damage any suscpetible card on any field. Suppress that card if it's unsuppressed.
 
 Pegasus
 Cavalry, Greek, Holy, Italian
@@ -431,7 +431,7 @@ A; ¤deploy_forward(6)
 A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
 A-10 Warthog
-Offense 2, Defense 2, Power 8, Salvage 6, Air, American, Bomber
+Offense 2, Defense 2, Power 8, Salvage 7, Air, American, Bomber
 A; ¤deploy_rearward(4 and 3 Air)
 A; ¤airstrike(1) Choose up to 2 cards on any field. Damage each one that is susceptible and suppress each one that is unsuppressed.
 
