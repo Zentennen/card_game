@@ -124,25 +124,31 @@ R; After this card damages another card in combat, you may spend 1 Fire and dama
 Giant Pyrausta
 Offense 3, Defense 3, Health 2, Fire, Air, Giant, Italian
 A; ¤deploy_forward(4 or 2 Air)
-R; At the end of each round, if there are no other Fire cards within range 1, damage this card.
+R; When your Maneuver Phase begins, if there are no Fire cards within range 1, damage this card.
+
+French 75
+Power 4, Salvage 1, American, Artillery, Fire
+A; ¤deploy_forward(3) Exhaust this card.
+A; Exhaust this card, spend 2 and suppress any susceptible card within range 2.
+T; ¤defender
 
 M2 Howitzer
 Power 3, Salvage 3, American, Artillery, Fire
 A; ¤deploy_forward(4) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 2.5.
+A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 2.5.
 
 M1 Long Tom
 Power 4, Speed 0.5, Salvage 5, American, Artillery, Fire
 A; ¤deploy_forward(6) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 3.
 
 M1 Black Dragon
 Power 8, Speed 0, Salvage 7, American, Artillery, Fire, Giant
 A; ¤deploy_forward(8) Exhaust this card.
 T; ¤defender
-A; Exhaust this card, spend 1 Fire and damage and suppress any susceptible card within range 3.
+A; Exhaust this card, spend 2 Fire and damage and suppress any susceptible card within range 3.
 
 Porphyrion
 Offense 3, Health 4, Giant, Greek, Italian
@@ -200,9 +206,9 @@ A; ¤deploy_forward(4)
 T; This card has +4 Defense while not in combat.
 
 Ares
-Offense 10, Defense 7, Charisma 2, Tactics 1, Greek, Infantry, Italian 
+Offense 10, Defense 4, Health 2, Charisma 3, Tactics 1, Greek, Infantry, Italian 
 A; ¤deploy_forward(10)
-T; All allied cards within range 1 have +3 Offense while attacking.
+T; All allied cards within range 1.5 have +3 Offense while attacking.
 
 Romulus
 Offense 2, Defense 2, Holy, Italian
@@ -213,7 +219,7 @@ R; When this card is destroyed, unexhaust all friendly Italian cards.
 Inner Flame
 Power 4, Fire
 A; ¤action(1 Fire) Attach this card to a susceptible or friendly card.
-R; When a card this is attached to attacks, damage and unexhaust it.  
+R; When a card this is attached to attacks, damage and unexhaust it.
 
 Sturmzug
 Offense 4, Defense 6, German, Infantry
@@ -296,7 +302,7 @@ R; When your Attack Phase begins, exhaust any card this is attached to and attac
 Big Bertha
 Defense 2, Power 10, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(8 or 4 Fire) Exhaust this card.
-A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on the field.
+A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on any field.
 
 Pegasus
 Cavalry, Greek, Holy, Italian
@@ -313,12 +319,6 @@ Dolos
 Offense 6, Defense 6, Greek, Italian, Spirit, Unholy
 A; ¤deploy_forward(5)
 R; When an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
-
-French 75
-Power 4, Salvage 1, American, Artillery, Fire
-A; ¤deploy_forward(2) Exhaust this card.
-A; Exhaust this card, spend 1 and suppress any susceptible card within range 2.
-T; ¤defender
 
 Skunkworks
 Defense 4, Salvage 1, Air, American, Structure
@@ -406,39 +406,39 @@ T; All allied cards have +0.5 Offense for each friendly Italian card.
 
 Ju 52
 Air, German, Transport
-A; ¤deploy_rearward(6)
+A; ¤deploy_rearward(5)
 A; Exhaust this card, spend 1 Air and resupply 4.
 
 Ju 87 Stuka
-Power 3, Salvage 4, Air, Bomber, German
+Power 4, Salvage 4, Air, Bomber, German
 A; ¤deploy_rearward(5)
-A; ¤airstrike(1 Air) Suppress any card and damage it if it's susceptible.
+A; ¤airstrike(1 Air) Choose any card. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
 Me 262
 Offense 6, Defense 6, Power 6, Salvage 4
 A; ¤deploy_rearward(6)
-A; ¤airstrike(2 Air) Suppress any card on the field and damage it if it's susceptible.
+A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 R; ¤intercept(2 Air)
 
-Il-2 Ilyusha
-Offense 2, Defense 4, Power 5, Salvage 3, Air, Bomber, Russian
-A; ¤deploy_rearward(2)
-A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+Il-2 Sturmovik
+Offense 2, Defense 4, Power 3, Salvage 3, Air, Bomber, Russian
+A; ¤deploy_rearward(4)
+A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
-Il-10 Sturmovik
-Offense 2, Defense 4, Power 6, Air, Bomber, Russian
-A; ¤deploy_forward(2)
-A; ¤airstrike(1 Air) Suppress any card on the field and damage it if it's susceptible.
+Il-10 Beast
+Offense 2, Defense 5, Power 4, Air, Beast, Bomber, Russian
+A; ¤deploy_forward(6)
+A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
 A-10 Warthog
 Offense 2, Defense 2, Power 8, Salvage 6, Air, American, Bomber
 A; ¤deploy_rearward(8)
-A; ¤airstrike(2 Air) Suppress up to 2 cards on the field. Damage each one that is susceptible.
+A; ¤airstrike(2 Air) Choose up to 2 cards on any field. Damage each one that is susceptible and suppress each one that is unsuppressed.
 
 F-15 Eagle
 Offense 10, Defense 10, Power 10, Air, American, Fighter
-A; ¤deploy_rearward(4 and 3 Air)
-A; ¤airstrike(2 Air) Suppress any card on the field and damage it twice if it's susceptible.
+A; ¤deploy_rearward(10)
+A; ¤airstrike(2 Air) Choose any card. Damage it twice if it's susceptible and suppress it if it's unsuppressed.
 R; ¤intercept(2 Air)
 
 AC-130 Gunship
@@ -448,24 +448,24 @@ A; ¤airstrike(4 Fire) Damage and suppress all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 
 Phoenix
-Offense 6, Defense 3, Power 3, Speed 4, Air, Fire
+Offense 6, Defense 3, Power 3, Speed 4, Air, Elemental, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
-A; ¤airstrike(1 Air or 1 Fire) Suppress any card on the field and damage it if it's susceptible.
+A; ¤airstrike(1 Air or 1 Fire) Damage any susceptible card.
 R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
 
 Thunderbird
-Offense 6, Defense 3, Power 3, Speed 4, Air, American
+Offense 7, Defense 4, Power 4, Speed 4, Air, American, Elemental
 A; ¤deploy_forward(3 and 2 Air)
-A; ¤airstrike(1 Air) Suppress any 2 cards on the field.
+A; ¤airstrike(1 Air) Damage any susceptible card.
 
 Artemis
-Offense 7, Defense 7, Power 7, Speed 1.5, Artillery, Greek, Italian
+Offense 5, Defense 7, Power 9, Speed 1.5, Artillery, Greek, Italian
 A; ¤deploy_forward(10) Exhaust this card.
 A; Exhaust this card, spend 1 and damage any susceptible card within range 2.
 
 Kamikaze
-Air, Holy, Japanese, Unholy
-A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage a susceptible enemy card twice. 
+Power 8, Air, Holy, Japanese, Unholy
+A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible enemy card twice. 
 
 Gwyn ap Nudd
 Offense 2, Defense 3, British, Infantry
