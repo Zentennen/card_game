@@ -359,7 +359,7 @@ T; All friendly cards have +3 Offense.
 Echidna
 Offense 9, Defense 9, Greek, Italian, Unholy
 A; ¤deploy_forward(9)
-R; When an Unholy card enters your board, resupply 3.
+R; When an Unholy card enters your field or rear, resupply 3.
 
 Equalizer
 Power 2, Fire
