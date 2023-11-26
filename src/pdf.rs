@@ -1,5 +1,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
+#![allow(dead_code)]
 
 use crate::*;
 use extstd::*;
@@ -271,6 +272,9 @@ impl DeserializedProperty {
         if efct.contains(|c| c == '(' || c == ')' || c == '¤') {
             panic!("Unprocessed commands");
         }
+        if efct.starts_with(' ') {
+            panic!("White space in beginning of property: {efct}");
+        }
 
         Self { 
             main_effects,
@@ -295,11 +299,11 @@ impl DeserializedProperty {
             ph.set_xy(x, y);
             ph.multi_cell(&self.efct_limited, prop_top_w, property_height, default_text_align);
         }
-        for main_effect in self.main_effects.iter().rev() {
-            y -= property_height;
-            ph.set_xy(x, y);
-            ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
-        }
+        //for main_effect in self.main_effects.iter().rev() {
+            //y -= property_height;
+            //ph.set_xy(x, y);
+            //ph.multi_cell(&main_effect, card_inner_width, property_height, default_text_align);
+        //}
     
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);

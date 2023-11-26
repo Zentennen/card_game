@@ -72,7 +72,7 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
             prev = next;
         }
 
-        let substr = &s[2 + prev.1..];
+        let substr = &s[2 + prev.1..].trim();
         match prev.0 {
             'A' => card.abiilities.push(substr.to_string()),
             'R' => card.reactions.push(substr.to_string()),

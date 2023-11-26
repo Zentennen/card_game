@@ -7,7 +7,7 @@ Grim Reaper
 Offense 6, Health 3, Salvage 7, Spirit, Unholy
 A; ¤deploy_forward(8)
 R; ¤breakthrough(1)
-R; Before this card damages another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
+R; When this card damages another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
 
 Witch of Salem
 Offense 2, Defense 2, Power 7, Salvage 5, Mage, Unholy
@@ -15,8 +15,8 @@ A; ¤deploy_forward(5)
 T; Susceptible enemy cards within range 2 have -20 Defense.
 
 Cain
-Offense 3, Defense 5, Salvage 3, Human, Unholy
-A; ¤deploy_forward(4)
+Offense 2, Defense 4, Salvage 3, Human, Unholy
+A; ¤deploy_forward(3)
 T; This card has +0.5 Offense and +0.5 Defense for each enemy card within range 1.5.
 
 Minotaur Warband
@@ -70,20 +70,19 @@ Offense 3, Defense 6, Health 2, Speed 0, Salvage 3, Earth, Giant
 A; ¤deploy_forward(4)
 
 Winged Hussars
-Offense 2, Defense 3, Speed 2, Salvage 1, Eastern European, Cavalry
+Offense 2, Defense 3, Speed 2, Salvage 1, Cavalry, Eastern European
 A; ¤deploy_forward(3)
 R; ¤flanking(1)
 R; ¤upkeep(1)
+
+Cossack Cavalry
+Speed 2, Salvage 1, Cavalry, Russian
+A; ¤deploy_forward(2)
 
 Last Stand
 A; ¤equip(1)
 T; Any card this is attached to has +3 Health.
 R; At the end of each round, destroy any card this is attached to.
-
-Giant Minotaur
-Offense 5, Defense 5, Health 3, Giant, Minotaur
-A; ¤deploy_forward(8)
-R; ¤critical_hit(2)
 
 Coup de Grace
 A; ¤equip(0)
@@ -110,11 +109,11 @@ T; This card has +1 Offense for each friendly Fire card.
 Cerberus
 Offense 6, Defense 2, Power 4, Health 3, Beast, Fire, Greek, Italian, Unholy
 A; ¤deploy_forward(8)
-R; Before this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and damage each of them.
+R; When this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and damage each of them.
 
 Forced March
 A; ¤equip(1)
-R; Before your Maneuver phase begins, destroy this card or damage any card this is attached to.
+R; When your Maneuver Phase begins, destroy this card or damage any card this is attached to.
 T; Any card this is attached to has +1 Speed.
 
 Giant Salamander
@@ -166,7 +165,7 @@ A; ¤deploy_forward(6)
 
 Surtr
 Offense 6, Defense 4, Health 2, Fire, German, Giant
-A; ¤deploy_forward(8)Maneuver
+A; ¤deploy_forward(8)
 A; ¤critical_hit(1 Fire)
 A; ¤breakthrough(1 Fire)
 
@@ -176,14 +175,14 @@ A; ¤deploy_rearward(1) Exhaust this card.
 A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
 
 Ker
-Offense 7, Defense 5, Greek, Italian, Spirit, Unholy
-A; ¤deploy_forward(6)
-R; Before a card within range 2 is destroyed, unexhaust this card.
+Offense 5, Defense 5, Greek, Italian, Spirit, Unholy
+A; ¤deploy_forward(5)
+R; When a card within range 2 is destroyed, unexhaust this card.
 
 Thanatos
 Offense 6, Defense 8, Power 4, Greek, Italian, Unholy
 A; ¤deploy_forward(10)
-R; Before your Maneuver phase begins, damage all susceptible cards within range 1.5.
+R; When your Maneuver Phase begins, damage all susceptible cards within range 1.5.
 
 Ludwig von Crüwell
 German, Officer
@@ -209,12 +208,12 @@ Romulus
 Offense 2, Defense 2, Holy, Italian
 A; ¤deploy_forward(5)
 T; All friendly Italian cards have +1 Defense.
-R; Before this card is destroyed, unexhaust all friendly Italian cards.
+R; When this card is destroyed, unexhaust all friendly Italian cards.
 
 Inner Flame
 Power 4, Fire
-A; ¤action(1 Fire) and attach this card to a susceptible or friendly card.
-R; Before a card this is attached to attacks, damage and unexhaust it.  
+A; ¤action(1 Fire) Attach this card to a susceptible or friendly card.
+R; When a card this is attached to attacks, damage and unexhaust it.  
 
 Sturmzug
 Offense 4, Defense 6, German, Infantry
@@ -225,17 +224,17 @@ Vernichtungsfeuer
 Defense 7, Artillery, German
 A; ¤deploy_rearward(4 or 2 Fire)
 R; ¤upkeep(2 Fire)
-R; Before friendly Artillery card damages another card, if that card is 1 damage from being destroyed, eliminate it.
+R; When a friendly Artillery card damages another card, if that card is 1 damage from being destroyed, eliminate it.
 
 Centaur Warband
-Offense 4, Defense 4, Health 1, Speed 2, Beast, Cavalry
-R; ¤breakthrough(1)
-A; ¤deploy_forward(4)
+Offense 4, Defense 4, Speed 2, Beast, Cavalry
+R; ¤flanking(2)
+A; ¤deploy_forward(3)
 
 Centaur Horde
 Offense 4, Defense 4, Health 2, Speed 2, Beast, Cavalry
-R; ¤breakthrough(1)
-A; ¤deploy_forward(6)
+R; ¤flanking(2)
+A; ¤deploy_forward(5)
 
 Sickle Cut
 A; ¤equip(0)
@@ -258,7 +257,7 @@ T; Enemy cards within range 3 have -20 Defense for each time they have attacked 
 Pienaar's Battalion
 Offense 2, Defense 3, British, Infantry
 A; ¤deploy_forward(2)
-R; Before this card is unexhausted, spend 1 or exhaust it.
+R; When this card is unexhausted, spend 1 or exhaust it.
 
 Eye of the Storm
 Air
@@ -272,18 +271,18 @@ T; Any friendly Infantry card this is attached to has +2 Offense and +2 Defense.
 Library of Alexandria
 Health 2, Tactics 1
 A; ¤deploy_rearward(1)
-R; Before a Fire card damages this card, damage it again.
+R; When a Fire card damages this card, damage it again.
 
 Browning M1919
 Power 3, American, Equipment
 A; ¤equip(1)
-R; Before a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
+R; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
 
 Valkyrie
 Offense 7, Defense 4, Power 7, Air, German, Holy
 A; ¤deploy_forward(6 or 3 Air)
-R; Before an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
-R; Before a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
+R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
+R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
 
 Day of Wrath
 Power 4, Fire, Holy
@@ -292,17 +291,17 @@ A; ¤action(3 Fire) Damage all susceptible cards.
 General Erwin Rommel
 German, Officer
 A; ¤equip(3)
-R; Before your Attack phase begins, exhaust any card this is attached to and attack with it. That attack bypasses the enemy frontline.
+R; When your Attack Phase begins, exhaust any card this is attached to and attack with it. That attack bypasses the enemy frontline.
 
 Big Bertha
-Defense 2, Power 10, Salvage 4, Artillery, Fire, German, Giant
-A; ¤deploy_rearward(2 Fire) Exhaust this card.
+Defense 2, Power 10, Artillery, Fire, German, Giant
+A; ¤deploy_rearward(8 or 4 Fire) Exhaust this card.
 A; Exhaust this card and spend 2 Fire. Damage and suppress any suscpetible card on the field.
 
 Pegasus
 Cavalry, Greek, Holy, Italian
 A; ¤equip(2 Air)
-T; Any card this is attached to has +3 Speed.
+T; Any card this is attached to has +2 Speed.
 T; You may look at any cards other players draw.
 
 Gates of Olympus
@@ -313,7 +312,7 @@ A; Exhaust this card and reveal the top card of your deck. If the revealed card 
 Dolos
 Offense 6, Defense 6, Greek, Italian, Spirit, Unholy
 A; ¤deploy_forward(5)
-R; Before an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+R; When an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
 
 French 75
 Power 4, Salvage 1, American, Artillery, Fire
@@ -343,7 +342,7 @@ T; Friendly Greek cards within range 1 have +2 Defense.
 Hypnos
 Offense 2, Defense 5, Power 4, Greek, Holy, Italian
 A; ¤deploy_forward(6)
-R; Before a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
+R; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
 
 Benito Mussolini
 Defense 2, Italian, Unholy
@@ -354,13 +353,13 @@ Ragnarök
 Defense 10, Health 3, German, Holy
 A; ¤deploy_rearward(2)
 R; ¤upkeep(2 Fire)
-R; Before this card is destroyed, you lose the game.
+R; When this card is destroyed, you lose the game.
 T; All friendly cards have +3 Offense.
 
 Echidna
 Offense 9, Defense 9, Greek, Italian, Unholy
 A; ¤deploy_forward(9)
-R; Before an Unholy card enters your board, resupply 3.
+R; When an Unholy card enters your board, resupply 3.
 
 Equalizer
 Power 2, Fire
@@ -452,7 +451,7 @@ Phoenix
 Offense 6, Defense 3, Power 3, Speed 4, Air, Fire
 A; ¤deploy_forward(2 Air and 2 Fire)
 A; ¤airstrike(1 Air or 1 Fire) Suppress any card on the field and damage it if it's susceptible.
-R; Before this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
 
 Thunderbird
 Offense 6, Defense 3, Power 3, Speed 4, Air, American
@@ -460,22 +459,38 @@ A; ¤deploy_forward(3 and 2 Air)
 A; ¤airstrike(1 Air) Suppress any 2 cards on the field.
 
 Artemis
-Offense 3, Defense 3, Power 3, Artillery, Greek, Italian
-A; ¤deploy_forward(4) Exhaust this card.
-A; Exhaust this card, spend 2 and damage any susceptible card within range 2.
+Offense 7, Defense 7, Power 7, Speed 1.5, Artillery, Greek, Italian
+A; ¤deploy_forward(10) Exhaust this card.
+A; Exhaust this card, spend 1 and damage any susceptible card within range 2.
 
 Kamikaze
 Air, Holy, Japanese, Unholy
 A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage a susceptible enemy card twice. 
 
 Gwyn ap Nudd
-Offense 3, Defense 2, British, Infantry
+Offense 2, Defense 3, British, Infantry
 A; ¤deploy_forward(3)
 T; All friendly Beast cards within range 1.5 have +2 Offense.
 
 Flak 88
-Offense 3, Defense 3, Power 8, Salvage 5, Artillery, Fire, German
+Offense 3, Defense 3, Power 8, Speed 0, Salvage 5, Artillery, Fire, German
 A; ¤deploy_forward(6)
 A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 2.
 R; ¤intercept(1 Fire)
 T; ¤defender
+
+Storm Sylph
+Offense 3, Defense 3, Power 3, Air, Elemental, Spirit
+A; ¤deploy_forward(4)
+A; ¤airstrike(1 Air) Suppress any susceptible card.
+T; This card has +1 Power for each friendly Air card.
+
+Tempestarius
+Offense 2, Defense 2, Power 3, Air
+A; ¤deploy_forward(3)
+A; Exhaust this card, spend 1 Air and move any susceptible card to a position within range 1 of it.
+
+Paracelsus
+German
+A; ¤deploy_rearward(1)
+R; When an Elemental card uses an ability that spends supply, resupply 1.
