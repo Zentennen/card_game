@@ -269,4 +269,10 @@ Flee en Masse
 Power 50
 A; ¤action ¤
 
+
+Elemental Apparition
+Offense 7, Defense 7, Health 2, Air, Earth, Elemental, Fire, Water
+A; ¤deploy_forward(1 Air, 1 Earth, 1 Fire and 1 Water)
+R; When your Maneuver Phase begins, if there are no Elemental cards within range 1, damage this card.
+
 Gale

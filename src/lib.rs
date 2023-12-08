@@ -35,7 +35,7 @@ pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
 pub const text_offset: f64 = 1.0;
 pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
-pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Salvage", "Charisma", "Tactics", "Logistics"];
+pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Salvage", "Morale", "Tactics", "Logistics"];
 
 //name
 pub const name_font_size: f64 = 8.5;
