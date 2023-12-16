@@ -579,7 +579,6 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         y -= flavor_text_h;
     }
 
-
     for prop in &pass {
         y = prop.add_to_pdf(ph, x - text_offset, y, "trait.png");
     }
@@ -594,11 +593,14 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
 fn add_cards(ph: &PdfHandler, cards: &Vec<Card>) {
     ph.set_text_color(255.0, 255.0, 255.0);
     let num_cards = cards.len();
-    for p in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
+    for page in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
         ph.add_page();
+        let bg_width = card_separation_width * cards_per_row as f64 + 6.0;
+        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page) / 3 + 1) as f64 * card_separation_height + 6.0;
+        ph.filled_rect(page_pad_l - 3.0, page_pad_t - 3.0, bg_width, bg_height);
         for r in 0..cards_per_column {
             for c in 0..cards_per_row {
-                let i = p * cards_per_page + r * cards_per_row + c;
+                let i = page * cards_per_page + r * cards_per_row + c;
                 if i < num_cards {
                     let x = page_pad_l as f64 + c as f64 * card_separation_width;
                     let y = page_pad_t as f64 + r as f64 * card_separation_height;
