@@ -490,12 +490,11 @@ German
 A; ¤deploy_rearward(1)
 R; When an Elemental card uses an ability that spends supply, resupply 1.
 
+Test
+Unholy
+A; ¤action(5) Choose any type. Damage all susceptible cards of that type.
+
 Ethnic Cleansing
 Power 1, Unholy
 A; ¤action(5) Choose any type. Damage all susceptible cards of that type.
-P; This card has +1 Power for each friendly Unholy card.
-
-RNGesus
-Offense 4, Defense 5, Holy, Human
-A; ¤deploy_forward(4)
-R; When this card damages another card, reveal the top card of your deck. If that card is Holy, unexhaust this card.
+T; This card has +1 Power for each friendly Unholy card.

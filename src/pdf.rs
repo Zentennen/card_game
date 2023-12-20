@@ -595,8 +595,8 @@ fn add_cards(ph: &PdfHandler, cards: &Vec<Card>) {
     let num_cards = cards.len();
     for page in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
         ph.add_page();
-        let bg_width = card_separation_width * cards_per_row as f64 + 6.0;
-        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page) / 3 + 1) as f64 * card_separation_height + 6.0;
+        let bg_width = std::cmp::min(cards_per_row, num_cards - page * cards_per_page) as f64 * card_separation_width + 3.0;
+        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page) / cards_per_row + 1) as f64 * card_separation_height + 3.0;
         ph.filled_rect(page_pad_l - 3.0, page_pad_t - 3.0, bg_width, bg_height);
         for r in 0..cards_per_column {
             for c in 0..cards_per_row {
