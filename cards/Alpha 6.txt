@@ -179,6 +179,7 @@ Manhattan Project
 Defense 5, American
 A; ¤deploy_rearward(1) Exhaust this card.
 A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
+F; I can't tell you what we will be working on, but I can tell you it will end this war, and it might end all war.
 
 Ker
 Offense 5, Defense 5, Greek, Italian, Spirit, Unholy
@@ -393,6 +394,12 @@ A; ¤deploy_rearward(1)
 R; ¤upkeep(2)
 T; All friendly American cards have +1 Offense and +1 Power.
 
+Wild Hunt
+British, German
+A; ¤deploy_forward(1)
+R; ¤upkeep(2)
+T; All friendly British or German cards have +1 OFfense.
+
 Urbi et Orbi
 Defense 3, Italian
 A; ¤deploy_rearward(3)
@@ -414,6 +421,12 @@ Offense 6, Defense 6, Power 6, Salvage 4
 A; ¤deploy_rearward(6)
 A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 R; ¤intercept(2 Air)
+
+DH.98 Mosquito
+Offense 6, Defense 4, Power 5, Air, Bomber, British
+A; ¤deploy_rearward(4 and 1 Air)
+A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
+R; ¤intercept(1 Air)
 
 Il-2 Sturmovik
 Offense 2, Defense 4, Power 3, Salvage 3, Air, Bomber, Russian
@@ -460,7 +473,7 @@ A; Exhaust this card, spend 1 and damage any susceptible card within range 2.
 
 Kamikaze
 Power 8, Air, Holy, Japanese, Unholy
-A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible enemy card twice. 
+A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible card twice. 
 
 Gwyn ap Nudd
 Offense 2, Defense 3, Salvage 2, British, Infantry
