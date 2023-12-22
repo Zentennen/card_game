@@ -398,7 +398,7 @@ Wild Hunt
 British, German
 A; ¤deploy_forward(1)
 R; ¤upkeep(2)
-T; All friendly British or German cards have +1 OFfense.
+T; All friendly Beast, British or German cards have +1 Offense.
 
 Urbi et Orbi
 Defense 3, Italian
@@ -503,11 +503,11 @@ German
 A; ¤deploy_rearward(1)
 R; When an Elemental card uses an ability that spends supply, resupply 1.
 
-Test
-Unholy
-A; ¤action(5) Choose any type. Damage all susceptible cards of that type.
-
 Ethnic Cleansing
 Power 1, Unholy
 A; ¤action(5) Choose any type. Damage all susceptible cards of that type.
 T; This card has +1 Power for each friendly Unholy card.
+
+Test
+Power 100, Logistics 1 Fire, Defense 100, Logistics 10 Air, Morale 10, Defense 100, Health 3
+A; ¤action(5) Choose any type. Damage all susceptible cards of that type.

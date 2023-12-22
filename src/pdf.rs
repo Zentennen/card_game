@@ -202,7 +202,7 @@ impl PdfHandler<'_> {
         self.pdf.call_method1("line", args).unwrap();
     }
 
-    pub fn string_w(&self, string: &str) -> f64 {
+    pub fn string_width(&self, string: &str) -> f64 {
         let args = types::PyTuple::new(self.py, &[string]);
         let w = self.pdf.call_method1("get_string_width", args).unwrap().to_object(self.py);
         w.extract(self.py).unwrap()
@@ -454,39 +454,71 @@ struct IconData {
     text: String
 }
 
-fn add_icons_to_pdf(ph: &PdfHandler, x: f64, y: f64, delta_y: f64, icon_data: &Vec<IconData>) -> f64 {
+fn count_icon_rows(ph: &PdfHandler, icon_data: &Vec<IconData>) -> usize {
+    if icon_data.len() == 0 {
+        return 0;
+    }
+
+    let mut n = 1;
+    let mut w = 0.0;
+    for i in icon_data {
+        w += icon_size + icon_text_pad_l + ph.string_width(&i.text);
+        if w > card_inner_width {
+            n += 1;
+            w -= card_inner_width;
+        }
+    }
+
+    n
+}
+
+fn add_attributes(ph: &PdfHandler, x: f64, y: f64, icon_data: &Vec<IconData>) -> f64 {
     if icon_data.is_empty() {
         return y;
     }
 
-    ph.set_font_modded(font_name, icon_text_font_size, default_text_mod);
-    let rows = icon_data.len().div_ceil(max_icons_per_row);
-    let icons_per_row = icon_data.len().div_ceil(rows);
     let mut icon = 0;
-    for row in 0..rows {
-        let icons_this_row = usize::min(icons_per_row, icon_data.len() - icon);
-        let y = y + delta_y * row as f64;
-        let step_width = card_outer_width / icons_this_row as f64;
-        let last_icon_width = ph.string_w(&icon_data[icons_this_row - 1].text) + icon_size + icon_text_pad_l;
-        let width = step_width * (icons_this_row - 1) as f64 + last_icon_width;
-        let x = x + (card_outer_width - width) / 2.0;
+    let mut rows = 0;
+    ph.set_font_modded(font_name, icon_text_font_size, default_text_mod);
+    let total_width: f64 = icon_data.iter().map(|i| icon_size + icon_text_pad_l + ph.string_width(&i.text)).sum();
+
+    while icon < icon_data.len() {
+        rows += 1;
+        let y = y + icon_row_height * rows as f64;
+        let mut icons_this_row = 0;
+        let mut width = 0.0;
+        for i in  {
+            let w = icon_size + icon_text_pad_l + ph.string_width(&i.text);
+            
+            if width + w > card_inner_width {
+                break;
+            }
+
+            icons_this_row += 1;
+            width += w;
+        }
+
+        let horizontal_padding = (card_outer_width - width) / icons_this_row as f64;
+        let mut x = x + horizontal_padding / 2.0;
         
-        for i in 0..icons_this_row {
-            let x = x + i as f64 * step_width;
+        for _ in 0..icons_this_row {
             let icon_data = &icon_data[icon];
             icon += 1;
             ph.set_xy(x, y);
             ph.image(&icon_data.image, "icons", icon_size, icon_size);
             ph.text(&icon_data.text, x + icon_size + icon_text_pad_l, y + icon_text_pad_t);
+            x += horizontal_padding + ph.string_width(&icon_data.text) + icon_size + icon_text_pad_l;
         }
     }
 
-    y + rows as f64 * delta_y
+    y + rows as f64 * icon_row_height
 }
 
 fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     print(&card.name);
+    let mut y = base_y;
 
+    //card image
     let image_name = &format!("{}.png", &card.name);
     if ph.has_image(image_name, "card images") {
         ph.set_xy(base_x, base_y);
@@ -499,8 +531,9 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         icon_data.push(IconData{ image: format!("{}.png", attribute.n), text: attribute.v.clone() });
     }
 
-    let rows = icon_data.len().div_ceil(max_icons_per_row);
-    let mut h = upper_alpha_base_height + rows as f64 * icon_row_height;
+    //let rows = icon_data.len().div_ceil(max_icons_per_row);
+    ph.set_font_modded(font_name, icon_text_font_size, default_text_mod);
+    let mut h = upper_alpha_base_height + count_icon_rows(ph, &icon_data) as f64 * icon_row_height;
     
     let mut types = String::with_capacity(default_attr_string_alloc);
     for t in &card.types {
@@ -551,8 +584,6 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
         ph.image("commander_right.png", "icons", commander_size, commander_size);
     }
 
-    let mut y = base_y;
-    
     //name
     ph.set_xy(base_x, y);
     ph.set_font_modded(font_name, name_font_size, name_text_mod);
@@ -560,7 +591,7 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     
     //main attributes
     y += name_h;
-    y = add_icons_to_pdf(ph, base_x, y, icon_row_height, &icon_data);
+    y = add_attributes(ph, base_x, y, &icon_data);
     
     //other attributes
     let x = base_x + card_pad;
@@ -596,7 +627,7 @@ fn add_cards(ph: &PdfHandler, cards: &Vec<Card>) {
     for page in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
         ph.add_page();
         let bg_width = std::cmp::min(cards_per_row, num_cards - page * cards_per_page) as f64 * card_separation_width + 3.0;
-        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page) / cards_per_row + 1) as f64 * card_separation_height + 3.0;
+        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page).div_ceil(cards_per_row)) as f64 * card_separation_height + 3.0;
         ph.filled_rect(page_pad_l - 3.0, page_pad_t - 3.0, bg_width, bg_height);
         for r in 0..cards_per_column {
             for c in 0..cards_per_row {

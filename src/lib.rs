@@ -1,5 +1,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
+#![feature(int_roundings)]
 
 use serde::*;
 
@@ -18,8 +19,8 @@ pub const default_attr_string_alloc: usize = 100;
 pub const string_indicator_char: char = '\"';
 
 //page
-pub const page_pad_t: f64 = 5.0;
-pub const page_pad_l: f64 = 12.0;
+pub const page_pad_t: f64 = 6.0;
+pub const page_pad_l: f64 = 11.0;
 pub const cards_per_column: usize = 3;
 pub const cards_per_row: usize = 3;
 pub const cards_per_page: usize = cards_per_column * cards_per_row;
@@ -43,7 +44,6 @@ pub const commander_size: f64 = 12.0;
 pub const commander_offset_right: f64 = card_outer_width - commander_size;
 
 //icons
-pub const max_icons_per_row: usize = 6;
 pub const icon_size: f64 = 3.5;
 pub const icon_pad_vertical: f64 = 1.5;
 pub const icon_pad_h: f64 = 1.5;
