@@ -285,9 +285,7 @@ impl DeserializedProperty {
         }
     }
 
-    pub fn add_to_pdf(&self, ph: &PdfHandler, base_x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
-        let x = base_x;
-
+    pub fn add_to_pdf(&self, ph: &PdfHandler, x: f64, mut y: f64, prop_sym_name: &str) -> f64 {
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         if !self.efct_non_limited.is_empty() {
             y -= self.efct_non_limited_h;
@@ -308,7 +306,7 @@ impl DeserializedProperty {
         ph.set_xy(x + prop_sym_pad_l, y + prop_sym_pad_t);
         ph.image(prop_sym_name, "icons", prop_sym_size, prop_sym_size);
 
-        y - property_pad_v
+        y - vertical_property_pad
     }
 }
 
@@ -429,24 +427,24 @@ fn get_height_of_properties(acti: &Vec<DeserializedProperty>, trig: &Vec<Deseria
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.keywords.len() as f64 * property_height;
-        h += property_pad_v;
+        h += vertical_property_pad;
     }
 
     for prop in trig {
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.keywords.len() as f64 * property_height;
-        h += property_pad_v;
+        h += vertical_property_pad;
     }
 
     for prop in pass {
         h += prop.efct_non_limited_h;
         h += prop.efct_limited_h;
         h += prop.keywords.len() as f64 * property_height;
-        h += property_pad_v;
+        h += vertical_property_pad;
     }
 
-    h - property_pad_v
+    h - vertical_property_pad
 }
 
 struct IconData {
@@ -472,24 +470,23 @@ fn count_icon_rows(ph: &PdfHandler, icon_data: &Vec<IconData>) -> usize {
     n
 }
 
-fn add_attributes(ph: &PdfHandler, x: f64, y: f64, icon_data: &Vec<IconData>) -> f64 {
+fn add_attributes(ph: &PdfHandler, x: f64, mut y: f64, icon_data: &Vec<IconData>) -> f64 {
     if icon_data.is_empty() {
         return y;
     }
 
-    let mut icon = 0;
-    let mut rows = 0;
     ph.set_font_modded(font_name, icon_text_font_size, default_text_mod);
+    let mut icon = 0;
     let total_width: f64 = icon_data.iter().map(|i| icon_size + icon_text_pad_l + ph.string_width(&i.text)).sum();
+    let rows = (total_width / card_inner_width).ceil();
+    let average_width_per_row = total_width / rows;
 
     while icon < icon_data.len() {
-        rows += 1;
-        let y = y + icon_row_height * rows as f64;
         let mut icons_this_row = 0;
         let mut width = 0.0;
-        for i in  {
-            let w = icon_size + icon_text_pad_l + ph.string_width(&i.text);
-            
+
+        while width <= average_width_per_row && icon + icons_this_row < icon_data.len() {
+            let w = icon_size + icon_text_pad_l + ph.string_width(&icon_data[icon + icons_this_row].text);
             if width + w > card_inner_width {
                 break;
             }
@@ -500,7 +497,6 @@ fn add_attributes(ph: &PdfHandler, x: f64, y: f64, icon_data: &Vec<IconData>) ->
 
         let horizontal_padding = (card_outer_width - width) / icons_this_row as f64;
         let mut x = x + horizontal_padding / 2.0;
-        
         for _ in 0..icons_this_row {
             let icon_data = &icon_data[icon];
             icon += 1;
@@ -509,9 +505,11 @@ fn add_attributes(ph: &PdfHandler, x: f64, y: f64, icon_data: &Vec<IconData>) ->
             ph.text(&icon_data.text, x + icon_size + icon_text_pad_l, y + icon_text_pad_t);
             x += horizontal_padding + ph.string_width(&icon_data.text) + icon_size + icon_text_pad_l;
         }
+
+        y += icon_row_height;
     }
 
-    y + rows as f64 * icon_row_height
+    y
 }
 
 fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
@@ -569,7 +567,8 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //flavor text
     let mut flavor_text_h = 0.0;
     if !card.flavor_text.is_empty() {
-        flavor_text_h = ph.multi_cell_h(&card.flavor_text, card_inner_width, property_height, Alignment::left) + property_pad_v;
+        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
+        flavor_text_h = ph.multi_cell_h(&card.flavor_text, card_inner_width, property_height, default_text_align) + vertical_property_pad;
     }
 
     let h = get_height_of_properties(&acti, &trig, &pass) + lower_alpha_base_height + flavor_text_h;
@@ -602,14 +601,17 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     }
 
     //properties
-    ph.set_font_modded(font_name, default_font_size, default_text_mod);
     y = base_y + card_inner_height;
 
     if flavor_text_h != 0.0 {
-        ph.multi_cell(&card.flavor_text, card_inner_width, property_height, Alignment::left);
-        y -= flavor_text_h;
+        y -= flavor_text_h - vertical_property_pad;
+        ph.set_xy(x - text_offset, y);
+        ph.set_font_modded(font_name, default_font_size, attr_text_mod);
+        ph.multi_cell(&card.flavor_text, card_inner_width, property_height, default_text_align);
+        y -= vertical_property_pad;
     }
 
+    ph.set_font_modded(font_name, default_font_size, default_text_mod);
     for prop in &pass {
         y = prop.add_to_pdf(ph, x - text_offset, y, "trait.png");
     }
@@ -626,8 +628,9 @@ fn add_cards(ph: &PdfHandler, cards: &Vec<Card>) {
     let num_cards = cards.len();
     for page in 0..if num_cards % cards_per_page == 0 { num_cards / cards_per_page } else { num_cards / cards_per_page + 1 } {
         ph.add_page();
-        let bg_width = std::cmp::min(cards_per_row, num_cards - page * cards_per_page) as f64 * card_separation_width + 3.0;
-        let bg_height = std::cmp::min(cards_per_column, (num_cards - page * cards_per_page).div_ceil(cards_per_row)) as f64 * card_separation_height + 3.0;
+        let cards_left = num_cards - page * cards_per_page;
+        let bg_width = std::cmp::min(cards_per_row, cards_left) as f64 * card_separation_width + 3.0;
+        let bg_height = std::cmp::min(cards_per_column, (cards_left + cards_per_row - 1) / cards_per_row) as f64 * card_separation_height + 3.0;
         ph.filled_rect(page_pad_l - 3.0, page_pad_t - 3.0, bg_width, bg_height);
         for r in 0..cards_per_column {
             for c in 0..cards_per_row {

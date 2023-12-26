@@ -1,6 +1,5 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
-#![feature(int_roundings)]
 
 use serde::*;
 
@@ -58,7 +57,7 @@ pub const attribute_height: f64 = 3.2;
 //property
 pub const default_font_size: f64 = 6.5;
 pub const property_height: f64 = 3.0;
-pub const property_pad_v: f64 = 2.0;
+pub const vertical_property_pad: f64 = 2.0;
 pub const prop_sym_size: f64 = 2.5;
 pub const prop_sym_pad_l: f64 = card_inner_width + text_offset - prop_sym_size;
 pub const prop_sym_pad_t: f64 = (property_height * prop_sym_l as f64 - prop_sym_size) / 2.0;

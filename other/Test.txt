@@ -1,0 +1,5 @@
+Manhattan Project
+Defense 5, American
+A; ¤deploy_rearward(1) Exhaust this card.
+A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
+F; "I can't tell you what we will be working on, but I can tell you it will end this war, and it might end all war" - J. R. Oppenheimer
