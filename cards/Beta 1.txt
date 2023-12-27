@@ -10,9 +10,9 @@ R; ¤breakthrough(1)
 R; When this card damages another card in combat, if that card is 1 damage or less from being destroyed, eliminate it.
 
 Witch of Salem
-Offense 2, Defense 2, Power 7, Salvage 5, Unholy
-A; ¤deploy_forward(5)
-T; Susceptible enemy cards within range 2 have -20 Defense.
+Offense 3, Defense 2, Power 6, Salvage 5, Unholy
+A; ¤deploy_forward(3)
+T; Susceptible enemy cards within range 2 have -1 Defense.
 
 Cain
 Offense 2, Defense 4, Salvage 3, Human, Unholy
@@ -190,7 +190,7 @@ F; "I can't tell you what we will be working on, but I can tell you it will end 
 Ker
 Offense 5, Defense 5, Greek, Italian, Spirit, Unholy
 A; ¤deploy_forward(5)
-R; When a card within range 2 is destroyed, unexhaust this card.
+R; When a card within range 2 is destroyed, refresh this card.
 
 Thanatos
 Offense 6, Defense 8, Power 4, Greek, Italian, Unholy
@@ -198,9 +198,10 @@ A; ¤deploy_forward(9)
 R; When your maneuver phase begins, damage all susceptible cards within range 1.5.
 
 Ludwig Crüwell
-German, Officer
-A; ¤equip(3)
+German, Officer, Unholy
+A; ¤equip(4)
 T; All friendly German and Italian cards within range 1 have +2 Offense.
+F; "The Führer envisages a Europe under our absolute control."
 
 Guardian Spirit
 Offense 4, Health 2, Salvage 5, Holy, Spirit
@@ -221,12 +222,12 @@ Romulus
 Offense 2, Defense 2, Holy, Italian
 A; ¤deploy_forward(5)
 T; All friendly Italian cards have +1 Defense.
-R; When this card is destroyed, unexhaust all friendly Italian cards.
+R; When this card is destroyed, refresh all friendly Italian cards.
 
 Inner Flame
 Power 4, Fire
 A; ¤action(1 Fire) Attach this card to a susceptible or friendly card.
-R; When a card this is attached to attacks, damage and unexhaust it.
+R; When a card this is attached to attacks, damage and refresh it.
 
 Sturmzug
 Offense 3, Defense 5, Health 2, Salvage 5, German, Infantry
@@ -263,9 +264,10 @@ A; ¤deploy_forward(4)
 T; While there is a nearby friendly Spirit card, this card has +4 Offense.
 
 Giuseppe Garibaldi
-Salvage 2, Italian, Officer, Politician
+Italian, Officer
 A; ¤equip(4)
 T; Enemy cards within range 3 have -20 Defense for each time they have attacked a friendly Italian card this turn.
+F; "Italy owes to you an undertaking which has merited the applause of the universe"
 
 Pienaar's Battalion
 Offense 2, Health 2, British, Infantry
@@ -282,7 +284,7 @@ A; ¤equip(2)
 T; Any Infantry card this is attached to has +2 Offense and +2 Defense.
 
 Library of Alexandria
-Health 2, Tactics 1
+Health 2, Tactics 1, Structure
 A; ¤deploy_rearward(1)
 R; When a Fire card damages this card, damage it again.
 
@@ -340,13 +342,13 @@ A; ¤deploy_forward(2)
 T; This card has +1 Offense for each Fire supply you have spent this turn.
 
 Burma Road
-Defense 6, Logistics 1, Chinese, Structure
+Defense 4, Logistics 1, Chinese, Structure
 A; ¤deploy_rearward(3)
 
 Hypnos
-Offense 2, Defense 5, Power 4, Greek, Holy, Italian
-A; ¤deploy_forward(6)
-R; When a susceptible or friendly card within range 2.5 is unexhausted, you may choose to heal that card instead. If you do, exhaust this card.
+Offense 4, Defense 7, Power 7, Greek, Holy, Italian
+A; ¤deploy_forward(7)
+R; When a susceptible or friendly card within range 2.5 is refreshed, you may choose to heal that card instead. If you do, exhaust this card.
 
 Benito Mussolini
 Defense 2, Salvage 1,Morale -1, Italian, Unholy
@@ -382,7 +384,7 @@ A; ¤action(7) Damage any susceptible card twice.
 T; This card has +1 Power for each friendly Holy card.
 
 Dietrich von Bern
-Offense 7, Health 2, Morale 1, German, Infantry
+Offense 4, Health 2, Defense 1, Morale 1, German, Infantry
 A; ¤deploy_forward(5)
 R; ¤critical_hit(2)
 T; This card has +1 Defense for each friendly German card.
@@ -407,6 +409,7 @@ American
 A; ¤deploy_rearward(1)
 R; ¤upkeep(2)
 T; All friendly American cards have +1 Offense and +1 Power.
+F; "This generation of Americans has a rendezvous with destiny."
 
 Wild Hunt
 British, German
@@ -419,6 +422,7 @@ Defense 3, Italian
 A; ¤deploy_rearward(3)
 R; ¤upkeep(3)
 T; All allied cards have +0.5 Offense for each friendly Italian card.
+F; "When Rome falls, so will the world."
 
 Ju 52
 Salvage 4, Air, German, Transport
@@ -432,7 +436,7 @@ A; ¤airstrike(1 Air) Choose any card. Damage it if it's susceptible and suppres
 F; "The sniper among bombers."
 
 Me 262
-Offense 6, Defense 6, Power 6, Salvage 4
+Offense 6, Defense 6, Power 6, Salvage 4, Air, Fighter, German
 A; ¤deploy_rearward(6)
 A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 R; ¤intercept(2 Air)

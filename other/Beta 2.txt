@@ -1,0 +1,14 @@
+Red Baron
+German, Pilot
+A; ¤assign(2)
+R; Any Air card this is attached to has +2 Defense.
+
+Cherufe
+Offense 40, Defense 60, Health 3, American, Earth, Fire
+A; ¤deploy_forward(4 and 2 Earth)
+R; ¤upkeep(1 Fire)
+R; ¤critical_Hit(1 Fire)
+
+Rapid Dragon
+Power 10, American, Chinese
+A; ¤action(X) where is any number of Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.

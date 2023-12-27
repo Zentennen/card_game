@@ -1,5 +1,5 @@
 Gaius Julius Caesar
-Morale 9, Tactics 5, Logistics 7, Italian
+Morale 9, Tactics 5, Logistics 7, Italian, Officer, Unholy
 R; When a friendly Structure card enters the board, you may exhaust a friendly Italian card to resupply 1.
 F; "I came, I saw, I conquered."
 
@@ -10,11 +10,11 @@ T; All Italian cards have +1 Offense and all Greek cards have +1 Defense.
 F; "Know that no one is free, except Zeus."
 
 Walther Model
-Morale 8, Tactics 4, Logistics 5, Logistics 1 Fire, German, Officer
+Morale 8, Tactics 4, Logistics 5, Logistics 1 Fire, German, Officer, Unholy
 T; All friendly German cards have +0.5 Defense for each time an enemy Attack Phase has ended without your team being demoralized.
 F; "My soldiers are my children."
 
 Curtis LeMay
-Morale 7, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Fire, Air, American, Fire, Unholy
+Morale 7, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1, Air, American, Fire, Officer, Unholy
 R; ¤objective When friendly Air or Fire cards have dealt 3 damage in total this turn, this card gains +1 Air Logistics and +1 Fire Logistics.
 F; "If you kill enough of them, they stop fighting."
