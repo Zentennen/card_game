@@ -251,10 +251,12 @@ R; ¤flanking(2)
 A; ¤deploy_forward(5)
 
 Sickle Cut
+German
 A; ¤equip(0)
 T; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'.
 
 Berserk
+German
 A; ¤equip(0)
 T; Any card this is attached to has '¤breakthrough(2)'
 
@@ -418,7 +420,7 @@ R; ¤upkeep(2)
 T; All friendly Beast, British or German cards have +1 Offense.
 
 Urbi et Orbi
-Defense 3, Italian
+Defense 3, Holy, Italian
 A; ¤deploy_rearward(3)
 R; ¤upkeep(3)
 T; All allied cards have +0.5 Offense for each friendly Italian card.
