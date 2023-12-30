@@ -58,7 +58,7 @@ R; ¤upkeep(1 Fire)
 R; ¤critical_hit(1 Fire)
 
 Flaming Barrier
-Offense 10, Speed 0, Salvage 1, Fire, Structure
+Offense 10, Speed 0, Fire, Structure
 A; ¤deploy_forward(2 or 1 Fire)
 R; ¤critical_hit(1 Fire)
 T; ¤defender
@@ -455,7 +455,7 @@ A; ¤deploy_rearward(4)
 A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
 Il-10 Beast
-Offense 2, Defense 5, Power 4, Air, Beast, Bomber, Russian
+Offense 2, Defense 5, Power 4, Salvage 5, Air, Beast, Bomber, Russian
 A; ¤deploy_forward(6)
 A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 

@@ -18,15 +18,15 @@ pub const default_attr_string_alloc: usize = 100;
 pub const string_indicator_char: char = '\"';
 
 //page
-pub const page_pad_t: f64 = 6.0;
-pub const page_pad_l: f64 = 11.0;
+pub const page_pad_t: f64 = 13.0;
+pub const page_pad_l: f64 = 13.0;
 pub const cards_per_column: usize = 3;
 pub const cards_per_row: usize = 3;
 pub const cards_per_page: usize = cards_per_column * cards_per_row;
 
 //card
-pub const card_outer_width: f64 = 63.0;
-pub const card_outer_height: f64 = 88.2;
+pub const card_outer_width: f64 = 59.0;
+pub const card_outer_height: f64 = 82.6;
 pub const card_separation_width: f64 = card_outer_width + 3.0;
 pub const card_separation_height: f64 = card_outer_height + 3.0;
 pub const card_inner_width: f64 = card_outer_width - card_pad * 2.0;
