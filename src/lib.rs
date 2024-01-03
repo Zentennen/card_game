@@ -39,8 +39,6 @@ pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", 
 //name
 pub const name_font_size: f64 = 8.5;
 pub const name_h: f64 = 7.0;
-pub const commander_size: f64 = 12.0;
-pub const commander_offset_right: f64 = card_outer_width - commander_size;
 
 //icons
 pub const icon_size: f64 = 3.5;
@@ -50,6 +48,8 @@ pub const icon_row_height: f64 = icon_size + icon_pad_vertical;
 pub const icon_text_font_size: f64 = 8.0;
 pub const icon_text_pad_t: f64 = icon_text_font_size * 0.35;
 pub const icon_text_pad_l: f64 = 1.0;
+pub const commander_icon_size: f64 = 9.0;
+pub const commander_offset_right: f64 = card_outer_width - commander_icon_size;
 
 //attribute
 pub const attribute_height: f64 = 3.2;

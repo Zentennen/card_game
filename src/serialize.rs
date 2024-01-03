@@ -44,7 +44,7 @@ fn initialize_card(card: &mut Card, s: &str) {
                 card.attributes.push(Attribute{ n: name.to_string(), v: value.to_string() });
             }
             else {
-                card.types.push(name.to_string());
+                card.types.push(string.to_string());
             }
         }
         else {

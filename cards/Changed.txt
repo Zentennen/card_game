@@ -1,0 +1,316 @@
+Surtr
+Offense 7, Defense 4, Health 2, Fire, German, Giant
+A; ¤deploy_forward(8)
+A; ¤critical_hit(1 Fire)
+A; ¤breakthrough(1 Fire)
+
+Winged Hussars
+Offense 2, Health 2, Defense 2, Speed 2, Salvage 2, Cavalry, Slavic
+A; ¤deploy_forward(3)
+R; ¤flanking(2)
+R; ¤upkeep(1)
+
+Cossack Cavalry
+Speed 2, Salvage 1, Cavalry, Slavic
+A; ¤deploy_forward(2)
+R; ¤flanking(2)
+
+Flaming Barrier
+Offense 10, Speed 0, Elemental, Fire, Structure
+A; ¤deploy_forward(2 or 1 Fire)
+R; ¤critical_hit(1 Fire)
+T; ¤defender
+
+Living Flame
+Offense 10, Salvage 1 Fire, Elemental, Fire
+A; ¤deploy_forward(2 Fire) 
+R; ¤upkeep(1 Fire)
+R; ¤critical_hit(1 Fire)
+
+Cain
+Offense 2, Defense 2, Salvage 3, Human, Unholy
+A; ¤deploy_forward(3)
+T; This card has +0.5 Offense and +0.5 Defense for each enemy card within range 1.5.
+
+Last Stand
+A; ¤equip(1)
+T; Any card this is attached to has +3 Health and +3 Offense.
+R; When your maneuver phase begins, destroy any card this is attached to.
+
+Coup de Grace
+A; ¤equip(2)
+R; ¤upkeep(2)
+T; Any card this is attached to has +2 Offense and ¤critical_hit(2).
+
+Kriegsglück
+German
+A; ¤equip(2)
+R; ¤upkeep(2)
+T; Any card this is attached to has +3 Offense, +3 Defense and +3 Power.
+
+Giant Pyrausta
+Offense 3, Defense 3, Health 2, Air, Elemental, Fire, Giant, Italian
+A; ¤deploy_forward(4 or 2 Air)
+R; When your maneuver phase begins, if there are no friendly Fire cards within range 1, damage this card.
+
+French 75
+Power 4, Salvage 1, American, Artillery, Fire, French
+A; ¤deploy_forward(3) Exhaust this card.
+A; Exhaust this card, spend 2 and exhaust any susceptible card within range 2.
+T; ¤defender
+
+M2 Howitzer
+Power 3, Salvage 3, American, Artillery, Fire
+A; ¤deploy_forward(4) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Exhaust that card if it's active.
+
+M1 Long Tom
+Power 4, Speed 0.5, Salvage 5, American, Artillery, Fire
+A; ¤deploy_forward(6) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Exhaust that card if it's active.
+
+M1 Black Dragon
+Power 8, Speed 0, Salvage 7, American, Artillery, Fire, Giant
+A; ¤deploy_forward(8) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 2.5. Exhaust that card if it's active.
+
+Ker
+Offense 5, Defense 5, Greek, Italian, Spirit, Unholy
+A; ¤deploy_forward(5)
+R; When a card within range 2 is destroyed, refresh this card.
+
+Thanatos
+Offense 6, Defense 8, Power 4, Greek, Italian, Unholy
+A; ¤deploy_forward(9)
+R; When your maneuver phase begins, damage all susceptible cards within range 1.5.
+
+Ares
+Offense 10, Defense 4, Health 2, Morale 3, Tactics 1, Greek, Infantry, Italian 
+A; ¤deploy_forward(10)
+T; All allied cards within range 1.5 have +3 Offense while attacking.
+
+Vernichtungsfeuer
+Artillery, German
+A; ¤equip(1)
+R; ¤upkeep(2)
+R; When a friendly Artillery card damages another card, if that card is 1 damage or less from being destroyed, eliminate it.
+
+Sickle Cut
+German
+A; ¤equip(1)
+T; Any German card this is attached to has '¤breakthrough(2) and '¤flanking(2)'.
+
+Berserk
+German
+A; ¤equip(1)
+T; Any card this is attached to has '¤breakthrough(2)'
+
+Kindred Spirits
+Offense 3, Defense 6, Salvage 3, Spririt
+A; ¤deploy_forward(4)
+T; While there is a nearby friendly Spirit card, this card has +3 Offense.
+
+Giuseppe Garibaldi
+Italian, Officer
+A; ¤equip(4)
+T; Enemy cards within range 3 have -20 Defense for each time they have attacked a friendly Italian card this turn.
+F; "Italy owes to you an undertaking which has merited the applause of the universe"
+
+Sturmgewehr
+Equipment, German, Infantry
+A; ¤equip(2)
+T; Any Infantry card this is attached to has +2 Offense and +2 Defense.
+
+Library of Alexandria
+Health 2, Tactics 1, Structure
+A; ¤deploy_rearward(1)
+R; When a Fire card damages this card, damage it again.
+
+Valkyrie
+Offense 8, Defense 4, Power 7, Air, German, Holy
+A; ¤deploy_forward(6 or 3 Air)
+R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
+R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
+
+Big Bertha
+Defense 2, Power 10, Artillery, Fire, German, Giant
+A; ¤deploy_rearward(8 or 4 Fire) Exhaust this card.
+A; Exhaust this card and spend 2 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
+
+Pegasus
+Cavalry, Greek, Holy, Italian
+A; ¤equip(2 Air)
+T; Any card this is attached to has +2 Speed.
+T; You may look at any cards other players draw.
+
+Gates of Olympus
+Defense 2, Salvage 2, Morale 1, Greek, Italian, Structure
+A; ¤deploy_forward(3)
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Italian, resupply 1. If it's Greek, draw it to your hand.
+
+Dolos
+Offense 6, Defense 6, Greek, Italian, Spirit, Unholy
+A; ¤deploy_forward(5)
+R; When an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+
+Skunkworks
+Health 2, Salvage 1, Air, American, Structure
+A; ¤deploy_rearward(1 Air) Exhaust this card.
+A; Exhaust this card, spend 1 and resupply 1 Air.
+
+Houdou
+Offense 2, Defense 1, Beast, Chinese, Elemental, Fire
+A; ¤deploy_forward(2)
+T; This card has +1 Offense for each Fire supply you have spent this turn.
+
+Burma Road
+Defense 4, Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
+Hypnos
+Offense 4, Defense 7, Power 7, Greek, Holy, Italian
+A; ¤deploy_forward(7)
+R; When a susceptible or friendly card within range 2.5 is refreshed, you may choose to heal that card instead. If you do, exhaust this card.
+
+Benito Mussolini
+Defense 2, Salvage 1,Morale -1, Italian, Unholy
+A; ¤deploy_rearward(3)
+T; All German cards have +1 Offense, all Italian cards have +1 Defense and all Unholy cards have +1 Power.
+F; "The truth is that men are tired of liberty."
+
+Ragnarök
+Defense 10, Health 3, German, Holy
+A; ¤deploy_rearward(2)
+R; ¤upkeep(2 Fire)
+R; When this card is destroyed, you lose the game.
+T; All friendly cards have +3 Offense.
+
+Echidna
+Offense 9, Defense 6, Health 2, Greek, Italian, Unholy
+A; ¤deploy_forward(9)
+R; When an Unholy card enters your field or rear, resupply 3.
+
+Equalizer
+Power 2, Fire
+A; ¤action(2 Fire) All susceptible cards in the frontline or backline of any player are damaged twice.
+T; This card has +1 Power for each friendly Fire card.
+
+Holy Flame
+Power 4, Fire, Holy
+A; ¤action(2 Fire) Damage any susceptible card. 
+T; This card has +1 Power for each friendly Holy card.
+
+Smite
+Power 5, Holy
+A; ¤action(7) Damage any susceptible card twice.
+T; This card has +1 Power for each friendly Holy card.
+
+Dietrich von Bern
+Offense 5, Health 2, Defense 1, Morale 1, German, Infantry
+A; ¤deploy_forward(5)
+R; ¤critical_hit(2)
+T; This card has +1 Defense for each friendly German card within range 1.5.
+
+Efreet
+Offense 6, Defense 6, Fire, Spirit, Unholy
+A; ¤deploy_forward(6 or 3 Fire)
+T; Friendly Unholy cards have +2 Offense.
+T; Friendly Fire cards have +2 Power.
+
+Achilles
+Offense 3, Defense 6, Salvage 3, Greek, Human, Infantry
+A; ¤deploy_forward(4)
+
+King Leonidas
+Defense 3, Morale 1, Tactics 1, Greek, Infantry
+A; ¤deploy_forward(4)
+T; All friendly Greek cards within range 1 have +1 Defense.
+
+Rendezvous with Destiny
+American
+A; ¤deploy_rearward(1)
+R; ¤upkeep(2)
+T; All friendly American cards have +1 Offense and +1 Power.
+F; "This generation of Americans has a rendezvous with destiny."
+
+Wild Hunt
+British, German
+A; ¤deploy_forward(1)
+R; ¤upkeep(2)
+T; All friendly Beast, British or German cards have +1 Offense.
+
+Urbi et Orbi
+Defense 3, Holy, Italian
+A; ¤deploy_rearward(3)
+R; ¤upkeep(3)
+T; All allied cards have +0.5 Offense for each friendly Italian card.
+F; "When Rome falls, so will the world."
+
+Ju 52
+Salvage 4, Air, German, Transport
+A; ¤deploy_rearward(5)
+A; Exhaust this card, spend 1 Air and resupply 4.
+
+Phoenix
+Offense 6, Defense 3, Power 3, Speed 4, Air, Beast, Elemental, Fire
+A; ¤deploy_forward(2 Air and 2 Fire)
+A; ¤airstrike(1 Air or 1 Fire) Damage any susceptible card.
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
+
+Thunderbird
+Offense 7, Defense 4, Power 4, Speed 4, Air, American, Beast, Elemental
+A; ¤deploy_forward(3 and 2 Air)
+A; ¤airstrike(1 Air) Damage any susceptible card.
+
+Artemis
+Offense 5, Defense 7, Power 9, Speed 1.5, Artillery, Greek, Italian
+A; ¤deploy_forward(10) Exhaust this card.
+A; Exhaust this card, spend 1 and damage any susceptible card within range 2.
+
+Kamikaze
+Power 8, Air, Holy, Japanese, Unholy
+A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible card twice.
+F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
+
+Gwyn ap Nudd
+Offense 2, Defense 3, Salvage 2, British, Infantry
+A; ¤deploy_forward(3)
+T; All friendly Beast cards within range 1.5 have +2 Offense.
+
+Flak 88
+Offense 3, Defense 3, Power 8, Speed 0, Salvage 5, Artillery, Fire, German
+A; ¤deploy_forward(6)
+A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 2.
+R; ¤intercept(1 Fire)
+T; ¤defender
+
+Maxim Gunner
+Offense 1, Health 2, Speed 0, British, Infantry
+A; ¤deploy_forward(2)
+T; ¤defender
+T; This card has +3 Offense while active.
+
+Storm Sylph
+Offense 3, Defense 3, Power 3, Air, Elemental, Spirit
+A; ¤deploy_forward(4 or 2 Air)
+A; ¤airstrike(1 Air) Exhaust any susceptible card.
+T; This card has +1 Power for each friendly Air card.
+
+Tempestarius
+Offense 2, Defense 2, Power 3, Salvage 2, Air
+A; ¤deploy_forward(3)
+A; Exhaust this card, spend 1 Air and move any susceptible card to a position within range 1 of it.
+
+Paracelsus
+German
+A; ¤deploy_forward(2)
+R; When a friendly Elemental card within range 1.5 spends supply for the first time this turn, resupply 1.
+
+Ethnic Cleansing
+Power 1, Unholy
+A; ¤action(6) Damage all susceptible cards of any one type.
+T; This card has +1 Power for each friendly Unholy card.
+F; "You will be judged in years to come by how you responded to genocide on your watch."

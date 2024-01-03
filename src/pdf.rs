@@ -578,9 +578,9 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //Add the corners for heroes
     if card.commander {
         ph.set_xy(base_x, base_y);
-        ph.image("commander_left.png", "icons", commander_size, commander_size);
+        ph.image("commander_left.png", "icons", commander_icon_size, commander_icon_size);
         ph.set_xy(base_x + commander_offset_right, base_y);
-        ph.image("commander_right.png", "icons", commander_size, commander_size);
+        ph.image("commander_right.png", "icons", commander_icon_size, commander_icon_size);
     }
 
     //name
