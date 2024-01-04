@@ -13,33 +13,11 @@ Rapid Dragon
 Power 10, American, Chinese
 A; ¤action(X) where is any number of Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
 
-Ju 87 Stuka
-Power 4, Salvage 4, Air, Bomber, German
-A; ¤deploy_rearward(5)
-A; ¤airstrike(1 Air) Choose any card. Damage it if it's susceptible and suppress it if it's unsuppressed.
-F; "The sniper among bombers."
-
-Me 262
-Offense 6, Defense 6, Power 6, Salvage 4, Air, Fighter, German
-A; ¤deploy_rearward(6)
-A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
-R; ¤intercept(2 Air)
-
 DH.98 Mosquito
 Offense 6, Defense 4, Power 5, Air, Bomber, British
 A; ¤deploy_rearward(4 and 1 Air)
 A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 R; ¤intercept(1 Air)
-
-Il-2 Sturmovik
-Offense 2, Defense 4, Power 3, Salvage 3, Air, Bomber, Slavic
-A; ¤deploy_rearward(4)
-A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
-
-Il-10 Beast
-Offense 2, Defense 5, Power 4, Salvage 5, Air, Beast, Bomber, Slavic
-A; ¤deploy_forward(6)
-A; ¤airstrike(1 Air) Choose any card on any field. Damage it if it's susceptible and suppress it if it's unsuppressed.
 
 A-10 Warthog
 Offense 2, Defense 2, Power 8, Salvage 7, Air, American, Bomber
@@ -59,3 +37,23 @@ A; ¤deploy_rearward(3 Air and 3 Fire) Exhaust this card.
 A; ¤airstrike(3 Fire) Damage all susceptible cards in any field.
 A; Exhaust this card, spend 1 Air and resupply 4 Fire.
 F; "Not all air support is created equal."
+
+Il-10 Beast
+Offense 2, Defense 5, Power 7, Salvage 5, Air, Beast, Bomber, Slavic
+A; ¤deploy_forward(3)
+A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and exhaust it if it's active.
+
+Burma Road
+Defense 4, Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
+Me 262
+Offense 6, Defense 6, Power 6, Salvage 4, Air, Fighter, German
+A; ¤deploy_rearward(3)
+A; ¤airstrike(3 Air) Choose any card on any field. Damage it if it's susceptible and exhaust it if it's active.
+R; ¤intercept(2 Air)
+
+Il-2 Sturmovik
+Offense 2, Defense 4, Power 7, Salvage 3, Air, Bomber, Slavic
+A; ¤deploy_rearward(2)
+A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and exhaust it if it's active.

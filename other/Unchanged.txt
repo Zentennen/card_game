@@ -40,12 +40,6 @@ Offense 4, Health 3, Power 3, Salvage 5, Greek, Italian, Fire, Giant, Artillery
 A; ¤deploy_forward(6)
 A; Spend 1 Fire and exhaust any susceptible card within range 2.
 
-PaK 38
-Offense 10, Defense 4, Speed 0.5, Salvage 2, Artillery, Fire, German
-A; ¤deploy_forward(3)
-R; ¤critical_hit(1 Fire)
-R; ¤upkeep(1)
-
 Maginot Line
 Offense 10, Defense 10, Speed 0, Salvage 1, French, Structure
 A; ¤deploy_forward(2)
@@ -174,3 +168,23 @@ Browning M1919
 Power 3, American, Equipment
 A; ¤equip(1)
 R; When a card this is attached to is damaged by a susceptible card, you may spend 1 and damage that card.
+
+Kamikaze
+Power 8, Air, Holy, Japanese, Unholy
+A; ¤action(2 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible card twice.
+F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
+
+Tempestarius
+Offense 2, Defense 2, Power 3, Salvage 2, Air
+A; ¤deploy_forward(3)
+A; Exhaust this card, spend 1 Air and move any friendly or susceptible card to a position within range 1.5 of it.
+
+Maxim Gunner
+Offense 1, Health 2, Speed 0, British, Infantry
+A; ¤deploy_forward(2)
+T; ¤defender
+T; This card has +3 Offense while active.
+
+Achilles
+Offense 3, Defense 6, Salvage 3, Greek, Human, Infantry
+A; ¤deploy_forward(4)
