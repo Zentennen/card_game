@@ -305,3 +305,8 @@ Power 5, Salvage 4, Air, Bomber, German
 A; ¤deploy_rearward(3)
 A; ¤airstrike(2 Air) Choose any card. Damage it if it's susceptible and exhaust it if it's active.
 F; "The sniper among bombers."
+
+Kamikaze
+Power 7, Air, Holy, Japanese, Unholy
+A; ¤action(1 Air) Destroy any number of friendly Air cards. For each card destroyed, damage any susceptible card twice.
+F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
