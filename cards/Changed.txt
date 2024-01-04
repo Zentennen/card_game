@@ -11,7 +11,7 @@ R; ¤flanking(2)
 R; ¤upkeep(1)
 
 Cossack Cavalry
-Speed 2, Salvage 2, Cavalry, Slavic
+Speed 2, Salvage 1, Cavalry, Slavic
 A; ¤deploy_forward(2)
 R; ¤flanking(2)
 
@@ -28,7 +28,7 @@ A; ¤deploy_forward(2)
 R; ¤critical_hit(1 Fire)
 
 Cain
-Offense 2, Defense 2, Salvage 3, Human, Unholy
+Offense 2, Defense 2, Salvage 2, Human, Unholy
 A; ¤deploy_forward(3)
 T; This card has +0.5 Offense and +0.5 Defense for each enemy card within range 1.5.
 

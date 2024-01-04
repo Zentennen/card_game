@@ -57,3 +57,8 @@ Il-2 Sturmovik
 Offense 2, Defense 4, Power 7, Salvage 3, Air, Bomber, Slavic
 A; ¤deploy_rearward(2)
 A; ¤airstrike(2 Air) Choose any card on any field. Damage it if it's susceptible and exhaust it if it's active.
+
+Thermopylae
+Defense 7, Morale 3, Greek, Structure
+A; ¤deploy_forward(3)
+R; When this card is destroyed, demoralize your team.

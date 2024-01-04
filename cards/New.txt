@@ -2,3 +2,19 @@ True Strike
 A; ¤equip(1)
 R; ¤upkeep(2)
 T; Any card this is attached to has +3 Offense.
+
+Colosseum
+Defense 5, Speed 0, Salvage 2, Italian, Structure
+A; ¤deploy_forward(3)
+R; When an allied card within range 1 damages an enemy card while defending in combat, demoralize that enemy card's team.
+T; ¤defender
+
+Hadrian's Wall
+Defense 4, Speed 0, British, Italian, Structure
+A; ¤deploy_forward(1)
+T; ¤defender
+
+Griffin
+Offense 6, Defense 2, Health 2, Speed 2.5, Air, Beast
+A; ¤deploy_forward(6 or 3 Air)
+T; All friendly Beast cards within range 1.5 have +1 Offense and all friendly Air cards within range 1.5 have +1 Power.

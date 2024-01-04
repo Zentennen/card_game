@@ -1,5 +1,5 @@
 Gaius Julius Caesar
-Morale 9, Tactics 5, Logistics 7, Italian, Officer
+Morale 9, Tactics 5, Logistics 7, Italian, Officer, Unholy
 R; When a friendly Structure card enters the board, you may exhaust a friendly Italian card to resupply 1.
 F; "I came, I saw, I conquered."
 
