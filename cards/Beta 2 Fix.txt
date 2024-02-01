@@ -120,12 +120,6 @@ Offense 3, Defense 5, Health 2, Salvage 5, Air, American, Infantry
 A; ¤covert_action(6 or 3 Air) Move this card to an empty friendly position. 
 T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 
-Bernard Montgomery
-British, Officer
-A; ¤covert_action(3) Attach this card to a card on your field and swap its position with another card on your field.
-R; When your maneuver phase begins, move this card to your hand.
-T; Unblocked attacks from friendly cards within range 1 don't demoralize the attacked enemy team. Instead, they resupply 1.
-
 Operation Fortitude
 A; ¤covert_action(2) Move any card on your field to an empty position within range X, where X is its Speed.
 
@@ -133,3 +127,8 @@ Big Bertha
 Defense 2, Power 10, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(4 or 2 Fire)
 A; Exhaust this card and spend 2 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
+
+The Great Wall of China
+Health 3, Chinese, Earth, Structure
+A; ¤deploy_rearward(4)
+R; When an enemy card attacks, it engages this card before the frontline.

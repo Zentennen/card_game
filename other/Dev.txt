@@ -75,16 +75,6 @@ A; ¤use_by_anyone Spend 3 and destroy this card.
 Duel at Dawn
 A; Spend 2 and choose a friendly fielded card. That card battles an enemy card within range 1.
 
-Keeper of the Flame
-Offense 40, Defense 20, Health 2, Human, Fire, Cleric
-A; ¤summon(4)
-A; Spend 1 Fire, exhaust this card and give all cards within range 1.5 +30 Offense and +30 Power this round.
-
-True Strike
-T; ¤decay(1)
-A; Trap; Pay 2 and attach this card to a card of your choice.
-P; If this card is attached to a card, that card has +20 Offense and +1 Strength.
-
 Queen of Battle
 Offense 20, Defense 50, Infantry
 A; ¤summon(4)
@@ -98,11 +88,6 @@ Walking Fortress
 Offense 50, Defense 100, Earth, Structure
 A; ¤summon(4)
 P; ¤defender
-
-Heinz Guderian
-German, Officer
-A; ¤equip(4)
-P; All friendly German cards within range 1.5 have 'Breakthrough(1)'
 
 Ludwig von Mises
 German
@@ -195,8 +180,6 @@ Offense 7, Defense 7, Health 2, Air, Earth, Elemental, Fire, Water
 A; ¤deploy_forward(1 Air, 1 Earth, 1 Fire and 1 Water)
 R; When your Maneuver Phase begins, if there are no Elemental cards within range 1, damage this card.
 
-Gale
-
 RNGesus
 Offense 4, Defense 5, Holy, Human
 A; ¤deploy_forward(4)
@@ -211,3 +194,10 @@ Paul Volkher
 Race to the Sea
 A; ¤deploy_rearward(2 Water)
 A; When a friendly card attacks, you may spend 1 to make the attack diagonal.
+
+
+Bernard Montgomery
+British, Officer
+A; ¤covert_action(3) Attach this card to a card on your field and swap its position with another card on your field.
+R; When your maneuver phase begins, move this card to your hand.
+T; Unblocked attacks from friendly cards within range 1 don't demoralize the attacked enemy team. Instead, they resupply 1.
