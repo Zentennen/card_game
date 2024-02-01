@@ -24,6 +24,10 @@ Army, Doctrine, German
 A; ¤reserve(2)
 T; Whenever an enemy card defends in combat, that card gets -20 Defense for the duration of the combat for each time it has previously defended in combat during the current turn.
 
+Burma Road
+Defense 4, Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
 Dreikaiserbund
 German, Policy
 A; ¤reserve(2)
@@ -41,19 +45,6 @@ A; ¤summon(6)
 T; ¤onslaught
 T; After this card deals combat damage to a susceptible card, you may pay 1 Fire. If you do, deal 1 damage to that card.
 
-Saboteurs
-Offense 40, Strength 2, Defense 40, Health 2, Speed 0
-A; ¤summon(6)
-
-Walther Model
-Commander, German
-A; ¤reserve(4)
-A; Exhaust a friendly card and give it +30 Defense.
-
-Suppressive Fireball
-Power 50, Fire, Spell
-A; Pay 6 Fire choose a position. Pacify all susceptible cards within range 1.5 of that position and deal 1 damage to all susceptible cards within range 1 of that position.
-
 Backhand Blow
 Tactic
 A; ¤equip(2)
@@ -65,11 +56,6 @@ Policy
 A; ¤reserve(4)
 P; All enemy cards have +20 Defense.
 T; When an enemy card is destroyed from combat damage, deal 1 damage to its controller's commander.
-
-Schutztruppe
-Offense 40, Defense 60, Tribute 3, Army, German, Infantry
-A; ¤summon(4)
-P; This card has +5 Offense and +5 Defense for each enemy card within range 2.5.
 
 Dwight D. Eisenhower
 American, Officer
@@ -103,21 +89,6 @@ Queen of Battle
 Offense 20, Defense 50, Infantry
 A; ¤summon(4)
 P; This card has +5 Offense and +5 Defense for each friendly Infantry card.
-
-Centaur Horde
-Army, Cavalry, Offense 60, Defense 20, Health 2, Speed 2
-T; ¤breakthrough
-A; ¤summon(6)
-
-Phantom Warrior
-Offense 70, Defense 10, Health 1, Army, Infantry, Spell, Spirit
-A; ¤summon(2)
-T; ¤decay(1)
-
-Phantom Beast
-Offense 90, Defense 10, Health 3, Beast, Spell, Spirit
-A; ¤summon(4)
-T; ¤decay(1)
 
 Rock Golem
 Offense 30, Defense 80, Speed 0.5, Earth, Elemental, Spell 
@@ -204,31 +175,6 @@ R; ¤critical_Hit(1 Fire)
 Rapid Dragon
 Power 100, American, Chinese
 A; ¤action(X) where is any number of Air Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
-
-Bf 109
-Offense 60, Defense 50, Air, Fighter, German
-A; ¤deploy_rearward(2 Air)
-R; ¤intercept(1)
-
-Spitfire Mk. 1
-Offense 50, Defense 60, Air, British, Fighter, Russian
-A; ¤deploy_rearward(3)
-R; ¤intercept(1 Air)
-
-Spitfire Mk. 24
-Offense 50, Defense 60, Air, British, Fighter, Russian
-A; ¤deploy_rearward(3)
-R; ¤intercept(1 Air)
-
-P-38 Lightning
-Offense 70, Defense 80, Air, American, Fighter
-A; ¤deploy_rearward(2 Air)
-R; ¤intercept(1 Air)
-
-Red Baron
-German, Pilot
-A; ¤assign(2)
-R; Any Air card this is attached to has +30 Defense.
 
 Fimbulvetr
 

@@ -266,7 +266,7 @@ impl DeserializedProperty {
         let mut keywords = Vec::<String>::with_capacity(10);
         ph.set_font_modded(font_name, default_font_size, default_text_mod);
         process_commands(&mut efct);
-        split_main_properties(&mut efct, &mut keywords);
+        split_keywords(&mut efct, &mut keywords);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
         if efct.contains(|c| c == '(' || c == ')' || c == '¤') {
@@ -382,7 +382,7 @@ fn process_commands(string: &mut String) {
     } 
 }
 
-fn split_main_properties(string: &mut String, main_effects: &mut Vec<String>) {
+fn split_keywords(string: &mut String, main_effects: &mut Vec<String>) {
     let mut s = &string[..];
     while s.starts_with("**") {
         let substring = &s[2..];
