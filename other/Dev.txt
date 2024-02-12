@@ -162,23 +162,14 @@ Power 100, American, Chinese
 A; ¤action(X) where is any number of Air Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
 
 Fimbulvetr
+Unholy
 
-Maxim Gunner
-Offense 10, Defense 40, Speed 0
-A; ¤deploy_forward(2)
-T; ¤defender
-T; This card has +30 Offense while unexhausted.
 
 R; When a friendly Unholy card damages another card, damage that card again.
 
 Flee en Masse
 Power 50
 A; ¤action ¤
-
-Elemental Apparition
-Offense 7, Defense 7, Health 2, Air, Earth, Elemental, Fire, Water
-A; ¤deploy_forward(1 Air, 1 Earth, 1 Fire and 1 Water)
-R; When your Maneuver Phase begins, if there are no Elemental cards within range 1, damage this card.
 
 RNGesus
 Offense 4, Defense 5, Holy, Human
@@ -190,14 +181,18 @@ Morale 4, Tactics 6, Logistics 3 Air, Logistics 3 Earth, Logistics 3 Fire, Germa
 A; ¤deploy_rearward(10) Replace your commander with this card, your old commander is eliminated. Destroy any friendly card named "General Erwin Rommel", then resupply 3 if there is a friendly destroyed card with that name.
 
 Paul Volkher
+Health 4, American
+A; ¤deploy_rearward(1) Trigger all reactions with '¤upkeep' twice.
+R; When your maneuver phase begins, damage this card.
+T; Your reactions with '¤upkeep' don't trigger unless triggered by this card.
 
 Race to the Sea
 A; ¤deploy_rearward(2 Water)
 A; When a friendly card attacks, you may spend 1 to make the attack diagonal.
 
+Hopeless Diamond
+Air
+A; ¤deploy_rearward(1 Air) Exhaust this card.
+A; Spend 1 and exhaust this card. If this is the second time this ability is used, this card becomes Advanced and resupply 3 Air.
 
-Bernard Montgomery
-British, Officer
-A; ¤covert_action(3) Attach this card to a card on your field and swap its position with another card on your field.
-R; When your maneuver phase begins, move this card to your hand.
-T; Unblocked attacks from friendly cards within range 1 don't demoralize the attacked enemy team. Instead, they resupply 1.
+Persephone

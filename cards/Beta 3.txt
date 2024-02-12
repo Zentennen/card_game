@@ -102,14 +102,8 @@ T; The first card to use an abiltiy that spends Air supply each turn has +2 Powe
 Giuseppe Garibaldi
 Italian, Officer
 A; ¤equip(2)
-T; All friendly Italian cards within range 1.5 have +2 Offense while attacking in combat against an exhausted defender. 
+T; All friendly Italian cards within range 1.5 have +2 Offense while attacking an exhausted card. 
 F; "Italy owes to you an undertaking which has merited the applause of the universe"
-
-Franz Halder
-German, Officer
-A; ¤action(3) Give control of this card to any enemy player and move this card to their rear.
-R; When your maneuver phase begins, spend 1 or exhaust a friendly card.
-R; When this card is destroyed, demoralize your team.
 
 Operation Allied Force
 Power 12, Air
@@ -123,6 +117,16 @@ T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 Operation Fortitude
 A; ¤covert_action(2) Move any card on your field to an empty position within range X, where X is its Speed.
 
+Operation Bagration
+Power 3, Slavic
+A; ¤covert_action(5) Destroy a susceptible card for each unblocked attack your cards have done this turn.
+
+Dolos
+Offense 6, Defense 6, Greek, Italian, Spirit, Unholy
+A; ¤covert_action(5) Move this card to an empty friendly position.
+R; When an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+T; ¤defender
+
 Big Bertha
 Defense 2, Power 10, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(4 or 2 Fire)
@@ -132,3 +136,21 @@ The Great Wall of China
 Health 3, Chinese, Earth, Structure
 A; ¤deploy_rearward(4)
 R; When an enemy card attacks, it engages this card before the frontline.
+
+Elemental Apparition
+Offense 7, Defense 7, Elemental, Spirit
+A; ¤deploy_forward(4) Only use this ability if there are at least 2 friendly Elemental cards.
+R; When your maneuver phase begins, if there are no friendly Elemental cards within range 1, damage this card.
+
+Bernard Montgomery
+Morale -1, Tactics 1, British, Officer
+A; ¤deploy_rearward(3)
+R; ¤upkeep(1)
+T; You don't need to spend supply the first time each turn when you place a card face down.
+
+Franz Halder
+German, Officer
+A; ¤action(2) Give control of this card to any enemy player and move this card to their rear.
+R; When your maneuver phase begins, spend 1 or exhaust a friendly card.
+R; When this card is destroyed, spend 3 or demoralize your team.
+
