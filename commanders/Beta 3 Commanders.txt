@@ -1,3 +1,7 @@
+Ra
+Morale 7, Tactics 3, Logistics 4, Logistics 2 Fire, Egyptian, Fire, Holy
+T; This card has +1 Fire Logistics if there have ever been 5 friendly Fire cards at the same time this game.
+
 Gaius Julius Caesar
 Morale 9, Tactics 5, Logistics 7, Italian, Officer
 R; When a friendly Structure card enters the board, you may exhaust a friendly Italian card to resupply 1.

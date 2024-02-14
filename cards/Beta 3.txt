@@ -12,7 +12,7 @@ Offense 5, Defense 5, Health 2, Beast, Infantry, Minotaur
 A; ¤deploy_forward(6)
 
 Minotaur Berserker
-Offense 5, Defense 5, Salvage 3, Beast, Infantry, Minotaur
+Offense 5, Defense 5, Beast, Infantry, Minotaur
 A; ¤deploy_forward(4)
 R; ¤upkeep(1)
 R; ¤breakthrough(1)
@@ -57,8 +57,8 @@ Power 3, Air, American
 A; ¤action(2 Air) Damage any susceptible card and exhaust all susceptible cards within range 1 of it.
 
 Flak 88
-Offense 3, Defense 3, Power 8, Speed 0, Salvage 5, Artillery, Fire, German
-A; ¤deploy_forward(6)
+Offense 3, Defense 3, Power 8, Speed 0, Salvage 6, Artillery, Fire, German
+A; ¤deploy_forward(6 Salvage)
 A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 2.
 T; All allied cards within range 1.5 have +2 Defense during the abilities and reactinos of Air cards.
 T; ¤defender
@@ -111,7 +111,7 @@ A; ¤covert_action(5 Air) Eliminate any susceptible card.
 
 101st Airborne
 Offense 3, Defense 5, Health 2, Salvage 5, Air, American, Infantry
-A; ¤covert_action(6 or 3 Air) Move this card to an empty friendly position. 
+A; ¤covert_action(6 Salvage or 3 Air) Move this card to an empty friendly position. 
 T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 
 Operation Fortitude
@@ -134,7 +134,7 @@ A; Exhaust this card and spend 2 Fire. Damage any suscpetible card on any field.
 
 The Great Wall of China
 Health 3, Chinese, Earth, Structure
-A; ¤deploy_rearward(4)
+A; ¤deploy_rearward(4 Salvage)
 R; When an enemy card attacks, it engages this card before the frontline.
 
 Elemental Apparition
@@ -153,4 +153,59 @@ German, Officer
 A; ¤action(2) Give control of this card to any enemy player and move this card to their rear.
 R; When your maneuver phase begins, spend 1 or exhaust a friendly card.
 R; When this card is destroyed, spend 3 or demoralize your team.
+
+Dietrich von Bern
+Offense 4, Defense 2, Morale 1, German, Holy, Infantry
+A; ¤deploy_forward(4)
+R; ¤critical_hit(1)
+T; This card has +1 Defense for each friendly German card.
+
+French 75
+Power 3, Salvage 2, American, Artillery, Fire, French
+A; ¤deploy_forward(2 Salvage) Exhaust this card.
+A; Exhaust this card, spend 1 and exhaust any susceptible card within range 2.
+T; ¤defender
+
+M2 Howitzer
+Power 3, Speed 0.5, Salvage 4, American, Artillery, Fire
+A; ¤deploy_forward(4 Salvage) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 2.5. Exhaust that card if it's active.
+
+M1 Long Tom
+Power 4, Speed 0.5, Salvage 6, American, Artillery, Fire
+A; ¤deploy_forward(6 Salvage) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 3. Exhaust that card if it's active.
+
+M1 Black Dragon
+Power 5, Speed 0, Salvage 8, American, Artillery, Fire, Giant
+A; ¤deploy_forward(8 Salvage) Exhaust this card.
+T; ¤defender
+A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 3 twice. Exhaust that card if it's active.
+
+PaK 38
+Offense 7, Defense 4, Speed 0.5, Salvage 2, Artillery, Fire, German
+A; ¤deploy_forward(3 Salvage)
+R; ¤critical_hit(1 Fire)
+R; ¤upkeep(1)
+
+Iron Giant
+Offense 3, Defense 6, Health 2, Speed 0, Salvage 3, Earth, Elemental, Giant
+A; ¤deploy_forward(4 Salvage)
+
+Dirlewanger Brigade
+Offense 2, Defense 1, Health 2, Salvage 3, German, Infantry, Unholy
+A; ¤deploy_forward(3 Salvage)
+R; ¤critical_hit(3 Salvage)
+
+Chuikov's Chosen
+Offense 3, Defense 5, Salvage 4, Morale 1, Infantry, Slavic
+A; ¤deploy_forward(4 Salvage)
+T; This card has +4 Defense while not in combat.
+
+Sturmzug
+Offense 3, Defense 5, Health 2, Salvage 5, German, Infantry
+A; ¤deploy_forward(6 Salvage)
+R; ¤flanking(1 Fire)
 
