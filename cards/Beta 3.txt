@@ -81,7 +81,7 @@ T; All friendly German cards within range 1.5 have the reaction '¤Breakthrough(
 Hypnos
 Offense 3, Defense 4, Health 2, Power 7 Greek, Holy, Italian
 A; ¤deploy_forward(7)
-When a damaged card that is either friendly or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
 
 Thunderbird
 Offense 7, Defense 5, Power 5, Speed 4, Air, American, Beast, Elemental, Holy
