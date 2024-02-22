@@ -43,14 +43,25 @@ A; ¤action(2 Air and 2 Fire) Damage all susceptible cards on any field.
 T; This card has +1 Power for each friendly Air card.
 F; "They sowed the wind, and now they are going to reap the whirlwind."
 
+Operation Flax
+Health 2, Air, American, British
+A; ¤action(1 Air) Move this card to any rear.
+R; ¤upkeep(1 Air)
+T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
+
 Strafing Run
 Power 3, Air
 A; ¤action(1 Air) Exhaust up to 2 susceptible cards.
 
-Airlift
-Air
+Tunisian Airlift
+Health 3, Air
 A; ¤deploy_rearward(1 Air)
-R; When your maneuver phase begins, destroy this card and resupply 3.
+R; When your maneuver phase begins, damage this card and resupply 1.
+
+Demyansk Airlift
+Health 3, Air
+A; ¤deploy_rearward(1 Air)
+R; When your maneuver phase begins, damage this card, spend 1 Air and resupply 3.
 
 Shock and Awe
 Power 3, Air, American
@@ -150,9 +161,8 @@ T; You don't need to spend supply the first time each turn when you place a card
 
 Franz Halder
 German, Officer
-A; ¤action(2) Give control of this card to any enemy player and move this card to their rear.
-R; When your maneuver phase begins, spend 1 or exhaust a friendly card.
-R; When this card is destroyed, spend 3 or demoralize your team.
+A; ¤action(2) Move this card to any rear.
+R; When the holder of this card begins their maneuver phase, they may exhaust a friendly card. If they don't, they spend 3 and destroy this card.
 
 Dietrich von Bern
 Offense 4, Defense 2, Morale 1, German, Holy, Infantry
