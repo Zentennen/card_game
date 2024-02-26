@@ -1,34 +1,38 @@
-Red Baron
-German, Pilot
-A; ¤assign(2)
-R; Any Air card this is attached to has +2 Defense.
-
 Cherufe
-Offense 40, Defense 60, Health 3, American, Earth, Fire
+Offense 4, Defense 6, Health 3, American, Earth, Fire
 A; ¤deploy_forward(4 and 2 Earth)
 R; ¤upkeep(1 Fire)
 R; ¤critical_Hit(1 Fire)
 
-The Great Wall
-Defense 5, Chinese, Structure
-
 Will-o'-the-Wisp
 Defense 4, Fire, Spirit
 A; ¤deploy_forward(4 or 2 Fire)
-R; ¤mobile_defense(1)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
+
+Gates of Gehenna
+Offense 6, Defense 6, Power 6, Speed 0, Fire, Structure, Unholy
+A; ¤deploy_forward(2 Earth and 2 Fire)
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Fire or Unholy, damage any susceptible card within range 2.5.
 
 Motorized Infantry
+Offense 4, Defense 6, Health 2, Speed 2, Salvage 6, Earth, Infantry
+A; ¤deploy_forward(6)
+A; ¤flanking(1 Earth)
+R; ¤upkeep(1 Earth)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
-Giuseppe Garibaldi
+Panzer 4
+Offense 6, Defense 5, Speed 2, Salvage 5, Armored, Earth, German
+A; ¤deploy_froward(6)
+A; ¤breakthrough(1 Earth)
+A; ¤flanking(1 Earth)
 
-A; ¤equip(3)
-
-
-Big Bertha
-
-
-
-
+Panzer 6 Tiger
+Offense 8, Defense 7, Speed 2, Salvage 8, Armored, Earth, German, Giant
+A; ¤deploy_forward(8)
+A; ¤breakthrough(1 Earth)
+R; ¤upkeep(1)
+R; ¤critical_hit(1 Fire)
 
 Rapid Dragon
 Power 10, American, Chinese
@@ -37,8 +41,3 @@ A; ¤action(X) where is any number of Transport cards you choose to exhaust. Cho
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure
 A; ¤deploy_rearward(3)
-
-Thermopylae
-Defense 7, Morale 3, Greek, Structure
-A; ¤deploy_forward(3)
-R; When this card is destroyed, demoralize your team.
