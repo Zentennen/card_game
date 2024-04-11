@@ -21,6 +21,17 @@ A; ¤flanking(1 Earth)
 R; ¤upkeep(1 Earth)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
+Hypnos
+Offense 3, Defense 4, Health 2, Power 7, Greek, Holy, Italian
+A; ¤deploy_forward(7)
+When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+
+Vernichtungsfeuer
+Artillery, German
+A; ¤equip(1)
+R; ¤upkeep(2)
+R; When a friendly Artillery card this is attached to damages another card, if that card is 1 damage or less from being destroyed, eliminate it.
+
 Panzer 4
 Offense 6, Defense 5, Speed 2, Salvage 5, Armored, Earth, German
 A; ¤deploy_froward(6)

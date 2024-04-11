@@ -90,7 +90,7 @@ A; ¤equip(3)
 T; All friendly German cards within range 1.5 have the reaction '¤Breakthrough(1)'
 
 Hypnos
-Offense 3, Defense 4, Health 2, Power 7 Greek, Holy, Italian
+Offense 3, Defense 4, Health 2, Power 7, Greek, Holy, Italian
 A; ¤deploy_forward(7)
 When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
 
