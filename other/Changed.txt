@@ -1,0 +1,9 @@
+Big Bertha
+Defense 1, Power 10, Artillery, Fire, German, Giant
+A; ¤deploy_rearward(2 or 1 Fire)
+A; Exhaust this card and spend 3 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
+
+Kamikaze
+Power 5, Air, Holy, Japanese, Unholy
+A; ¤action(1 Air) Destroy a friendly Air card and damage any susceptible enemy card twice.
+F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
