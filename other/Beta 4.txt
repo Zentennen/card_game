@@ -22,9 +22,9 @@ R; ¤upkeep(1 Earth)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
 Hypnos
-Offense 3, Defense 4, Health 2, Power 7, Greek, Holy, Italian
+Offense 5, Defense 6, Power 7, Greek, Holy, Italian
 A; ¤deploy_forward(7)
-When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
 
 Vernichtungsfeuer
 Artillery, German
@@ -86,3 +86,8 @@ A; ¤action(0) Demoralize your team, then resupply 1 for each time your team has
 Barbed Wire
 Power 6
 R; When a susceptible enemy card demoralizes your team with an unblocked attack, damage that card.
+
+
+Forbidden Knowledge
+Unholy
+A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.

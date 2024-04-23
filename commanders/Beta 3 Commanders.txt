@@ -1,23 +1,34 @@
 Ra
-Morale 7, Tactics 3, Logistics 4, Logistics 2 Fire, Egyptian, Fire, Holy
-T; This card has +1 Fire Logistics if there have ever been 5 friendly Fire cards at the same time this game.
+Morale 6, Tactics 3, Logistics 4, Logistics 2 Fire, African, Fire, Holy
+T; This card has +1 Fire Logistics if there have ever been 4 friendly Fire cards at the same time this game.
+F; "The Egyptians saw the sun and called him Ra, the Sun God. He rode across the sky in his chariot until it was time to sleep."
 
 Gaius Julius Caesar
-Morale 9, Tactics 5, Logistics 7, Italian, Officer
-R; When a friendly Structure card enters the board, you may exhaust a friendly Italian card to resupply 1.
+Morale 7, Tactics 5, Logistics 7, Italian, Officer
+R; When a friendly Structure card enters the board, you may exhaust a friendly Italian card to resupply 2.
 F; "I came, I saw, I conquered."
 
+Napoleon Bonaparte
+Morale 8, Tactics 5, Logistics 4, Logistics 1 Fire, French, Officer
+T; Friendly Artillery cards and friendly French cards have +1 Speed if there have been 2 times this game where a friendly card has moved and done an unblocked attack in the same turn.
+F; "Never interrupt your enemy when he is making a mistake."
+
 Zeus
-Morale 7, Tactics 3, Logistics 4, Logistics 2 Air, Power 7, Air, Greek, Holy, Italian
+Morale 6, Tactics 3, Logistics 4, Logistics 2 Air, Power 7, Air, Greek, Holy, Italian
 A; Spend 2 Air and damage a susceptible card.
 F; "Know that no one is free, except Zeus."
 
 Walther Model
-Morale 7, Tactics 4, Logistics 5, Logistics 1 Fire, German, Officer
+Morale 6, Tactics 4, Logistics 5, Logistics 1 Fire, German, Officer
 T; All friendly German cards have +0.5 Defense for each time an enemy Attack Phase has ended without your team being demoralized.
 F; "My soldiers are my children."
 
 Curtis LeMay
-Morale 6, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Fire, Air, American, Fire, Officer, Unholy
+Morale 5, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Fire, Air, American, Fire, Officer, Unholy
 T; This card has +1 Air Logistics and +1 Fire Logistics if your Fire or Air cards have collectively dealt 3 damage in the same turn this game.
 F; "If you kill enough of them, they stop fighting."
+
+Hannibal Barca
+Morale 7, Tactics 6, Logistics 5, African, Officer
+A; Use only during your maneuver phase. Spend 4 and move any number of friendly cards on your field to any position on your field any number of times.
+F; "We will find a way or we shall make one."

@@ -601,3 +601,32 @@ Offense 7, Defense 4, Power 7, Air, German, Holy
 A; ¤deploy_forward(6 or 3 Air)
 R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
 R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
+
+Hypnos
+Offense 5, Defense 6, Power 7, Greek, Holy, Italian
+A; ¤deploy_forward(7)
+R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+
+Burma Road
+Defense 4, Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
+Finest Hour
+Defense 99, Morale 2, British
+A; ¤deploy_rearward(6) Spend 1 less for each friendly British card.
+
+Christmas Truce
+Power 7, French, German
+A; ¤deploy_rearward(3)
+R; When your maneuver phase begins while your team is not attacking, destroy this card.
+T; Susceptible cards can't attack and can't take damage.
+
+No Step Back
+Slavic
+A; ¤deploy_rearward(2) Spend 1 less if there is a friendly Slavic card.
+T; All cards in your frontline have +1 Offense and all cards in your backline have -2 Offense.
+
+Will-o'-the-Wisp
+Defense 4, Fire, Spirit
+A; ¤deploy_forward(4 or 2 Fire)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.

@@ -93,10 +93,6 @@ A; ¤deploy_rearward(3)
 R; When your maneuver phase begins while your team is not attacking, destroy this card.
 T; Susceptible cards can't attack and can't take damage.
 
-Forbidden Knowledge
-Unholy
-A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.
-
 No Step Back
 Slavic
 A; ¤deploy_rearward(2)

@@ -1,7 +1,3 @@
-Ra
-Morale 7, Tactics 3, Logistics 4, Logistics 2 Fire, Egyptian, Fire, Holy
-T; This card has +1 Fire Logistics if there have ever been 5 friendly Fire cards at the same time this game.
-
 Napoleon Bonaparte
 Morale 10, Tactics 5, Logistics 4, Logistics 1 Fire
 T; All friendly French cards and all friendly Artillery cards have +1 Speed if friendly cards have 
