@@ -65,7 +65,7 @@ T; Susceptible cards can't attack and can't take damage.
 
 Forbidden Knowledge
 Unholy
-A; ¤action(1) Demoralize your team and draw 5 cards.
+A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.
 
 War Propaganda
 Health 3, Morale 3
@@ -74,8 +74,8 @@ R; When your maneuver phase begins, damage this card.
 
 No Step Back
 Slavic
-A; ¤deploy_rearward(3)
-T; All cards in your frontline have +2 Offense and all cards in your backline have -2 Offense.
+A; ¤deploy_rearward(2)
+T; All cards in your frontline have +1 Offense and all cards in your backline have -2 Offense.
 
 
 A; Each card in a frontline moves to the backline position in the same column, and each card in a backline moves to the frontline position in the same column.

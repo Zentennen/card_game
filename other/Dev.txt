@@ -162,7 +162,8 @@ Power 100, American, Chinese
 A; ¤action(X) where is any number of Air Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
 
 Fimbulvetr
-Unholy
+Air, Water, Unholy
+
 
 
 R; When a friendly Unholy card damages another card, damage that card again.
@@ -196,3 +197,7 @@ A; ¤deploy_rearward(1 Air) Exhaust this card.
 A; Spend 1 and exhaust this card. If this is the second time this ability is used, this card becomes Advanced and resupply 3 Air.
 
 Persephone
+
+Aporia
+Aether
+A; ¤action(3 Aether) Any enemy player destroys all card in their hand.

@@ -1,5 +1,5 @@
 Big Bertha
-Defense 1, Power 10, Artillery, Fire, German, Giant
+Defense 1, Power 9, Artillery, Fire, German, Giant
 A; ¤deploy_rearward(2 or 1 Fire)
 A; Exhaust this card and spend 3 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
 
@@ -7,3 +7,102 @@ Kamikaze
 Power 5, Air, Holy, Japanese, Unholy
 A; ¤action(1 Air) Destroy a friendly Air card and damage any susceptible enemy card twice.
 F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
+
+Operation Flax
+Health 2, Air, American, British
+A; Use this ability only from your hand during your maneuver phase. Spend 1 Air and move this card to any rear.
+R; ¤upkeep(1 Air)
+T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
+
+Operation Bagration
+Power 4, Slavic
+A; ¤covert_action(6) Spend 1 less for every 2 friendly Slavic cards. Choose a number of susceptible cards up to the number of unblocked attacks your card have done this turn. Damage that many susceptible cards.
+R; ¤culling(1)
+
+Operation Fortitude
+A; ¤covert_action(3) Move this card to your rear.
+T; You may move cards in your attack phase the same way as during your maneuver phase. Your unblocked attacks can't demoralize any team.
+
+Bombing of Kosovo
+Power 12, Air
+A; ¤covert_action(5 Air) Damage any susceptible card.
+T; ¤culling(2)
+
+Vernichtungsfeuer
+Artillery, German
+A; ¤equip(3)
+T; Any Artillery card this is attached to has the reaction '¤culling(1)'
+
+Sickle Cut
+German
+A; ¤equip(1)
+T; Any German card this is attached to has the reactions '¤breakthrough(2) and '¤flanking(2)'.
+
+Berserk
+German
+A; ¤equip(1)
+T; Any card this is attached to has the reaction '¤breakthrough(2)'
+
+Flaming Barrier
+Offense 7, Speed 0, Elemental, Fire, Structure
+A; ¤deploy_forward(2 or 1 Fire)
+R; ¤critical_hit(1)
+T; ¤defender
+
+Maginot Line
+Offense 9, Defense 9, Speed 0, Salvage 1, French, Structure
+A; ¤deploy_forward(1)
+R; ¤upkeep(1)
+R; ¤critical_hit(0)
+T; ¤defender
+
+Ragnarök
+Defense 99, Health 3, German, Holy
+A; ¤deploy_rearward(1)
+R; ¤upkeep(1 Fire)
+R; When this card is destroyed, you lose the game.
+T; All friendly cards have +3 Offense.
+
+Day of Wrath
+Power 5, Fire, Holy
+A; ¤action(3 Air) Damage all susceptible cards.
+F; "God is a just judge, and God is angry with the wicked every day."
+
+Grim Reaper
+Offense 6, Health 3, Salvage 8, Spirit, Unholy
+A; ¤deploy_forward(8)
+R; ¤breakthrough(1)
+R; ¤culling(1)
+
+
+
+
+
+
+Burma Road
+Defense 4, Logistics 1, Chinese, Structure
+A; ¤deploy_rearward(3)
+
+Finest Hour
+Defense 99, Morale 2, British
+A; ¤deploy_rearward(6) Spend 1 less for each friendly British card.
+
+Christmas Truce
+Power 7, French, German
+A; ¤deploy_rearward(3)
+R; When your maneuver phase begins while your team is not attacking, destroy this card.
+T; Susceptible cards can't attack and can't take damage.
+
+Forbidden Knowledge
+Unholy
+A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.
+
+No Step Back
+Slavic
+A; ¤deploy_rearward(2)
+T; All cards in your frontline have +1 Offense and all cards in your backline have -2 Offense.
+
+Will-o'-the-Wisp
+Defense 4, Fire, Spirit
+A; ¤deploy_forward(4 or 2 Fire)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
