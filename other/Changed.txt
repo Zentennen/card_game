@@ -21,6 +21,7 @@ R; ¤culling(1)
 
 Operation Fortitude
 A; ¤covert_action(3) Move this card to your rear.
+R; ¤upkeep(5)
 T; You may move cards in your attack phase the same way as during your maneuver phase. Your unblocked attacks can't demoralize any team.
 
 Bombing of Kosovo
@@ -91,6 +92,7 @@ A; ¤deploy_rearward(6) Spend 1 less for each friendly British card.
 Christmas Truce
 Power 7, French, German
 A; ¤deploy_rearward(3)
+R; ¤upkeep(5)
 R; When your maneuver phase begins while your team is not attacking, destroy this card.
 T; Susceptible cards can't attack and can't take damage.
 

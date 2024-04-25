@@ -46,7 +46,7 @@ F; "They sowed the wind, and now they are going to reap the whirlwind."
 Operation Flax
 Health 2, Air, American, British
 A; Use this ability only from your hand during your maneuver phase. Spend 1 Air and move this card to any rear.
-R; ¤upkeep(1 Air)
+R; ¤upkeep(1)
 T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
 
 Strafing Run
@@ -128,6 +128,7 @@ T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 
 Operation Fortitude
 A; ¤covert_action(3) Move this card to your rear.
+R; ¤upkeep(5)
 T; You may move cards in your attack phase the same way as during your maneuver phase. Your unblocked attacks can't demoralize any team.
 
 Operation Bagration
