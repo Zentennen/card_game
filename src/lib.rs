@@ -86,7 +86,7 @@ pub struct Card {
     pub commander: bool,
     pub attributes: HashMap<String, String>,
     pub types: Vec<String>,
-    pub abiilities: Vec<String>,
+    pub abilities: Vec<String>,
     pub reactions: Vec<String>,
     pub traits: Vec<String>,
 }
@@ -99,7 +99,7 @@ impl Card {
             commander: false,
             attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
-            abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
+            abilities: Vec::<String>::with_capacity(default_card_property_alloc),
             reactions: Vec::<String>::with_capacity(default_card_property_alloc),
             traits: Vec::<String>::with_capacity(default_card_property_alloc),
         }
@@ -112,7 +112,7 @@ impl Card {
             commander: false,
             attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
-            abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
+            abilities: Vec::<String>::with_capacity(default_card_property_alloc),
             reactions: Vec::<String>::with_capacity(default_card_property_alloc),
             traits: Vec::<String>::with_capacity(default_card_property_alloc),
         }

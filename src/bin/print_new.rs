@@ -16,7 +16,5 @@ fn main() {
         }
     }
     
-    let ca: Vec<Card> = cards.into_iter().filter(|c| !c.attributes.contains_key("Health") && c.abiilities.iter().any(|a| a.contains("¤deploy"))).collect();
-
-    add_cards_to_pdf(&ca);
+    add_cards_to_pdf(&cards);
 }

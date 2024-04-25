@@ -90,9 +90,9 @@ A; ¤equip(3)
 T; All friendly German cards within range 1.5 have the reaction '¤Breakthrough(1)'
 
 Hypnos
-Offense 3, Defense 4, Health 2, Power 7, Greek, Holy, Italian
+Offense 5, Defense 6, Power 7, Greek, Holy, Italian
 A; ¤deploy_forward(7)
-When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
 
 Thunderbird
 Offense 7, Defense 5, Power 5, Speed 4, Air, American, Beast, Elemental, Holy
@@ -122,7 +122,7 @@ A; ¤covert_action(5 Air) Damage any susceptible card.
 T; ¤culling(2)
 
 101st Airborne
-Offense 3, Defense 5, Health 2, Salvage 5, Air, American, Infantry
+Offense 3, Defense 4, Health 2, Salvage 5, Air, American, Infantry
 A; ¤covert_action(6 Salvage or 3 Air) Move this card to an empty friendly position.
 T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 
@@ -219,20 +219,10 @@ A; ¤deploy_forward(4 Salvage)
 T; This card has +4 Defense while not in combat.
 
 Sturmzug
-Offense 3, Defense 5, Health 2, Salvage 5, German, Infantry
+Offense 4, Defense 4, Health 2, Salvage 5, German, Infantry
 A; ¤deploy_forward(6 Salvage)
 R; ¤flanking(1 Fire)
-
-
-
-
-
-
-
-
-
-
-
+T; This card has +2 Defense while defending.
 
 Surtr
 Offense 7, Defense 4, Health 2, Fire, German, Giant
@@ -468,7 +458,7 @@ T; This card has +1 Defense for each enemy card within range 1.5.
 Semi-Motorized Infantry
 Offense 3, Defense 5, Speed 1.5, Salvage 5, Infantry, Italian
 A; ¤deploy_forward(6)
-R; ¤flanking(1)
+R; ¤flanking(2)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
 Cacus
@@ -601,12 +591,7 @@ Valkyrie
 Offense 7, Defense 4, Power 7, Air, German, Holy
 A; ¤deploy_forward(6 or 3 Air)
 R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
-R; When a susceptible enemy card within range 1.5 engages in combat, you may exhaust this card to eliminate it if it's 1 damage or less from being destroyed.
-
-Hypnos
-Offense 5, Defense 6, Power 7, Greek, Holy, Italian
-A; ¤deploy_forward(7)
-R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+R; When a susceptible enemy card within range 1.5 leaves combat, you may exhaust this card to eliminate it if that card's remaining health is 1 or less.
 
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure
@@ -631,3 +616,9 @@ Will-o'-the-Wisp
 Defense 4, Fire, Spirit
 A; ¤deploy_forward(4 or 2 Fire)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
+
+Barbed Wire
+Power 4, Health 2, Structure
+A; ¤deploy_rearward(4)
+R; When a susceptible enemy card demoralizes your team with an unblocked attack, damage both this card and that card.
+

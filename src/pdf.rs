@@ -549,7 +549,7 @@ fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {
     //collect data about deserialized properties
     ph.set_xy(base_x + card_pad - text_offset, base_y + 65.0);
     ph.set_font_modded(font_name, default_font_size, default_text_mod);
-    let acti: Vec<DeserializedProperty> = card.abiilities.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
+    let acti: Vec<DeserializedProperty> = card.abilities.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
     let trig: Vec<DeserializedProperty> = card.reactions.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
     let pass: Vec<DeserializedProperty> = card.traits.iter().rev().map(|p| { DeserializedProperty::from_property(p, ph) }).collect();
 

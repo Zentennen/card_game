@@ -63,7 +63,7 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
         while let Some(next) = find_item(s, prev.1 + 1) {
             let substr = &s[2 + prev.1..next.1].trim();
             match prev.0 {
-                'A' => card.abiilities.push(substr.to_string()),
+                'A' => card.abilities.push(substr.to_string()),
                 'R' => card.reactions.push(substr.to_string()),
                 'T' => card.traits.push(substr.to_string()),
                 'F' => card.flavor_text.push_str(substr),
@@ -75,7 +75,7 @@ fn process_card(card: &mut Card, s: &str) -> Maybe {
 
         let substr = &s[2 + prev.1..].trim();
         match prev.0 {
-            'A' => card.abiilities.push(substr.to_string()),
+            'A' => card.abilities.push(substr.to_string()),
             'R' => card.reactions.push(substr.to_string()),
             'T' => card.traits.push(substr.to_string()),
             'F' => card.flavor_text.push_str(substr),
@@ -153,7 +153,7 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     //find the provided directory
     let entries = std::fs::read_dir(directory).expect(directory);
     
-    //find every txt file in the direcyory
+    //find every txt file in the directory
     for entry in entries {
         if let Result::Ok(entry) = entry {
             if let Some(ext) = entry.path().extension() {
@@ -175,6 +175,9 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
     for card in cards.iter_mut() {
         card.commander = commanders;
         card.types.sort_by(|a, b| { a.cmp(&b) });
+        if !card.attributes.contains_key("Health") && card.abilities.iter().any(|a| a.starts_with("¤deploy")) {
+            card.attributes.insert("Health".to_string(), "1".to_string());
+        }
     }
 
     cards

@@ -53,41 +53,8 @@ Burma Road
 Defense 4, Logistics 1, Chinese, Structure
 A; ¤deploy_rearward(3)
 
-Finest Hour
-Defense 10, Morale 2, British
-A; ¤deploy_rearward(6) Spend 1 less for each friendly British card.
-
-Christmas Truce
-Power 7, French, German
-A; ¤deploy_rearward(3)
-R; When your maneuver phase begins while your team is not attacking, destroy this card.
-T; Susceptible cards can't attack and can't take damage.
-
-Forbidden Knowledge
-Unholy
-A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.
-
-War Propaganda
-Health 3, Morale 3
-A; ¤deploy_rearward 
-R; When your maneuver phase begins, damage this card.
-
-No Step Back
-Slavic
-A; ¤deploy_rearward(2)
-T; All cards in your frontline have +1 Offense and all cards in your backline have -2 Offense.
-
 
 A; Each card in a frontline moves to the backline position in the same column, and each card in a backline moves to the frontline position in the same column.
 
 Defense of Moscow
 A; ¤action(0) Demoralize your team, then resupply 1 for each time your team has been demoralized.
-
-Barbed Wire
-Power 6
-R; When a susceptible enemy card demoralizes your team with an unblocked attack, damage that card.
-
-
-Forbidden Knowledge
-Unholy
-A; ¤action(0) Demoralize your team, look at the hand of any player and draw 5 cards.
