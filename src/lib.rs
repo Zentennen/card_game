@@ -2,6 +2,7 @@
 #![allow(non_camel_case_types)]
 
 use serde::*;
+use std::collections::HashMap;
 
 //data
 pub const default_subattrib_alloc: usize = 1;
@@ -79,17 +80,11 @@ pub mod serialize;
 pub mod pdf;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
-pub struct Attribute {
-    pub n: String,
-    pub v: String,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Card {
     pub name: String,
     pub flavor_text: String,
     pub commander: bool,
-    pub attributes: Vec<Attribute>,
+    pub attributes: HashMap<String, String>,
     pub types: Vec<String>,
     pub abiilities: Vec<String>,
     pub reactions: Vec<String>,
@@ -102,7 +97,7 @@ impl Card {
             name: String::with_capacity(default_card_name_alloc), 
             flavor_text: String::with_capacity(default_card_property_alloc), 
             commander: false,
-            attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
             abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
             reactions: Vec::<String>::with_capacity(default_card_property_alloc),
@@ -115,7 +110,7 @@ impl Card {
             name: s.into(), 
             flavor_text: String::with_capacity(default_card_property_alloc), 
             commander: false,
-            attributes: Vec::<Attribute>::with_capacity(default_card_attribute_alloc), 
+            attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
             types: Vec::<String>::with_capacity(default_card_property_alloc),
             abiilities: Vec::<String>::with_capacity(default_card_property_alloc),
             reactions: Vec::<String>::with_capacity(default_card_property_alloc),

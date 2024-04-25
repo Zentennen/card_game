@@ -41,7 +41,8 @@ fn initialize_card(card: &mut Card, s: &str) {
             
             if attributes.contains(&name) {
                 let value = string[space..].trim();
-                card.attributes.push(Attribute{ n: name.to_string(), v: value.to_string() });
+                card.attributes.insert(name.to_string(), value.to_string());
+                //card.attributes.push(Attribute{ n: name.to_string(), v: value.to_string() });
             }
             else {
                 card.types.push(string.to_string());
@@ -173,16 +174,7 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
 
     for card in cards.iter_mut() {
         card.commander = commanders;
-        
-        //sort types alphabetically
         card.types.sort_by(|a, b| { a.cmp(&b) });
-        
-        //sort attributes by position in the attributes array
-        card.attributes.sort_by(|a, b| {
-            let i = attributes.iter().position(|x| *x == a.n).unwrap();
-            let j = attributes.iter().position(|x| *x == b.n).unwrap();
-            i.cmp(&j)
-        });
     }
 
     cards

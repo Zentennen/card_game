@@ -11,7 +11,7 @@ F; "I cannot say that the wish to die for the emperor is genuine, coming from my
 Operation Flax
 Health 2, Air, American, British
 A; Use this ability only from your hand during your maneuver phase. Spend 1 Air and move this card to any rear.
-R; ¤upkeep(1 Air)
+R; ¤upkeep(1)
 T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
 
 Operation Bagration
@@ -74,10 +74,11 @@ A; ¤deploy_forward(8)
 R; ¤breakthrough(1)
 R; ¤culling(1)
 
-
-
-
-
+Semi-Motorized Infantry
+Offense 3, Defense 5, Speed 1.5, Salvage 5, Infantry, Italian
+A; ¤deploy_forward(6)
+R; ¤flanking(1)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure

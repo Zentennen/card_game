@@ -465,10 +465,10 @@ A; ¤deploy_forward(2)
 T; This card has +1 Defense for each enemy card within range 1.5.
 
 Semi-Motorized Infantry
-Offense 3, Defense 6, Health 2, Speed 1.5, Salvage 5, Infantry, Italian
+Offense 3, Defense 5, Speed 1.5, Salvage 5, Infantry, Italian
 A; ¤deploy_forward(6)
 R; ¤flanking(1)
-R; ¤upkeep(1)
+R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
 Cacus
 Offense 4, Health 3, Power 3, Salvage 5, Greek, Italian, Fire, Giant, Artillery
