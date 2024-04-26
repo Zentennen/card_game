@@ -10,7 +10,7 @@ F; "I came, I saw, I conquered."
 
 Napoleon Bonaparte
 Morale 8, Tactics 5, Logistics 4, Logistics 1 Fire, French, Officer
-T; Friendly Artillery cards and friendly French cards have +1 Speed if there have been 2 times this game where a friendly card has moved and done an unblocked attack in the same turn.
+T; Friendly Artillery cards and friendly French cards have +1 Speed if there have been 2 times this game when a friendly card has moved and done an unblocked attack in the same turn.
 F; "Never interrupt your enemy when he is making a mistake."
 
 Zeus
@@ -25,7 +25,7 @@ F; "My soldiers are my children."
 
 Curtis LeMay
 Morale 5, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Fire, Air, American, Fire, Officer, Unholy
-T; This card has +1 Air Logistics and +1 Fire Logistics if your Fire or Air cards have collectively dealt 3 damage in the same turn this game.
+T; This card has +1 Air Logistics and +1 Fire Logistics if friendly Fire cards and friendly Air cards have ever collectively dealt 3 damage in the same turn this game.
 F; "If you kill enough of them, they stop fighting."
 
 Hannibal Barca

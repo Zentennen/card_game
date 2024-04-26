@@ -1,8 +1,0 @@
-Napoleon Bonaparte
-Morale 10, Tactics 5, Logistics 4, Logistics 1 Fire
-T; All friendly French cards and all friendly Artillery cards have +1 Speed if friendly cards have 
-
-Erich von Manstein
-Morale 8, Tactics 5, Logistics 3, Logistics 1 Earth, Logistics 1 Fire, German, Officer, Unholy
-R; When your first maneuver phase begins, spend 3 and resupply 3 Air.
-T; This card has +1 Tactics and +1 Logistics if German cards have ever demoralized an enemy team twice in the same turn this game.

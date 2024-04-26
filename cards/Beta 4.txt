@@ -48,6 +48,7 @@ Health 2, Air, American, British
 A; Use this ability only from your hand during your maneuver phase. Spend 1 Air and move this card to any rear.
 R; ¤upkeep(1)
 T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
+F; "When Rommel saw a captured American private eating a birthday cake, he knew the war was lost."
 
 Strafing Run
 Power 3, Air
@@ -80,14 +81,12 @@ A; ¤action(1 Air) Destroy a friendly Air card and damage any susceptible enemy 
 F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
 
 Thermopylae
-Defense 7, Morale 3, Greek, Structure
+Defense 7, Speed 0, Salvage 4, Morale 3, Greek, Structure
 A; ¤deploy_forward(2)
 R; When this card is destroyed, demoralize your team.
-
-Heinz Guderian
-German, Officer
-A; ¤equip(3)
-T; All friendly German cards within range 1.5 have the reaction '¤Breakthrough(1)'
+T; ¤defender
+F; "For some the fairest thing on the dark earth is Thermopylae,
+And the Spartan phalanx lowering lances to die."
 
 Hypnos
 Offense 5, Defense 6, Power 7, Greek, Holy, Italian
@@ -122,12 +121,12 @@ A; ¤covert_action(5 Air) Damage any susceptible card.
 T; ¤culling(2)
 
 101st Airborne
-Offense 3, Defense 4, Health 2, Salvage 5, Air, American, Infantry
-A; ¤covert_action(6 Salvage or 3 Air) Move this card to an empty friendly position.
+Offense 3, Defense 4, Health 2, Air, American, Infantry
+A; ¤covertly_deploy_forward(6 Salvage or 3 Air)
 T; Unblocked attacks from this card don't demoralize the attacked enemy team.
 
 Operation Fortitude
-A; ¤covert_action(3) Move this card to your rear.
+A; ¤covertly_deploy_rearward(3)
 R; ¤upkeep(5)
 T; You may move cards in your attack phase the same way as during your maneuver phase. Your unblocked attacks can't demoralize any team.
 
@@ -138,17 +137,17 @@ R; ¤culling(1)
 
 Dolos
 Offense 6, Defense 6, Greek, Italian, Spirit, Unholy
-A; ¤covert_action(5) Move this card to an empty friendly position.
-R; When an Unholy card within range 1 attacks, you may exhaust this card to make the attack diagonal.
+A; ¤covertly_deploy_forward(5)
+R; When an Unholy card within range 1.5 attacks, you may exhaust this card to make the attack diagonal.
 T; ¤defender
 
 Big Bertha
-Defense 1, Power 10, Artillery, Fire, German, Giant
-A; ¤deploy_rearward(2 or 1 Fire)
-A; Exhaust this card and spend 3 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
+Defense 1, Power 8, Artillery, Fire, German, Giant
+A; ¤deploy_rearward(2 salvage or 1 Fire)
+A; Exhaust this card and spend 2 Fire. Damage any suscpetible card on any field. Exhaust that card if it's active.
 
 The Great Wall of China
-Health 3, Chinese, Earth, Structure
+Health 3, Salvage 4, Chinese, Earth, Structure
 A; ¤deploy_rearward(4 Salvage)
 R; When an enemy card attacks, it engages this card before the frontline.
 
@@ -157,15 +156,9 @@ Offense 7, Defense 7, Elemental, Spirit
 A; ¤deploy_forward(4) Only use this ability if there are at least 2 friendly Elemental cards.
 R; When your maneuver phase begins, if there are no friendly Elemental cards within range 1, damage this card.
 
-Bernard Montgomery
-Morale -1, Tactics 1, British, Officer
-A; ¤deploy_rearward(3)
-R; ¤upkeep(1)
-T; You don't need to spend supply the first time each turn when you place a card face down.
-
 Franz Halder
 German, Officer
-A; ¤action(2) Move this card to any rear.
+A; Use this ability only from your hand during your maneuver phase. Spend 2 and move this card to any rear.
 R; When the holder of this card begins their maneuver phase, they may exhaust a friendly card. If they don't, they spend 3 and destroy this card.
 
 Dietrich von Bern
@@ -175,38 +168,34 @@ R; ¤critical_hit(1)
 T; This card has +1 Defense for each friendly German card.
 
 French 75
-Power 3, Salvage 2, American, Artillery, Fire, French
-A; ¤deploy_forward(2 Salvage) Exhaust this card.
+Power 3, American, Artillery, Fire, French
+A; ¤deploy_forward(2 Salvage or 1 Fire) Exhaust this card.
 A; Exhaust this card, spend 1 and exhaust any susceptible card within range 2.
 T; ¤defender
 
 M2 Howitzer
-Power 3, Speed 0.5, Salvage 4, American, Artillery, Fire
-A; ¤deploy_forward(4 Salvage) Exhaust this card.
-T; ¤defender
+Power 3, Speed 0.5, American, Artillery, Fire
+A; ¤deploy_forward(4 Salvage or 2 Fire) Exhaust this card.
 A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 2.5. Exhaust that card if it's active.
+T; ¤defender
 
 M1 Long Tom
-Power 4, Speed 0.5, Salvage 6, American, Artillery, Fire
-A; ¤deploy_forward(6 Salvage) Exhaust this card.
-T; ¤defender
+Power 4, Speed 0.5, American, Artillery, Fire
+A; ¤deploy_forward(6 Salvage or 3 Fire) Exhaust this card.
 A; Exhaust this card, spend 1 Fire and damage any susceptible card within range 3. Exhaust that card if it's active.
+T; ¤defender
 
 M1 Black Dragon
-Power 5, Speed 0, Salvage 8, American, Artillery, Fire, Giant
-A; ¤deploy_forward(8 Salvage) Exhaust this card.
-T; ¤defender
+Power 5, Speed 0, American, Artillery, Fire, Giant
+A; ¤deploy_forward(8 Salvageor 4 Fire) Exhaust this card.
 A; Exhaust this card, spend 2 Fire and damage any susceptible card within range 3 twice. Exhaust that card if it's active.
+T; ¤defender
 
 PaK 38
 Offense 7, Defense 4, Speed 0.5, Salvage 2, Artillery, Fire, German
 A; ¤deploy_forward(3 Salvage)
 R; ¤critical_hit(1 Fire)
 R; ¤upkeep(1)
-
-Iron Giant
-Offense 3, Defense 6, Health 2, Speed 0, Salvage 3, Earth, Elemental, Giant
-A; ¤deploy_forward(4 Salvage)
 
 Dirlewanger Brigade
 Offense 2, Defense 1, Health 2, Salvage 3, German, Infantry, Unholy
@@ -219,7 +208,7 @@ A; ¤deploy_forward(4 Salvage)
 T; This card has +4 Defense while not in combat.
 
 Sturmzug
-Offense 4, Defense 4, Health 2, Salvage 5, German, Infantry
+Offense 4, Defense 4, Health 2, Salvage 6, German, Infantry
 A; ¤deploy_forward(6 Salvage)
 R; ¤flanking(1 Fire)
 T; This card has +2 Defense while defending.
@@ -232,13 +221,13 @@ A; ¤breakthrough(1 Fire)
 
 Winged Hussars
 Offense 2, Health 2, Defense 2, Speed 2, Salvage 2, Cavalry, Slavic
-A; ¤deploy_forward(3)
+A; ¤deploy_forward(3 Salvage)
 R; ¤flanking(2)
 R; ¤upkeep(1)
 
 Cossack Cavalry
 Speed 2, Salvage 1, Cavalry, Slavic
-A; ¤deploy_forward(2)
+A; ¤deploy_forward(2 Salvage)
 R; ¤flanking(2)
 
 Flaming Barrier
@@ -316,7 +305,7 @@ T; Any Infantry card this is attached to has +2 Offense and +2 Defense.
 
 Library of Alexandria
 Health 3, Speed 0, Tactics 1, Structure
-A; ¤deploy_forward(2)
+A; ¤deploy_forward(2 Salvage)
 R; When a Fire card damages this card, damage it again.
 T; ¤defender
 
@@ -359,13 +348,12 @@ T; All friendly cards have +3 Offense.
 Echidna
 Offense 9, Health 3, Greek, Italian, Unholy
 A; ¤deploy_forward(9)
-R; When an Unholy card enters your field or rear for the first time this turn, resupply 2.
+R; The first time each turn when an Unholy card enters your field or rear, resupply 2.
 
 Efreet
 Offense 6, Defense 6, Fire, Spirit, Unholy
 A; ¤deploy_forward(6 or 3 Fire)
-T; Friendly Unholy cards have +2 Offense.
-T; Friendly Fire cards have +2 Power.
+T; Friendly Unholy cards have +2 Offense and friendly Fire cards have +2 Power.
 
 Rendezvous with Destiny
 American
@@ -389,7 +377,7 @@ F; "When Rome falls, so will the world."
 
 Ju 52
 Salvage 4, Air, German, Transport
-A; ¤deploy_rearward(5)
+A; ¤deploy_rearward(5 Salvage)
 A; Exhaust this card, spend 1 Air and resupply 4.
 
 Artemis
@@ -405,7 +393,7 @@ T; All friendly Beast cards within range 1 have +2 Offense.
 Paracelsus
 Offense 1, Defense 1, German
 A; ¤deploy_forward(2)
-R; When a friendly Elemental card within range 2 spends supply for the first time this turn, resupply 1.
+R; The first time each turn when an Elemental card within range 2 spends supply, resupply 1.
 
 Ethnic Cleansing
 Power 1, Unholy
@@ -420,13 +408,13 @@ T; Any card this is attached to has +3 Offense.
 
 Colosseum
 Defense 5, Speed 0, Salvage 2, Italian, Structure
-A; ¤deploy_forward(3)
+A; ¤deploy_forward(3 Salvage)
 R; When an allied card within range 1 damages an enemy card while defending in combat, demoralize that enemy card's team.
 T; ¤defender
 
 Hadrian's Wall
 Defense 4, Speed 0, British, Italian, Structure
-A; ¤deploy_forward(1)
+A; ¤deploy_forward(1 Salvage)
 T; ¤defender
 
 Griffin
@@ -446,18 +434,18 @@ R; ¤breakthrough(1)
 R; ¤culling(1)
 
 Witch of Salem
-Offense 3, Defense 2, Power 6, Salvage 5, Unholy
+Offense 3, Defense 2, Power 6, Salvage 3, Unholy
 A; ¤deploy_forward(3)
 T; Susceptible enemy cards within range 2 have -1 Defense.
 
 Schutztruppe
-Offense 1, Defense 1, Salvage 1, African, German, Infantry
-A; ¤deploy_forward(2)
+Offense 1, Defense 1, Salvage 2, African, German, Infantry
+A; ¤deploy_forward(2 Salvage)
 T; This card has +1 Defense for each enemy card within range 1.5.
 
 Semi-Motorized Infantry
-Offense 3, Defense 5, Speed 1.5, Salvage 5, Infantry, Italian
-A; ¤deploy_forward(6)
+Offense 3, Defense 5, Speed 1.5, Salvage 6, Infantry, Italian
+A; ¤deploy_forward(6 Salvage)
 R; ¤flanking(2)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
@@ -467,9 +455,9 @@ A; ¤deploy_forward(6)
 A; Spend 1 Fire and exhaust any susceptible card within range 2.
 
 Maginot Line
-Offense 9, Defense 9, Speed 0, Salvage 1, French, Structure
-A; ¤deploy_forward(1)
-R; ¤upkeep(1)
+Offense 9, Defense 9, Speed 0, French, Structure
+A; ¤deploy_forward(1 Salvage)
+R; ¤upkeep(1 Salvage)
 R; ¤critical_hit(0)
 T; ¤defender
 
@@ -501,12 +489,12 @@ R; After this card damages another card in combat, you may spend 1 Fire and dama
 
 Centaur Warband
 Offense 4, Defense 4, Speed 2, Salvage 2, Beast, Cavalry
-A; ¤deploy_forward(3)
+A; ¤deploy_forward(3 Salvage)
 R; ¤flanking(2)
 
 Centaur Horde
 Offense 4, Defense 4, Health 2, Speed 2, Salvage 4, Beast, Cavalry
-A; ¤deploy_forward(5)
+A; ¤deploy_forward(5 Salvage)
 R; ¤flanking(2)
 
 Pienaar's Battalion
@@ -529,9 +517,9 @@ A; ¤deploy_forward(7)
 T; All friendly Fire cards have +1 Speed.
 
 Manhattan Project
-Health 3, American, Fire
-A; ¤deploy_rearward(3) Exhaust this card.
-A; Spend 1 Fire and exhaust this card. If this is the third time this ability is used, you win the game.
+Health 4, American, Fire
+A; ¤deploy_rearward(4) Exhaust this card.
+A; Spend 1 Fire and exhaust this card. If this is the fourth time this ability is used, you win the game.
 F; "I can't tell you what we will be working on, but I can tell you it will end this war, and it might end all war."
 
 Guardian Spirit
@@ -578,8 +566,8 @@ A; ¤deploy_forward(3)
 A; Exhaust this card, spend 1 Air and move any friendly or susceptible card to a position within range 1.5 of it.
 
 Maxim Gunner
-Offense 1, Health 2, Speed 0, British, Infantry
-A; ¤deploy_forward(2)
+Offense 1, Health 2, Speed 0, Salvage 1, British, Infantry
+A; ¤deploy_forward(2 Salvage)
 T; ¤defender
 T; This card has +3 Offense while active.
 
@@ -590,12 +578,12 @@ A; ¤deploy_forward(4)
 Valkyrie
 Offense 7, Defense 4, Power 7, Air, German, Holy
 A; ¤deploy_forward(6 or 3 Air)
-R; When an allied card within range 1.5 is 0 damage or less from being destroyed, you may exhaust this card to heal that card.
-R; When a susceptible enemy card within range 1.5 leaves combat, you may exhaust this card to eliminate it if that card's remaining health is 1 or less.
+R; When an allied card within range 1.5 is damaged and its damage is equal to or greater than its Health value, you may exhaust this card to heal that card.
+R; When a susceptible enemy card within range 1.5 leaves combat, you may exhaust this card to eliminate that card if its Health value minus its damage is 1 or less.
 
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure
-A; ¤deploy_rearward(3)
+A; ¤deploy_rearward(3 Salvage)
 
 Finest Hour
 Defense 99, Morale 2, British
@@ -619,6 +607,6 @@ R; When an allied card within range 1 is attacked, you may exhaust this card to 
 
 Barbed Wire
 Power 4, Health 2, Structure
-A; ¤deploy_rearward(4)
+A; ¤deploy_rearward(4 Salvage)
 R; When a susceptible enemy card demoralizes your team with an unblocked attack, damage both this card and that card.
 

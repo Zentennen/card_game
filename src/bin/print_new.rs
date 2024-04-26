@@ -1,6 +1,5 @@
 use card_game::serialize::*;
 use card_game::pdf::*;
-use card_game::Card;
 
 fn main() {
     let mut cards = serialize_all_cards("cards", false);
