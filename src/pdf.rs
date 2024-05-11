@@ -472,17 +472,16 @@ fn add_attributes(ph: &PdfHandler, x: f64, mut y: f64, card: &Card) -> f64 {
 
     ph.set_font_modded(font_name, icon_text_font_size, default_text_mod);
     let mut icon = 0;
-    let total_width: f64 = card.attributes.iter().map(|i| icon_size + icon_text_pad_l + ph.string_width(&i.1)).sum();
+    let total_width: f64 = card.attributes.iter().map(|a| icon_size + icon_text_pad_l + ph.string_width(&a.1)).sum();
     let rows = (total_width / card_inner_width).ceil();
     let average_width_per_row = total_width / rows;
 
-    loop {
+    while icon < card.attributes.len() {
         let mut icons_this_row = 0;
         let mut width = 0.0;
-        icon += 1;
 
         while width <= average_width_per_row && icon + icons_this_row < card.attributes.len() {
-            let w = icon_size + icon_text_pad_l + ph.string_width(card.attributes.iter().nth(icon + icons_this_row).unwrap().1);
+            let w = icon_size + icon_text_pad_l + ph.string_width(&card.attributes[icon + icons_this_row].1);
             if width + w > card_inner_width {
                 break;
             }
@@ -493,20 +492,19 @@ fn add_attributes(ph: &PdfHandler, x: f64, mut y: f64, card: &Card) -> f64 {
 
         let horizontal_padding = (card_outer_width - width) / icons_this_row as f64;
         let mut x = x + horizontal_padding / 2.0;
-        for (name, value) in card.attributes.iter().skip(icon).take(icons_this_row) {
+        for _ in 0..icons_this_row {
+            let (image, text) = &card.attributes[icon];
             icon += 1;
             ph.set_xy(x, y);
-            ph.image(&format!("{}.png", &name), "icons", icon_size, icon_size);
-            ph.text(&value, x + icon_size + icon_text_pad_l, y + icon_text_pad_t);
-            x += horizontal_padding + ph.string_width(&value) + icon_size + icon_text_pad_l;
+            ph.image(&format!("{}.png", image), "icons", icon_size, icon_size);
+            ph.text(text, x + icon_size + icon_text_pad_l, y + icon_text_pad_t);
+            x += horizontal_padding + ph.string_width(text) + icon_size + icon_text_pad_l;
         }
 
         y += icon_row_height;
-
-        if icon == card.attributes.len() {
-            return y;
-        }
     }
+
+    y
 }
 
 fn add_card(ph: &PdfHandler, card: &Card, base_x: f64, base_y: f64) {

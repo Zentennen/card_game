@@ -2,13 +2,12 @@
 #![allow(non_camel_case_types)]
 
 use serde::*;
-use std::collections::HashMap;
 
 //data
 pub const default_subattrib_alloc: usize = 1;
-pub const default_card_name_alloc: usize = 10;
+pub const card_string_alloc: usize = 10;
 pub const default_card_attribute_alloc: usize = 5;
-pub const default_card_property_alloc: usize = 5;
+pub const card_vec_alloc: usize = 5;
 pub const default_property_name_alloc: usize = 20;
 pub const default_property_attribute_alloc: usize = 5;
 pub const default_property_effect_alloc: usize = 50;
@@ -35,7 +34,7 @@ pub const card_inner_height: f64 = card_outer_height - card_pad;
 pub const card_pad: f64 = 2.5;
 pub const text_offset: f64 = 1.0;
 pub const card_pixel_width: usize = (card_outer_width * pixels_per_mm as f64) as usize;
-pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Salvage", "Morale", "Tactics", "Logistics"];
+pub const attributes: [&str; 10] = ["Offense", "Defense", "Strength", "Health", "Power", "Speed", "Morale", "Tactics", "Logistics", "Salvage"];
 
 //name
 pub const name_font_size: f64 = 8.5;
@@ -76,6 +75,7 @@ pub const alpha_gradient_height: f64 = alpha_gradient_pixel_height as f64 / pixe
 pub const upper_alpha_base_height: f64 = name_h + alpha_gradient_height;
 pub const lower_alpha_base_height: f64 = card_pad + alpha_gradient_height;
 
+
 pub mod serialize;
 pub mod pdf;
 
@@ -84,7 +84,7 @@ pub struct Card {
     pub name: String,
     pub flavor_text: String,
     pub commander: bool,
-    pub attributes: HashMap<String, String>,
+    pub attributes: Vec<(String, String)>,
     pub types: Vec<String>,
     pub abilities: Vec<String>,
     pub reactions: Vec<String>,
@@ -94,27 +94,21 @@ pub struct Card {
 impl Card {
     pub fn new() -> Self {
         Self { 
-            name: String::with_capacity(default_card_name_alloc), 
-            flavor_text: String::with_capacity(default_card_property_alloc), 
+            name: String::with_capacity(card_string_alloc), 
+            flavor_text: String::with_capacity(card_string_alloc), 
             commander: false,
-            attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
-            types: Vec::<String>::with_capacity(default_card_property_alloc),
-            abilities: Vec::<String>::with_capacity(default_card_property_alloc),
-            reactions: Vec::<String>::with_capacity(default_card_property_alloc),
-            traits: Vec::<String>::with_capacity(default_card_property_alloc),
+            attributes: Vec::<(String, String)>::with_capacity(card_vec_alloc),
+            types: Vec::<String>::with_capacity(card_vec_alloc),
+            abilities: Vec::<String>::with_capacity(card_vec_alloc),
+            reactions: Vec::<String>::with_capacity(card_vec_alloc),
+            traits: Vec::<String>::with_capacity(card_vec_alloc),
         }
     }
 
     pub fn with_name(s: impl Into<String>) -> Self {
         Self { 
             name: s.into(), 
-            flavor_text: String::with_capacity(default_card_property_alloc), 
-            commander: false,
-            attributes: HashMap::<String, String>::with_capacity(default_card_attribute_alloc), 
-            types: Vec::<String>::with_capacity(default_card_property_alloc),
-            abilities: Vec::<String>::with_capacity(default_card_property_alloc),
-            reactions: Vec::<String>::with_capacity(default_card_property_alloc),
-            traits: Vec::<String>::with_capacity(default_card_property_alloc),
+            ..Self::new()
         }
     }
 }

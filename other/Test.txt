@@ -1,5 +1,3 @@
-Winged Hussars
-Offense 2, Health 2, Defense 2, Speed 2, Salvage 2, Cavalry, Eastern European
-A; ¤deploy_forward(3)
-R; ¤flanking(2)
-R; ¤upkeep(1)
+Minotaur Warband
+Offense 5, Defense 5, Beast, Infantry, Minotaur
+A; ¤deploy_forward(4)

@@ -121,7 +121,7 @@ A; ¤upkeep(3 Quintessence)
 Santcifying Grace
 Holy
 A; ¤equip(1 Quintessence) Attach only to a non-Unholy card.
-T; When a card this is attached to is destroyed, 
+T; When a card this is attached to is destroyed, move it to your hand.
 
 William of Occam
 Defense 10, Holy
@@ -164,7 +164,9 @@ A; ¤action(X) where is any number of Air Transport cards you choose to exhaust.
 Fimbulvetr
 Air, Water, Unholy
 
-
+Rapid Dragon
+Power 10, American, Chinese
+A; ¤action(X) where X is any number of Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
 
 R; When a friendly Unholy card damages another card, damage that card again.
 
@@ -200,4 +202,9 @@ Persephone
 
 Aporia
 Aether
-A; ¤action(3 Aether) Any enemy player destroys all card in their hand.
+A; ¤action(2 Aether) Any enemy player destroys all card in their hand.
+
+
+Baal
+Morale 5, Tactics 3, Logistics 3, Logistics 1 Air, Logistics 1 Water, Holy
+T; If there have ever been 8 friendly cards at the same time, this card has +3 Tactics, +1 Aether Logistics, +1 Earth Logistics and +1 Fire Logistics

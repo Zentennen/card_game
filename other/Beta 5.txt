@@ -4,15 +4,10 @@ A; ¤deploy_forward(4 and 2 Earth)
 R; ¤upkeep(1 Fire)
 R; ¤critical_Hit(1 Fire)
 
-Will-o'-the-Wisp
-Defense 4, Fire, Spirit
-A; ¤deploy_forward(4 or 2 Fire)
-R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
-
 Gates of Gehenna
 Offense 6, Defense 6, Power 6, Speed 0, Fire, Structure, Unholy
 A; ¤deploy_forward(2 Earth and 2 Fire)
-A; Exhaust this card and reveal the top card of your deck. If the revealed card is Fire or Unholy, damage any susceptible card within range 2.5.
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Unholy, damage any susceptible card within range 2.5.
 
 Motorized Infantry
 Offense 4, Defense 6, Health 2, Speed 2, Salvage 6, Earth, Infantry
@@ -20,17 +15,6 @@ A; ¤deploy_forward(6)
 A; ¤flanking(1 Earth)
 R; ¤upkeep(1 Earth)
 R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
-
-Hypnos
-Offense 5, Defense 6, Power 7, Greek, Holy, Italian
-A; ¤deploy_forward(7)
-R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
-
-Vernichtungsfeuer
-Artillery, German
-A; ¤equip(1)
-R; ¤upkeep(2)
-R; When a friendly Artillery card this is attached to damages another card, if that card is 1 damage or less from being destroyed, eliminate it.
 
 Panzer 4
 Offense 6, Defense 5, Speed 2, Salvage 5, Armored, Earth, German
@@ -45,16 +29,11 @@ A; ¤breakthrough(1 Earth)
 R; ¤upkeep(1)
 R; ¤critical_hit(1 Fire)
 
-Rapid Dragon
-Power 10, American, Chinese
-A; ¤action(X) where is any number of Transport cards you choose to exhaust. Choose X susceptible enemy cards and suppress and damage each of them.
+1000 Bomber Raid
+
+Rolling Thunder
 
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure
-A; ¤deploy_rearward(3)
+A; ¤deploy_rearward(3 Salvage)
 
-
-A; Each card in a frontline moves to the backline position in the same column, and each card in a backline moves to the frontline position in the same column.
-
-Defense of Moscow
-A; ¤action(0) Demoralize your team, then resupply 1 for each time your team has been demoralized.

@@ -3,8 +3,15 @@ use card_game::pdf::*;
 use card_game::Card;
 
 fn main() {
-    let cards = std::fs::read_to_string("cards.json").unwrap();
-    let mut cards: Vec<Card> = serde_json::from_str(&cards).unwrap();
+    let old_cards = std::fs::read_to_string("cards.json");
+    let mut cards;
+    if let Ok(old_cards) = old_cards {
+        cards = serde_json::from_str(&old_cards).unwrap();
+    }
+    else {
+        cards = Vec::<Card>::with_capacity(1000);
+    }
+    
     let mut new_cards = serialize_all_cards("cards", false);
     new_cards.extend(serialize_all_cards("commanders", true));
 

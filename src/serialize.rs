@@ -38,11 +38,9 @@ fn initialize_card(card: &mut Card, s: &str) {
         let space = string.find(' ');
         if let Some(space) = space {
             let name = string[..space].trim();
-            
             if attributes.contains(&name) {
                 let value = string[space..].trim();
-                card.attributes.insert(name.to_string(), value.to_string());
-                //card.attributes.push(Attribute{ n: name.to_string(), v: value.to_string() });
+                card.attributes.push((name.to_string(), value.to_string()));
             }
             else {
                 card.types.push(string.to_string());
@@ -174,10 +172,8 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
 
     for card in cards.iter_mut() {
         card.commander = commanders;
-        card.types.sort_by(|a, b| { a.cmp(&b) });
-        if !card.attributes.contains_key("Health") && card.abilities.iter().any(|a| a.starts_with("¤deploy")) {
-            card.attributes.insert("Health".to_string(), "1".to_string());
-        }
+        card.types.sort_by(|a, b| a.cmp(&b));
+        card.attributes.sort_by(|a, b| attributes.iter().position(|s| *s == a.0).unwrap().cmp(&attributes.iter().position(|s| *s == b.0).unwrap()));
     }
 
     cards

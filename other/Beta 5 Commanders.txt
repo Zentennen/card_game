@@ -5,12 +5,18 @@ T; This card has +1 Tactics and +1 Logistics if friendly German cards have ever 
 F; "A war is not lost until you consider it lost."
 
 Heinz Guderian
-Morale 7, Tactics 5, Logistics 1, Logistics 3 Earth, German, Officer, Unholy
+Morale 7, Tactics 5, Logistics 2, Logistics 2 Earth, German, Officer, Unholy
 T; This card has +1 Earth Logistics if if there have been 2 times this game when a friendly Armored card destroys an enemy card and demoralizes an enemy team in the same turn.
+T; Every friendly German card has +2 Defense for every card it has destroyed in combat this turn.
 F; "If the tanks succeed, then victory follows."
 
 Bernard Montgomery
 Morale 5, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Earth, Logistics 1 Fire
-R; When you place a card face down, if 
+R; The first time this 
 R; When a British card does an unblocked attack, you may resupply 2 Air or 2 Earth or 2 Fire instead of demoralizing the enemy team.
 F; "To us is given the honor of striking a blow for freedom."
+
+Napoleon Bonaparte
+Morale 8, Tactics 5, Logistics 4, Logistics 1 Fire, French
+T; Friendly Artillery cards and friendly French cards have +1 Speed if there have been 2 times this game when a friendly card has moved and done an unblocked attack in the same turn.
+F; "Never interrupt your enemy when he is making a mistake."
