@@ -9,25 +9,21 @@ Offense 6, Defense 6, Power 6, Speed 0, Fire, Structure, Unholy
 A; ¤deploy_forward(2 Earth and 2 Fire)
 A; Exhaust this card and reveal the top card of your deck. If the revealed card is Unholy, damage any susceptible card within range 2.5.
 
-Motorized Infantry
-Offense 4, Defense 6, Health 2, Speed 2, Salvage 6, Earth, Infantry
-A; ¤deploy_forward(6)
-A; ¤flanking(1 Earth)
-R; ¤upkeep(1 Earth)
-R; When an allied card within range 1 is attacked, you may exhaust this card to make it replace that card in combat.
 
 Panzer 4
-Offense 6, Defense 5, Speed 2, Salvage 5, Armored, Earth, German
-A; ¤deploy_froward(6)
-A; ¤breakthrough(1 Earth)
+Offense 4, Defense 4, Speed 4, Salvage 5, Armored, German, Mechanized
+A; ¤deploy_forward(5 Salvage)
 A; ¤flanking(1 Earth)
+R; ¤breakthrough(1 Earth)
+R; ¤critical_hit(1 Fire)
+T; This card has +3 Defense while attack1ing.
 
 Panzer 6 Tiger
-Offense 8, Defense 7, Speed 2, Salvage 8, Armored, Earth, German, Giant
-A; ¤deploy_forward(8)
-A; ¤breakthrough(1 Earth)
-R; ¤upkeep(1)
+Offense 9, Defense 6, Speed 2, Salvage 8, Armored, German, Giant, Mechanized
+A; ¤deploy_forward(10 Salvage or 5 Earth)
+A; ¤breakthrough(2 Earth)
 R; ¤critical_hit(1 Fire)
+T; This card has +3 Defense while attacking.
 
 1000 Bomber Raid
 
@@ -36,4 +32,11 @@ Rolling Thunder
 Burma Road
 Defense 4, Logistics 1, Chinese, Structure
 A; ¤deploy_rearward(3 Salvage)
+
+Gargoyle
+Offense 3, Defense 7, Speed 2.5, Air, Earth
+A; ¤deploy(1 Air and 1 Earth)
+
+Matilda 2
+Offense 7, Defense 5, Speed 1.5, Salvage 5, Armored, British, Mechanized
 

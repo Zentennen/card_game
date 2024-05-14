@@ -269,7 +269,7 @@ impl DeserializedProperty {
         split_keywords(&mut efct, &mut keywords);
         split_limited(&efct, &mut total_limited_l, ph, &mut efct_limited, &mut efct_non_limited, &mut efct_limited_l, &mut efct_non_limited_l);
 
-        if efct.contains(|c| c == '(' || c == ')' || c == '¤') {
+        if efct.contains(|c| c == '¤') {
             panic!("Unprocessed commands");
         }
         if efct.starts_with(' ') {
