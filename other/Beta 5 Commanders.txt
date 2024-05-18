@@ -17,5 +17,18 @@ F; "Never interrupt your enemy when he is making a mistake."
 
 Arthur Harris
 Morale 6, Tactics 4, Logistics 2, Logistics 2 Air, Logistics 2 Fire, British
-T; Friendly British cards have +2 Power if friendly cards have dealt 3 or more damage in the same turn using abilities that spend Air supply or Fire supply.
+T; Friendly British cards have +2 Power if friendly cards have dealt 4 or more damage in the same turn using abilities that spend Air supply or Fire supply.
 T; Your unblocked attacks don't demoralize the attacked enemy team.
+
+Tiamat
+Morale 5, Tactics 3, Logistics 1 Aether, Logistics 1 Air, Logistics 1 Earth, Logistics 1 Fire, Logistics 1 Water, African, Dragon
+
+Nu
+Power 4, Morale 6, Tactics 3, Logistics 3, Logistics 2 Water, African, Holy
+A; Use only if your destroyed cards have been shuffled into a new deck at least once this game. Exhaust this card, spend 2 Water and damage all susceptible cards on all fields.
+T; Your minimum deck size is reduced by 10.
+
+Hades
+Morale 4, Tactics 3, Logistics 7, Unholy
+A; Exhaust this card, spend 3 and move one of your destroyed cards with Salvage value between 1 and 4 to any empty position on your field.
+A; Use only if your Unholy cards have destroyed 3 or more cards this game. Exhaust this card, spend 5 and move one of your destroyed cards with Salvage value between 5 and 8 to any empty position on your field.

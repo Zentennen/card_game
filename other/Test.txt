@@ -1,3 +1,0 @@
-Minotaur Warband
-Offense 5, Defense 5, Beast, Infantry, Minotaur
-A; ¤deploy_forward(4)
