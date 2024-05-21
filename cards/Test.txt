@@ -1,0 +1,22 @@
+Day of Wrath
+Power 4, Holy
+A; ¤action(4 Air) Damage all susceptible non-Holy cards.
+A; ¤action(6 Air) Damage all susceptible non-Holy cards twice.
+F; "God is a just judge, and God is angry with the wicked every day."
+
+Efreet
+Offense 4, Defense 4, Elemental, Spirit, Unholy
+A; ¤deploy_forward(4 or 2 Fire)
+R; ¤breakthrough(1 Fire)
+T; This card has +2 Offense if there is an Unholy card within range 1.5.
+
+Reap the Whirlwind
+British
+A; ¤deploy_rearward(7) Spend 2 less for every attack an enemy card has made against you last turn.
+T; All friendly cards have +1 Power during abilities that spend Air supply.
+F; "They sowed the wind, and now they are going to reap the whirlwind."
+
+Operation Bagration
+Power 4, Slavic
+A; ¤covert_action(3) Spend 1 less if there is a friendly Slavic card. Damage any number of susceptible cards up to the number of unblocked attacks your card have done this turn.
+R; ¤culling(1)

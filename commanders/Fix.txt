@@ -1,0 +1,9 @@
+Zeus
+Morale 5, Tactics 3, Logistics 4, Logistics 2 Air, Power 6, Greek, Holy, Italian
+A; Exhaust this card, spend 2 Air and damage a susceptible card.
+F; "Know that no one is free, except Zeus."
+
+Ra
+Morale 5, Tactics 3, Logistics 4, Logistics 2 Fire, African, Holy
+T; This card has +1 Fire Logistics if there have ever been 6 or more cards on your field at the same time this game.
+F; "The Egyptians saw the sun and called him Ra, the Sun God. He rode across the sky in his chariot until it was time to sleep."

@@ -5,9 +5,9 @@ T; This card has +1 Tactics and +1 Logistics if friendly German cards have ever 
 F; "A war is not lost until you consider it lost."
 
 Bernard Montgomery
-Morale 5, Tactics 4, Logistics 3, Logistics 1 Air, Logistics 1 Earth, Logistics 1 Fire, British
-R; The first time this 
-R; When a British card does an unblocked attack, you may resupply 2 Air or 2 Earth or 2 Fire instead of demoralizing the enemy team.
+Morale 5, Tactics 4, Logistics 2, Logistics 1 Air, Logistics 1 Earth, Logistics 1 Fire, British
+R; This card has +2 Logistics if it has 
+R; When a British card would demoralize an enemy team with an unblocked attack, you may instead resupply 2 Air or 2 Earth or 2 Fire.
 F; "To us is given the honor of striking a blow for freedom."
 
 Napoleon Bonaparte

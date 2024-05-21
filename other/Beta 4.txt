@@ -40,7 +40,7 @@ F; "In spite of all that happened at Hamburg, bombing proved a relatively humane
 
 Reap the Whirlwind
 British
-A; ¤deploy_rearward(9) Spend 2 less for every attack an enemy card has made against you last turn.
+A; ¤deploy_rearward(7) Spend 2 less for every attack an enemy card has made against you last turn.
 T; All friendly cards have +1 Power during abilities that spend Air supply.
 F; "They sowed the wind, and now they are going to reap the whirlwind."
 
@@ -60,13 +60,8 @@ Power 8, German
 A; ¤action(3 Air) Spend 1 Air less if there are 3 or more friendly German cards. Damage any susceptible card on any field.
 F; "They called it the sniper among bombers."
 
-Ju 52
-Defense 6, Logistics 3, German, Mechanized
-A; ¤deploy_rearward(3 Salvage)
-R; ¤upkeep(1 Air)
-
 AC-130 Gunship
-Power 6, Defense 10, Morale 1, American, Mechanized
+Power 6, Defense 10, Morale 1, American, Giant, Mechanized
 A; ¤deploy_rearward(3 Salvage and 1 Fire) Use only if friendly cards have exhausted 3 enemy cards this turn.
 A; Exhaust this card, spend 1 Air and resupply 3 Fire.
 A; Exhaust this card, spend 1 Air and 1 Fire and damage any susceptible card. Exhaust that card if possible.
@@ -81,16 +76,6 @@ Shock and Awe
 Power 3, American
 A; ¤action(2 Air) Choose any position. Damage any susceptible card in that position and exhaust all susceptible cards within range 1 of that position.
 A; ¤action(3 Air) Choose any position. Damage any susceptible card in that position and exhaust all susceptible cards within range 1.5 of that position.
-
-Tunisian Airlift
-Health 3, Logistics 1, German
-A; ¤deploy_rearward(1 Air)
-R; When your maneuver phase begins, damage this card.
-
-Demyansk Airlift
-Health 3, Logistics 4, German
-A; ¤deploy_rearward(1 Air)
-R; When your maneuver phase begins, damage this card.
 
 Flak 88
 Offense 3, Defense 3, Power 9, Speed 0, Salvage 6, Artillery, German, Giant
@@ -155,7 +140,7 @@ T; You may move cards in your attack phase the same way as during your maneuver 
 
 Operation Bagration
 Power 4, Slavic
-A; ¤covert_action(6) Spend 1 less for every 2 friendly Slavic cards. Choose a number of susceptible cards up to the number of unblocked attacks your card have done this turn. Damage the chosen cards.
+A; ¤covert_action(3) Spend 1 less if there is a friendly Slavic card. Damage any number of susceptible cards up to the number of unblocked attacks your card have done this turn.
 R; ¤culling(1)
 
 Dolos
@@ -163,11 +148,6 @@ Offense 6, Defense 6, Salvage 5, Greek, Italian, Spirit, Unholy
 A; ¤covertly_deploy_forward(5)
 R; When an Unholy card within range 1.5 attacks, you may exhaust this card to make the attack diagonal.
 T; ¤defender
-
-The Great Wall of China
-Health 3, Salvage 4, Chinese, Structure
-A; ¤deploy_rearward(4 Salvage or 2 Earth)
-R; When an enemy card attacks, it engages this card before the frontline.
 
 Elemental Apparition
 Offense 7, Defense 7, Elemental, Spirit
@@ -265,11 +245,6 @@ A; ¤action(2 Fire) Damage any susceptible enemy card.
 A; ¤deploy_forward(2) 
 R; ¤critical_hit(1 Fire)
 
-Cain
-Offense 2, Defense 2, Salvage 2, Human, Unholy
-A; ¤deploy_forward(3)
-T; This card has +1 Offense and +1 Defense for every 2 enemy cards within range 1.5.
-
 Last Stand
 A; ¤covertly_equip(1)
 T; Any card this is attached to has +3 Offense and +3 Health.
@@ -285,15 +260,6 @@ German
 A; ¤covertly_deploy_rearward(2) Spend 1 less if there are 2 or more friendly German cards.
 R; When a friendly card leaves combat, destroy this card.
 T; Friendly cards have +3 Offense and +3 Defense while in combat.
-
-True Strike
-A; ¤covert_action(1) Use only during your attack phase. Exhaust any friendly card. That card attacks and has +3 Offense during that attack.
-
-First Strike
-A; ¤action(2) Exhaust and attack with any friendly card.
-
-Second Strike
-A; ¤covert_action(2) Use only during your attack phase. Attack with any friendly card. That attack does not demoralize the attacked enemy team if it's unblocked.
 
 One Man Army
 A; ¤covertly_equip(4)
@@ -388,15 +354,15 @@ R; When this card is destroyed, you lose the game.
 T; Friendly cards have +3 Offense.
 
 Echidna
-Offense 9, Defense 1, Health 3, Salvage 9, Greek, Italian, Unholy
+Offense 7, Defense 1, Health 3, Salvage 9, Greek, Italian, Unholy
 A; ¤deploy_forward(9 Salvage)
-R; The first time every turn when an Unholy card enters your field or rear, resupply 3.
+R; When an Unholy card enters your field, resupply 2.
 
 Efreet
 Offense 4, Defense 4, Elemental, Spirit, Unholy
 A; ¤deploy_forward(4 or 2 Fire)
 R; ¤breakthrough(1 Fire)
-T; This card has +1 Offense for every friendly Unholy card within range 1.5.
+T; This card has +2 Offense if there is an Unholy card within range 1.5.
 
 Rendezvous with Destiny
 American
@@ -445,11 +411,6 @@ A; ¤deploy_forward(3 Salvage)
 R; When an allied card within range 1 damages an enemy card while defending in combat, demoralize that enemy card's team.
 T; ¤defender
 
-Hadrian's Wall
-Defense 4, Speed 0, British, Italian, Structure
-A; ¤deploy_forward(1 Salvage)
-T; ¤defender
-
 Griffin
 Offense 4, Defense 3, Speed 4, Beast
 A; ¤deploy_forward(5)
@@ -490,13 +451,6 @@ Cacus
 Offense 4, Defense 1, Health 3, Power 4, Salvage 5, Greek, Italian, Giant, Artillery
 A; ¤deploy_forward(7)
 A; Spend 1 Fire and exhaust any susceptible card within range 2.
-
-Maginot Line
-Offense 9, Defense 9, Speed 0, French, Structure
-A; ¤deploy_forward(1 Salvage)
-R; ¤upkeep(1 Salvage)
-R; ¤critical_hit(0)
-T; ¤defender
 
 King Salamander
 Offense 3, Defense 3, Beast, Elemental
@@ -571,9 +525,9 @@ A; ¤action(1 Fire) Attach this card to a susceptible or friendly card.
 R; When a card this is attached to attacks, damage and refresh it.
 
 Day of Wrath
-Power 5, Holy
-A; ¤action(3 Air) Damage all susceptible cards.
-A; ¤action(5 Air) Damage all susceptible cards twice.
+Power 4, Holy
+A; ¤action(4 Air) Damage all susceptible non-Holy cards.
+A; ¤action(6 Air) Damage all susceptible non-Holy cards twice.
 F; "God is a just judge, and God is angry with the wicked every day."
 
 General Erwin Rommel
@@ -605,8 +559,8 @@ R; When an allied card within range 1.5 is damaged and its damage is equal to or
 R; When a susceptible enemy card within range 1.5 leaves combat, you may exhaust this card to eliminate that card if its Health value minus its damage is 1 or less.
 
 Finest Hour
-Defense 99, Morale 2, British
-A; ¤deploy_rearward(6) Spend 1 less for every friendly British card.
+Defense 10, Morale 2, British
+A; ¤deploy_rearward(4) Spend 1 less if there is a friendly British card.
 
 Christmas Truce
 Power 7, British, French, German
@@ -621,12 +575,12 @@ T; Cards in your frontline have +1 Offense and cards in your backline have -2 Of
 
 Barbed Wire
 Power 4, Health 2, Structure
-A; ¤deploy_rearward(4 Salvage)
+A; ¤deploy_rearward(4 Salvage or 2 Earth)
 R; When a susceptible enemy card demoralizes your team with an unblocked attack, damage this card and that card.
 
 Broken Battleplans
 Power 6
-A; ¤covert_action(4) Every card in a frontline moves to the backline position in the same column, and every card in a backline moves to the frontline position in the same column.
+A; ¤covert_action(2) Every card in a frontline moves to the backline position in the same column, and every card in a backline moves to the frontline position in the same column.
 
 Minutemen
 Offense 1, Health 2, Speed 1.5, Salvage 2, American, Infantry
@@ -709,13 +663,13 @@ T; This card has +2 Defense while attacking.
 
 S35 Somua
 Offense 6, Defense 4, Speed 2, Salvage 4, Armored, French, Mechanized
-A; ¤deploy_forward(4 Salvage)
+A; ¤deploy_forward(4 Salvage or 2 Earth)
 R; ¤breakthrough(1 Earth)
 T; This card has +3 Defense while attacking.
 
 Centurion
 Offense 8, Defense 5, Speed 4, Armored, British, Mechanized
-A; ¤deploy_forward(3 Salvage and 3 Earth) Use only if a friendly card damaged two cards in combat last turn.
+A; ¤deploy_forward(2 Salvage and 2 Earth) Use only if one of your cards damaged two different enemy cards in combat last turn.
 R; ¤breakthrough(1 Earth)
 R; ¤critical_hit(0)
 T; This card has +3 Defense while attacking.
@@ -732,22 +686,91 @@ R; ¤breakthrough(1 Earth)
 T; This card has +2 Defense while attacking.
 
 Golem of Chelm
-Offense 3, Defense 4, Health 3, Speed 0.5, Morale 1, Elemental, Giant, Holy, Jewish
+Offense 3, Defense 3, Health 3, Speed 0.5, Morale 1, Elemental, Giant, Holy, Slavic
 A; ¤deploy_forward(6 Salvage or 3 Earth)
-A; Spend 1 Earth and attach the top card of your deck to this card face-down.
+A; Exhaust this card, spend 1 Earth and attach the top card of your deck to this card face-down.
 T; This card has +2 Offense for each card attached to it.
 
 Golem of Prague
-Offense 3, Defense 2, Health 3, Speed 0.5, Morale 1, Elemental, German, Giant, Holy, Jewish
+Offense 2, Defense 2, Health 3, Speed 0.5, Morale 1, Elemental, Giant, Holy, Slavic
 A; ¤deploy_forward(4 Salvage or 2 Earth)
-R; The first time every turn when a Holy card enters your field or rear, you may spend 1 Earth and resupply 4.
+A; Spend 1 and draw one of your destroyed Holy cards to your hand.
+R; When a Holy card enters your field or rear, you may spend 1 Earth and resupply 3.
 
 Colossus of Rhodes
-Offense 4, Defense 4, Health 3, Speed 0, Morale 1, Armored, Elemental, Giant, Greek, Holy
-A; ¤deploy_forward(7 Salvage)
+Offense 4, Defense 3, Health 3, Speed 0, Morale 1, Salvage 5, Armored, Elemental, Giant, Greek, Holy
+A; ¤deploy_forward(5 Salvage)
 T; This card has +1 Defense for each Earth supply you have spent this turn.
 
 IG Farben
 Defense 5, Logistics 1 Earth, German, Structure, Unholy
 A; ¤deploy_forward(2 Earth)
 R; ¤upkeep(1)
+
+ERA Plates
+A; ¤covertly_equip(4 Salvage or 2 Earth)
+T; Any Armored card this is attached to has +1 Health.
+
+Azrael
+Offense 7, Defense 7, Power 7, Health 2, Speed 2.5, Holy
+A; ¤deploy_forward(13)
+A; Spend 4 and damage any susceptible card within range 1.5.
+
+Ju 52
+Defense 6, Logistics 3, German, Mechanized
+A; ¤deploy_rearward(3 Salvage)
+R; ¤upkeep(1 Air)
+
+Demyansk Airlift
+Health 3, Logistics 2, German
+A; ¤deploy_rearward(2 Air)
+R; ¤upkeep(1 Air)
+
+Tunisian Airlift
+Health 4, Logistics 1, German
+A; ¤deploy_rearward(1 Air)
+R; When your maneuver phase begins, damage this card.
+
+Cain
+Offense 2, Defense 2, Salvage 3, Unholy
+A; ¤deploy_forward(3)
+T; This card has +1 Offense and +1 Defense for every 2 enemy cards within range 1.5.
+
+True Strike
+A; ¤covert_action(1) Use only during your attack phase. Exhaust any friendly card. That card attacks and has +3 Offense during that attack. This attack does not demoralize the attacked enemy team if it's unblocked.
+
+First Strike
+A; ¤action(2) Exhaust and attack with any friendly card. This attack does not demoralize the attacked enemy team if it's unblocked.
+
+Second Strike
+A; ¤covert_action(2) Use only during your attack phase. Attack with any friendly card. This attack does not demoralize the attacked enemy team if it's unblocked.
+
+AC-130 Gunship
+Power 6, Defense 10, Morale 1, American, Giant, Mechanized
+A; ¤deploy_rearward(3 Salvage and 1 Fire) Use only if friendly cards have exhausted 3 enemy cards this turn.
+A; Exhaust this card, spend 1 Air and resupply 3 Fire.
+A; Exhaust this card, spend 1 Air and 1 Fire and damage any susceptible card. Exhaust that card if possible.
+F; "Not all Air Support is created equal."
+
+The Great Wall of China
+Health 3, Salvage 4, Chinese, Giant, Structure
+A; ¤deploy_rearward(4 Salvage or 2 Earth)
+R; When an enemy card attacks, it engages this card before the frontline.
+
+Maginot Line
+Offense 9, Defense 9, Speed 0, French, Giant, Structure
+A; ¤deploy_forward(1 Salvage)
+R; ¤upkeep(1 Salvage)
+R; ¤critical_hit(0)
+T; ¤defender
+
+Hadrian's Wall
+Defense 4, Speed 0, British, Italian, Giant, Structure
+A; ¤deploy_forward(1 Salvage)
+T; ¤defender
+
+SR-71 Blackbird
+American
+R; ¤action(1 Air) Any enemy player reveals their hand and prepared cards.
+
+TODO: modify air cards, more German cards
