@@ -59,3 +59,8 @@ Power 4, British, Holy, Unholy
 A; ¤action(3 Air and 3 Fire) Damage all susceptible cards on any field.
 T; This card has +1 Power if there are 2 or more friendly British cards.
 F; "In spite of all that happened at Hamburg, bombing proved a relatively humane method."
+
+Fimbulvetr
+Power 5, German, Unholy
+A; ¤action(2 Air) Exhaust up to 2 susceptible cards. For each card exhausted, you may move that card to an empty position within range 1.5 of it on the same field.
+T; This card has +2 Power if there is a friendly German or Unholy card.
