@@ -20,3 +20,42 @@ Operation Bagration
 Power 4, Slavic
 A; ¤covert_action(3) Spend 1 less if there is a friendly Slavic card. Damage any number of susceptible cards up to the number of unblocked attacks your card have done this turn.
 R; ¤culling(1)
+
+Dietrich von Bern
+Offense 4, Defense 2, Morale 1, Salvage 4, German, Holy, Infantry
+A; ¤deploy_forward(4 Salvage)
+R; ¤critical_hit(1)
+T; This card has +2 Defense if there is a friendly German card.
+
+French Imperial Guard
+Offense 3, Defense 4, Morale 1, Salvage 3, French, Infantry
+A; ¤deploy_forward(3 Salvage)
+
+Queen Olga of Kiev
+Power 3, Holy, Slavic
+A; ¤deploy_rearward(4)
+R; After a susceptible enemy card attacks you, you may spend 1 Fire to damage that card.
+
+Volkssturm
+Offense 1, Health 2, Salvage 2, German, Infantry, Unholy
+A; ¤deploy_forward(2 Salvage)
+
+SS Prinz Eugen
+Offense 3, Defense 4, Health 2, Salvage 4, German, Infantry, Slavic, Unholy
+A; ¤deploy_forward(4 Salvage)
+
+Tank Buster
+Power 8, German
+A; ¤action(3 Air) Spend 1 Air less if there are 2 or more friendly German cards. Damage any susceptible card on any field.
+F; "They called it the sniper among bombers."
+
+Equalizer
+Power 5, American
+A; ¤action(3 Air and 3 Fire) Spend 1 Air less if there are 2 or more friendly American cards. Demoralize your team. All susceptible cards in either the frontline or backline of any player are damaged twice.
+F; "Great American napalm lights up the sky like a sun."
+
+Operation Gomorrah
+Power 4, British, Holy, Unholy
+A; ¤action(3 Air and 3 Fire) Damage all susceptible cards on any field.
+T; This card has +1 Power if there are 2 or more friendly British cards.
+F; "In spite of all that happened at Hamburg, bombing proved a relatively humane method."
