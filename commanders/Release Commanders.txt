@@ -1,0 +1,33 @@
+Heinz Guderian
+Morale 6, Tactics 5, Logistics 4, Logistics 3 Earth, German, Unholy
+A; Exhaust this card and refresh a German card. Use this ability at most twice per game.
+R; When a friendly card demoralizes an enemy team with an unblocked attack, exhaust this card and demoralize that team again. Trigger this reaction only if a friendly card has ever destroyed 2 cards in combat in the same turn.
+F; "If the tanks succeed, then victory follows."
+
+Hel
+Morale 5, Tactics 2, Logistics 9, Logistics 2 Earth, Holy, Nordic, Unholy
+A; Exhaust this card and swap your current deck with your set aside deck.
+T; This card has +2 Earth Logistics if there have ever been 2 friendly Holy cards and 2 friendly Unholy cards in play at the same time.
+T; Your deck size is half the standard amount, and you start the game with another deck of the same size set aside. If any card would be reshuffled into your deck, reshuffle it into the deck it was originally in.
+
+Erich von Manstein
+Morale 7, Tactics 5, Logistics 8, Logistics 1 Earth, Logistics 1 Fire, German, Unholy
+A; Spend 4 and resupply 3 Air. Use this ability only once per game.
+T; This card has +1 Tactics and +2 Logistics if friendly cards have ever made two unblocked attacks in the same round.
+F; "A war is not lost until you consider it lost."
+
+Napoleon Bonaparte
+Morale 10, Tactics 5, Logistics 9, Logistics 1 Fire, French
+A; Exhaust this card and refresh a French card. Use this ability only if a friendly card has ever moved and done an unblocked attack in the same turn.
+F; "Never interrupt your enemy when he is making a mistake."
+
+Curtis LeMay
+Morale 5, Tactics 4, Logistics 5, Logistics 2 Air, Logistics 1 Fire, American, Unholy
+A; Resupply 1 for each enemy card destroyed this turn. Use this ability only once per game.
+T; This card has +1 Air Logistics and +1 Fire Logistics for each maneuver phase in which friendly cards damaged at least 2 enemy cards.
+F; "If you kill enough of them, they stop fighting."
+
+Dwight Eisenhower
+Morale 8, Tactics 4, Logistics 7, Logistics 2 Air or 2 Earth or 2 Fire or 2 Water, American
+A; All friendly cards attack. Use this ability only once per game and only if the total number of printed types on friendly cards in play is 5 or more.
+T; Friendly cards with any of the following types have all of them: American, British, Chinese, Egyptian, French, Greek, Slavic

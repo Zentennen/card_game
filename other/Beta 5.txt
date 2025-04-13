@@ -1,41 +1,6 @@
-Volkssturm
-Offense 1, Health 2, Salvage 2, German, Infantry, Unholy
-A; ¤deploy_forward(2 Salvage)
-
 Field Marshal Erwin Rommel
 Morale 6, Tactics 6, Logistics 2 Air, Logistics 2 Earth, Logistics 2 Fire, German
 A; ¤covertly_deploy_forward(12 Salvage) Use only if a card named "General Erwin Rommel" is attached to a card that made an unblocked attack this turn. Eliminate your commander and make this card your new commander.
-
-Cherufe
-Offense 6, Defense 6, Health 3, American, Elemental
-A; ¤deploy_forward(5 and 1 Earth)
-R; ¤upkeep(1 Fire)
-R; ¤critical_Hit(1 Fire)
-
-Gates of Gehenna
-Offense 6, Defense 6, Power 6, Speed 0, Elemental, Giant, Structure, Unholy
-A; ¤deploy_forward(2 Earth and 2 Fire)
-A; Exhaust this card and reveal the top card of your deck. If the revealed card is Unholy, damage any susceptible card within range 2.5.
-
-Panzer 4
-Offense 4, Defense 4, Speed 4, Salvage 5, Armored, German, Mechanized
-A; ¤deploy_forward(5 Salvage)
-A; ¤flanking(1 Earth)
-R; ¤breakthrough(1 Earth)
-R; ¤critical_hit(1 Fire)
-T; This card has +3 Defense while attack1ing.
-
-Panzer 6 Tiger
-Offense 9, Defense 6, Speed 2, Salvage 8, Armored, German, Giant, Mechanized
-A; ¤deploy_forward(10 Salvage or 5 Earth)
-A; ¤breakthrough(2 Earth)
-R; ¤critical_hit(1 Fire)
-T; This card has +3 Defense while attacking.
-
-Gargoyle
-Offense 3, Defense 7, Speed 2.5, Armored, Elemental
-A; ¤deploy(1 Air and 1 Earth)
-
 1000 Bomber Raid
 Power 3, British, Holy, Unholy
 A; ¤action(2 Air and 1 Fire) Any player damages 3 susceptible cards on their field or as many as possible. Exhausts any active cards that were damaged.
@@ -49,3 +14,20 @@ A; ¤deploy_forward(2 Salvage)
 
 Matilda 2
 Offense 7, Defense 5, Speed 1.5, Salvage 5, Armored, British, Mechanized
+
+Medusa
+Offense 8, Defense 7, Greek, Italian, Unholy
+A; ¤deploy(8 Salvage or 4 Earth)
+A; Spend 1 Earth and exhaust all in the same column as this card.
+T; Susceptible enemy cards in the same column as this card can't be unexhausted.
+
+Aerial Interdiction
+
+Breath of Ymir
+
+Armageddon
+A; ¤setup(2 Fire)
+
+Charybdis
+
+Scylla

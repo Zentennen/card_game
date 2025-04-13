@@ -1,0 +1,25 @@
+Tiamat
+Morale 5, Tactics 3, Logistics 1 Aether, Logistics 1 Air, Logistics 1 Earth, Logistics 1 Fire, Logistics 1 Water, Egyptian
+
+Nu
+Power 4, Morale 6, Tactics 3, Logistics 3, Logistics 2 Water, African, Holy
+A; Use only if your destroyed cards have been shuffled into a new deck at least once this game. Exhaust this card, spend 2 Water and damage all susceptible cards on all fields.
+T; Your minimum deck size is reduced by 10.
+
+Hades
+Morale 4, Tactics 3, Logistics 7, Unholy
+A; Exhaust this card, spend 3 and move one of your destroyed cards with Salvage value between 1 and 4 to any empty position on your field.
+A; Use only if your Unholy cards have destroyed 3 or more cards this game. Exhaust this card, spend 5 and move one of your destroyed cards with Salvage value between 5 and 8 to any empty position on your field.
+
+Dionysus
+Morale 5, Tactics 0, Logistics 8, Logistics 2 Earth or 2 Water, Greek, Holy, Italian
+A; Spend 3, reveal the top 12 cards of your deck and choose an enemy player. That player separates those cards into two piles, choose one pile and move all cards in it to your hand and destroy all cards in the other.
+A; Spend 3. This card gains +1 Morale and +2 Logistics. Use this ability only 
+F; "Wine is the most civilized thing in the world."
+
+Arthur Harris
+Morale 5, Tactics 4, Logistics 4, Logistics 3 Air, Logistics 1 Fire, British
+A; Spend 15 Air and win the game.
+T; This card gains +1 Air Logistics and +1 Fire Logistics for every round this game where you have
+T; Your unblocked attacks don't demoralize the attacked enemy team if unblocked.
+F; "They sowed the wind, and now they are going to reap the whirlwind."

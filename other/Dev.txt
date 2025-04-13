@@ -9,11 +9,6 @@ Offense 30, Defense 50, Army
 A; ¤summon(4)
 P; All cards within range 1 have +20 Offense and +20 Power for each Equipment card that is attached to them.
 
-Shock and Awe
-Power 50, Doctrine, Fire, American
-A; ¤reserve(6 or 3 Fire)
-T; When an enemy card is damaged or exhausted by another card you control, you may exhaust a susceptible enemy fielded card.
-
 Bewegungskrieg
 Army, Doctrine, Earth, German
 A; ¤reserve(2)
@@ -108,10 +103,6 @@ Ulysses S. Grant
 Defense 200, 
 A; ¤reserve(4)
 P; All friendly African cards are American.
-
-Gargoyle
-Offense 20, Defense 80, Speed 1.5, Air, Earth
-A; ¤deploy(1 Air and 1 Earth)
 
 The Weak Suffer as they Must
 Greek

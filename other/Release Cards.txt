@@ -1,0 +1,946 @@
+Ares
+Offense 10, Defense 7, Constitution 2, Greek, Holy, Italian
+A; ¤deploy(10 Salvage)
+T; Allied cards within range 1.5 have +5 Offense.
+
+Minotaur Warband
+Offense 7, Defense 7
+A; ¤deploy(4)
+
+Minotaur Horde
+Offense 7, Defense 7, Constitution 2
+A; ¤deploy(6)
+
+Minotaur Berserker
+Offense 7, Defense 7
+A; ¤deploy(4)
+R; ¤upkeep(1)
+R; ¤breakthrough(1)
+
+King Leonidas
+Defense 4, Greek
+A; ¤deploy(3)
+T; Friendly Greek cards within range 1 have +1 Defense.
+
+Day of the Typhoon
+Power 10, British
+A; ¤action(2 Air) Choose any player and exhaust all susceptible cards in their field or support area.
+
+Equalizer
+Power 6, American
+A; ¤action(2 Air and 2 Fire) Spend 1 Air less if there are 2 or more friendly American cards. Choose a column on any field and damage all suscpetible enemy cards in that column.
+F; "Great American napalm lights up the sky like a sun."
+
+Operation Gomorrah
+Power 5, British, Holy, Unholy
+A; ¤action(3 Air and 2 Fire) Choose any player and damage all susceptible cards on their field or support area.
+T; This card has +2 Power if there are 2 or more friendly British cards in play.
+F; "In spite of all that happened at Hamburg, bombing proved a relatively humane method."
+
+Fimbulvetr
+Power 6, German, Unholy
+A; ¤action(2 Air or 2 Water) Exhaust up to 2 susceptible cards. for every card exhausted, you may move that card to an empty position within range 1.5 of it on the same field.
+T; This card has +1 Power if there is a friendly German or Unholy card in play.
+
+Reap the Whirlwind
+British
+A; ¤setup(5) Spend 2 less for every attack an enemy card has made against you last turn.
+T; All friendly cards have +1 Power during abilities that spend Air supply.
+
+Operation Flax
+American, British
+A; Use this ability only from your hand during your maneuver phase. Spend 1 Air and move this card to any support area.
+R; ¤upkeep(1)
+T; The player who holds this card can't spend supply so that they have less than 4 supply remaining.
+F; "When Rommel saw a captured American private eating a birthday cake, he knew the war was lost."
+
+Strafing Run
+Power 8
+A; ¤action(1 Air) Exhaust up to 2 susceptible cards.
+A; ¤action(1 Air) Suppress a susceptible card.
+
+Tank Buster
+Power 10, German
+A; ¤action(3 Air) Spend 1 Air less if there are 2 or more friendly German cards. Damage a susceptible card on any field.
+A; ¤action(5 Air) Spend 1 Air less if there are 2 or more friendly German cards. Damage up to two susceptible card on any field.
+F; "They called it the sniper among bombers."
+
+AC-130 Gunship
+Power 10, Defense 10, American
+A; ¤setup(3 Salvage and 1 Fire) Use only if friendly cards have damaged at least 2 enemy cards this turn.
+A; Exhaust this card, spend 1 Air and resupply 3 Fire.
+A; Exhaust this card, spend 1 Air and 1 Fire and damage a susceptible card twice. Exhaust that card if possible.
+F; "Not all Air Support is created equal."
+
+Kamikaze
+Power 8, Holy, Japanese, Unholy
+A; ¤action(3 Air) Destroy a friendly card and damage a susceptible enemy card twice.
+F; "I cannot say that the wish to die for the emperor is genuine, coming from my heart. However, it is decided for me that I die for the emperor."
+
+Shock and Awe
+Power 5, American
+A; ¤action(2 Air) Damage a susceptible card and exhaust that card if possible.
+A; ¤action(3 Air) Choose any position. Damage the card in that position if there is one and it is susceptible and exhaust all susceptible cards within range 1.5 of that position.
+
+Flak 88
+Offense 4, Defense 4, Power 10, Speed 0, Salvage 6, German
+A; ¤deploy(6 Salvage)
+A; Exhaust this card, spend 2 Fire and damage a susceptible card within range 2.
+T; Allied cards within range 1.5 have +4 Defense during abilities that spend Air supply.
+T; ¤defender
+
+Thermopylae
+Defense 9, Speed 0, Greek, Structure
+A; ¤deploy(2 or 1 Earth)
+R; When this card is destroyed, demoralize your team.
+T; ¤defender
+T; Your commander has +2 Morale.
+
+Hypnos
+Offense 6, Defense 8, Power 8, Greek, Holy, Italian
+A; ¤deploy(7)
+R; When a damaged card that is either allied or susceptible within range 2.5 is refreshed, you may spend 1 and heal that card insead.
+
+Thunderbird
+Offense 10, Defense 8, Power 8, Speed 3, American, Holy
+A; ¤deploy(8 or 4 Air)
+A; Spend 1 Air and exhaust a susceptible card.
+
+Storm Sylph
+Defense 3, Power 3
+A; ¤deploy(6 or 3 Air)
+A; Exhaust this card and damage a susceptible card.
+T; This card has +1 Power for every Air supply you have spent this turn.
+
+Tempestarius
+Power 9, Salvage 3, Italian
+A; ¤deploy(4)
+A; Exhaust this card, spend 1 Air and exhaust a susceptible card.
+
+Red Baron
+German
+A; ¤setup(3)
+R; When a friendly card uses an abiltiy or reaction that spends Air supply you may exhaust this card to grant that card +1 Power during that ability or reaction.
+
+Giuseppe Garibaldi
+Italian
+A; ¤equip(1)
+T; The Italian card this is attached to has +5 Offense while in combat with a card that attacked last turn. 
+F; "Italy owes to you an undertaking which has merited the applause of the universe"
+
+Bombing of Kosovo
+Power 12
+A; ¤covert_action(4 Air) Damage a susceptible card.
+
+101st Airborne
+Offense 4, Defense 5, Constitution 2, American
+A; ¤covertly_deploy(4 Salvage or 2 Air)
+T; Unblocked attacks from this card don't demoralize the attacked enemy team if unblocked.
+
+Operation Fortitude
+A; ¤covertly_setup(1)
+R; ¤upkeep(2)
+T; You may march cards in your attack phase the same way as during your maneuver phase. Your unblocked attacks never demoralize the attacked team.
+
+Operation Bagration
+Power 6, Slavic
+A; ¤covert_action(2) Spend 1 less if there are at least 2 friendly Slavic cards if your field. Damage any number of susceptible cards up to the number of unblocked attacks your card have done this turn.
+
+Dolos
+Offense 8, Defense 8, Salvage 5, Greek, Italian, Unholy
+A; ¤covertly_deploy(4)
+R; When an Unholy card within range 1.5 attacks, you may exhaust this card and make the attack diagonal.
+T; ¤defender
+
+Elemental Apparition
+Offense 7, Defense 7
+A; ¤deploy(3) Only use this ability if you the collective total amount of Air, Earth, Fire and Water supply you have spent this turn is at least 4.
+
+Franz Halder
+German
+A; Use this ability only from your hand during your maneuver phase. Spend 2 and move this card to any support area.
+R; When the holder of this card begins their attack phase, they may exhaust a friendly card. If they don't, they spend 3 and destroy this card.
+
+Dietrich von Bern
+Offense 6, Defense 3, Salvage 4, German, Holy
+A; ¤deploy(4 Salvage)
+R; ¤critical_hit(1)
+T; This card has +3 Defense if there are at least 2 friendly German cards in play.
+
+French 75
+Power 4, American, French
+A; ¤deploy(2 Salvage or 1 Fire) Exhaust this card.
+A; Exhaust this card, spend 1 and exhaust a susceptible card within range 2.5.
+T; ¤defender
+
+Le Grande Armée
+Offense 6, Defense 4, Constitution 3, French
+A; ¤deploy(6)
+
+Canon Modèle 1936
+Power 4, French, German
+A; ¤deploy(4 Salvage or 2 Fire)
+A; Exhaust this card, spend 1 Fire and damage a susceptible card within range 3. Exhaust that card if possible.
+T; ¤defender
+
+French 75
+Power 4, American, French
+A; ¤deploy(2 Salvage or 1 Fire) Exhaust this card.
+A; Exhaust this card, spend 1 and exhaust a susceptible card within range 2.5.
+T; ¤defender
+
+M2 Howitzer
+Power 5, Speed 0.5, American
+A; ¤deploy(4 Salvage or 2 Fire) Exhaust this card.
+A; Exhaust this card, spend 1 Fire and damage a susceptible card within range 3. Exhaust that card if possible.
+T; ¤defender
+
+M1 Long Tom
+Power 6, Speed 0.5, American
+A; ¤deploy(6 Salvage or 3 Fire) Exhaust this card.
+A; Exhaust this card, spend 1 Fire and damage a susceptible card within range 3.5. Exhaust that card if possible.
+T; ¤defender
+
+M1 Black Dragon
+Power 7, Speed 0, American
+A; ¤deploy(8 Salvage or 4 Fire) Exhaust this card.
+A; Exhaust this card, spend 2 Fire and damage a susceptible card within range 4 twice. Exhaust that card if possible.
+T; ¤defender
+
+Big Bertha
+Power 10, German
+A; ¤deploy(8 Salvage or 4 Fire)
+A; Suppress this card, spend 2 Fire and damage a suscpetible card on any field twice. Exhaust that card if possible.
+
+PaK 38
+Offense 9, Defense 5, Speed 0.5, Salvage 2, German
+A; ¤deploy(3 Salvage)
+R; ¤critical_hit(1 Fire)
+R; ¤upkeep(1)
+
+Dirlewanger Brigade
+Offense 3, Constitution 2, Salvage 3, German, Unholy
+A; ¤deploy(3 Salvage)
+R; ¤critical_hit(3 Salvage)
+
+Chuikov's Chosen
+Offense 4, Defense 7, Salvage 4, Slavic
+A; ¤deploy(4 Salvage)
+T; This card has +4 Defense while not in combat.
+
+Sturmzug
+Offense 5, Defense 6, Constitution 2, Salvage 6, German
+A; ¤deploy(6 Salvage)
+R; ¤flanking(1 Fire)
+R; ¤critical_hit(1 Fire)
+
+Surtr
+Offense 9, Defense 5, Constitution 2, German
+A; ¤deploy(8 or 4 Fire)
+A; ¤critical_hit(1 Fire)
+A; ¤breakthrough(1 Fire)
+
+Winged Hussars
+Offense 3, Constitution 2, Defense 3, Speed 2, Salvage 2, Slavic
+A; ¤deploy(3 Salvage)
+R; ¤flanking(2)
+R; ¤upkeep(1)
+
+Cossack Cavalry
+Speed 2, Salvage 1, Slavic
+A; ¤deploy(2 Salvage)
+R; ¤flanking(2)
+
+Flaming Barrier
+Offense 9, Speed 0, Structure
+A; ¤deploy(2 or 1 Fire)
+R; ¤critical_hit(1)
+T; ¤defender
+
+Aspect of Wadjet
+Offense 4, Power 4, Egyptian
+A; ¤action(2 Fire) Damage a susceptible enemy card.
+A; ¤deploy(2)
+R; ¤critical_hit(1 Fire)
+
+Last Stand
+Defense 99
+A; ¤covertly_equip(0)
+T; The card this is attached to has +3 Offense and +3 Constitution.
+R; When your maneuver phase begins, destroy the card this is attached to.
+
+Coup de Grace
+Defense 99, French
+A; ¤covertly_equip(1) Spend 1 less if there are at least 2 friendly French cards in play.
+T; The card this is attached to has the reaction '¤culling'.
+
+Kriegsglück
+Defense 99, German
+A; ¤setup(1)
+A; ¤covertly_setup(1) Spend 1 less if there are at least 2 friendly German cards in play.
+R; When a friendly card enters combat, it gains +3 Offense and +3 Defense during that combat. Destroy this card when this happens.
+
+One Man Army
+Defense 99
+A; ¤covertly_equip(2)
+R; The card this is attached to has +2 Offense and +1 Defense for every enemy card within range 1.5.
+
+Operation Ichigo
+Japanese
+A; ¤covertly_setup(1)
+R; When your maneuver phase begins, spend all of your supply except 2 and destroy this card.
+T; Friendly cards have +1 Offense and the reaction '¤breakthrough(0)'
+F; "The last dying breath of the Japanese Army."
+
+Giant Pyrausta
+Offense 4, Defense 4, Constitution 2, Italian
+A; ¤deploy(2 or 1 Fire)
+R; ¤upkeep(1 Fire)
+
+Ruohtta
+Offense 8, Constitution 2, Power 6, Nordic, Unholy
+A; ¤deploy(7 Salvage) Exhaust two friendly cards within range 1.5.
+A; ¤deploy(10 Salvage)
+R; When this card damages an enemy card, you may spend 1 and damage another susceptible card within range 1 of that card.
+
+Ker
+Offense 6, Defense 6, Greek, Italian, Unholy
+A; ¤deploy(5)
+R; When a card within range 2 is destroyed, refresh this card.
+
+Thanatos
+Offense 8, Defense 6, Constitution 2, Power 5, Greek, Italian, Unholy
+A; ¤deploy(10)
+R; When your maneuver phase begins, damage all susceptible cards within range 1.5.
+
+Vernichtungsfeuer
+Defense 99, German
+A; ¤equip(3)
+R; The card this is attached to has '¤culling' while not in combat.
+
+Sickle Cut
+Defense 99, German
+A; ¤equip(1)
+T; Any German card this is attached to has the reactions '¤breakthrough(2) and '¤flanking(2)'.
+
+Berserk
+Defense 99, Nordic
+A; ¤equip(1) Spend 1 less if there are at least 2 friendly Nordic cards in play.
+T; The card this is attached to has the reaction '¤breakthrough(1)'
+
+Kindred Spirits
+Offense 6, Defense 6, Salvage 3
+A; ¤deploy(4)
+R; When an allied card within range 1 is attacked, you may exhaust this card, spend 2 and make it replace that card in combat.
+
+Sturmgewehr
+German
+A; ¤equip(2)
+T; Any German card this is attached to has 10 Offense.
+
+Library of Alexandria
+Constitution 3, Speed 0, Structure
+A; ¤deploy(3 Salvage)
+R; When this card is damaged by an ability or reaction that spends Fire supply, damage this card again.
+T; ¤defender
+T; Your commander has +1 Tactics
+
+Pegasus
+Greek, Holy, Italian
+A; ¤equip(2 Air)
+T; The card this is attached to has +2 Speed and +2 Offense.
+T; You may look at any cards other players draw.
+
+Gates of Olympus
+Defense 9, Speed 0, Greek, Holy, Italian, Structure
+A; ¤deploy(3)
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Italian, resupply 1. If it's Greek, draw it to your hand.
+T; ¤defender
+
+Skunkworks
+Defense 6, American, Structure
+A; ¤deploy(1 Air)
+R; ¤upkeep(1)
+T; Your commander has +1 Air Logistics
+
+Houdou
+Offense 4, Chinese
+A; ¤deploy(2)
+T; This card has +1 Offense for every Fire supply you have spent this turn.
+
+Benito Mussolini
+Italian, Unholy
+A; ¤setup(3)
+T; Friendly German, Italian or Unholy cards have +1 Offense.
+F; "The truth is that men are tired of liberty."
+
+Ragnarök
+Defense 99, Constitution 3, German, Holy
+A; ¤setup(1)
+R; ¤upkeep(2 Fire)
+R; When this card is destroyed, you lose the game.
+T; Friendly cards have +3 Offense.
+
+Echidna
+Offense 8, Defense 4, Constitution 2, Greek, Italian, Unholy
+A; ¤deploy(9) Damage this card.
+A; ¤deploy(6 Earth)
+R; When a friendly Unholy card enters your field, resupply 2.
+T; This card has +4 Defense while not in combat.
+
+Efreet
+Offense 5, Defense 5, Unholy
+A; ¤deploy(4 or 2 Fire)
+R; ¤breakthrough(1 Fire)
+T; This card has +2 Offense if there are at least 2 friendly Unholy cards in play.
+
+Rendezvous with Destiny
+American
+A; ¤setup(2)
+T; Friendly American cards have +1 Offense and +1 Power.
+F; "This generation of Americans has a rendezvous with destiny."
+
+Wild Hunt
+British, German, Holy
+A; ¤setup(3)
+T; Friendly British or German cards have +1 Offense.
+
+Urbi et Orbi
+Holy, Italian
+A; ¤setup(5)
+T; Friendly cards have +1 Offense for every friendly Holy or Italian card in play.
+F; "When Rome falls, so will the world."
+
+Artemis
+Offense 10, Constitution 2, Power 8, Speed 1.5, Greek, Holy, Italian
+A; ¤deploy(10)
+A; Exhaust this card, spend 2 and damage a susceptible card within range 2.5.
+
+Burning Lotus
+Constitution 5, Power 6
+A; ¤setup(4 Fire)
+R; When your maneuver phase begins, damage this card.
+R; When this card is destroyed, resupply 5 Fire and damage a susceptible card.
+
+Holy Flame
+Power 6
+A; ¤action(3 Fire) Damage a susceptible card.
+A; ¤action(1 Fire) Exhaust a susceptible card.
+T; This card has +2 Power if there are at least 2 friendly Holy cards in play.
+
+Gwyn ap Nudd
+Offense 8, British, Holy
+A; ¤deploy(3)
+
+Basan
+Offense 10, Defense 5, Holy, Japanese
+A; ¤deploy(4 or 2 Air or 2 Fire)
+
+Ophiotaurus
+Offense 8, Defense 6, Greek, Unholy
+A; ¤deploy(4)
+R; ¤critical_hit(3)
+
+Ra's Devoted
+Offense 7, Defense 4, Holy, Egyptian
+A; ¤setup(4 or 2 Fire)
+R; When a friendly card within range 1.5 attacks, you may exhaust this card and spend 1 Fire to grant the attacking card +5 Offense during that attack.
+
+Paracelsus
+Offense 0, German
+A; ¤deploy(2)
+R; When you spend Air, Earth, Fire or Water supply, you may exhaust this card and resupply 1.
+T; ¤defender
+
+Ethnic Cleansing
+Power 1, Unholy
+A; ¤action(10) Damage all susceptible cards of any one type.
+T; This card has +1 Power for every friendly Unholy card.
+F; "You will be judged in years to come by how you responded to genocide on your watch."
+
+Colosseum
+Defense 6, Speed 0, Italian, Structure
+A; ¤deploy(4 Salvage)
+R; When an allied card within range 1 damages an enemy card in combat, demoralize the enemy team.
+T; ¤defender
+
+Griffin
+Offense 6, Constitution 2, Speed 4
+A; ¤deploy(4 or 2 Air)
+R; ¤critical_hit(1 Air)
+T; This card has +1 Offense for every Air supply spent this turn.
+
+Shocktroops
+Offense 4, Defense 4, Speed 1.5, Salvage 4, German, Slavic
+A; ¤deploy(5 Salvage)
+R; When this card attacks, it bypasses the frontline.
+
+Bellona
+Offense 6, Defense 6, Constitution 2, Holy, Italian
+A; ¤deploy(9 Salvage)
+R; ¤critical_hit(0)
+T; This card has +1 Offense for every attack made this turn.
+
+Sun Spirit
+Offense 6, Constitution 2
+A; ¤deploy(2 Fire)
+A; ¤deploy(2) Damage this card.
+
+Grim Reaper
+Offense 9, Constitution 2, Unholy
+A; ¤deploy(7)
+R; ¤breakthrough(3)
+R; ¤culling
+
+Witch of Salem
+Offense 3, Defense 3, Power 8, Salvage 3, Unholy
+A; ¤deploy(3)
+T; Susceptible enemy cards within range 2 have -1 Defense.
+
+Schutztruppe
+Offense 3, Defense 2, Constitution 2, Salvage 3, German
+A; ¤deploy(3 Salvage)
+T; This card has +1 Defense for every enemy card within range 1.5.
+
+Cacus
+Offense 5, Constitution 3, Power 5, Salvage 5, Greek, Italian
+A; ¤deploy(7)
+R; ¤overpower
+A; Spend 1 Fire and exhaust a susceptible card within range 2.
+
+King Salamander
+Offense 6, Defense 6
+A; ¤deploy(4 or 2 Fire)
+R; ¤critical_hit(1 Fire)
+T; This card has +1 Offense for every Fire supply you have spent this turn.
+
+Alecto
+Offense 8, Defense 4, Constitution 3, Greek, Italian, Unholy
+A; ¤deploy(6 Salvage) Damage this card twice. Damage it one less for every danage friendly cards dealt to enemy cards last turn.
+A; ¤deploy(4 Earth)
+R; ¤critical_hit(0) Spend 1 less if there are at least 2 friendly Unholy cards in play.
+
+Tisiphone
+Offense 9, Defense 4, Constitution 2, Greek, Italian, Unholy
+A; ¤deploy(6 Salvage) Damage this card twice. Damage it one less for every time enemy cards destroyed friendly cards last turn.
+A; ¤deploy(4 Earth)
+R; ¤flanking(0) Spend 1 less if there are at least 2 friendly Unholy cards in play.
+
+Megaera
+Offense 9, Defense 4, Constitution 3, Greek, Italian, Unholy
+A; ¤deploy(6 Salvage) Damage this card twice. Damage it one less for every unblocked attack made against you last turn.
+A; ¤deploy(4 Earth)
+R; ¤breakthrough(0) Spend 1 less if there are at least 2 friendly Unholy cards in play.
+
+Cerberus
+Offense 9, Defense 3, Power 6, Constitution 3, Greek, Italian, Unholy
+A; ¤deploy(12 or 6 Fire)
+R; When this card attacks, you may choose up to 3 susceptible cards, spend 1 Fire per card chosen and damage every of them.
+
+Forced March
+Defense 99
+A; ¤action(0) Damage and refresh any friendly card.
+
+Giant Salamander
+Offense 9, Defense 4, Power 7, Constitution 3
+A; ¤deploy(8 or 4 Fire)
+R; After this card damages another card in combat, you may spend 1 Fire and damage all susceptible cards within range 1 of that card.
+
+Centaur Warband
+Offense 6, Defense 4, Speed 2, Salvage 3
+A; ¤deploy(4 Salvage)
+R; ¤flanking(1)
+
+Centaur Horde
+Offense 6, Defense 4, Constitution 2, Speed 2, Salvage 5
+A; ¤deploy(6 Salvage)
+R; ¤flanking(1)
+
+Pienaar's Battalion
+Offense 3, Constitution 2, British
+A; ¤deploy(2)
+R; When this card is refreshed, spend 1 or exhaust it.
+
+Porphyrion
+Offense 5, Constitution 4, Salvage 6, Greek, Italian
+A; ¤deploy(8)
+R; ¤overpower
+
+Shepherd of Fire
+Offense 9, Defense 7, Power 9, Unholy
+A; ¤deploy(5)
+A; ¤deploy(4 Fire) Exhaust this card and damage all susceptible cards within range 1.5.
+T; Friendly cards have +1 Speed for every Fire supply you have spent this turn.
+
+Manhattan Project
+Constitution 4, American
+A; ¤setup(4) Exhaust this card.
+A; Spend 1 Fire and exhaust this card. If this is the fourth time this ability is used, you win the game.
+F; "I can't tell you what we will be working on, but I can tell you it will end this war, and it might end all war."
+
+Hermann Hoth
+German, Officer
+A; ¤equip(2)
+T; The German card this is attached to has +3 Offense and the reaction '¤Breakthrough(0)'
+
+Guardian Spirit
+Offense 5, Constitution 2, Salvage 5, Holy
+A; ¤deploy(6)
+T; Allied cards within range 1 have +1 Constitution.
+
+Romulus
+Offense 4, Defense 4, Holy, Italian
+A; ¤deploy(4)
+T; Friendly Italian cards have +1 Defense.
+R; When this card is destroyed, refresh all friendly Italian cards.
+
+Inner Flame
+Defense 99, Power 6
+A; Use only from your hand during your maneuver phase. Spend 1 Fire and attach this card to a susceptible or friendly card.
+R; When a card this is attached to attacks, damage and refresh it.
+
+Day of Wrath
+Power 6, Holy
+A; ¤action(4 Air) Damage all susceptible non-Holy cards.
+A; ¤action(6 Air) Damage all susceptible non-Holy cards twice.
+F; "God is a just judge, and God is angry with the wicked every day."
+
+General Erwin Rommel
+German
+A; ¤equip(4)
+R; When your attack phase begins, exhaust the card this is attached to and attack with it. That attack bypasses the enemy frontline.
+F; "Don't fight a battle if you don't gain anything by winning."
+
+Ludwig Crüwell
+German, Unholy
+A; ¤equip(3)
+T; Friendly German or Italian cards within range 1 have +2 Offense.
+F; "The Führer envisages a Europe under our absolute control."
+
+Maxim Gunner
+Constitution 2, Speed 0, Salvage 1, British
+A; ¤deploy(2 Salvage)
+T; ¤defender
+T; This card has +3 Offense while active.
+
+Achilles
+Offense 4, Defense 8, Salvage 3, Greek, Holy
+A; ¤deploy(4)
+
+Valkyrie
+Offense 10, Defense 5, Power 6, German, Holy
+A; ¤deploy(8 or 4 Air)
+R; When a susceptible card within range 1.5 leaves combat and is 1 damage or less from being destroyed, you may exhaust this card to heal or eliminate that card.
+
+Finest Hour
+Defense 99, British
+A; ¤setup(3) Spend 1 less if there is a friendly British card.
+R; When your team would be demoralized, destroy this card instead.
+
+Christmas Truce
+Power 8, British, French, German
+A; ¤setup(2)
+R; When your maneuver phase begins while your team is not attacking, destroy this card.
+T; Susceptible cards can't attack and can't exhaust, damage, destroy or eliminate other cards.
+
+No Step Back
+Slavic
+A; ¤setup(2) Spend 1 less if there is a friendly Slavic card.
+T; Cards in your frontline have +1 Offense and cards in your backline have -2 Offense.
+
+Barbed Wire
+Power 5, Constitution 2, Structure
+A; ¤setup(4 Salvage or 2 Earth)
+R; When a susceptible enemy card makes an unblocked attack, damage this card and that card.
+
+Broken Battleplans
+A; ¤covert_action(1) Every card in a frontline moves to the backline position in the same column, and every card in a backline moves to the frontline position in the same column.
+
+Minutemen
+Offense 3, Constitution 2, Speed 1.5, Salvage 2, American
+A; ¤deploy(3 Salvage) Exhaust this card.
+
+Phoenix
+Offense 9, Defense 6, Speed 4
+A; ¤deploy(2 Air and 2 Fire)
+R; ¤critical_hit(1 Air or 1 Fire)
+R; When this card is destroyed, return it to your hand instead and resupply 1 Air and 1 Fire.
+
+French Imperial Guard
+Offense 3, Defense 5, Constitution 2, Salvage 3, French
+A; ¤deploy(4 Salvage) You may move a destroyed friendly French card to your hand.
+
+Militarize Railways
+Unholy
+A; ¤action(0) Resupply 1 for every time your team has been demoralized, then demoralize your team.
+
+Militarized Education
+Unholy
+A; ¤action(0) Demoralize your team.
+T; Your commander has +2 Tactics.
+
+Satanist
+Unholy
+A; ¤deploy(3 Salvage)
+R; When this card does an unblocked attack, you may destroy this card and move an Unholy card with a '¤deploy' ability from your hand to the position this card was in before being destroyed. If you do, exhaust that card.
+
+Will-o'-the-Wisp
+Defense 6
+A; ¤deploy(4 or 2 Fire)
+R; When an allied card within range 1 is attacked, you may exhaust this card, spend 1 Fire and make it replace that card in combat.
+
+Goblin Army
+Offense 3, Constitution 3, Speed 1.5, Unholy
+A; ¤deploy(1 Salvage and 1 Earth)
+
+Cthonic Gnomes
+Defense 3, Constitution 2, Speed 1.5
+A; ¤deploy(3)
+R; When this card does an unblocked attack, you may spend 1 Earth and resupply 4.
+
+Charlemagne Brigade
+Offense 4, Defense 5, Constitution 2, Salvage 4, French, German, Unholy
+A; ¤deploy(4 Salvage)
+R; ¤overpower
+
+Semi-Motorized Infantry
+Offense 4, Defense 6, Constitution 2, Speed 1.5, Salvage 6, Italian
+A; ¤deploy(6 Salvage or 3 Earth)
+R; ¤flanking(2)
+R; When an allied card within range 1 is attacked, you may exhaust this card, spend 2 and make it replace that card in combat.
+
+Motorized Infantry
+Offense 4, Defense 7, Constitution 2, Speed 2, Salvage 6
+A; ¤deploy(5 Salvage and 1 Earth)
+R; ¤flanking(1 Earth)
+R; When an allied card within range 2 is attacked, you may exhaust this card, spend 1 Earth and make it replace that card in combat.
+
+British Expeditionary Force
+Offense 4, Defense 7, Speed 4, Salvage 5, British
+A; ¤deploy(5 Salvage)
+R; ¤flanking(1 Earth)
+R; When an allied card within range 4 is attacked, you may exhaust this card, spend 1 Earth and make it replace that card in combat.
+
+Sturmgeschütz 3
+Offense 8, Defense 8, Speed 2.5, German
+A; ¤deploy(3 Salvage and 1 Earth)
+
+Char B1
+Offense 8, Defense 4, Speed 2, French
+A; ¤deploy(3 Salvage and 1 Earth)
+T; This card has +4 Defense while attacking.
+
+Panzer 3
+Offense 8, Defense 4, Speed 3, Salvage 6, German
+A; ¤deploy(6 Salvage)
+R; ¤flanking(1 Earth)
+R; ¤breakthrough(1 Earth)
+T; This card has +4 Defense while attacking.
+
+Panzer 4
+Offense 8, Defense 4, Speed 2.5, Salvage 7, German
+A; ¤deploy(7 Salvage)
+R; ¤flanking(1 Earth)
+R; ¤breakthrough(1 Earth)
+R; ¤critical_hit(2 or 1 Fire)
+T; This card has +4 Defense while attacking.
+
+M4 Sherman
+Offense 9, Defense 4, Speed 3, American
+A; ¤deploy(2 Salvage and 3 Earth)
+R; ¤flanking(1 Earth)
+R; ¤breakthrough(1 Earth)
+R; ¤critical_hit(1)
+T; This card has +3 Defense while attacking.
+
+S35 Somua
+Offense 7, Defense 6, Speed 2, French
+A; ¤deploy(3 Salvage and 2 Earth)
+R; ¤breakthrough(1 Earth)
+R; ¤critical_hit(2 or 1 Fire)
+T; This card has +3 Defense while attacking.
+
+Centurion
+Offense 9, Defense 4, Speed 4, British
+A; ¤deploy(3 Earth) Use only if one of your cards damaged two different enemy cards in combat last turn.
+R; ¤breakthrough(1)
+R; ¤flanking(1)
+R; ¤critical_hit(0)
+T; This card has +4 Defense while attacking.
+
+Panzer 6 Tiger
+Offense 10, Defense 6, Speed 4, German
+A; ¤deploy(4 Salvage and 2 Earth)
+R; ¤breakthrough(2 Earth)
+R; ¤critical_hit(1 Fire)
+T; This card has +4 Defense while attacking.
+
+SS Totenkopf
+Offense 9, Defense 5, Constitution 2, Speed 2.5, German, Unholy
+A; ¤deploy(7 Salvage and 3 Earth)
+R; ¤upkeep(2 or 1 Earth)
+R; ¤breakthrough(2 Earth)
+R; ¤critical_hit(1 Fire)
+T; This card has +3 Defense while attacking.
+
+Desert Rats
+Offense 8, Defense 3, Constitution 2, Speed 3, British
+A; ¤deploy(6 Salvage and 2 Earth)
+R; ¤breakthrough(1 Earth)
+R; ¤flanking(1)
+T; This card has +4 Defense while attacking.
+
+Bewegungskrieg
+German
+A; ¤setup(3)
+T; Every friendly card has +X Offense where X is the total range of all movement (rounded up) it has performed this turn while marching.
+
+Golem of Chelm
+Offense 4, Defense 4, Constitution 3, Speed 0.5, Holy, Slavic
+A; ¤deploy(6 Salvage or 3 Earth)
+A; Exhaust this card, spend 1 Earth and attach the top card of your deck to this card face-down.
+T; This card has +2 Offense for every card attached to it.
+
+Golem of Prague
+Offense 3, Defense 3, Constitution 3, Speed 0.5, Holy, Slavic
+A; ¤deploy(4 Salvage or 2 Earth)
+R; When a friendly Holy card is destroyed, you may instead draw it to your hand.
+R; When a friendly Holy card enters play, you may spend 1 Earth and resupply 3.
+
+Colossus of Rhodes
+Offense 5, Defense 3, Constitution 3, Speed 0, Salvage 5, Greek, Holy
+A; ¤deploy(6 Salvage or 3 Earth)
+R; ¤overpower
+T; This card has +1 Defense for every Earth supply you have spent this turn.
+
+IG Farben
+Defense 6, German, Structure, Unholy
+A; ¤deploy(1 Earth)
+R; ¤upkeep(1)
+T; Your commander has +1 Earth Logistics.
+
+Hephaestus
+Offense 6, Defense 4, Constitution 2, Greek, Holy, Italian
+A; ¤deploy(6 Salvage and 1 Fire)
+R; ¤upkeep(2 or 1 Earth)
+R; When this card destroys another card, resupply 2 Fire. 
+T; Your commander has +1 Fire Logistics.
+
+Forbidden Knowledge
+Unholy
+A; ¤action(0) Demoralize your team and destroy the top 5 cards of your deck, then move up to 5 destroyed friendly Unholy cards to your hand.
+
+Pot of Greece
+Greek
+A; ¤action(1) Spend 1 less if there are at least 2 Greek cards in play. Draw 2 cards.
+
+Heart of Darkness
+Constitution 3, Unholy
+A; ¤deploy(3) Demoralize your team.
+T; Friendly Unholy cards have +3 Offense while this card is in your frontline.
+
+ERA Plates
+A; ¤covertly_equip(2 Salvage or 1 Earth)
+T; The card this is attached to has +1 Constitution while attacking.
+
+Azrael
+Offense 9, Defense 9, Power 9, Constitution 2, Speed 2.5, Holy
+A; ¤deploy(12 or 6 Fire)
+A; Spend 4 or 2 Fire and damage a susceptible card within range 1.5.
+
+Ju 52
+Defense 8, German
+A; ¤setup(1 Air)
+T; Your commander has +1 Logistics.
+
+Demyansk Airlift
+Constitution 2, German
+A; ¤setup(2 Air)
+R; When your maneuver phase begins, damage this card.
+T; Your commander has +5 Logistics.
+
+Tunisian Airlift
+Constitution 3, German
+A; ¤setup(1 Air)
+R; ¤upkeep(1 Air)
+T; Your commander has +2 Logistics.
+
+Cain
+Offense 3, Defense 3, Salvage 3, Unholy
+A; ¤deploy(3)
+T; This card has +1 Offense and +1 Defense for every 2 enemy cards within range 1.5.
+
+True Strike
+A; ¤covert_action(0) Use only during your attack phase. Exhaust any friendly card. That card attacks and has +4 Offense during that attack.
+
+First Strike
+A; ¤action(1) Exhaust and attack with any friendly card. This attack does not demoralize the attacked enemy team if unblocked.
+
+Second Strike
+A; ¤covert_action(0) Use only during your attack phase. Attack with any exhausted friendly card. This attack does not demoralize the attacked enemy team if unblocked.
+
+The Great Wall of China
+Constitution 3, Salvage 4, Chinese, Structure
+A; ¤setup(4 Salvage or 2 Earth)
+R; When an enemy card attacks, it engages this card before the frontline.
+
+Maginot Line
+Offense 10, Defense 10, Speed 0, French, Structure
+A; ¤deploy(1 Salvage)
+R; ¤upkeep(1 Salvage)
+R; ¤critical_hit(0)
+T; ¤defender
+
+Hadrian's Wall
+Defense 5, Speed 0, British, Italian, Structure
+A; ¤deploy(1 Salvage)
+T; ¤defender
+
+SR-71 Blackbird
+American
+R; ¤action(1 Air) Spend 1 Air less if there are at least 3 friendly American cards in play. Any enemy player reveals their hand and prepared cards.
+
+Queen Olga of Kiev
+Power 4, Holy, Slavic
+A; ¤deploy(3)
+R; After a susceptible enemy card attacks you, you may spend 1 Fire to damage that card.
+
+SS Prinz Eugen
+Offense 4, Defense 5, Constitution 2, Salvage 4, German, Slavic, Unholy
+A; ¤deploy(4 Salvage)
+R; ¤critical_hit(3)
+
+Volkssturm
+Offense 2, Constitution 2, Salvage 2, German, Unholy
+A; ¤deploy(2 Salvage)
+T; ¤defender
+
+Cherufe
+Offense 8, Defense 8, Constitution 2, American
+A; ¤deploy(5 and 1 Earth)
+R; ¤upkeep(2 Fire)
+R; ¤critical_Hit(1 Fire)
+
+Gates of Gehenna
+Offense 9, Defense 9, Power 6, Speed 0, Structure, Unholy
+A; ¤deploy(2 Earth and 2 Fire)
+A; Exhaust this card and reveal the top card of your deck. If the revealed card is Unholy, damage any susceptible card within range 2.5.
+
+Gargoyle
+Offense 5, Defense 8, Speed 2.5
+A; ¤deploy(1 Air and 1 Earth)
+
+Sirona
+Defense 8, French, German, Holy
+A; ¤deploy(6 or 3 Water)
+R; When your maneuver phase begins, you may heal an allied card within range 2.
+
+Rosmerta
+Defense 5, Constitution 2, French, Holy, Italian
+A; ¤deploy(8 or 4 Earth or 4 Water)
+A; Exhaust this card and resupply 1 for every 3 supply you have.
+
+Epona
+Offense 8, Defense 8, French, Holy, Italian
+A; ¤deploy(7)
+R; ¤flanking(1)

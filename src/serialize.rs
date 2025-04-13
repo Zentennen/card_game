@@ -170,6 +170,20 @@ pub fn serialize_all_cards(directory: &str, commanders: bool) -> Vec<Card> {
         }
     }
 
+    for card in &cards {
+        let mut found = false;
+        for c in &cards {
+            if card.name == c.name {
+                if found {
+                    panic!("Two cards named {}", card.name);
+                }
+                else {
+                    found = true;
+                }
+            }
+        }
+    }
+
     for card in cards.iter_mut() {
         card.commander = commanders;
         card.types.sort_by(|a, b| a.cmp(&b));
