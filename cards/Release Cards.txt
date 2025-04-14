@@ -167,15 +167,9 @@ A; ¤deploy(4 Salvage)
 R; ¤critical_hit(1)
 T; This card has +3 Defense if there are at least 2 friendly German cards in play.
 
-French 75
-Power 4, American, French
-A; ¤deploy(2 Salvage or 1 Fire) Exhaust this card.
-A; Exhaust this card, spend 1 and exhaust a susceptible card within range 2.5.
-T; ¤defender
-
 Le Grande Armée
 Offense 6, Defense 4, Constitution 3, French
-A; ¤deploy(6)
+A; ¤deploy(6 Salvage)
 
 Canon Modèle 1936
 Power 4, French, German
@@ -272,7 +266,7 @@ R; When your maneuver phase begins, destroy the card this is attached to.
 Coup de Grace
 Defense 99, French
 A; ¤covertly_equip(1) Spend 1 less if there are at least 2 friendly French cards in play.
-T; The card this is attached to has the reaction '¤culling'.
+R; When the card this is attached to damages another card, eliminate that card if its damage is 1 less than its Constitution or more.
 
 Kriegsglück
 Defense 99, German
@@ -315,8 +309,8 @@ R; When your maneuver phase begins, damage all susceptible cards within range 1.
 
 Vernichtungsfeuer
 Defense 99, German
-A; ¤equip(3)
-R; The card this is attached to has '¤culling' while not in combat.
+A; ¤equip(3) Spend 1 less if there are at least 2 friendly German cards in play.
+R; When the card this is attached to damages another card while not in combat, damage that card again.
 
 Sickle Cut
 Defense 99, German
@@ -335,8 +329,8 @@ R; When an allied card within range 1 is attacked, you may exhaust this card, sp
 
 Sturmgewehr
 German
-A; ¤equip(2)
-T; Any German card this is attached to has 10 Offense.
+A; ¤equip(1)
+T; Any German card this is attached to has 8 Offense.
 
 Library of Alexandria
 Constitution 3, Speed 0, Structure
@@ -396,14 +390,15 @@ T; This card has +2 Offense if there are at least 2 friendly Unholy cards in pla
 
 Rendezvous with Destiny
 American
-A; ¤setup(2)
-T; Friendly American cards have +1 Offense and +1 Power.
+A; ¤setup(2 or 1 Air)
+T; Friendly American cards have +2 Offense and +2 Power.
 F; "This generation of Americans has a rendezvous with destiny."
 
 Wild Hunt
-British, German, Holy
-A; ¤setup(3)
-T; Friendly British or German cards have +1 Offense.
+Health 3, British, German, Holy
+A; ¤setup(2)
+R; When a friendly British or German card leaves combat, damage this card.
+T; Friendly British or German cards have +3 Offense.
 
 Urbi et Orbi
 Holy, Italian
@@ -490,12 +485,13 @@ Grim Reaper
 Offense 9, Constitution 2, Unholy
 A; ¤deploy(7)
 R; ¤breakthrough(3)
-R; ¤culling
+R; When this card damages another card, eliminate that card if its damage is 1 less than its Constitution or more.
 
 Witch of Salem
-Offense 3, Defense 3, Power 8, Salvage 3, Unholy
+Offense 4, Defense 3, Power 8, Salvage 3, American, Unholy
 A; ¤deploy(3)
-T; Susceptible enemy cards within range 2 have -1 Defense.
+T; ¤defender
+T; Susceptible cards within range 2 have -2 Defense.
 
 Schutztruppe
 Offense 3, Defense 2, Constitution 2, Salvage 3, German

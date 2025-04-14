@@ -1,7 +1,6 @@
 Heinz Guderian
 Morale 6, Tactics 5, Logistics 4, Logistics 3 Earth, German, Unholy
-A; Exhaust this card and refresh a German card. Use this ability at most twice per game.
-R; When a friendly card demoralizes an enemy team with an unblocked attack, exhaust this card and demoralize that team again. Trigger this reaction only if a friendly card has ever destroyed 2 cards in combat in the same turn.
+A; Exhaust this card and refresh up to 2 German cards. Use this ability at most twice per game and only if a friendly card has ever destroyed 2 cards in combat in the same turn.
 F; "If the tanks succeed, then victory follows."
 
 Hel
@@ -11,7 +10,7 @@ T; This card has +2 Earth Logistics if there have ever been 2 friendly Holy card
 T; Your deck size is half the standard amount, and you start the game with another deck of the same size set aside. If any card would be reshuffled into your deck, reshuffle it into the deck it was originally in.
 
 Erich von Manstein
-Morale 7, Tactics 5, Logistics 8, Logistics 1 Earth, Logistics 1 Fire, German, Unholy
+Morale 6, Tactics 5, Logistics 8, Logistics 1 Earth, Logistics 1 Fire, German, Unholy
 A; Spend 4 and resupply 3 Air. Use this ability only once per game.
 T; This card has +1 Tactics and +2 Logistics if friendly cards have ever made two unblocked attacks in the same round.
 F; "A war is not lost until you consider it lost."

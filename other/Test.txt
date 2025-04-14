@@ -77,8 +77,8 @@ F; "Italy owes to you an undertaking which has merited the applause of the unive
 
 Sturmgewehr
 German
-A; ¤equip(2)
-T; Any German card this is attached to has 10 Offense.
+A; ¤equip(1)
+T; Any German card this is attached to has 8 Offense.
 
 Paracelsus
 Offense 0, German
@@ -137,7 +137,7 @@ R; ¤flanking(1)
 
 Le Grande Armée
 Offense 6, Defense 4, Constitution 3, French
-A; ¤deploy(6)
+A; ¤deploy(6 Salvage)
 
 Canon Modèle 1936
 Power 4, French, German
@@ -173,3 +173,42 @@ Big Bertha
 Power 10, German
 A; ¤deploy(8 Salvage or 4 Fire)
 A; Suppress this card, spend 2 Fire and damage a suscpetible card on any field twice. Exhaust that card if possible.
+
+Rendezvous with Destiny
+American
+A; ¤setup(2 or 1 Air)
+T; Friendly American cards have +2 Offense and +2 Power.
+F; "This generation of Americans has a rendezvous with destiny."
+
+Wild Hunt
+Health 3, British, German, Holy
+A; ¤setup(2)
+R; When a friendly British or German card leaves combat, damage this card.
+T; Friendly British or German cards have +3 Offense.
+
+Grim Reaper
+Offense 9, Constitution 2, Unholy
+A; ¤deploy(7)
+R; ¤breakthrough(3)
+R; When this card damages another card, eliminate that card if its damage is 1 less than its Constitution or more.
+
+Coup de Grace
+Defense 99, French
+A; ¤covertly_equip(1) Spend 1 less if there are at least 2 friendly French cards in play.
+R; When the card this is attached to damages another card, eliminate that card if its damage is 1 less than its Constitution or more.
+
+Vernichtungsfeuer
+Defense 99, German
+A; ¤equip(3) Spend 1 less if there are at least 2 friendly German cards in play.
+R; When the card this is attached to damages another card while not in combat, damage that card again.
+
+Witch of Salem
+Offense 4, Defense 3, Power 8, Salvage 3, American, Unholy
+A; ¤deploy(3)
+T; ¤defender
+T; Susceptible cards within range 2 have -2 Defense.
+
+Signifer
+Italian
+A; ¤deploy(3)
+T; Allied cards within range 1 have +2 Offense.
